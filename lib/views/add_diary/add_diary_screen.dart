@@ -1,14 +1,13 @@
 import 'dart:io';
 
-import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:ours_log/common/enums/icon_and_index.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
+import 'package:ours_log/common/widgets/custom_button.dart';
 import 'package:ours_log/common/widgets/custom_expansion_card.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/common/widgets/open_close_container.dart';
@@ -85,26 +84,9 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            GestureDetector(
+            CustomButton(
+              label: AppString.saveText.tr,
               onTap: onTapSaveBtn,
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: RS.w10),
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Colors.pinkAccent,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Center(
-                  child: Text(
-                    AppString.saveText.tr,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: RS.width20,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
             )
           ],
         ),
@@ -112,12 +94,12 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: RS.h10,
-              horizontal: RS.width20,
-            ),
-            child: SingleChildScrollView(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: RS.h10,
+                horizontal: RS.width20,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -147,6 +129,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                   ),
                   SizedBox(height: RS.height20),
                   ImageOfToday(
+                      label: '${AppString.photoOfToday.tr}',
                       uploadFiles: uploadFiles,
                       selectedPhotos: () async {
                         File file =
@@ -221,18 +204,7 @@ class _AddDiaryScreenState extends State<AddDiaryScreen> {
                     label: AppString.weatherText.tr,
                     selectedIconIndexs: selectedWeatherIndexs,
                   ),
-                  // ExpansionIconCard(
-                  //   label: AppString.peopleText.tr,
-                  //   icons: AppConstant.dummyIcons,
-                  // ),
-                  // SizedBox(height: RS.height20),
 
-                  // ExpansionIconCard(
-                  //   label: AppString.weatherText.tr,
-                  //   icons: [
-                  //     ...AppConstant.weatherIcons,
-                  //   ],
-                  // ),
                   SizedBox(height: RS.height20),
                   Container(
                     padding: EdgeInsets.all(RS.width8),

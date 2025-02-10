@@ -8,12 +8,14 @@ class CustomTextFormField extends StatelessWidget {
     this.hintText,
     this.widget,
     this.maxLines,
+    this.readOnly,
     this.controller,
   }) : super(key: key);
 
   final String? hintText;
   final Widget? widget;
   final int? maxLines;
+  final bool? readOnly;
   final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class CustomTextFormField extends StatelessWidget {
         children: [
           Expanded(
             child: TextFormField(
+              readOnly: readOnly ?? false,
               style: TextStyle(fontSize: RS.width12),
               maxLines: maxLines ?? 1,
               controller: controller,

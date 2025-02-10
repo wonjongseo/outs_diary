@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 
@@ -103,6 +104,12 @@ ThemeData lightTheme(String systemLanguage) {
 TextStyle get boldStyle {
   return TextStyle(
     fontWeight: FontWeight.w700,
-    fontSize: RS.width17,
+    fontSize: RS.width20,
+  );
+}
+
+TextStyle get weekdayStyle {
+  return TextStyle(
+    color: Get.isDarkMode ? Colors.white : AppColors.greyBackground,
   );
 }

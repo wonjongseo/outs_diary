@@ -12,17 +12,18 @@ class ImageOfToday extends StatelessWidget {
   const ImageOfToday(
       {super.key,
       required this.uploadFiles,
+      required this.label,
       required this.selectedPhotos,
       required this.removePhoto});
 
   final List<File> uploadFiles;
   final Function() selectedPhotos;
   final Function(int) removePhoto;
+  final String label;
   @override
   Widget build(BuildContext context) {
     return ColTextAndWidget(
-      label:
-          '${AppString.photoOfToday.tr}  ${uploadFiles.isEmpty ? '' : '+${uploadFiles.length}'}',
+      label: '${label}  ${uploadFiles.isEmpty ? '' : '+${uploadFiles.length}'}',
       labelWidget: GestureDetector(
         onTap: selectedPhotos,
         child: const Icon(Icons.add),

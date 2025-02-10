@@ -276,6 +276,8 @@
 //   }
 // }
 
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 bool get isKo => Get.locale.toString().contains('ko');
@@ -283,15 +285,32 @@ bool get isJp => Get.locale.toString().contains('ja');
 bool get isEn => Get.locale.toString().contains('en');
 
 class AppFunction {
-  static bool isEn() {
-    return Get.locale.toString().contains('en');
+  static void vaildTextFeildSnackBar({
+    required String title,
+    required String message,
+  }) {
+    AppFunction.showSnackBar(
+        title, message, FontAwesomeIcons.check, Colors.redAccent);
   }
 
-  static bool isJp() {
-    return Get.locale.toString().contains('ja');
+  static void invaildTextFeildSnackBar({
+    required String title,
+    required String message,
+  }) {
+    AppFunction.showSnackBar(
+        title, message, FontAwesomeIcons.exclamation, Colors.redAccent);
   }
 
-  static bool isKo() {
-    return Get.locale.toString().contains('ko');
+  static void showSnackBar(
+      String title, String message, IconData iconData, Color borderColor) {
+    if (!Get.isSnackbarOpen) {
+      Get.snackbar(
+        title,
+        message,
+        icon: Icon(iconData),
+        borderWidth: 1,
+        borderColor: borderColor,
+      );
+    }
   }
 }

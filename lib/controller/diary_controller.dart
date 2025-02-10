@@ -14,6 +14,7 @@ class DiaryController extends GetxController {
   late DateTime selectedDay;
   late DateTime focusedDay;
   RxList<DiaryModel> _diaries = <DiaryModel>[].obs;
+  ScrollController scrollController = ScrollController();
 
   DiaryModel? selectedDiary;
   DiaryRepository _diaryRepository = DiaryRepository();
@@ -33,29 +34,38 @@ class DiaryController extends GetxController {
     update();
   }
 
+  void scrollGoToTop() {
+    scrollController.animateTo(
+      200,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
   void onDatSelected(DateTime cSelectedDay, DateTime cFocusedDay) {
     if (kEvents[cSelectedDay] != null) {
       selectedDiary = kEvents[cSelectedDay]![0];
+      scrollGoToTop();
       update();
-    } else {
-      selectedDiary = null;
+      return;
+    }
+    selectedDiary = null;
 
-      if (cSelectedDay.difference(now).isNegative) {
-        Get.to(() => AddDiaryScreen(selectedDay: selectedDay));
-      } else {
-        if (!Get.isSnackbarOpen) {
-          Get.snackbar(
-            '!',
-            '미래는 저장할 수 없어요.',
-            icon: Icon(Icons.done),
-            borderWidth: 1,
-            borderColor: Colors.redAccent,
-          );
-        }
+    if (cSelectedDay.difference(now).isNegative) {
+      Get.to(() => AddDiaryScreen(selectedDay: selectedDay));
+    } else {
+      if (!Get.isSnackbarOpen) {
+        Get.snackbar(
+          '!',
+          '미래는 저장할 수 없어요.',
+          icon: Icon(Icons.done),
+          borderWidth: 1,
+          borderColor: Colors.redAccent,
+        );
       }
     }
-    this.selectedDay = cSelectedDay;
-    this.focusedDay = cFocusedDay;
+    selectedDay = cSelectedDay;
+    focusedDay = cFocusedDay;
   }
 
   getAllData() async {

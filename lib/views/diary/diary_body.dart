@@ -14,16 +14,10 @@ import 'package:table_calendar/table_calendar.dart';
 class DiaryBody extends StatelessWidget {
   DiaryBody({super.key});
 
-  DiaryController diaryController = Get.find<DiaryController>();
-
-  TextStyle get weekdayStyle {
-    return TextStyle(
-      color: Get.isDarkMode ? Colors.white : AppColors.greyBackground,
-    );
-  }
+  final DiaryController diaryController = Get.find<DiaryController>();
 
   Widget? prioritizedBuilder(context, day, focusedDay) {
-    bool isNextDay = day.day > diaryController.now.day;
+    bool isNextDay = diaryController.now.difference(day).isNegative;
     return Column(
       children: [
         Container(
@@ -31,7 +25,9 @@ class DiaryBody extends StatelessWidget {
           width: RS.w10 * 4.5,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isNextDay ? Colors.grey.withOpacity(.15) : Colors.white,
+            color: isNextDay
+                ? Colors.grey.withOpacity(.15)
+                : Colors.grey.withOpacity(.4),
           ),
           margin: EdgeInsets.only(bottom: RS.h10 / 2),
         ),
@@ -72,27 +68,18 @@ class DiaryBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        child: GetBuilder<DiaryController>(builder: (controller) {
-          return Column(
+      child: GetBuilder<DiaryController>(builder: (controller) {
+        return SingleChildScrollView(
+          controller: controller.scrollController,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              GestureDetector(
-                // onTap: selectYearAndMonthDialog,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      DateFormat(
-                              'yyy${AppString.yearText.tr} M${AppString.monthText.tr}')
-                          .format(controller.focusedDay),
-                      style: boldStyle,
-                    ),
-                    SizedBox(width: RS.w10),
-                    const Icon(Icons.keyboard_arrow_down),
-                  ],
-                ),
+              Text(
+                DateFormat('yyy${AppString.yearText.tr} M${AppString.month.tr}')
+                    .format(controller.focusedDay),
+                style: boldStyle,
               ),
+              SizedBox(height: RS.h10 * 1.2),
               TableCalendar(
                 availableGestures: AvailableGestures.horizontalSwipe,
                 daysOfWeekStyle: DaysOfWeekStyle(
@@ -102,7 +89,7 @@ class DiaryBody extends StatelessWidget {
                 pageJumpingEnabled: false,
                 pageAnimationEnabled: false,
                 locale: isKo ? 'ko' : 'ja',
-                daysOfWeekHeight: 100,
+                daysOfWeekHeight: RS.h10 * 3,
                 headerVisible: false,
                 onPageChanged: diaryController.onPageChanged,
                 calendarStyle: const CalendarStyle(
@@ -127,9 +114,9 @@ class DiaryBody extends StatelessWidget {
               if (diaryController.selectedDiary != null)
                 SelectedDiary(diaryController: diaryController)
             ],
-          );
-        }),
-      ),
+          ),
+        );
+      }),
     );
   }
 }

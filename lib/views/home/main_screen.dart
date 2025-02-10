@@ -5,6 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:intl/intl.dart';
+import 'package:ours_log/controller/hospital_log_controller.dart';
+import 'package:ours_log/views/Hospital_Log/hospital_log_body.dart';
 import 'package:ours_log/common/theme/light_theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
@@ -17,8 +19,8 @@ import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/views/add_diary/add_diary_screen.dart';
 import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/background/background2.dart';
-import 'package:ours_log/views/home/bodys/diary_body.dart';
-import 'package:ours_log/views/hospital_visit_log/hospital_visit_log_screen.dart';
+import 'package:ours_log/views/diary/diary_body.dart';
+
 import 'package:table_calendar/table_calendar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -30,19 +32,20 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   late DiaryController diaryController;
-  int bodyIndex = 0;
+  int bodyIndex = 1;
   List<Widget> bodys = [];
 
   @override
   void initState() {
     Get.put(DiaryController());
+    Get.put(HospitalLogController());
     setBodys();
     super.initState();
   }
 
   void setBodys() {
     bodys.add(DiaryBody());
-    bodys.add(HospitalVisitLogBody());
+    bodys.add(HospitalLogBody());
     bodys.add(Text('data2'));
     bodys.add(Text('data3'));
     bodys.add(Text('data4'));
@@ -57,10 +60,12 @@ class _MainScreenState extends State<MainScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [bottomNavigtionBar()],
       ),
-      body: SafeArea(
-          child: BackGround2(
-        widget: bodys[bodyIndex],
-      )),
+      body: BackGround2(
+        widget: Padding(
+          padding: EdgeInsets.symmetric(horizontal: RS.w10 * 1.2),
+          child: bodys[bodyIndex],
+        ),
+      ),
     );
   }
 
@@ -68,7 +73,8 @@ class _MainScreenState extends State<MainScreen> {
     return BottomNavigationBar(
       currentIndex: bodyIndex,
       type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
+      backgroundColor:
+          Get.isDarkMode ? AppColors.greyBackground : Colors.grey[100]!,
       onTap: (value) {
         bodyIndex = value;
         setState(() {});
@@ -77,8 +83,9 @@ class _MainScreenState extends State<MainScreen> {
           color: AppColors.primaryColor, fontWeight: FontWeight.w500),
       selectedItemColor: AppColors.primaryColor,
       items: [
-        BottomNavigationBarItem(label: '건강 기록', icon: Text('')),
-        BottomNavigationBarItem(label: '병원 방문 기록', icon: Text('')),
+        BottomNavigationBarItem(label: AppString.healthLog.tr, icon: Text('')),
+        BottomNavigationBarItem(
+            label: AppString.hospitalVisitLog.tr, icon: Text('')),
         BottomNavigationBarItem(
             label: AppString.expensiveTextTr.tr, icon: Text('')),
         BottomNavigationBarItem(label: AppString.settingTr.tr, icon: Text('')),

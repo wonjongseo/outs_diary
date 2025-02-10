@@ -7,7 +7,7 @@ import 'package:ours_log/common/utilities/app_image_path.dart';
 class AppConstant {
   static const int diaryModelHiveId = 0;
   static const int healthModelHiveId = 1;
-  static const int genderTypeHiveId = 2;
+  static const int hospitalLogModelHiveId = 2;
   static const int stampModelHiveId = 3;
   static const int todoModelHiveId = 4;
   static const int catModelHiveId = 5;
@@ -18,8 +18,9 @@ class AppConstant {
   static const int expensiveModelHiveId = 10;
   static const int categoryModelHiveId = 11;
 
-  static const String diaryModelBox = 'diarys';
   static const String settingModelBox = 'settings';
+  static const String diaryModelBox = 'diarys';
+  static const String hospitalLogModelBox = 'hospitalLogs';
   static const String stampModelBox = 'stamps';
   static const String todoModelBox = 'todos';
   static const String nutritionModelModelBox = 'nutritions';
@@ -29,8 +30,7 @@ class AppConstant {
   static const String settingLanguageKey = 'settingLanguage';
   static const String lastPetIndexKey = 'lastPetIndex';
   static const String lastBottomTapIndexKey = 'lastBottomTapIndex';
-  static const String lastNutritionBottomPageIndexKey =
-      'lastNutritionBottomPageIndex';
+  static const String hospitalNamesBox = 'hospitalNames';
 
   static const String countOfReiveRequestionKey = 'countOfReiveRequestion';
   static const String hasReviewedKey = 'hasReviewed';

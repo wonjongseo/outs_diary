@@ -44,11 +44,11 @@ class AppTranslations extends Translations {
           AppString.settingTr: AppString.settingJp,
           AppString.weightText: AppString.weightTextJp,
           AppString.duplicateNameTr: AppString.duplicateNameJp,
-          AppString.monthText: AppString.monthTextJp,
+          AppString.month: AppString.monthTextJp,
           AppString.yearText: AppString.yearTextJp,
-          AppString.dayText: AppString.dayTextJp,
-          AppString.dogTextTr: AppString.dogTextJp,
-          AppString.catTextTr: AppString.catTextJp,
+          AppString.day: AppString.dayTextJp,
+          AppString.healthLog: AppString.healthLogJp,
+          AppString.hospitalVisitLog: AppString.hospitalVisitLogJp,
           AppString.hasipitalTextTr: AppString.hasipitalTextJp,
           AppString.hasipitalNumTextTr: AppString.hasipitalNumTextJp,
           AppString.yesTextTr: AppString.yesTextJp,
@@ -73,7 +73,7 @@ class AppTranslations extends Translations {
           AppString.veryGood: AppString.veryGoodJp,
           AppString.nomal: AppString.nomalJp,
           AppString.veryBad: AppString.veryBadJp,
-          AppString.handmadeTextTr: AppString.handmadeTextJp,
+          AppString.hour: AppString.hourJp,
           AppString.updateBtnText: AppString.updateBtnTextJp,
           AppString.cancelBtnTextTr: AppString.cancelBtnTextJp,
           AppString.completeText: AppString.completeTextJp,
@@ -90,7 +90,7 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
           AppString.stampNameCtlMsg: AppString.stampNameCtlMsgJp,
           AppString.ageMonthText: AppString.ageMonthTextJp,
-          AppString.makterText: AppString.makterTextJp,
+          AppString.minute: AppString.minuteJp,
           AppString.numberOfGivenText: AppString.numberOfGivenTextJp,
           AppString.numberOfGivenSufficText:
               AppString.numberOfGivenSufficTextJp,
@@ -184,11 +184,11 @@ class AppTranslations extends Translations {
           AppString.settingTr: AppString.settingKr,
           AppString.weightText: AppString.weightTextKr,
           AppString.duplicateNameTr: AppString.duplicateNameKr,
-          AppString.monthText: AppString.monthTextKr,
+          AppString.month: AppString.monthTextKr,
           AppString.yearText: AppString.yearTextKr,
-          AppString.dayText: AppString.dayTextKr,
-          AppString.dogTextTr: AppString.dogTextKr,
-          AppString.catTextTr: AppString.catTextKr,
+          AppString.day: AppString.dayTextKr,
+          AppString.healthLog: AppString.healthLogKr,
+          AppString.hospitalVisitLog: AppString.hospitalVisitLogKr,
           AppString.hasipitalTextTr: AppString.hasipitalTextKr,
           AppString.hasipitalNumTextTr: AppString.hasipitalNumTextKr,
           AppString.yesTextTr: AppString.yesTextKr,
@@ -213,7 +213,7 @@ class AppTranslations extends Translations {
           AppString.veryGood: AppString.veryGoodKr,
           AppString.nomal: AppString.nomalKr,
           AppString.veryBad: AppString.veryBadKr,
-          AppString.handmadeTextTr: AppString.handmadeTextKr,
+          AppString.hour: AppString.hourKr,
           AppString.updateBtnText: AppString.updateBtnTextKr,
           AppString.cancelBtnTextTr: AppString.cancelBtnTextKr,
           AppString.completeText: AppString.completeTextKr,
@@ -230,7 +230,7 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectKr,
           AppString.stampNameCtlMsg: AppString.stampNameCtlMsgKr,
           AppString.ageMonthText: AppString.ageMonthTextKr,
-          AppString.makterText: AppString.makterTextKr,
+          AppString.minute: AppString.minuteKr,
           AppString.numberOfGivenText: AppString.numberOfGivenTextKr,
           AppString.numberOfGivenSufficText:
               AppString.numberOfGivenSufficTextKr,
@@ -327,11 +327,11 @@ class AppTranslations extends Translations {
           AppString.settingTr: AppString.settingEn,
           AppString.weightText: AppString.weightTextEn,
           AppString.duplicateNameTr: AppString.duplicateNameEn,
-          AppString.monthText: AppString.monthTextEn,
+          AppString.month: AppString.monthTextEn,
           AppString.yearText: AppString.yearTextEn,
-          AppString.dayText: AppString.dayTextEn,
-          AppString.dogTextTr: AppString.dogTextEn,
-          AppString.catTextTr: AppString.catTextEn,
+          AppString.day: AppString.dayTextEn,
+          AppString.healthLog: AppString.healthLogEn,
+          AppString.hospitalVisitLog: AppString.hospitalVisitLogEn,
           AppString.hasipitalTextTr: AppString.hasipitalTextEn,
           AppString.hasipitalNumTextTr: AppString.hasipitalNumTextEn,
           AppString.yesTextTr: AppString.yesTextEn,
@@ -356,7 +356,7 @@ class AppTranslations extends Translations {
           AppString.veryGood: AppString.veryGoodEn,
           AppString.nomal: AppString.nomalEn,
           AppString.veryBad: AppString.veryBadEn,
-          AppString.handmadeTextTr: AppString.handmadeTextEn,
+          AppString.hour: AppString.hourEn,
           AppString.updateBtnText: AppString.updateBtnTextEn,
           AppString.cancelBtnTextTr: AppString.cancelBtnTextEn,
           AppString.completeText: AppString.completeTextEn,
@@ -373,7 +373,7 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectEn,
           AppString.stampNameCtlMsg: AppString.stampNameCtlMsgEn,
           AppString.ageMonthText: AppString.ageMonthTextEn,
-          AppString.makterText: AppString.makterTextEn,
+          AppString.minute: AppString.minuteEn,
           AppString.numberOfGivenText: AppString.numberOfGivenTextEn,
           AppString.numberOfGivenSufficText:
               AppString.numberOfGivenSufficTextEn,
@@ -627,25 +627,25 @@ class AppString {
   static String yearTextJp = "年";
   static String yearTextEn = "";
 
-  static String monthText = "monthTextTr";
+  static String month = "monthTextTr";
   static String monthTextKr = '월';
   static String monthTextJp = "月";
   static String monthTextEn = "Month";
 
-  static String dayText = "dayTextTr";
+  static String day = "dayTextTr";
   static String dayTextKr = '일';
   static String dayTextJp = "日";
   static String dayTextEn = "Day";
 
-  static String dogTextTr = "dogTextTr";
-  static String dogTextKr = '강아지';
-  static String dogTextJp = "ワンちゃん";
-  static String dogTextEn = "Puppy";
+  static String healthLog = "healthLogTr";
+  static String healthLogKr = '건강 기록';
+  static String healthLogJp = "健康記録";
+  static String healthLogEn = "Health Log";
 
-  static String catTextTr = "catTextTr";
-  static String catTextKr = '고양이';
-  static String catTextJp = "ネコちゃん";
-  static String catTextEn = "Kitten";
+  static String hospitalVisitLog = "hospitalVisitLogTr";
+  static String hospitalVisitLogKr = '진료 기록';
+  static String hospitalVisitLogJp = "通院記録";
+  static String hospitalVisitLogEn = "hospitalVisitLog";
 
   static String hasipitalTextTr = "hasipitalTextTr";
   static String hasipitalTextKr = '병원 명';
@@ -779,10 +779,15 @@ class AppString {
   static String veryBadJp = "とても悪い";
   static String veryBadEn = "Very Bad";
 
-  static String handmadeTextTr = "handmadeTextTr";
-  static String handmadeTextKr = '손수 만듬';
-  static String handmadeTextJp = "手作り";
-  static String handmadeTextEn = "Handmade";
+  static String hour = "timeTr";
+  static String hourKr = '시';
+  static String hourJp = "時";
+  static String hourEn = "Handmade";
+
+  static String minute = "minuteTr";
+  static String minuteKr = '분';
+  static String minuteJp = "分";
+  static String minuteEn = "minute";
 
   static String updateBtnText = "updateBtnTextTr";
   static String updateBtnTextKr = '변경';
@@ -863,11 +868,6 @@ class AppString {
   static String ageMonthTextKr = '개월';
   static String ageMonthTextJp = "ヶ月";
   static String ageMonthTextEn = " month";
-
-  static String makterText = "makterTextTr";
-  static String makterTextKr = '제조사';
-  static String makterTextJp = "メーカー";
-  static String makterTextEn = "Maker";
 
   static String numberOfGivenText = "numberOfGivenTr";
   static String numberOfGivenTextKr = '주는 횟수';
