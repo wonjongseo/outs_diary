@@ -1,17 +1,3 @@
-# ours_log
+![image](https://github.com/user-attachments/assets/83a0feb0-6557-48c6-b54b-54df274532c4)
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# outs_diary
+![image](https://github.com/user-attachments/assets/799f555b-cb63-4fcb-b050-b691c6a200a4)
