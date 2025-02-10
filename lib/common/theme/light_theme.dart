@@ -44,7 +44,7 @@ ThemeData lightTheme(String systemLanguage) {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.greenLight,
-        foregroundColor: AppColors.backgroundLight,
+        foregroundColor: AppColors.white,
         splashFactory: NoSplash.splashFactory,
         elevation: 0,
         shadowColor: Colors.transparent,
@@ -59,14 +59,14 @@ ThemeData lightTheme(String systemLanguage) {
       ),
     ),
     bottomSheetTheme: const BottomSheetThemeData(
-      backgroundColor: AppColors.backgroundLight,
+      backgroundColor: AppColors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(20),
         ),
       ),
     ),
-    dialogBackgroundColor: AppColors.backgroundLight,
+    dialogBackgroundColor: AppColors.white,
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -78,7 +78,7 @@ ThemeData lightTheme(String systemLanguage) {
     ),
     listTileTheme: const ListTileThemeData(
       iconColor: AppColors.greenDark,
-      tileColor: AppColors.backgroundLight,
+      tileColor: AppColors.white,
     ),
     switchTheme: const SwitchThemeData(
       thumbColor: MaterialStatePropertyAll(Color(0xFF83939C)),

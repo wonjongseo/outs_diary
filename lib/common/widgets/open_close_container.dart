@@ -7,22 +7,24 @@ import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_expansion_card.dart';
 
 class ExpansionIconCard extends StatefulWidget {
-  const ExpansionIconCard(
-      {super.key, required this.icons, required this.label});
+  const ExpansionIconCard({
+    super.key,
+    required this.icons,
+    required this.label,
+    required this.selectedIconIndexs,
+    this.isOnlyOne = false,
+  });
 
   final List<IconAndIndex> icons;
+  final List<int> selectedIconIndexs;
+  final bool isOnlyOne;
   final String label;
   @override
   State<ExpansionIconCard> createState() => _ExpansionIconCardState();
 }
 
 class _ExpansionIconCardState extends State<ExpansionIconCard> {
-  List<int> selectedIndexs = [];
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  int selectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -36,32 +38,37 @@ class _ExpansionIconCardState extends State<ExpansionIconCard> {
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: () {
-                setState(
-                  () {
-                    if (selectedIndexs.contains(index)) {
-                      selectedIndexs.remove(index);
-                    } else {
-                      selectedIndexs.add(index);
-                    }
-                  },
-                );
+                if (widget.isOnlyOne) {
+                  selectedIndex = index;
+                  widget.selectedIconIndexs.assignAll([index]);
+                } else {
+                  if (widget.selectedIconIndexs.contains(index)) {
+                    widget.selectedIconIndexs.remove(index);
+                  } else {
+                    widget.selectedIconIndexs.add(index);
+                  }
+                }
+
+                setState(() {});
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(
                     widget.icons[index].iconData,
-                    size: RS.width10 * 4,
-                    color: selectedIndexs.contains(index)
+                    size: RS.w10 * 4,
+                    color: widget.selectedIconIndexs.contains(index) ||
+                            selectedIndex == index
                         ? Colors.pinkAccent
                         : null,
                   ),
-                  SizedBox(height: RS.height10 / 2),
+                  SizedBox(height: RS.h10 / 2),
                   Text(
                     widget.icons[index].title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: selectedIndexs.contains(index)
+                        color: widget.selectedIconIndexs.contains(index) ||
+                                selectedIndex == index
                             ? Colors.pinkAccent
                             : null),
                   )

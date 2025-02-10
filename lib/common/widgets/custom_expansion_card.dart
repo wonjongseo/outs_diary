@@ -24,6 +24,7 @@ class CustomExpansionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTileCard(
+      initiallyExpanded: true,
       elevation: 0,
       title: titleWidget == null ? Text(title) : titleWidget!,
       subtitle: subTitleWidget == null && subTitle == null
@@ -31,12 +32,12 @@ class CustomExpansionCard extends StatelessWidget {
           : subTitleWidget == null
               ? Text(subTitle!)
               : subTitleWidget!,
-      expandedColor: Get.isDarkMode ? AppColors.backgroundDark : Colors.white,
+      expandedColor: Get.isDarkMode ? AppColors.black : Colors.white,
       shadowColor: Colors.transparent,
       children: children == null
           ? [
               Padding(
-                padding: EdgeInsets.symmetric(vertical: RS.height10),
+                padding: EdgeInsets.symmetric(vertical: RS.h10),
                 child: child,
               )
             ]

@@ -5,76 +5,50 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
+import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
-import 'package:ours_log/views/full_Image_screen.dart';
-import 'package:ours_log/views/image_picker_screen.dart';
-import 'package:photo_manager/photo_manager.dart';
 
-class ImageOfToday extends StatefulWidget {
-  const ImageOfToday({
-    super.key,
-  });
+class ImageOfToday extends StatelessWidget {
+  const ImageOfToday(
+      {super.key,
+      required this.uploadFiles,
+      required this.selectedPhotos,
+      required this.removePhoto});
 
-  @override
-  State<ImageOfToday> createState() => _ImageOfTodayState();
-}
-
-class _ImageOfTodayState extends State<ImageOfToday> {
-  List<File> files = [];
-
-  @override
-  void initState() {
-    requestPermisson();
-    super.initState();
-  }
-
-  void requestPermisson() async {
-    final permission = await PhotoManager.requestPermissionExtend();
-    if (!permission.isAuth) {
-      return PhotoManager.openSetting();
-    }
-  }
-
+  final List<File> uploadFiles;
+  final Function() selectedPhotos;
+  final Function(int) removePhoto;
   @override
   Widget build(BuildContext context) {
     return ColTextAndWidget(
       label:
-          '${AppString.photoOfToday.tr}  ${files.isEmpty ? '' : '+${files.length}'}',
+          '${AppString.photoOfToday.tr}  ${uploadFiles.isEmpty ? '' : '+${uploadFiles.length}'}',
       labelWidget: GestureDetector(
-        onTap: () async {
-          File file = (await Get.to(() => const ImagePickerScreen()));
-          if (!files.contains(file)) {
-            files.add(file);
-          }
-          setState(() {}); // Don't Remove
-        },
+        onTap: selectedPhotos,
         child: const Icon(Icons.add),
       ),
-      widget: files.isEmpty ? _addPhoto() : _photos(),
+      widget: uploadFiles.isEmpty ? _addPhoto() : _photos(),
     );
   }
 
   CarouselSlider _photos() {
     return CarouselSlider(
       items: List.generate(
-        files.length,
+        uploadFiles.length,
         (index) => GestureDetector(
-          // onTap: () => Get.to(
-          //   () => FullmageScreen(fileImage: files[index].path),
-          // ),
           child: Stack(
             alignment: AlignmentDirectional.center,
             children: [
               Container(
-                height: RS.width10 * 25,
-                width: RS.width10 * 25,
+                height: RS.w10 * 25,
+                width: RS.w10 * 25,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(RS.width10 * 4),
+                  borderRadius: BorderRadius.circular(RS.w10 * 4),
                   border: Border.all(
                     color: Colors.grey,
                   ),
                   image: DecorationImage(
-                    image: FileImage(files[index]),
+                    image: FileImage(uploadFiles[index]),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -85,16 +59,11 @@ class _ImageOfTodayState extends State<ImageOfToday> {
                 child: IconButton(
                   style: IconButton.styleFrom(
                     padding: EdgeInsets.zero,
-                    // tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     backgroundColor: Colors.pinkAccent,
                     foregroundColor: Colors.white,
-                    minimumSize: Size(30, 30),
+                    minimumSize: const Size(30, 30),
                   ),
-                  onPressed: () async {
-                    files.remove(files[index]);
-
-                    setState(() {}); // Don't Remove
-                  },
+                  onPressed: () => removePhoto(index),
                   icon: const Icon(Icons.remove),
                 ),
               )
@@ -103,7 +72,7 @@ class _ImageOfTodayState extends State<ImageOfToday> {
         ),
       ),
       options: CarouselOptions(
-        height: RS.width10 * 25,
+        height: RS.w10 * 25,
         aspectRatio: 1,
         viewportFraction: 1,
         enableInfiniteScroll: false,
@@ -113,17 +82,14 @@ class _ImageOfTodayState extends State<ImageOfToday> {
 
   GestureDetector _addPhoto() {
     return GestureDetector(
-      onTap: () async {
-        files.add(await Get.to(() => const ImagePickerScreen()));
-        setState(() {}); // Don't Remove
-      },
+      onTap: selectedPhotos,
       child: Align(
         alignment: Alignment.center,
         child: Container(
-          height: RS.width10 * 25,
-          width: RS.width10 * 25,
+          height: RS.w10 * 25,
+          width: RS.w10 * 25,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(RS.width10 * 4),
+            borderRadius: BorderRadius.circular(RS.w10 * 4),
             border: Border.all(color: Colors.grey),
           ),
           child: Column(
@@ -131,7 +97,7 @@ class _ImageOfTodayState extends State<ImageOfToday> {
             children: [
               Icon(
                 Icons.camera_alt_outlined,
-                size: RS.width10 * 5,
+                size: RS.w10 * 5,
                 color: Colors.grey,
               ),
               Text(AppString.addPhoto.tr)

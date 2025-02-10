@@ -64,7 +64,7 @@ class OnBoarding1 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FaIcon(FontAwesomeIcons.mars),
-                      SizedBox(height: RS.height10),
+                      SizedBox(height: RS.h10),
                       Text(AppString.male.tr),
                     ],
                   ),
@@ -91,7 +91,7 @@ class OnBoarding1 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FaIcon(FontAwesomeIcons.venus),
-                      SizedBox(height: RS.height10),
+                      SizedBox(height: RS.h10),
                       Text(AppString.female.tr),
                     ],
                   ),
@@ -118,7 +118,7 @@ class OnBoarding1 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FaIcon(FontAwesomeIcons.marsAndVenus),
-                      SizedBox(height: RS.height10),
+                      SizedBox(height: RS.h10),
                       Text(AppString.another.tr),
                     ],
                   ),

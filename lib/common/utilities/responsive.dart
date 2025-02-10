@@ -26,13 +26,13 @@ class RS {
   static double height15 = sceenHeight / 56.8;
   static double height14 = sceenHeight / 60.85;
   static double height11 = sceenHeight / 77.45;
-  static double height10 = sceenHeight / 85.2;
+  static double h10 = sceenHeight / 85.2;
 
   static double height153 = sceenHeight / 5.55555;
-  static double width10 = sceenWidth / 41.4;
+  static double w10 = sceenWidth / 41.4;
 
-  static double width8 = width10 * 0.8;
-  static double width12 = width10 * 1.2;
+  static double width8 = w10 * 0.8;
+  static double width12 = w10 * 1.2;
   static double width20 = sceenWidth / 20;
   static double width16 = sceenWidth / 25.88;
   static double width15 = sceenWidth / 27.6;

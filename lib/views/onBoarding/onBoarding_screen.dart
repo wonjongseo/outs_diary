@@ -108,8 +108,8 @@ class _BoardingScreenState extends State<BoardingScreen> {
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(
-              vertical: RS.height10,
-              horizontal: RS.width10,
+              vertical: RS.h10,
+              horizontal: RS.w10,
             ),
             child: Column(
               children: [
@@ -251,8 +251,8 @@ class _BoardingScreenState extends State<BoardingScreen> {
         borderRadius: BorderRadius.circular(15),
         onTap: goToNextPage,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: RS.width10),
-          height: RS.height10 * 6,
+          margin: EdgeInsets.symmetric(horizontal: RS.w10),
+          height: RS.h10 * 6,
           decoration: BoxDecoration(
             color: Colors.pinkAccent,
             borderRadius: BorderRadius.circular(15),

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'package:ours_log/common/utilities/responsive.dart';
-
-import '../utilities/app_color.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -11,11 +8,13 @@ class CustomTextFormField extends StatelessWidget {
     this.hintText,
     this.widget,
     this.maxLines,
+    this.controller,
   }) : super(key: key);
 
   final String? hintText;
   final Widget? widget;
   final int? maxLines;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,6 +28,7 @@ class CustomTextFormField extends StatelessWidget {
             child: TextFormField(
               style: TextStyle(fontSize: RS.width12),
               maxLines: maxLines ?? 1,
+              controller: controller,
               decoration: InputDecoration(
                 prefixIconConstraints:
                     const BoxConstraints(minHeight: 0, minWidth: 0),

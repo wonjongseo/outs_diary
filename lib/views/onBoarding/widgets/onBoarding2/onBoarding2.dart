@@ -32,7 +32,7 @@ class OnBoarding2 extends StatelessWidget {
             text: isKo ? '어떤 기록을 담아볼까요?' : 'どんな記録を入れますか？',
           ),
         ),
-        SizedBox(height: RS.height10),
+        SizedBox(height: RS.h10),
         Column(
           children: List.generate(
             displayArticles.length,

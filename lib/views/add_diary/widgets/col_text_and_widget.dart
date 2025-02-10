@@ -25,36 +25,28 @@ class ColTextAndWidget extends StatelessWidget {
         horizontal: RS.width8,
       ).copyWith(
         top: RS.height14,
-        bottom: RS.height10,
+        bottom: RS.h10,
       ),
       decoration: BoxDecoration(
-        color: Get.isDarkMode ? AppColors.backgroundDark : Colors.white,
+        color: Get.isDarkMode ? AppColors.black : Colors.white,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: RS.width10),
+            padding: EdgeInsets.symmetric(horizontal: RS.w10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(label),
-                if (labelWidget != null) labelWidget!
-                // if (onTapIcon != null)
-                //   GestureDetector(
-                //     onTap: onTapIcon,
-                //     child: const Icon(Icons.keyboard_arrow_down),
-                //   )
-              ],
+              children: [Text(label), if (labelWidget != null) labelWidget!],
             ),
           ),
           Padding(
             padding: EdgeInsets.only(
               top: RS.height20,
               bottom: RS.height15,
-              right: RS.width10,
-              left: RS.width10,
+              right: RS.w10,
+              left: RS.w10,
             ),
             child: widget,
           ),

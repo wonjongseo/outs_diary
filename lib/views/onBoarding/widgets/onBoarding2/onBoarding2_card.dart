@@ -35,7 +35,7 @@ class OnBoarding2Card extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(displayArticle.label),
-              SizedBox(height: RS.height10 / 2),
+              SizedBox(height: RS.h10 / 2),
               Text(displayArticle.description),
             ],
           ),
@@ -49,8 +49,8 @@ class OnBoarding2Card extends StatelessWidget {
                   return Positioned(
                     right: index == 0 ? null : index * 40,
                     child: Container(
-                      width: RS.width10 * 5,
-                      height: RS.width10 * 5,
+                      width: RS.w10 * 5,
+                      height: RS.w10 * 5,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.grey[400]!),

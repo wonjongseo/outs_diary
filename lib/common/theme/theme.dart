@@ -12,7 +12,7 @@ const Color darkHeaderClr = Color(0xFF424242);
 
 TextStyle get subHeadingStyle {
   return TextStyle(
-    fontSize: RS.width10 * 1.6,
+    fontSize: RS.w10 * 1.6,
     fontWeight: FontWeight.w400,
     color: Get.isDarkMode ? Colors.white : Colors.black,
   );
@@ -20,7 +20,7 @@ TextStyle get subHeadingStyle {
 
 TextStyle get headingStyle {
   return TextStyle(
-    fontSize: RS.width10 * 2,
+    fontSize: RS.w10 * 2,
     fontWeight: FontWeight.w600,
     color: Get.isDarkMode ? Colors.white : Colors.black,
   );

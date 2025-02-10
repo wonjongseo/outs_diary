@@ -5,8 +5,8 @@ import 'package:ours_log/common/enums/icon_and_index.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
 
 class AppConstant {
-  static const int petModelHiveId = 0;
-  static const int dogModelHiveId = 1;
+  static const int diaryModelHiveId = 0;
+  static const int healthModelHiveId = 1;
   static const int genderTypeHiveId = 2;
   static const int stampModelHiveId = 3;
   static const int todoModelHiveId = 4;
@@ -18,7 +18,7 @@ class AppConstant {
   static const int expensiveModelHiveId = 10;
   static const int categoryModelHiveId = 11;
 
-  static const String petModelBox = 'pets';
+  static const String diaryModelBox = 'diarys';
   static const String settingModelBox = 'settings';
   static const String stampModelBox = 'stamps';
   static const String todoModelBox = 'todos';
@@ -49,12 +49,32 @@ class AppConstant {
     AppImagePath.feal5,
   ];
 
+  static List<IconAndIndex> faceIcons = [
+    IconAndIndex.faceLaughBeam,
+    IconAndIndex.faceMehBlank,
+    IconAndIndex.faceFrown,
+    IconAndIndex.faceSadTear,
+    IconAndIndex.faceAngry,
+  ];
   static List<IconAndIndex> weatherIcons = [
     IconAndIndex.sun,
     IconAndIndex.cloud,
     IconAndIndex.wind,
     IconAndIndex.umbrella,
     IconAndIndex.snowflake,
+  ];
+
+  static List<IconAndIndex> zeroToNineIcons = [
+    IconAndIndex.zero,
+    IconAndIndex.one,
+    IconAndIndex.two,
+    IconAndIndex.three,
+    IconAndIndex.four,
+    IconAndIndex.five,
+    IconAndIndex.six,
+    IconAndIndex.seven,
+    IconAndIndex.eight,
+    IconAndIndex.nine,
   ];
 
   // static List<IconData> fillingIcons = [

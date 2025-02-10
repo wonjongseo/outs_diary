@@ -46,7 +46,7 @@ ThemeData darkTheme() {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.greenDark,
-        foregroundColor: AppColors.backgroundDark,
+        foregroundColor: AppColors.black,
         splashFactory: NoSplash.splashFactory,
         elevation: 0,
         shadowColor: Colors.transparent,
@@ -81,7 +81,7 @@ ThemeData darkTheme() {
     ),
     listTileTheme: const ListTileThemeData(
       iconColor: AppColors.greenDark,
-      tileColor: AppColors.backgroundDark,
+      tileColor: AppColors.black,
     ),
     switchTheme: const SwitchThemeData(
       thumbColor: MaterialStatePropertyAll(AppColors.greenDark),

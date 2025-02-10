@@ -7,8 +7,8 @@ class AppTranslations extends Translations {
           AppString.whatDidYouHintMsg: AppString.whatDidYouHintMsgJp,
           AppString.howFealToday: AppString.howFealTodayJp,
           AppString.savedText: AppString.savedTextJp,
-          AppString.whatsRerText: AppString.whatsRerTextJp,
-          AppString.whatsDerTextText: AppString.whatsDerTextTextJp,
+          AppString.good: AppString.goodJp,
+          AppString.bad: AppString.badJp,
           AppString.fealText: AppString.fealTextJp,
           AppString.changedSystemLanguageMsg:
               AppString.changedSystemLanguageMsgJp,
@@ -70,9 +70,9 @@ class AppTranslations extends Translations {
           AppString.rain: AppString.rainJp,
           AppString.snow: AppString.snowJp,
           AppString.ageYearTextTr: AppString.ageYearTextJp,
-          AppString.rerTextTr: AppString.rerTextJp,
-          AppString.derTextText: AppString.derTextTextJp,
-          AppString.dryText: AppString.dryTextJp,
+          AppString.veryGood: AppString.veryGoodJp,
+          AppString.nomal: AppString.nomalJp,
+          AppString.veryBad: AppString.veryBadJp,
           AppString.handmadeTextTr: AppString.handmadeTextJp,
           AppString.updateBtnText: AppString.updateBtnTextJp,
           AppString.cancelBtnTextTr: AppString.cancelBtnTextJp,
@@ -150,8 +150,8 @@ class AppTranslations extends Translations {
           AppString.whatDidYouHintMsg: AppString.whatDidYouHintMsgKr,
           AppString.howFealToday: AppString.howFealTodayKr,
           AppString.savedText: AppString.savedTextKr,
-          AppString.whatsRerText: AppString.whatsRerTextKr,
-          AppString.whatsDerTextText: AppString.whatsDerTextTextKr,
+          AppString.good: AppString.goodKr,
+          AppString.bad: AppString.badKr,
           AppString.fealText: AppString.fealTextKr,
           AppString.changedSystemLanguageMsg:
               AppString.changedSystemLanguageMsgKr,
@@ -210,9 +210,9 @@ class AppTranslations extends Translations {
           AppString.rain: AppString.rainKr,
           AppString.snow: AppString.snowKr,
           AppString.ageYearTextTr: AppString.ageYearTextKr,
-          AppString.rerTextTr: AppString.rerTextKr,
-          AppString.derTextText: AppString.derTextTextKr,
-          AppString.dryText: AppString.dryTextKr,
+          AppString.veryGood: AppString.veryGoodKr,
+          AppString.nomal: AppString.nomalKr,
+          AppString.veryBad: AppString.veryBadKr,
           AppString.handmadeTextTr: AppString.handmadeTextKr,
           AppString.updateBtnText: AppString.updateBtnTextKr,
           AppString.cancelBtnTextTr: AppString.cancelBtnTextKr,
@@ -293,8 +293,8 @@ class AppTranslations extends Translations {
           AppString.whatDidYouHintMsg: AppString.whatDidYouHintMsgEn,
           AppString.howFealToday: AppString.howFealTodayEn,
           AppString.savedText: AppString.savedTextEn,
-          AppString.whatsRerText: AppString.whatsRerTextEn,
-          AppString.whatsDerTextText: AppString.whatsDerTextTextEn,
+          AppString.good: AppString.goodEn,
+          AppString.bad: AppString.badEn,
           AppString.fealText: AppString.fealTextEn,
           AppString.changedSystemLanguageMsg:
               AppString.changedSystemLanguageMsgEn,
@@ -353,9 +353,9 @@ class AppTranslations extends Translations {
           AppString.rain: AppString.rainEn,
           AppString.snow: AppString.snowEn,
           AppString.ageYearTextTr: AppString.ageYearTextEn,
-          AppString.rerTextTr: AppString.rerTextEn,
-          AppString.derTextText: AppString.derTextTextEn,
-          AppString.dryText: AppString.dryTextEn,
+          AppString.veryGood: AppString.veryGoodEn,
+          AppString.nomal: AppString.nomalEn,
+          AppString.veryBad: AppString.veryBadEn,
           AppString.handmadeTextTr: AppString.handmadeTextEn,
           AppString.updateBtnText: AppString.updateBtnTextEn,
           AppString.cancelBtnTextTr: AppString.cancelBtnTextEn,
@@ -752,45 +752,32 @@ class AppString {
   static String ageYearTextJp = " 歳";
   static String ageYearTextEn = "Age";
 
-  static String rerTextTr = "rerTextTr";
-  static String rerTextKr = '기초대사량';
-  static String rerTextJp = "基礎代謝量 ";
-  static String rerTextEn = "RER"; //"resting energy requirement";
+  static String veryGood = "veryGoodTr";
+  static String veryGoodKr = '아주 좋음';
+  static String veryGoodJp = "とても良い";
+  static String veryGoodEn = "veryGood"; //"resting energy requirement";
 
   //
-  static String whatsRerText = "whatsRerTextTr";
-  static String whatsRerTextKr = """
-RER(resting energy requirement)은 기초대사량.
-즉, 휴식 시에 필요한 칼로리를 뜻 합니다.""";
-
-  static String whatsRerTextJp = """
-RER(Resting Energy Requirement)というのは、基礎代謝量。
-即ち、休息に必要なカロリーを表します。""";
-
-  static String whatsRerTextEn = """
-RER(Resting Energy Requirement) is basal metabolism.
-In other words, it means the amount of energy you need to rest.""";
+  static String good = "goodTr";
+  static String goodKr = "좋음";
+  static String goodJp = "良い";
+  static String goodEn = 'good';
   //
 
-  static String derTextText = "derTextTextTr";
-  static String derTextTextKr = '1일 적정 칼로리';
-  static String derTextTextJp = "1日適量カロリー";
-  static String derTextTextEn =
-      "Daily energy requirement"; // "daily energy requirement;
+  static String nomal = "nomalTr";
+  static String nomalKr = '보통';
+  static String nomalJp = "普通";
+  static String nomalEn = "Daily energy requirement";
 
-  static String whatsDerTextText = "whatsDerTextTextTr";
-  static String whatsDerTextTextKr =
-      'DER(daily energy requirement)은 하루에 필요한 칼로리를 뜻 합니다.';
-  static String whatsDerTextTextJp =
-      'DER(daily energy requirement)は1日に必要なカロリーを表します。';
+  static String bad = "badTr";
+  static String badKr = '나쁨';
+  static String badJp = '悪い';
+  static String badEn = "bad";
 
-  static String whatsDerTextTextEn =
-      "DER means the amount of energy you need per day.";
-
-  static String dryText = "dryTextTr";
-  static String dryTextKr = '사료';
-  static String dryTextJp = "ドライ";
-  static String dryTextEn = "Feed";
+  static String veryBad = "veryBadTr";
+  static String veryBadKr = '아주 나쁨';
+  static String veryBadJp = "とても悪い";
+  static String veryBadEn = "Very Bad";
 
   static String handmadeTextTr = "handmadeTextTr";
   static String handmadeTextKr = '손수 만듬';
