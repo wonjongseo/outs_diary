@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/diary_controller.dart';
@@ -61,7 +62,7 @@ class ImageOfToday extends StatelessWidget {
                   style: IconButton.styleFrom(
                     padding: EdgeInsets.zero,
                     backgroundColor: Colors.pinkAccent,
-                    foregroundColor: Colors.white,
+                    foregroundColor: AppColors.white,
                     minimumSize: const Size(30, 30),
                   ),
                   onPressed: () => removePhoto(index),

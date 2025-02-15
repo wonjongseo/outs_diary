@@ -15,6 +15,7 @@ class HospitalLogController extends GetxController {
   HospitalLogRepository hospitalLogRepository = HospitalLogRepository();
   SettingRepository settingRepository = SettingRepository();
   late final ValueNotifier<List<HospitalLogModel>> selectedEvents;
+  ScrollController scrollController = ScrollController();
 
   final kEvents = LinkedHashMap<DateTime, List<HospitalLogModel>>(
     equals: isSameDay,
@@ -31,6 +32,11 @@ class HospitalLogController extends GetxController {
 
     selectedEvents = ValueNotifier(getEventsForDay(selectedDay!));
     super.onInit();
+  }
+
+  void onChageCalendar(DateTime cfocusedDay) {
+    focusedDay = cfocusedDay;
+    update();
   }
 
   List<HospitalLogModel> getEventsForDay(DateTime day) {

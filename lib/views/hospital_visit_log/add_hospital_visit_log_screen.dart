@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
@@ -114,8 +115,8 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
 
     if (hospitalName.isEmpty) {
       AppFunction.invaildTextFeildSnackBar(
-          title: '필수', message: '병원 이름을 입력해주세요');
-      scrollGoToTop();
+          title: AppString.requiredText.tr, message: '병원 이름을 입력해주세요');
+      AppFunction.scrollGoToTop(scrollController);
       return;
     }
 
@@ -154,13 +155,13 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
     );
   }
 
-  void scrollGoToTop() {
-    scrollController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
-  }
+  // void scrollGoToTop() {
+  //   scrollController.animateTo(
+  //     0,
+  //     duration: const Duration(milliseconds: 300),
+  //     curve: Curves.easeInOut,
+  //   );
+  // }
 
   PersistentBottomSheetController? bottomSheetController;
   @override
@@ -209,13 +210,16 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
                               readOnly: true,
                               widget: IconButton(
                                 onPressed: () async {
-                                  DateTime? _pickerDate = await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime.now().subtract(
-                                          const Duration(days: 365 * 3)),
-                                      lastDate: DateTime.now()
-                                          .add(const Duration(days: 365 * 3)));
+                                  DateTime? _pickerDate =
+                                      await AppFunction.pickDate(context);
+
+                                  // = await showDatePicker(
+                                  //     context: context,
+                                  //     initialDate: DateTime.now(),
+                                  //     firstDate: DateTime.now().subtract(
+                                  //         const Duration(days: 365 * 3)),
+                                  //     lastDate: DateTime.now()
+                                  //         .add(const Duration(days: 365 * 3)));
 
                                   if (_pickerDate != null) {
                                     _selectedDate = _pickerDate;
@@ -355,8 +359,17 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
                                     IconButton(
                                       onPressed: () async {
                                         Get.back();
-                                        File file = (await Get.to(
-                                            () => const ImagePickerScreen()));
+                                        final ImagePicker picker =
+                                            ImagePicker();
+                                        final XFile? image =
+                                            await picker.pickImage(
+                                                source: ImageSource.gallery);
+
+                                        if (image == null) {
+                                          return;
+                                        } //
+                                        File file = File(image!.path);
+
                                         if (!uploadFiles.contains(file)) {
                                           uploadFiles.add(file);
                                         }

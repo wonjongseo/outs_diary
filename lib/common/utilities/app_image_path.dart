@@ -1,9 +1,30 @@
 class AppImagePath {
-  static String feal1 = 'assets/images/feal1.png';
-  static String feal2 = 'assets/images/feal2.png';
-  static String feal3 = 'assets/images/feal3.png';
-  static String feal4 = 'assets/images/feal4.png';
-  static String feal5 = 'assets/images/feal5.png';
+  static String very_good1 = 'assets/images/feal1/very_good.png';
+  static String good1 = 'assets/images/feal1/good.png';
+  static String soso1 = 'assets/images/feal1/soso.png';
+  static String bad1 = 'assets/images/feal1/bad.png';
+  static String very_bad1 = 'assets/images/feal1/very_bad.png';
+
+  static String very_good2 = 'assets/images/feal2/very_good.png';
+  static String good2 = 'assets/images/feal2/good.png';
+  static String soso2 = 'assets/images/feal2/soso.png';
+  static String bad2 = 'assets/images/feal2/bad.png';
+  static String very_bad2 = 'assets/images/feal2/very_bad.png';
+  static String background21 = 'assets/images/feal2/background1.png';
+  static String background22 = 'assets/images/feal2/background2.png';
+  static String background23 = 'assets/images/feal2/background3.png';
+
+  static String sunny = 'assets/images/sunny.png';
+  static String rainny = 'assets/images/rainny.png';
+  static String cloudy = 'assets/images/cloudy.png';
+  // static String feal2 = 'assets/images/feal1/bad.png';
+  // static String feal1 = 'assets/images/feal1/very_bad.png';
+
+  // static String feal5 = 'assets/images/feal5.png';
+  // static String feal4 = 'assets/images/feal4.png';
+  // static String feal3 = 'assets/images/feal3.png';
+  // static String feal2 = 'assets/images/feal2.png';
+  // static String feal1 = 'assets/images/feal1.png';
   static String background1 = 'assets/images/background1.png';
   static String background2 = 'assets/images/background2.png';
   static String background3 = 'assets/images/background3.png';

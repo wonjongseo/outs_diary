@@ -32,7 +32,7 @@ class CustomExpansionCard extends StatelessWidget {
           : subTitleWidget == null
               ? Text(subTitle!)
               : subTitleWidget!,
-      expandedColor: Get.isDarkMode ? AppColors.black : Colors.white,
+      expandedColor: Get.isDarkMode ? AppColors.black : AppColors.white,
       shadowColor: Colors.transparent,
       children: children == null
           ? [

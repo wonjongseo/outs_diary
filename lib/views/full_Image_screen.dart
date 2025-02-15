@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
 
 class FullmageScreen extends StatelessWidget {
   const FullmageScreen({super.key, required this.fileImage});
@@ -35,7 +36,7 @@ class FullmageScreen extends StatelessWidget {
                 onPressed: Get.back,
                 icon: const FaIcon(
                   FontAwesomeIcons.x,
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ),
             ],

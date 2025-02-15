@@ -18,133 +18,155 @@ class HospitalLogBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HospitalLogController>(builder: (hospitalLogController) {
-      return SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              DateFormat('yyy${AppString.yearText.tr} M${AppString.month.tr}')
-                  .format(hospitalLogController.focusedDay),
-              style: boldStyle,
-            ),
-            SizedBox(height: RS.h10 * 1.2),
-            TableCalendar(
-              availableGestures: AvailableGestures.horizontalSwipe,
-              daysOfWeekStyle: DaysOfWeekStyle(
-                weekdayStyle: weekdayStyle,
-                weekendStyle: weekdayStyle,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: RS.w10 * 2),
+      child:
+          GetBuilder<HospitalLogController>(builder: (hospitalLogController) {
+        return SingleChildScrollView(
+          controller: hospitalLogController.scrollController,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                DateFormat('yyy${AppString.year.tr} M${AppString.month.tr}')
+                    .format(hospitalLogController.focusedDay),
+                style: boldStyle,
               ),
-              pageJumpingEnabled: false,
-              pageAnimationEnabled: false,
-              locale: isKo ? 'ko' : 'ja',
-              daysOfWeekHeight: RS.h10 * 3,
-              headerVisible: false,
-              firstDay: kFirstDay,
-              lastDay: kLastDay,
-              onPageChanged: (focusedDay) {
-                hospitalLogController.focusedDay = focusedDay;
-              },
-              calendarStyle: const CalendarStyle(
-                // outsideDaysVisible: false,
-                markersAutoAligned: false,
-                isTodayHighlighted: false,
-                // markersAlignment: Alignment.center,
-                // cellAlignment: Alignment.bottomCenter,
+              SizedBox(height: RS.h10 * 1.2),
+              TableCalendar(
+                availableGestures: AvailableGestures.horizontalSwipe,
+                daysOfWeekStyle: DaysOfWeekStyle(
+                  weekdayStyle: weekdayStyle,
+                  weekendStyle: weekdayStyle,
+                ),
+                pageJumpingEnabled: false,
+                pageAnimationEnabled: false,
+                locale: isKo ? 'ko' : 'ja',
+                daysOfWeekHeight: RS.h10 * 3,
+                headerVisible: false,
+                firstDay: kFirstDay,
+                lastDay: kLastDay,
+                onPageChanged: hospitalLogController.onChageCalendar,
+                calendarBuilders: CalendarBuilders(
+                  markerBuilder: (context, day, event) {
+                    if (event.isEmpty) return null;
+                    return Text(
+                      '+${event.length}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
+                ),
+                calendarStyle: CalendarStyle(
+                  markersAlignment: Alignment.bottomCenter,
+                  markersAnchor: 1,
+                  // selectedTextStyle: TextStyle(
+                  //   fontWeight: FontWeight.bold,
+                  //   color: Colors.redAccent,
+                  //   fontSize: 22,
+                  // ),
+                  // selectedDecoration: BoxDecoration(),
+                  withinRangeDecoration: BoxDecoration(
+                    border: Border.all(color: Colors.red),
+                  ),
+                ),
+                focusedDay: hospitalLogController.focusedDay,
+                selectedDayPredicate: (day) =>
+                    isSameDay(hospitalLogController.selectedDay, day),
+                eventLoader: hospitalLogController.getEventsForDay,
+                rowHeight: RS.h10 * 7,
+                onDaySelected: hospitalLogController.onDaySelected,
               ),
-              focusedDay: hospitalLogController.focusedDay,
-              selectedDayPredicate: (day) =>
-                  isSameDay(hospitalLogController.selectedDay, day),
-              eventLoader: hospitalLogController.getEventsForDay,
-              rowHeight: RS.h10 * 7,
-              onDaySelected: hospitalLogController.onDaySelected,
-            ),
-            const SizedBox(height: 8.0),
-            ValueListenableBuilder<List<HospitalLogModel>>(
-              valueListenable: hospitalLogController.selectedEvents,
-              builder: (context, value, _) {
-                return Column(
-                  children: List.generate(value.length, (index) {
-                    return Column(
-                      children: [
-                        if (index == 0)
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: IconButton(
-                              onPressed: () {
-                                Get.to(() => AddHospitalVisitLogScreen(
-                                    selectedDate:
-                                        hospitalLogController.selectedDay!));
-                              },
-                              icon: FaIcon(FontAwesomeIcons.add),
+              const SizedBox(height: 8.0),
+              ValueListenableBuilder<List<HospitalLogModel>>(
+                valueListenable: hospitalLogController.selectedEvents,
+                builder: (context, value, _) {
+                  return Column(
+                    children: List.generate(value.length, (index) {
+                      return Column(
+                        children: [
+                          if (index == 0)
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: IconButton(
+                                onPressed: () {
+                                  Get.to(() => AddHospitalVisitLogScreen(
+                                      selectedDate:
+                                          hospitalLogController.selectedDay!));
+                                },
+                                icon: FaIcon(FontAwesomeIcons.add),
+                              ),
+                            ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 12.0,
+                              vertical: 4.0,
+                            ),
+                            padding: EdgeInsets.all(RS.w10 * 1.2),
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text('${value[index].hospitalName}'),
+                                        SizedBox(height: RS.h10 / 2),
+                                        Text('${value[index].startTime ?? ''}'),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        IconButton(
+                                            onPressed: () {
+                                              Get.to(
+                                                () => AddHospitalVisitLogScreen(
+                                                  selectedDate:
+                                                      value[index].dateTime,
+                                                  hospitalLogModel:
+                                                      value[index],
+                                                ),
+                                              );
+                                            },
+                                            icon: Icon(FontAwesomeIcons.edit)),
+                                        SizedBox(width: RS.w10 / 2),
+                                        IconButton(
+                                          onPressed: () =>
+                                              hospitalLogController.delete(
+                                            value[index],
+                                          ),
+                                          icon: Icon(
+                                            FontAwesomeIcons.trashCan,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 12.0,
-                            vertical: 4.0,
-                          ),
-                          padding: EdgeInsets.all(RS.w10 * 1.2),
-                          decoration: BoxDecoration(
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text('${value[index].hospitalName}'),
-                                      SizedBox(height: RS.h10 / 2),
-                                      Text('${value[index].startTime ?? ''}'),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      IconButton(
-                                          onPressed: () {
-                                            Get.to(
-                                              () => AddHospitalVisitLogScreen(
-                                                selectedDate:
-                                                    value[index].dateTime,
-                                                hospitalLogModel: value[index],
-                                              ),
-                                            );
-                                          },
-                                          icon: Icon(FontAwesomeIcons.edit)),
-                                      SizedBox(width: RS.w10 / 2),
-                                      IconButton(
-                                        onPressed: () =>
-                                            hospitalLogController.delete(
-                                          value[index],
-                                        ),
-                                        icon: Icon(
-                                          FontAwesomeIcons.trashCan,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
-                );
-              },
-            ),
-          ],
-        ),
-      );
-    });
+                        ],
+                      );
+                    }),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      }),
+    );
   }
 }
 

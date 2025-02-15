@@ -34,6 +34,7 @@ class AppConstant {
 
   static const String countOfReiveRequestionKey = 'countOfReiveRequestion';
   static const String hasReviewedKey = 'hasReviewed';
+  static const String backgroundIndexKey = 'backgroundIndex';
 
   static const int countOfStampIcon = 18;
 
@@ -41,21 +42,30 @@ class AppConstant {
 
   static const int invalidNumber = -9192939;
 
-  static List<String> fillingIcons = [
-    AppImagePath.feal1,
-    AppImagePath.feal2,
-    AppImagePath.feal3,
-    AppImagePath.feal4,
-    AppImagePath.feal5,
+  static List<String> fillingIcons1 = [
+    AppImagePath.very_good1,
+    AppImagePath.good1,
+    AppImagePath.soso1,
+    AppImagePath.bad1,
+    AppImagePath.very_bad1,
   ];
 
-  static List<IconAndIndex> faceIcons = [
-    IconAndIndex.faceLaughBeam,
-    IconAndIndex.faceMehBlank,
-    IconAndIndex.faceFrown,
-    IconAndIndex.faceSadTear,
-    IconAndIndex.faceAngry,
+  static List<String> fillingIcons2 = [
+    AppImagePath.very_good2,
+    AppImagePath.good2,
+    AppImagePath.soso2,
+    AppImagePath.bad2,
+    AppImagePath.very_bad2,
   ];
+
+  // static List<IconAndIndex> faceIcons = [
+  //   IconAndIndex.faceLaughBeam,
+  //   IconAndIndex.faceMehBlank,
+  //   IconAndIndex.faceFrown,
+  //   IconAndIndex.faceSadTear,
+  //   IconAndIndex.faceAngry,
+  // ];
+
   static List<IconAndIndex> weatherIcons = [
     IconAndIndex.sun,
     IconAndIndex.cloud,

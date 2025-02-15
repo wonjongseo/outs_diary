@@ -28,7 +28,7 @@ class ColTextAndWidget extends StatelessWidget {
         bottom: RS.h10,
       ),
       decoration: BoxDecoration(
-        color: Get.isDarkMode ? AppColors.black : Colors.white,
+        color: Get.isDarkMode ? AppColors.black : AppColors.white,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(

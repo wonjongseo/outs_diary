@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 
 class CustomButton extends StatelessWidget {
@@ -24,7 +25,7 @@ class CustomButton extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: RS.width20,
-              color: Colors.white,
+              color: AppColors.white,
             ),
           ),
         ),

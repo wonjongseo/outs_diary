@@ -22,6 +22,7 @@ class DiaryModelAdapter extends TypeAdapter<DiaryModel> {
       weatherIconIndex: (fields[4] as List?)?.cast<int>(),
       whatTodo: fields[5] as String?,
       imagePath: (fields[6] as List?)?.cast<String>(),
+      painfulIndex: fields[8] as int?,
       health: fields[7] as HealthModel?,
     )
       ..id = fields[0] as String
@@ -31,7 +32,7 @@ class DiaryModelAdapter extends TypeAdapter<DiaryModel> {
   @override
   void write(BinaryWriter writer, DiaryModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -47,7 +48,9 @@ class DiaryModelAdapter extends TypeAdapter<DiaryModel> {
       ..writeByte(6)
       ..write(obj.imagePath)
       ..writeByte(7)
-      ..write(obj.health);
+      ..write(obj.health)
+      ..writeByte(8)
+      ..write(obj.painfulIndex);
   }
 
   @override

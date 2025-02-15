@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
 
 class MyWidget extends StatefulWidget {
   const MyWidget({Key? key, required this.title}) : super(key: key);
@@ -202,7 +203,7 @@ class _MyWidgetState extends State<MyWidget> {
               LineTouchTooltipData(getTooltipItems: (touchedSpots) {
         return touchedSpots.map((touchedSpot) {
           return LineTooltipItem("${touchedSpot.y.toInt()}0K",
-              const TextStyle(color: Colors.white));
+              const TextStyle(color: AppColors.white));
         }).toList();
       })),
     );

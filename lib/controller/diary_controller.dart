@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/respository/dairy_respository.dart';
+import 'package:ours_log/respository/monthly_repository.dart';
 import 'package:ours_log/views/add_diary/add_diary_screen.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -14,23 +15,38 @@ class DiaryController extends GetxController {
   late DateTime selectedDay;
   late DateTime focusedDay;
   RxList<DiaryModel> _diaries = <DiaryModel>[].obs;
+
+  RxList<DiaryModel> get diaries => _diaries;
   ScrollController scrollController = ScrollController();
 
   DiaryModel? selectedDiary;
   DiaryRepository _diaryRepository = DiaryRepository();
 
+  DateTime? peroidStartDay;
+  DateTime? peroidEndDay;
   @override
   void onInit() async {
     selectedDay = now;
     focusedDay = now;
     requestPermisson();
     getAllData();
+    setPeroidDate();
     super.onInit();
+  }
+
+  setPeroidDate() async {
+    peroidStartDay =
+        await MonthlyRepository.getPeroid(dateTime: focusedDay, isStart: true);
+    peroidEndDay =
+        await MonthlyRepository.getPeroid(dateTime: focusedDay, isStart: false);
+
+    update();
   }
 
   void onPageChanged(DateTime focusedDay) {
     this.focusedDay = focusedDay;
     selectedDiary = null;
+    setPeroidDate();
     update();
   }
 

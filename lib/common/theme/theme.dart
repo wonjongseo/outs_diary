@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 
 const Color bluishClr = Color(0xFF4e5ae8);
@@ -14,7 +15,7 @@ TextStyle get subHeadingStyle {
   return TextStyle(
     fontSize: RS.w10 * 1.6,
     fontWeight: FontWeight.w400,
-    color: Get.isDarkMode ? Colors.white : Colors.black,
+    color: Get.isDarkMode ? AppColors.white : Colors.black,
   );
 }
 
@@ -22,7 +23,7 @@ TextStyle get headingStyle {
   return TextStyle(
     fontSize: RS.w10 * 2,
     fontWeight: FontWeight.w600,
-    color: Get.isDarkMode ? Colors.white : Colors.black,
+    color: Get.isDarkMode ? AppColors.white : Colors.black,
   );
 }
 
@@ -30,7 +31,7 @@ TextStyle get activeHintStyle {
   return TextStyle(
     fontSize: RS.width14,
     fontWeight: FontWeight.w100,
-    color: Get.isDarkMode ? Colors.white : Colors.black,
+    color: Get.isDarkMode ? AppColors.white : Colors.black,
   );
 }
 

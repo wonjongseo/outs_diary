@@ -263,7 +263,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: RS.width20,
-                color: Colors.white,
+                color: AppColors.white,
               ),
             ),
           ),

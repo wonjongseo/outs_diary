@@ -11,7 +11,6 @@ ThemeData lightTheme(String systemLanguage) {
     textTheme: ThemeData.light().textTheme.apply(
         fontFamily:
             systemLanguage.contains('ja') ? "ZenMaruGothic" : "CookieRunFont"),
-    backgroundColor: Colors.white.withOpacity(.95),
 
     scaffoldBackgroundColor: Colors.white.withOpacity(.95),
     // extensions: [CustomThemeExtension.lightMode],
@@ -112,4 +111,8 @@ TextStyle get weekdayStyle {
   return TextStyle(
     color: Get.isDarkMode ? Colors.white : AppColors.greyBackground,
   );
+}
+
+TextStyle get textFieldSufficStyle {
+  return TextStyle(color: Colors.grey[500]);
 }

@@ -28,12 +28,16 @@ class DiaryModel {
   @HiveField(7)
   final HealthModel? health;
 
+  @HiveField(8)
+  final int? painfulIndex;
+
   DiaryModel({
     required this.dateTime,
     required this.fealIndex,
     this.weatherIconIndex,
     this.whatTodo,
     this.imagePath,
+    this.painfulIndex,
     this.health,
   }) {
     id = const Uuid().v4();
@@ -43,23 +47,6 @@ class DiaryModel {
   @override
   String toString() {
     return 'DiaryModel(\n id: $id\n createdAt: $createdAt\n dateTime: $dateTime\n fealIndex: $fealIndex\n weatherIconIndex: $weatherIconIndex\n whatTodo: $whatTodo\n health: $health \nimagePath: $imagePath)';
-  }
-
-  String get getFealImage {
-    switch (fealIndex) {
-      case 0:
-        return AppImagePath.feal1;
-      case 1:
-        return AppImagePath.feal2;
-      case 2:
-        return AppImagePath.feal3;
-      case 3:
-        return AppImagePath.feal4;
-      case 4:
-        return AppImagePath.feal5;
-      default:
-        return AppImagePath.feal1;
-    }
   }
 }
 

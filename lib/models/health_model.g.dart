@@ -17,11 +17,11 @@ class HealthModelAdapter extends TypeAdapter<HealthModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return HealthModel(
-      temperature: fields[0] as double?,
-      basicTemperature: fields[1] as double?,
-      bloodPressure: fields[2] as double?,
-      weight: fields[3] as double?,
-      pulse: fields[4] as double?,
+      temperatures: (fields[0] as List?)?.cast<double>(),
+      basicTemperatures: (fields[1] as List?)?.cast<double>(),
+      bloodPressures: (fields[2] as List?)?.cast<double>(),
+      weights: (fields[3] as List?)?.cast<double>(),
+      pulses: (fields[4] as List?)?.cast<double>(),
     );
   }
 
@@ -30,15 +30,15 @@ class HealthModelAdapter extends TypeAdapter<HealthModel> {
     writer
       ..writeByte(5)
       ..writeByte(0)
-      ..write(obj.temperature)
+      ..write(obj.temperatures)
       ..writeByte(1)
-      ..write(obj.basicTemperature)
+      ..write(obj.basicTemperatures)
       ..writeByte(2)
-      ..write(obj.bloodPressure)
+      ..write(obj.bloodPressures)
       ..writeByte(3)
-      ..write(obj.weight)
+      ..write(obj.weights)
       ..writeByte(4)
-      ..write(obj.pulse);
+      ..write(obj.pulses);
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/views/onBoarding/onBoarding_screen.dart';
 import 'package:ours_log/views/onBoarding/widgets/circle_done.dart';
@@ -54,7 +55,7 @@ class OnBoarding2Card extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.grey[400]!),
-                        color: Colors.white,
+                        color: AppColors.white,
                         // color: Colors.pinkAccent,
                       ),
                       child: Center(

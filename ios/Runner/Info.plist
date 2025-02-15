@@ -6,8 +6,9 @@
 
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>In order to access your photo library</string>
-
-
+	<key>NSCameraUsageDescription</key>
+	<string>カメラを使用する理由を記述</string>
+	
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

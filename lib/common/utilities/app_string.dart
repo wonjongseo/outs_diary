@@ -42,10 +42,10 @@ class AppTranslations extends Translations {
           AppString.nameTextTr: AppString.nameTextJp,
           AppString.birthDayTextTr: AppString.birthDayTextJp,
           AppString.settingTr: AppString.settingJp,
-          AppString.weightText: AppString.weightTextJp,
+          AppString.weight: AppString.weightTextJp,
           AppString.duplicateNameTr: AppString.duplicateNameJp,
           AppString.month: AppString.monthTextJp,
-          AppString.yearText: AppString.yearTextJp,
+          AppString.year: AppString.yearTextJp,
           AppString.day: AppString.dayTextJp,
           AppString.healthLog: AppString.healthLogJp,
           AppString.hospitalVisitLog: AppString.hospitalVisitLogJp,
@@ -54,7 +54,7 @@ class AppTranslations extends Translations {
           AppString.yesTextTr: AppString.yesTextJp,
           AppString.noTextTr: AppString.noTextJp,
           AppString.coutionTr: AppString.coutionJp,
-          AppString.previousDeletePetMsg1Tr: AppString.previousDeletePetMsg1Jp,
+          AppString.plzSelectFeal: AppString.plzSelectFealJp,
           AppString.previousDeletePetMsg2Tr: AppString.previousDeletePetMsg2Jp,
           AppString.previousDeletePetMsg3Tr: AppString.previousDeletePetMsg3Jp,
           AppString.previousDeletePetMsg4Tr: AppString.previousDeletePetMsg4Jp,
@@ -91,10 +91,9 @@ class AppTranslations extends Translations {
           AppString.stampNameCtlMsg: AppString.stampNameCtlMsgJp,
           AppString.ageMonthText: AppString.ageMonthTextJp,
           AppString.minute: AppString.minuteJp,
-          AppString.numberOfGivenText: AppString.numberOfGivenTextJp,
-          AppString.numberOfGivenSufficText:
-              AppString.numberOfGivenSufficTextJp,
-          AppString.countText: AppString.countTexJp,
+          AppString.morning: AppString.morningJp,
+          AppString.lunch: AppString.lunchJp,
+          AppString.evening: AppString.eveningJp,
           AppString.amountGivenGramText: AppString.amountGivenGramTextJp,
           AppString.vegetableText: AppString.vegetableTextJp,
           AppString.proteinText: AppString.proteinTextJp,
@@ -182,10 +181,10 @@ class AppTranslations extends Translations {
           AppString.nameTextTr: AppString.nameTextKr,
           AppString.birthDayTextTr: AppString.birthDayTextKr,
           AppString.settingTr: AppString.settingKr,
-          AppString.weightText: AppString.weightTextKr,
+          AppString.weight: AppString.weightTextKr,
           AppString.duplicateNameTr: AppString.duplicateNameKr,
           AppString.month: AppString.monthTextKr,
-          AppString.yearText: AppString.yearTextKr,
+          AppString.year: AppString.yearTextKr,
           AppString.day: AppString.dayTextKr,
           AppString.healthLog: AppString.healthLogKr,
           AppString.hospitalVisitLog: AppString.hospitalVisitLogKr,
@@ -194,7 +193,7 @@ class AppTranslations extends Translations {
           AppString.yesTextTr: AppString.yesTextKr,
           AppString.noTextTr: AppString.noTextKr,
           AppString.coutionTr: AppString.coutionKr,
-          AppString.previousDeletePetMsg1Tr: AppString.previousDeletePetMsg1Kr,
+          AppString.plzSelectFeal: AppString.plzSelectFealKr,
           AppString.previousDeletePetMsg2Tr: AppString.previousDeletePetMsg2Kr,
           AppString.previousDeletePetMsg3Tr: AppString.previousDeletePetMsg3Kr,
           AppString.previousDeletePetMsg4Tr: AppString.previousDeletePetMsg4Kr,
@@ -231,10 +230,9 @@ class AppTranslations extends Translations {
           AppString.stampNameCtlMsg: AppString.stampNameCtlMsgKr,
           AppString.ageMonthText: AppString.ageMonthTextKr,
           AppString.minute: AppString.minuteKr,
-          AppString.numberOfGivenText: AppString.numberOfGivenTextKr,
-          AppString.numberOfGivenSufficText:
-              AppString.numberOfGivenSufficTextKr,
-          AppString.countText: AppString.countTextKr,
+          AppString.morning: AppString.morningKr,
+          AppString.lunch: AppString.lunchKr,
+          AppString.evening: AppString.eveningKr,
           AppString.amountGivenGramText: AppString.amountGivenGramTextKr,
           AppString.vegetableText: AppString.vegetableTextKr,
           AppString.proteinText: AppString.proteinTextKr,
@@ -325,10 +323,10 @@ class AppTranslations extends Translations {
           AppString.nameTextTr: AppString.nameTextEn,
           AppString.birthDayTextTr: AppString.birthDayTextEn,
           AppString.settingTr: AppString.settingEn,
-          AppString.weightText: AppString.weightTextEn,
+          AppString.weight: AppString.weightTextEn,
           AppString.duplicateNameTr: AppString.duplicateNameEn,
           AppString.month: AppString.monthTextEn,
-          AppString.yearText: AppString.yearTextEn,
+          AppString.year: AppString.yearTextEn,
           AppString.day: AppString.dayTextEn,
           AppString.healthLog: AppString.healthLogEn,
           AppString.hospitalVisitLog: AppString.hospitalVisitLogEn,
@@ -337,7 +335,7 @@ class AppTranslations extends Translations {
           AppString.yesTextTr: AppString.yesTextEn,
           AppString.noTextTr: AppString.noTextEn,
           AppString.coutionTr: AppString.coutionEn,
-          AppString.previousDeletePetMsg1Tr: AppString.previousDeletePetMsg1En,
+          AppString.plzSelectFeal: AppString.plzSelectFealEn,
           AppString.previousDeletePetMsg2Tr: AppString.previousDeletePetMsg2En,
           AppString.previousDeletePetMsg3Tr: AppString.previousDeletePetMsg3En,
           AppString.previousDeletePetMsg4Tr: AppString.previousDeletePetMsg4En,
@@ -374,10 +372,9 @@ class AppTranslations extends Translations {
           AppString.stampNameCtlMsg: AppString.stampNameCtlMsgEn,
           AppString.ageMonthText: AppString.ageMonthTextEn,
           AppString.minute: AppString.minuteEn,
-          AppString.numberOfGivenText: AppString.numberOfGivenTextEn,
-          AppString.numberOfGivenSufficText:
-              AppString.numberOfGivenSufficTextEn,
-          AppString.countText: AppString.countTextEn,
+          AppString.morning: AppString.morningEn,
+          AppString.lunch: AppString.lunchEn,
+          AppString.evening: AppString.eveningEn,
           AppString.amountGivenGramText: AppString.amountGivenGramTextEn,
           AppString.vegetableText: AppString.vegetableTextEn,
           AppString.proteinText: AppString.proteinTextEn,
@@ -447,7 +444,7 @@ class AppString {
       "The System Language is changed.\nIf you want to change the app font, It is required to Restart";
 
   static String howFealToday = 'howFealTodaytr';
-  static String howFealTodayKr = '오늘 기분을 비숑으로 표현해봐요!';
+  static String howFealTodayKr = '오늘 기분은 어떠세요~?';
   static String howFealTodayJp = 'どんな1日でしたか？';
   static String howFealTodayEn = "There is no expenditure in ";
 
@@ -612,7 +609,7 @@ class AppString {
   static String settingJp = "設定";
   static String settingEn = "Setting";
 
-  static String weightText = "weightTextTr";
+  static String weight = "weightTextTr";
   static String weightTextKr = '체중';
   static String weightTextJp = "体重";
   static String weightTextEn = "Weight";
@@ -622,7 +619,7 @@ class AppString {
   static String duplicateNameJp = "は既に登録された名前です";
   static String duplicateNameEn = "";
 
-  static String yearText = "yearTextTr";
+  static String year = "yearTextTr";
   static String yearTextKr = '년';
   static String yearTextJp = "年";
   static String yearTextEn = "";
@@ -672,10 +669,10 @@ class AppString {
   static String coutionJp = "注意";
   static String coutionEn = "Coution";
 
-  static String previousDeletePetMsg1Tr = "previousDeletePetMsg1Tr";
-  static String previousDeletePetMsg1Kr = '삭제하면 ';
-  static String previousDeletePetMsg1Jp = "削除すると";
-  static String previousDeletePetMsg1En = "Once deleted, Data related to";
+  static String plzSelectFeal = "plzSelectFealTrTr";
+  static String plzSelectFealKr = '오늘의 기분을 선택해주세요.';
+  static String plzSelectFealJp = "今日の気分を選択してください。";
+  static String plzSelectFealEn = "plzSelectFealEn";
 
   static String previousDeletePetMsg2Tr = "previousDeletePetMsg2Tr";
   static String previousDeletePetMsg2Kr = '에 관한 데이터를 복구할 수 없습니다.';
@@ -869,20 +866,20 @@ class AppString {
   static String ageMonthTextJp = "ヶ月";
   static String ageMonthTextEn = " month";
 
-  static String numberOfGivenText = "numberOfGivenTr";
-  static String numberOfGivenTextKr = '주는 횟수';
-  static String numberOfGivenTextJp = " あげる回数";
-  static String numberOfGivenTextEn = "Number of servings";
+  static String morning = "morningTr";
+  static String morningKr = '아침';
+  static String morningJp = "朝";
+  static String morningEn = "morning";
 
-  static String numberOfGivenSufficText = "numberOfGivenSufficTextTr";
-  static String numberOfGivenSufficTextKr = '회 /1일';
-  static String numberOfGivenSufficTextJp = "回 /1日";
-  static String numberOfGivenSufficTextEn = "time(s) a day";
+  static String lunch = "lunchTr";
+  static String lunchKr = '점심';
+  static String lunchJp = "昼";
+  static String lunchEn = "lunch";
 
-  static String countText = "countTexTr";
-  static String countTextKr = '회';
-  static String countTexJp = "回";
-  static String countTextEn = "time(s)";
+  static String evening = "eveningTr";
+  static String eveningKr = '저녁';
+  static String eveningJp = "夕";
+  static String eveningEn = "evening";
 
   static String amountGivenGramText = "amountGivenGramTextTr";
   static String amountGivenGramTextKr = '주는 량';

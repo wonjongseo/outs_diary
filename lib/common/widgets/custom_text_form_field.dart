@@ -10,6 +10,8 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLines,
     this.readOnly,
     this.controller,
+    this.sufficIcon,
+    this.onTap,
   }) : super(key: key);
 
   final String? hintText;
@@ -17,6 +19,8 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLines;
   final bool? readOnly;
   final TextEditingController? controller;
+  final Widget? sufficIcon;
+  final Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,6 +32,7 @@ class CustomTextFormField extends StatelessWidget {
         children: [
           Expanded(
             child: TextFormField(
+              onTap: onTap,
               readOnly: readOnly ?? false,
               style: TextStyle(fontSize: RS.width12),
               maxLines: maxLines ?? 1,
@@ -37,7 +42,12 @@ class CustomTextFormField extends StatelessWidget {
                     const BoxConstraints(minHeight: 0, minWidth: 0),
                 suffixIconConstraints:
                     const BoxConstraints(minHeight: 0, minWidth: 0),
-                // suffixIcon: Text('c'),
+                suffixIcon: sufficIcon != null
+                    ? Padding(
+                        padding: EdgeInsets.only(right: RS.w10),
+                        child: sufficIcon,
+                      )
+                    : null,
                 contentPadding: maxLines != null
                     ? EdgeInsets.all(RS.width15)
                     : EdgeInsets.symmetric(horizontal: RS.width15),
