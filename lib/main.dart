@@ -1,11 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:ours_log/respository/hospital_log_repository.dart';
-import 'package:ours_log/views/Hospital_Log/hospital_log_body.dart';
 import 'package:ours_log/common/theme/dark_theme.dart';
 import 'package:ours_log/common/theme/light_theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
@@ -56,14 +53,14 @@ Future<void> initHive() async {
     Hive.registerAdapter(HospitalLogModelAdapter());
   }
 
-  if (kDebugMode) {
-    HospitalLogRepository hospitalLogRepository = HospitalLogRepository();
+  // if (kDebugMode) {
+  //   HospitalLogRepository hospitalLogRepository = HospitalLogRepository();
 
-    var hospitalLogModels = await hospitalLogRepository.select();
-    if (hospitalLogModels.isEmpty) {
-      for (var dummyHospitalLogModel in dummyHospitalLogModels) {
-        hospitalLogRepository.insert(dummyHospitalLogModel);
-      }
-    }
-  }
+  //   var hospitalLogModels = await hospitalLogRepository.select();
+  //   if (hospitalLogModels.isEmpty) {
+  //     for (var dummyHospitalLogModel in dummyHospitalLogModels) {
+  //       hospitalLogRepository.insert(dummyHospitalLogModel);
+  //     }
+  //   }
+  // }
 }

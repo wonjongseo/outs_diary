@@ -38,21 +38,13 @@ class _DiaryBodyState extends State<DiaryBody> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    DateFormat('yyy${AppString.year.tr} M${AppString.month.tr}')
-                        .format(controller.focusedDay),
-                    style: boldStyle,
-                  ),
-                  Text('생리')
-                ],
+              Text(
+                DateFormat('yyy${AppString.year.tr} M${AppString.month.tr}')
+                    .format(controller.focusedDay),
+                style: boldStyle,
               ),
               SizedBox(height: RS.h10 * 1.2),
               TableCalendar(
-                rangeStartDay: controller.peroidStartDay,
-                rangeEndDay: controller.peroidEndDay,
                 availableGestures: AvailableGestures.horizontalSwipe,
                 daysOfWeekStyle: DaysOfWeekStyle(
                   weekdayStyle: weekdayStyle,
@@ -140,10 +132,8 @@ class _DiaryBodyState extends State<DiaryBody> {
       return Column(
         children: [
           CircleAvatar(
-            // backgroundColor: Colors.white.withValues(alpha: .5),
-            // foregroundImage: AssetImage(diaryModel.getFealImage),
             foregroundImage: AssetImage(
-              backgroundController.iconImagePaths[diaryModel.fealIndex],
+              backgroundController.feals[diaryModel.fealIndex],
             ),
             radius: RS.w10 * 2.5,
           ),

@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 bool get isKo => Get.locale.toString().contains('ko');
 bool get isJp => Get.locale.toString().contains('ja');
 bool get isEn => Get.locale.toString().contains('en');
 
 class AppFunction {
+  static void requestPermisson() async {
+    final permission = await PhotoManager.requestPermissionExtend();
+    if (!permission.isAuth) {
+      return PhotoManager.openSetting();
+    }
+  }
+
   static Future<DateTime?> pickDate(BuildContext context,
       {DateTime? firstDate}) async {
     return await showDatePicker(

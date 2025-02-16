@@ -61,12 +61,8 @@ class HospitalLogBody extends StatelessWidget {
                 calendarStyle: CalendarStyle(
                   markersAlignment: Alignment.bottomCenter,
                   markersAnchor: 1,
-                  // selectedTextStyle: TextStyle(
-                  //   fontWeight: FontWeight.bold,
-                  //   color: Colors.redAccent,
-                  //   fontSize: 22,
-                  // ),
-                  // selectedDecoration: BoxDecoration(),
+                  defaultTextStyle: weekdayStyle,
+                  weekendTextStyle: weekdayStyle,
                   withinRangeDecoration: BoxDecoration(
                     border: Border.all(color: Colors.red),
                   ),

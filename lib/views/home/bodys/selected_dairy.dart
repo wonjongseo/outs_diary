@@ -44,10 +44,8 @@ class SelectedDiary extends StatelessWidget {
                 Row(
                   children: [
                     Image.asset(
-                      // diaryController.selectedDiary!.getFealImage,
-                      // diaryController.selectedDiary!.getFealImage,
-                      backgroundController.iconImagePaths[
-                          diaryController.selectedDiary!.fealIndex],
+                      backgroundController
+                          .feals[diaryController.selectedDiary!.fealIndex],
                       width: RS.w10 * 6,
                     ),
                     SizedBox(width: RS.w10),

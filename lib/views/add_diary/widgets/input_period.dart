@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/add_diary_controller.dart';
 import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
@@ -13,33 +14,49 @@ class InputPeriod extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<AddDiaryController>(builder: (controller) {
       return ColTextAndWidget(
-        label: '마법의 날',
+        label: '생리',
         widget: Padding(
-          padding: EdgeInsets.symmetric(horizontal: RS.w10 * 2),
+          padding: EdgeInsets.symmetric(horizontal: RS.w10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                children: [
-                  Text('생리 시작'),
-                  Checkbox(
-                    value: controller.startMasicDay != null ||
-                        controller.isStartedMasic != null,
-                    onChanged: (v) => controller.toggleMagicDay(true),
-                  )
-                ],
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: true
+                      ? Colors.pinkAccent
+                      : Colors.pinkAccent.withValues(alpha: .5),
+                  foregroundColor: true ? Colors.white : Colors.grey,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: RS.w10 * 5,
+                    vertical: RS.h10,
+                  ),
+                ),
+                onPressed: () {},
+                child: Text(
+                  '시작',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: RS.w10 * 1.8,
+                  ),
+                ),
               ),
-              Column(
-                children: [
-                  Text('생리 끝'),
-                  Checkbox(
-                    value: controller.endMasicDay != null ||
-                            controller.isEndedMasic != null
-                        ? true
-                        : false,
-                    onChanged: (v) => controller.toggleMagicDay(false),
-                  )
-                ],
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: RS.w10 * 5,
+                    vertical: RS.h10,
+                  ),
+                ),
+                onPressed: () {},
+                child: Text(
+                  ' 끝 ',
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: RS.w10 * 1.8,
+                  ),
+                ),
               ),
             ],
           ),

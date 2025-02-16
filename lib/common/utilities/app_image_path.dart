@@ -10,26 +10,24 @@ class AppImagePath {
   static String soso2 = 'assets/images/feal2/soso.png';
   static String bad2 = 'assets/images/feal2/bad.png';
   static String very_bad2 = 'assets/images/feal2/very_bad.png';
-  static String background21 = 'assets/images/feal2/background1.png';
-  static String background22 = 'assets/images/feal2/background2.png';
-  static String background23 = 'assets/images/feal2/background3.png';
 
   static String sunny = 'assets/images/sunny.png';
   static String rainny = 'assets/images/rainny.png';
   static String cloudy = 'assets/images/cloudy.png';
-  // static String feal2 = 'assets/images/feal1/bad.png';
-  // static String feal1 = 'assets/images/feal1/very_bad.png';
 
-  // static String feal5 = 'assets/images/feal5.png';
-  // static String feal4 = 'assets/images/feal4.png';
-  // static String feal3 = 'assets/images/feal3.png';
-  // static String feal2 = 'assets/images/feal2.png';
-  // static String feal1 = 'assets/images/feal1.png';
-  static String background1 = 'assets/images/background1.png';
-  static String background2 = 'assets/images/background2.png';
-  static String background3 = 'assets/images/background3.png';
-  static String background4 = 'assets/images/background4.png';
-  static String background5 = 'assets/images/background5.png';
+  static String background11 = 'assets/images/background/background11.png';
+  static String background12 = 'assets/images/background/background12.png';
+  static String background13 = 'assets/images/background/background13.png';
+
+  static String background21 = 'assets/images/background/background21.png';
+  static String background22 = 'assets/images/background/background22.png';
+  static String background23 = 'assets/images/background/background23.png';
+
+  static String background31 = 'assets/images/background/background31.png';
+  static String background32 = 'assets/images/background/background32.png';
+  static String background33 = 'assets/images/background/background33.png';
+
+//
   static String circleSetting = 'assets/images/circle_setting.png';
   static String circleSmale = 'assets/images/circle_smale.png';
   static String circleStamp = 'assets/images/circle_stamp.png';

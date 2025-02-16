@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/add_diary_controller.dart';
@@ -27,7 +26,7 @@ class FealSelector extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                addDiaryController.backgroundController.iconImagePaths.length,
+                addDiaryController.backgroundController.feals.length,
                 (index) {
                   bool isSelected =
                       addDiaryController.selectedFealIndex == index;
@@ -36,8 +35,7 @@ class FealSelector extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () => addDiaryController.onTapFealIcon(index),
                       child: Image.asset(
-                        addDiaryController
-                            .backgroundController.iconImagePaths[index],
+                        addDiaryController.backgroundController.feals[index],
                         width: isSelected ? RS.w10 * 5.5 : RS.w10 * 4.8,
                         colorBlendMode: BlendMode.modulate,
                         color:

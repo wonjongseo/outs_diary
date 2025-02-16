@@ -3,78 +3,125 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/views/home/main_screen.dart';
+import 'package:table_calendar/table_calendar.dart';
+
+import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/respository/dairy_respository.dart';
 import 'package:ours_log/respository/monthly_repository.dart';
 import 'package:ours_log/views/add_diary/add_diary_screen.dart';
-import 'package:photo_manager/photo_manager.dart';
-import 'package:table_calendar/table_calendar.dart';
+
+// class MontlyController extends GetxController {
+//   DateTime now = DateTime.now();
+//   late DateTime selectedDay;
+//   late DateTime focusedDay;
+
+//   PeriodModel periodModel = PeriodModel();
+
+//   ScrollController scrollController = ScrollController();
+//   DiaryController diaryController = Get.find<DiaryController>();
+
+//   final kEvents = LinkedHashMap<DateTime, List<DiaryModel>>(
+//     equals: isSameDay,
+//     hashCode: getHashCode,
+//   );
+
+//   List<DiaryModel> getEventsForDay(DateTime day) {
+//     // Implementation example
+//     return kEvents[day] ?? [];
+//   }
+
+//   void onPageChanged(DateTime focusedDay) {
+//     this.focusedDay = focusedDay;
+//     diaryController.getAllData();
+//   }
+
+//   void onDatSelected(DateTime cSelectedDay, DateTime cFocusedDay) {
+//     if (kEvents[cSelectedDay] != null) {
+//       selectedDiary = kEvents[cSelectedDay]![0];
+//       AppFunction.scrollGoToTop(scrollController);
+//       update();
+//       return;
+//     }
+//     selectedDiary = null;
+
+//     if (cSelectedDay.difference(now).isNegative) {
+//       Get.to(() => AddDiaryScreen(selectedDay: selectedDay));
+//     } else {
+//       if (!Get.isSnackbarOpen) {
+//         Get.snackbar(
+//           '경고',
+//           '미래는 저장할 수 없어요.',
+//           icon: Icon(Icons.done),
+//           borderWidth: 1,
+//           borderColor: Colors.redAccent,
+//         );
+//       }
+//     }
+//     selectedDay = cSelectedDay;
+//     focusedDay = cFocusedDay;
+//   }
+
+//   @override
+//   void onInit() async {
+//     selectedDay = now;
+//     focusedDay = now;
+//     AppFunction.requestPermisson();
+//     super.onInit();
+//   }
+// }
 
 class DiaryController extends GetxController {
   DateTime now = DateTime.now();
   late DateTime selectedDay;
   late DateTime focusedDay;
-  RxList<DiaryModel> _diaries = <DiaryModel>[].obs;
 
+  RxList<DiaryModel> _diaries = <DiaryModel>[].obs;
   RxList<DiaryModel> get diaries => _diaries;
+
   ScrollController scrollController = ScrollController();
 
   DiaryModel? selectedDiary;
   DiaryRepository _diaryRepository = DiaryRepository();
 
-  DateTime? peroidStartDay;
-  DateTime? peroidEndDay;
   @override
   void onInit() async {
     selectedDay = now;
     focusedDay = now;
-    requestPermisson();
+
+    AppFunction.requestPermisson();
     getAllData();
-    setPeroidDate();
     super.onInit();
   }
 
-  setPeroidDate() async {
-    peroidStartDay =
-        await MonthlyRepository.getPeroid(dateTime: focusedDay, isStart: true);
-    peroidEndDay =
-        await MonthlyRepository.getPeroid(dateTime: focusedDay, isStart: false);
-
-    update();
-  }
-
   void onPageChanged(DateTime focusedDay) {
+    print('focusedDay : ${focusedDay}');
+
     this.focusedDay = focusedDay;
     selectedDiary = null;
-    setPeroidDate();
-    update();
-  }
-
-  void scrollGoToTop() {
-    scrollController.animateTo(
-      200,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
+    getAllData();
   }
 
   void onDatSelected(DateTime cSelectedDay, DateTime cFocusedDay) {
     if (kEvents[cSelectedDay] != null) {
       selectedDiary = kEvents[cSelectedDay]![0];
-      scrollGoToTop();
+      AppFunction.scrollGoToTop(scrollController);
       update();
       return;
     }
     selectedDiary = null;
 
     if (cSelectedDay.difference(now).isNegative) {
-      Get.to(() => AddDiaryScreen(selectedDay: selectedDay));
+      Get.to(() => AddDiaryScreen(
+            selectedDay: selectedDay,
+          ));
     } else {
       if (!Get.isSnackbarOpen) {
         Get.snackbar(
-          '!',
+          '경고',
           '미래는 저장할 수 없어요.',
-          icon: Icon(Icons.done),
+          icon: const Icon(Icons.done),
           borderWidth: 1,
           borderColor: Colors.redAccent,
         );
@@ -84,8 +131,9 @@ class DiaryController extends GetxController {
     focusedDay = cFocusedDay;
   }
 
-  getAllData() async {
-    _diaries.assignAll(await _diaryRepository.loadDiaries());
+  void getAllData() async {
+    selectedDiary = null;
+    _diaries.assignAll(await _diaryRepository.loadDiariesInMonth(focusedDay));
 
     kEvents.clear();
     for (var diary in _diaries) {
@@ -98,13 +146,6 @@ class DiaryController extends GetxController {
     update();
   }
 
-  void requestPermisson() async {
-    final permission = await PhotoManager.requestPermissionExtend();
-    if (!permission.isAuth) {
-      return PhotoManager.openSetting();
-    }
-  }
-
   void delete() {
     _diaryRepository.deleteDiary(selectedDiary!);
     selectedDiary = null;
@@ -115,7 +156,7 @@ class DiaryController extends GetxController {
     _diaryRepository.saveDiary(diaryModel);
     selectedDiary = diaryModel;
     getAllData();
-    Get.back();
+    Get.offAll(() => MainScreen());
   }
 
   final kEvents = LinkedHashMap<DateTime, List<DiaryModel>>(
@@ -124,7 +165,6 @@ class DiaryController extends GetxController {
   );
 
   List<DiaryModel> getEventsForDay(DateTime day) {
-    // Implementation example
     return kEvents[day] ?? [];
   }
 }

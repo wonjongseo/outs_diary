@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/theme/light_theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
-import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_button.dart';
@@ -11,6 +10,7 @@ import 'package:ours_log/common/widgets/custom_expansion_card.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/common/widgets/open_close_container.dart';
 import 'package:ours_log/controller/add_diary_controller.dart';
+import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/views/add_diary/widgets/feal_selector.dart';
 import 'package:ours_log/views/add_diary/widgets/image_of_today.dart';
@@ -18,7 +18,11 @@ import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/add_diary/widgets/input_period.dart';
 
 class AddDiaryScreen extends StatelessWidget {
-  AddDiaryScreen({super.key, required this.selectedDay, this.diaryModel});
+  AddDiaryScreen({
+    super.key,
+    required this.selectedDay,
+    this.diaryModel,
+  });
 
   final DateTime selectedDay;
   final DiaryModel? diaryModel;
@@ -27,7 +31,10 @@ class AddDiaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     addDiaryController = Get.put(
-      AddDiaryController(selectedDay: selectedDay, diaryModel: diaryModel),
+      AddDiaryController(
+        selectedDay: selectedDay,
+        diaryModel: diaryModel,
+      ),
     );
     return Scaffold(
       appBar: _appBar(),
@@ -132,7 +139,7 @@ class AddDiaryScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const InputPeriod(),
+            // const InputPeriod(),
           ],
         ),
       ),

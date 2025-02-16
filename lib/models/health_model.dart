@@ -33,7 +33,8 @@ class HealthModel {
     for (var temperature in temperatures!) {
       avg += temperature;
     }
-    avg = avg / temperatures!.length;
+    avg = double.parse((avg / temperatures!.length).toStringAsFixed(1));
+
     return avg;
   }
 
@@ -45,7 +46,8 @@ class HealthModel {
     for (var basicTemperature in basicTemperatures!) {
       avg += basicTemperature;
     }
-    avg = avg / basicTemperatures!.length;
+    avg = double.parse((avg / basicTemperatures!.length).toStringAsFixed(1));
+
     return avg;
   }
 
@@ -57,7 +59,8 @@ class HealthModel {
     for (var bloodPressure in bloodPressures!) {
       avg += bloodPressure;
     }
-    avg = avg / bloodPressures!.length;
+    avg = double.parse((avg / bloodPressures!.length).toStringAsFixed(1));
+
     return avg;
   }
 
@@ -69,7 +72,7 @@ class HealthModel {
     for (var weight in weights!) {
       avg += weight;
     }
-    avg = avg / weights!.length;
+    avg = double.parse((avg / weights!.length).toStringAsFixed(1));
     return avg;
   }
 
@@ -81,7 +84,7 @@ class HealthModel {
     for (var pulse in pulses!) {
       avg += pulse;
     }
-    avg = avg / pulses!.length;
+    avg = double.parse((avg / pulses!.length).toStringAsFixed(1));
     return avg;
   }
 }

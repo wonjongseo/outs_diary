@@ -23,7 +23,8 @@ class AppConstant {
   static const String hospitalLogModelBox = 'hospitalLogs';
   static const String stampModelBox = 'stamps';
   static const String todoModelBox = 'todos';
-  static const String nutritionModelModelBox = 'nutritions';
+  static const String fealIndexBox = 'fealIndex';
+  static const String backgroundIndexBox = 'backgroundIndex';
   static const String expensiveModelModelBox = 'expensives';
   static const String categoryModelModelBox = 'categories';
   static const String groceriesModelModelBox = 'groceries';

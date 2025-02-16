@@ -16,46 +16,6 @@ class AddDiaryController extends GetxController {
   int backgroundIndex = 0;
   int selectedFealIndex = -1;
 
-  bool isMagicDay = false;
-
-  bool? isStartedMasic;
-  bool? isEndedMasic;
-  DateTime? startMasicDay;
-  DateTime? endMasicDay;
-
-  void toggleMagicDay(bool isStartDay) {
-    DateTime masicDate = DateTime(
-      selectedDay.year,
-      selectedDay.month,
-      selectedDay.day,
-    );
-
-    if (isStartDay) {
-      if (startMasicDay == null) {
-        startMasicDay = masicDate;
-        if (endMasicDay == startMasicDay) {
-          AppFunction.invaildTextFeildSnackBar(
-              title: '경고!', message: '생리의 시작 일과 끝 일이 동일합니다.');
-        }
-      } else {
-        startMasicDay = null;
-      }
-    } else {
-      if (endMasicDay == null) {
-        endMasicDay = masicDate;
-
-        if (startMasicDay == endMasicDay) {
-          AppFunction.invaildTextFeildSnackBar(
-              title: '경고!', message: '생리의 시작 일과 끝 일이 동일합니다.');
-        }
-      } else {
-        endMasicDay = null;
-      }
-    }
-    // isMagicDay = !isMagicDay;
-    update();
-  }
-
   BackgroundController backgroundController = Get.find<BackgroundController>();
   ScrollController scrollController = ScrollController();
   DiaryController diaryController = Get.find<DiaryController>();
@@ -80,14 +40,11 @@ class AddDiaryController extends GetxController {
 
   final DiaryModel? diaryModel;
   final DateTime selectedDay;
-
   AddDiaryController({this.diaryModel, required this.selectedDay});
 
   @override
   void onInit() async {
     whatToDoController = TextEditingController();
-    loadMagicDay();
-
     if (diaryModel != null) {
       loadDiaryModel();
       loadHealthModel();
@@ -98,25 +55,9 @@ class AddDiaryController extends GetxController {
     super.onInit();
   }
 
-  void loadMagicDay() async {
-    startMasicDay =
-        await MonthlyRepository.getPeroid(dateTime: selectedDay, isStart: true);
-
-    endMasicDay = await MonthlyRepository.getPeroid(
-        dateTime: selectedDay, isStart: false);
-
-    if (startMasicDay != null && endMasicDay != null) {
-      isStartedMasic = true;
-      isEndedMasic = true;
-      update();
-    } else if (startMasicDay != null && endMasicDay == null) {
-      isStartedMasic = true;
-      update();
-    }
-  }
-
   onTapFealIcon(int index) {
     selectedFealIndex = index;
+
     update();
   }
 
@@ -126,12 +67,12 @@ class AddDiaryController extends GetxController {
         title: AppString.requiredText.tr,
         message: AppString.plzSelectFeal.tr,
       );
+
       AppFunction.scrollGoToTop(scrollController);
       return;
     }
 
     String whatTodo = whatToDoController.text.trim();
-
     List<String> imagePhats = uploadFiles.map((e) => e.path).toList();
 
     HealthModel healthModel = createHealthModel();
@@ -151,12 +92,6 @@ class AddDiaryController extends GetxController {
     }
 
     diaryController.insert(newDiaryModel);
-    if (startMasicDay != null) {
-      MonthlyRepository.setPeroid(isStart: true, dateTime: startMasicDay!);
-    }
-    if (endMasicDay != null) {
-      MonthlyRepository.setPeroid(isStart: false, dateTime: endMasicDay!);
-    }
 
     AppFunction.vaildTextFeildSnackBar(
         title: '성공', message: '${selectedDay.day}일의 건강이 기록되었습니다.');
@@ -308,4 +243,67 @@ class AddDiaryController extends GetxController {
     }
     super.onClose();
   }
+
+  /**
+   
+
+ // bool isMagicDay = false;
+
+  // bool? isStartedMasic;
+  // bool? isEndedMasic;
+  // DateTime? startMasicDay;
+  // DateTime? endMasicDay;
+
+  // void toggleMagicDay(bool isStartDay) {
+  //   DateTime masicDate = DateTime(
+  //     selectedDay.year,
+  //     selectedDay.month,
+  //     selectedDay.day,
+  //   );
+
+  //   if (isStartDay) {
+  //     if (startMasicDay == null) {
+  //       startMasicDay = masicDate;
+  //       if (endMasicDay == startMasicDay) {
+  //         AppFunction.invaildTextFeildSnackBar(
+  //             title: '경고!', message: '생리의 시작 일과 끝 일이 동일합니다.');
+  //       }
+  //     } else {
+  //       startMasicDay = null;
+  //     }
+  //   } else {
+  //     if (endMasicDay == null) {
+  //       endMasicDay = masicDate;
+
+  //       if (startMasicDay == endMasicDay) {
+  //         AppFunction.invaildTextFeildSnackBar(
+  //             title: '경고!', message: '생리의 시작 일과 끝 일이 동일합니다.');
+  //       }
+  //     } else {
+  //       endMasicDay = null;
+  //     }
+  //   }
+  //   // isMagicDay = !isMagicDay;
+  //   update();
+  // }
+
+  // void loadMagicDay() async {
+  //   startMasicDay =
+  //       await MonthlyRepository.getPeroid(dateTime: selectedDay, isStart: true);
+
+  //   endMasicDay = await MonthlyRepository.getPeroid(
+  //       dateTime: selectedDay, isStart: false);
+
+  //   startMasicDay!.difference(selectedDay).isNegative;
+  //   startMasicDay!.difference(selectedDay).isNegative;
+  //   if (startMasicDay != null && endMasicDay != null) {
+  //     isStartedMasic = true;
+  //     isEndedMasic = true;
+  //     update();
+  //   } else if (startMasicDay != null && endMasicDay == null) {
+  //     isStartedMasic = true;
+  //     update();
+  //   }
+  // }
+   */
 }

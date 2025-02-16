@@ -11,6 +11,7 @@ import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/views/background/background2.dart';
 import 'package:ours_log/views/diary/diary_body.dart';
 import 'package:ours_log/views/graph/graph_body.dart';
+import 'package:ours_log/views/setting/setting_body.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -21,7 +22,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   late DiaryController diaryController;
-  int bodyIndex = 1;
+  int bodyIndex = 3;
   List<Widget> bodys = [];
 
   @override
@@ -37,7 +38,7 @@ class _MainScreenState extends State<MainScreen> {
     bodys.add(DiaryBody());
     bodys.add(HospitalLogBody());
     bodys.add(GraphBody());
-    bodys.add(Text('data4'));
+    bodys.add(SettingBody());
     setState(() {});
   }
 
@@ -62,8 +63,8 @@ class _MainScreenState extends State<MainScreen> {
     return BottomNavigationBar(
       currentIndex: bodyIndex,
       type: BottomNavigationBarType.fixed,
-      backgroundColor:
-          Get.isDarkMode ? AppColors.greyBackground : Colors.grey[100]!,
+      // backgroundColor:
+      //     Get.isDarkMode ? AppColors.greyBackground : Colors.grey[100]!,
       onTap: (value) {
         bodyIndex = value;
         setState(() {});
@@ -76,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
         BottomNavigationBarItem(
             label: AppString.hospitalVisitLog.tr, icon: Text('')),
         BottomNavigationBarItem(
-            label: AppString.expensiveTextTr.tr, icon: Text('')),
+            label: AppString.healthGraph.tr, icon: Text('')),
         BottomNavigationBarItem(label: AppString.settingTr.tr, icon: Text('')),
       ],
     );

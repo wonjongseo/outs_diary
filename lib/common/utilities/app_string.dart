@@ -4,6 +4,8 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.englishText: AppString.englishTextJp,
+          AppString.japaneseText: AppString.japaneseTextJp,
           AppString.whatDidYouHintMsg: AppString.whatDidYouHintMsgJp,
           AppString.howFealToday: AppString.howFealTodayJp,
           AppString.savedText: AppString.savedTextJp,
@@ -83,7 +85,7 @@ class AppTranslations extends Translations {
           AppString.foodTextTr: AppString.foodTextJp,
           AppString.updateExampleBtnTr: AppString.updateExampleBtnJp,
           AppString.calendarTextTr: AppString.calendarTextJp,
-          AppString.expensiveTextTr: AppString.expensiveTextJp,
+          AppString.healthGraph: AppString.healthGraphJp,
           AppString.enrollTextBtnTr: AppString.enrollTextBtnJp,
           AppString.saveText: AppString.saveTextJp,
           AppString.stampText: AppString.stampTextJp,
@@ -146,6 +148,8 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.englishText: AppString.englishTextKr,
+          AppString.japaneseText: AppString.japaneseTextKr,
           AppString.whatDidYouHintMsg: AppString.whatDidYouHintMsgKr,
           AppString.howFealToday: AppString.howFealTodayKr,
           AppString.savedText: AppString.savedTextKr,
@@ -222,7 +226,7 @@ class AppTranslations extends Translations {
           AppString.foodTextTr: AppString.foodTextKr,
           AppString.updateExampleBtnTr: AppString.updateExampleBtnKr,
           AppString.calendarTextTr: AppString.calendarTextKr,
-          AppString.expensiveTextTr: AppString.expensiveTextKr,
+          AppString.healthGraph: AppString.healthGraphKr,
           AppString.enrollTextBtnTr: AppString.enrollTextBtnKr,
           AppString.saveText: AppString.saveTextKr,
           AppString.stampText: AppString.stampTextKr,
@@ -288,6 +292,8 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.englishText: AppString.englishTextEn,
+          AppString.japaneseText: AppString.japaneseTextEn,
           AppString.whatDidYouHintMsg: AppString.whatDidYouHintMsgEn,
           AppString.howFealToday: AppString.howFealTodayEn,
           AppString.savedText: AppString.savedTextEn,
@@ -364,7 +370,7 @@ class AppTranslations extends Translations {
           AppString.foodTextTr: AppString.foodTextEn,
           AppString.updateExampleBtnTr: AppString.updateExampleBtnEn,
           AppString.calendarTextTr: AppString.calendarTextEn,
-          AppString.expensiveTextTr: AppString.expensiveTextEn,
+          AppString.healthGraph: AppString.healthGraphEn,
           AppString.enrollTextBtnTr: AppString.enrollTextBtnEn,
           AppString.saveText: AppString.saveTextEn,
           AppString.stampText: AppString.stampTextEn,
@@ -532,6 +538,16 @@ class AppString {
   static String periodKr = "생리기간";
   static String periodJp = "生理期間";
   static String periodEn = "period";
+
+  static String englishText = 'englishTextTr';
+  static String englishTextKr = '영어';
+  static String englishTextJp = '英語';
+  static String englishTextEn = "English";
+
+  static String japaneseText = 'japaneseTextTr';
+  static String japaneseTextKr = '일본어';
+  static String japaneseTextJp = '日本語';
+  static String japaneseTextEn = "japanese";
 
   static String weightCtrHint = "weightCtrHintTr";
   static String weightCtrHintKr = "체중을 입력해주세요";
@@ -831,10 +847,10 @@ class AppString {
   static String foodTextJp = "栄養";
   static String foodTextEn = "Nutrition";
 
-  static String expensiveTextTr = "expensiveTextTr";
-  static String expensiveTextKr = '비용';
-  static String expensiveTextJp = "費用";
-  static String expensiveTextEn = "Cost";
+  static String healthGraph = "healthGraphTr";
+  static String healthGraphKr = '건강 그래프';
+  static String healthGraphJp = "健康グラフ";
+  static String healthGraphEn = "healthGraph";
 
   static String enrollTextBtnTr = "enrollTextBtnTr";
   static String enrollTextBtnKr = '등록';

@@ -9,6 +9,7 @@ import 'package:ours_log/common/widgets/custom_expansion_card.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/datas/graph_data.dart';
 import 'package:ours_log/models/diary_model.dart';
+import 'package:ours_log/respository/dairy_respository.dart';
 import 'package:ours_log/views/graph/weight_graph.dart';
 
 class GraphBody extends StatefulWidget {
@@ -21,8 +22,9 @@ class GraphBody extends StatefulWidget {
 class _GraphBodyState extends State<GraphBody> {
   DateTime now = DateTime.now();
 
-  DiaryController diaryController = Get.find<DiaryController>();
+  DiaryRepository diaryController = DiaryRepository();
 
+  late GraphData? fealGraphData;
   late GraphData? temperatureGraphData;
   late GraphData? weightGraphData;
   late GraphData? pulseGraphData;
@@ -31,8 +33,19 @@ class _GraphBodyState extends State<GraphBody> {
 
   @override
   void initState() {
+    createGraphData(now);
+
+    setState(() {});
+    super.initState();
+  }
+
+  late List<DiaryModel> diarys;
+  void createGraphData(DateTime dateTime) async {
     countOfDay = getDaysInMonth(now.year, now.month);
 
+    fealGraphData = GraphData(
+      xDatas: List.generate(countOfDay, (index) => 0),
+    );
     temperatureGraphData = GraphData(
       xDatas: List.generate(countOfDay, (index) => 0),
     );
@@ -42,18 +55,9 @@ class _GraphBodyState extends State<GraphBody> {
     pulseGraphData = GraphData(
       xDatas: List.generate(countOfDay, (index) => 0),
     );
-    createGraphData(); // dont't swap to calculateMinMaxValueAndHeight method;
 
-    calculateMinMaxValueAndHeight(temperatureGraphData);
-    calculateMinMaxValueAndHeight(weightGraphData);
-    calculateMinMaxValueAndHeight(pulseGraphData);
+    diarys = await diaryController.loadDiariesInMonth(dateTime);
 
-    setState(() {});
-    super.initState();
-  }
-
-  void createGraphData() {
-    List<DiaryModel> diarys = diaryController.diaries;
     for (var diary in diarys) {
       if (diary.health == null || diary.health?.temperatures == null) {
         continue;
@@ -65,55 +69,90 @@ class _GraphBodyState extends State<GraphBody> {
         weightGraphData!.xDatas[diary.dateTime.day - 1] =
             diary.health!.avgWeight;
         pulseGraphData!.xDatas[diary.dateTime.day - 1] = diary.health!.avgPulse;
+        fealGraphData!.xDatas[diary.dateTime.day - 1] =
+            (diary.fealIndex + 1).toDouble();
       }
     }
+    calculateMinMaxValueAndHeight(fealGraphData, isFeal: true);
+    calculateMinMaxValueAndHeight(temperatureGraphData);
+    calculateMinMaxValueAndHeight(weightGraphData);
+    calculateMinMaxValueAndHeight(pulseGraphData);
+
+    setState(() {});
   }
 
-  void calculateMinMaxValueAndHeight(GraphData? temperature) {
-    double? maxY =
-        temperature!.xDatas.where((element) => element != 0).firstOrNull;
-    double? minY =
-        temperature.xDatas.where((element) => element != 0).firstOrNull;
+  void calculateMinMaxValueAndHeight(GraphData? temperature,
+      {bool isFeal = false}) {
+    if (isFeal) {
+      temperature!.maxY = 6;
+      temperature.minY = 0;
+    } else {
+      double? maxY =
+          temperature!.xDatas.where((element) => element != 0).firstOrNull;
+      double? minY =
+          temperature.xDatas.where((element) => element != 0).firstOrNull;
 
-    if (maxY == null || minY == null) {
-      temperature = null;
-      return;
-    }
-
-    for (var value in temperature.xDatas) {
-      if (value == 0) continue;
-
-      if (minY! > value) {
-        minY = value;
+      if (maxY == null || minY == null) {
+        temperature = null;
+        return;
       }
-      if (maxY! < value) {
-        maxY = value;
+
+      for (var value in temperature.xDatas) {
+        if (value == 0) continue;
+
+        if (minY! > value) {
+          minY = value;
+        }
+        if (maxY! < value) {
+          maxY = value;
+        }
       }
+
+      double diff = maxY! - minY!;
+
+      minY = (minY - diff).round().toDouble();
+      maxY = (maxY + diff).round().toDouble();
+
+      temperature.maxY = maxY;
+      temperature.minY = minY;
     }
-
-    double diff = maxY! - minY!;
-
-    minY = (minY - diff).round().toDouble();
-    maxY = (maxY + diff).round().toDouble();
-
-    temperature.maxY = maxY;
-    temperature.minY = minY;
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Align(
-          alignment: Alignment.topLeft,
-          child: Padding(
-            padding: EdgeInsets.only(left: RS.w10, bottom: RS.h10),
-            child: Text(
-              DateFormat('yyy${AppString.year.tr} M${AppString.month.tr}')
-                  .format(now),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              DateFormat('yyy${AppString.year.tr}').format(now),
               style: boldStyle,
             ),
-          ),
+            Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      now = DateTime(now.year, now.month - 1);
+                      createGraphData(now);
+                      setState(() {});
+                    },
+                    icon: Icon(Icons.arrow_back_ios)),
+                Text(
+                  DateFormat('M${AppString.month.tr}').format(now),
+                  style: boldStyle,
+                ),
+                IconButton(
+                    onPressed: () {
+                      now = DateTime(now.year, now.month + 1);
+                      createGraphData(now);
+                      setState(() {});
+                    },
+                    icon: Icon(Icons.arrow_forward_ios)),
+              ],
+            ),
+          ],
         ),
         Expanded(
           child: SingleChildScrollView(
@@ -121,6 +160,22 @@ class _GraphBodyState extends State<GraphBody> {
               padding: EdgeInsets.symmetric(horizontal: RS.w10),
               child: Column(
                 children: [
+                  CustomExpansionCard(
+                    title: AppString.fealText.tr,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: RS.h10,
+                        horizontal: RS.w10 * 2,
+                      ),
+                      child: fealGraphData == null
+                          ? Container()
+                          : CustomFealLineGraph(
+                              graphData: fealGraphData!,
+                              countOfDay: countOfDay,
+                            ),
+                    ),
+                  ),
+                  SizedBox(height: RS.h10),
                   CustomExpansionCard(
                     title: AppString.temperature.tr,
                     child: Padding(

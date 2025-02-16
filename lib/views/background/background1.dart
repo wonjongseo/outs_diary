@@ -15,7 +15,7 @@ class BackGround1 extends StatelessWidget {
           child: Transform.scale(
             scale: .6,
             child: Image.asset(
-              AppImagePath.background2,
+              AppImagePath.background12,
               fit: BoxFit.fill,
             ),
           ),
@@ -27,7 +27,7 @@ class BackGround1 extends StatelessWidget {
           child: Transform.scale(
             scale: .8,
             child: Image.asset(
-              AppImagePath.background2,
+              AppImagePath.background12,
               fit: BoxFit.fill,
             ),
           ),
@@ -38,7 +38,7 @@ class BackGround1 extends StatelessWidget {
           bottom: -120,
           child: Container(
             child: Image.asset(
-              AppImagePath.background2,
+              AppImagePath.background12,
               fit: BoxFit.fill,
             ),
           ),
