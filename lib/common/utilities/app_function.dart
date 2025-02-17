@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 bool get isKo => Get.locale.toString().contains('ko');
@@ -49,6 +50,18 @@ class AppFunction {
       200,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
+    );
+  }
+
+  static Future<TimeOfDay?> pickTime(BuildContext context) async {
+    return await showTimePicker(
+      cancelText: AppString.cancelBtnTextTr.tr,
+      helpText: '방문 시간을 입력해주세요.',
+      errorInvalidText: '올바른 시간을 입력해주세요',
+      hourLabelText: AppString.hour.tr,
+      minuteLabelText: AppString.minute.tr,
+      context: context,
+      initialTime: TimeOfDay.now(),
     );
   }
 

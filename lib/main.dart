@@ -6,14 +6,14 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/models/alerm_modal.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/health_model.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
+import 'package:ours_log/models/user_model.dart';
 import 'package:ours_log/respository/setting_repository.dart';
-import 'package:ours_log/views/home/main_screen.dart';
 import 'package:ours_log/views/splash_screen.dart';
 
-//flutter pub run build_runner build
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeDateFormatting();
@@ -80,6 +80,13 @@ class _MyAppState extends State<MyApp> {
 
 Future<void> initHive() async {
   await Hive.initFlutter();
+
+  if (!Hive.isAdapterRegistered(AppConstant.alermModelHiveId)) {
+    Hive.registerAdapter(AlermModelAdapter());
+  }
+  if (!Hive.isAdapterRegistered(AppConstant.userModelHiveId)) {
+    Hive.registerAdapter(UserModelAdapter());
+  }
   if (!Hive.isAdapterRegistered(AppConstant.diaryModelHiveId)) {
     Hive.registerAdapter(DiaryModelAdapter());
   }

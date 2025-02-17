@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/state_manager.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
+import 'package:ours_log/controller/onboarding_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 
 class Onboarding5 extends StatelessWidget {
@@ -10,7 +11,7 @@ class Onboarding5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return GetBuilder<UserController>(builder: (userController) {
+    return GetBuilder<OnboardingController>(builder: (onboardingController) {
       return Column(
         children: [
           Text(
@@ -25,21 +26,19 @@ class Onboarding5 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
-                onTap: () {
-                  userController.onTapIsDrinkPill(true);
-                },
+                onTap: () => onboardingController.onTapIsDrinkPill(true),
                 child: Container(
                   width: size.width / 3 - 30,
                   height: size.width / 3 - 30,
                   decoration: BoxDecoration(
-                    color: userController.isDrinkingPill != null &&
-                            userController.isDrinkingPill == true
+                    color: onboardingController.isDrinkingPill != null &&
+                            onboardingController.isDrinkingPill == true
                         ? Colors.pinkAccent
                         : null,
                     borderRadius: BorderRadius.circular(RS.w10 * 1.5),
                     border: Border.all(color: Colors.grey),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -50,28 +49,23 @@ class Onboarding5 extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  userController.onTapIsDrinkPill(false);
-                },
+                onTap: () => onboardingController.onTapIsDrinkPill(false),
                 child: Container(
                   width: size.width / 3 - 30,
                   height: size.width / 3 - 30,
                   decoration: BoxDecoration(
-                    color: userController.isDrinkingPill != null &&
-                            userController.isDrinkingPill == false
+                    color: onboardingController.isDrinkingPill != null &&
+                            onboardingController.isDrinkingPill == false
                         ? Colors.pinkAccent
                         : null,
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(color: Colors.grey),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text('아니요'),
-                        // FaIcon(FontAwesomeIcons.venus),
-                        // SizedBox(height: RS.h10),
-                        // Text(AppString.female.tr),
                       ],
                     ),
                   ),

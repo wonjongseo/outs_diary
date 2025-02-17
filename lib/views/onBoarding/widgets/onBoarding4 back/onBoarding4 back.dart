@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app_constant.dart';
 
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
@@ -33,8 +34,7 @@ class OnBoarding2 extends StatelessWidget {
       Stack(
         children: [
           CarouselSlider(
-            items: List.generate(backgroundController.backgroundLists.length,
-                (index) {
+            items: List.generate(AppConstant.backgroundLists.length, (index) {
               return GetBuilder<UserController>(
                 builder: (context) {
                   return GestureDetector(
@@ -42,8 +42,8 @@ class OnBoarding2 extends StatelessWidget {
                     child: Stack(
                       children: [
                         BackGround1Sample(
-                          backgrounds: backgroundController
-                              .backgroundLists[index].images,
+                          backgrounds:
+                              AppConstant.backgroundLists[index].images,
                           isSelected:
                               backgroundController.backgroundIndex == index,
                         ),
@@ -73,7 +73,7 @@ class OnBoarding2 extends StatelessWidget {
                                 bottom: -2,
                                 right: -2,
                                 child: Text(
-                                  backgroundController
+                                  AppConstant
                                       .backgroundLists[index].description,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -85,8 +85,7 @@ class OnBoarding2 extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                backgroundController
-                                    .backgroundLists[index].description,
+                                AppConstant.backgroundLists[index].description,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: RS.w10 * 2.2,

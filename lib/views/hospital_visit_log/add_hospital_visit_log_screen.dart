@@ -12,13 +12,11 @@ import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/c_dropdown_button.dart';
 import 'package:ours_log/common/widgets/custom_button.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
-import 'package:ours_log/controller/add_diary_controller.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
 import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/add_diary/widgets/image_of_today.dart';
-import 'package:ours_log/views/image_picker_screen.dart';
 
 class AddHospitalVisitLogScreen extends StatefulWidget {
   const AddHospitalVisitLogScreen({
@@ -154,14 +152,6 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
     );
   }
 
-  // void scrollGoToTop() {
-  //   scrollController.animateTo(
-  //     0,
-  //     duration: const Duration(milliseconds: 300),
-  //     curve: Curves.easeInOut,
-  //   );
-  // }
-
   PersistentBottomSheetController? bottomSheetController;
   @override
   Widget build(BuildContext context) {
@@ -211,14 +201,6 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
                                 onPressed: () async {
                                   DateTime? _pickerDate =
                                       await AppFunction.pickDate(context);
-
-                                  // = await showDatePicker(
-                                  //     context: context,
-                                  //     initialDate: DateTime.now(),
-                                  //     firstDate: DateTime.now().subtract(
-                                  //         const Duration(days: 365 * 3)),
-                                  //     lastDate: DateTime.now()
-                                  //         .add(const Duration(days: 365 * 3)));
 
                                   if (_pickerDate != null) {
                                     _selectedDate = _pickerDate;

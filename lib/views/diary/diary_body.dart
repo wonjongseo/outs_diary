@@ -88,10 +88,9 @@ class _DiaryBodyState extends State<DiaryBody> {
     bool isToday = AppFunction.isSameDay(diaryController.now, day);
     bool isMustPill = false;
     // if (isToday) {
-    if (userController.selectedDays.contains(day.weekday - 1)) {
-      isMustPill = true;
-      // }
-    }
+    // if (userController.selectedDays.contains(day.weekday - 1)) {
+    //   isMustPill = true;
+    // }
 
     return Column(
       children: [

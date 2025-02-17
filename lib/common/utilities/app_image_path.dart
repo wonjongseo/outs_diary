@@ -48,6 +48,10 @@ class AppImagePath {
   static String background41 = 'assets/images/background/background41.png';
   static String background42 = 'assets/images/background/background42.png';
   static String background43 = 'assets/images/background/background43.png';
+
+  static String background51 = 'assets/images/background/background51.png';
+  static String background52 = 'assets/images/background/background52.png';
+  static String background53 = 'assets/images/background/background53.png';
 //
   static String sunny = 'assets/images/sunny.png';
   static String rainny = 'assets/images/rainny.png';

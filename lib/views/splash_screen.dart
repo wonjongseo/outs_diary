@@ -7,8 +7,10 @@ import 'package:ours_log/controller/image_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
+import 'package:ours_log/views/home/main_screen.dart';
 import 'package:ours_log/views/onBoarding/onBoarding_screen.dart';
-import 'package:ours_log/views/onBoarding/widgets/onBoarding1/onBoarding1.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,16 +27,22 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
   }
 
+  late UserController userController;
   initControllers() async {
-    Get.put(UserController());
+    userController = Get.put(UserController());
     Get.put(DiaryController());
     Get.put(HospitalLogController());
     Get.put(ImageController());
   }
 
   void navigate() async {
-    await Future.delayed(Duration(milliseconds: 500));
-    Get.off(() => OnBoardingScreen());
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    if (userController.userModel == null) {
+      Get.off(() => OnBoardingScreen());
+    } else {
+      Get.off(() => const MainScreen());
+    }
   }
 
   @override

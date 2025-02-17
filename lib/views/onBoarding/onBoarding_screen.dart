@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,14 +9,15 @@ import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
+import 'package:ours_log/controller/onboarding_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/views/home/main_screen.dart';
 import 'package:ours_log/views/onBoarding/widgets/onBoarding1/onBoarding1.dart';
 import 'package:ours_log/views/onBoarding/widgets/onBoarding3/onBoarding3.dart';
 import 'package:ours_log/views/onBoarding/widgets/onBoarding2/onBoarding2.dart';
-import 'package:ours_log/views/onBoarding/widgets/onBoarding4/onBoarding4.dart';
 import 'package:ours_log/views/onBoarding/widgets/onBoarding5.dart';
 import 'package:ours_log/views/onBoarding/widgets/onBoarding6.dart';
+import 'package:ours_log/views/onBoarding/widgets/onBoarding7.dart';
 
 class DisplayArticle {
   final String label;
@@ -28,47 +30,15 @@ class DisplayArticle {
   });
 }
 
-class OnBoardingScreen extends StatefulWidget {
-  const OnBoardingScreen({super.key});
+class OnBoardingScreen extends StatelessWidget {
+  OnBoardingScreen({super.key});
 
-  @override
-  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
-}
-
-class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  int pageIndex = 0;
-  late PageController pageController;
-
-  Duration pageDuration = const Duration(milliseconds: 200);
-  Curve pageCurves = Curves.linear;
-
-  bool isShownMLE = false;
-  bool isShownDays = false;
-
-  late List<Widget> bodys;
-  @override
-  void initState() {
-    pageController = PageController(initialPage: pageIndex);
-
-    super.initState();
-  }
-
+  OnboardingController onboardingController = Get.put(OnboardingController());
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<UserController>(builder: (userController) {
-      bodys = [
-        const OnBoarding1(),
-        const OnBoarding2(),
-        const OnBoarding3(),
-        const Onboarding5(),
-        if (userController.isDrinkingPill ?? false)
-          Onboarding6(
-            isShownMLE: isShownMLE,
-            isShownDays: isShownDays,
-          ),
-      ];
+    return GetBuilder<OnboardingController>(builder: (onboardingController) {
       return Scaffold(
-        appBar: _appBar(),
+        appBar: _appBar(context),
         body: SafeArea(
           child: Center(
             child: Padding(
@@ -80,10 +50,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 children: [
                   Expanded(
                     child: PageView.builder(
-                      itemCount: bodys.length,
-                      controller: pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: onboardingController.bodys.length,
+                      controller: onboardingController.pageController,
                       itemBuilder: (context, index) {
-                        return bodys[index];
+                        return onboardingController.bodys[index];
                       },
                     ),
                   )
@@ -97,24 +68,29 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     });
   }
 
-  AppBar _appBar() {
+  AppBar _appBar(BuildContext context) {
     return AppBar(
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextButton(
-            onPressed: backToPage,
-            child: Text(AppString.back.tr),
-          ),
-          Expanded(
+          if (onboardingController.pageIndex != 0)
+            TextButton(
+              onPressed: onboardingController.backToPage,
+              child: Text(AppString.back.tr),
+            ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * .75,
             child: LinearProgressIndicator(
               minHeight: 10,
               borderRadius: BorderRadius.circular(20),
-              value: ((10 / bodys.length) * (pageIndex + 1) / 10).toDouble(),
+              value: ((10 / onboardingController.bodys.length) *
+                      (onboardingController.pageIndex + 1) /
+                      10)
+                  .toDouble(),
               color: Colors.pinkAccent,
             ),
           ),
-          SizedBox(width: RS.w10 * 3),
+          if (onboardingController.pageIndex == 0) SizedBox(width: RS.w10 * 3),
         ],
       ),
     );
@@ -124,7 +100,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return SafeArea(
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
-        onTap: goToNextPage,
+        onTap: onboardingController.goToNextPage,
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: RS.w10),
           height: RS.h10 * 6,
@@ -134,7 +110,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
           child: Center(
             child: Text(
-              pageIndex == bodys.length - 1
+              onboardingController.pageIndex ==
+                      onboardingController.bodys.length - 1
                   ? AppString.start.tr
                   : AppString.next.tr,
               style: TextStyle(
@@ -147,38 +124,5 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         ),
       ),
     );
-  }
-
-  void backToPage() {
-    pageIndex--;
-    pageController.previousPage(
-      duration: pageDuration,
-      curve: pageCurves,
-    );
-    setState(() {});
-  }
-
-  void goToNextPage() {
-    if (pageIndex == 4 && (isShownMLE == false || isShownDays == false)) {
-      if (isShownMLE == false && isShownDays == false) {
-        isShownMLE = true;
-      } else if (isShownMLE && isShownDays == false) {
-        isShownDays = true;
-      }
-
-      setState(() {});
-      return;
-    }
-
-    if (pageIndex == bodys.length - 1) {
-      Get.off(() => const MainScreen());
-      return;
-    }
-    pageIndex++;
-    pageController.nextPage(
-      duration: pageDuration,
-      curve: pageCurves,
-    );
-    setState(() {});
   }
 }

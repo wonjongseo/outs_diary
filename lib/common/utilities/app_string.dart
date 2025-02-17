@@ -4,6 +4,7 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.background5Desc: AppString.background5DescJp,
           AppString.noCameraPermssionMsg: AppString.noCameraPermssionMsgJp,
           AppString.noLibaryPermssion: AppString.noLibaryPermssionMsgJp,
           AppString.fealIcon1Des: AppString.fealIcon1DesJp,
@@ -160,6 +161,7 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.background5Desc: AppString.background5DescKr,
           AppString.noCameraPermssionMsg: AppString.noCameraPermssionMsgKr,
           AppString.noLibaryPermssion: AppString.noLibaryPermssionMsgKr,
           AppString.fealIcon1Des: AppString.fealIcon1DesKr,
@@ -316,6 +318,7 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.background5Desc: AppString.background5DescEn,
           AppString.noCameraPermssionMsg: AppString.noCameraPermssionMsgEn,
           AppString.noLibaryPermssion: AppString.requiredLibaryPermssionMsgEn,
           AppString.fealIcon1Des: AppString.fealIcon1DesEn,
@@ -566,9 +569,9 @@ class AppString {
   static String requiredTextEn = "Required";
 
   static String appName = "appNameTr";
-  static String appNameKr = "진료 기록";
-  static String appNameJp = "カルテ記録";
-  static String appNameEn = "Your Little One’s Record";
+  static String appNameKr = "내 진료 기록";
+  static String appNameJp = "私のカルテ";
+  static String appNameEn = "karute";
 
   static String period = "periodTr";
   static String periodKr = "생리기간";
@@ -1084,27 +1087,32 @@ class AppString {
   static String backgroundEn = "background";
 
   static String background1Desc = "background1DescTr";
-  static String background1DescKr = "동물 친구들";
-  static String background1DescJp = '動物友達';
+  static String background1DescKr = "뭐라고 사파리";
+  static String background1DescJp = 'なんちゃってサファリ';
   static String background1DescEn = "background1Desc";
 
   static String background2Desc = "background2DescTr";
-  static String background2DescKr = "다람쥐와 도토리";
-  static String background2DescJp = 'リスとドングリ';
+  static String background2DescKr = "도토리 월드";
+  static String background2DescJp = 'ドングリワールド';
   static String background2DescEn = "squirrel and acorn";
 
   static String background3Desc = "background3Desc";
   static String background3DescKr = "난쟁이의 마을";
-  static String background3DescJp = '小人の村';
+  static String background3DescJp = '小人村';
   static String background3DescEn = "background3Desc";
 
   static String background4Desc = "background4DescTr";
-  static String salmonTextKr = "우주 속에서";
-  static String salmonTextJp = '宇宙の中で';
+  static String salmonTextKr = "우주 여행";
+  static String salmonTextJp = '宇宙旅行';
   static String salmonTextEn = "In Space";
 
+  static String background5Desc = "background5DescTr";
+  static String background5DescKr = "남기면 안돼";
+  static String background5DescJp = 'お残し厳禁';
+  static String background5DescEn = "Do Dot ..";
+
   static String fealIcon1Name = "fealIcon1NameTr";
-  static String fealIcon1NameKr = "어린 친구들";
+  static String fealIcon1NameKr = "심플이들";
   static String fealIcon1NameJp = '幼い友達';
   static String fealIcon1NameEn = "Cucumber";
 
@@ -1114,13 +1122,13 @@ class AppString {
   static String fealIcon1DesEn = "Cucumber";
 
   static String fealIcon2Name = "fealIcon2NameTr";
-  static String fealIcon2NameKr = "동물 친구들";
-  static String fealIcon2NameJp = '動物の友達';
-  static String fealIcon2NameEn = "Cucumber";
+  static String fealIcon2NameKr = "우리 친구들";
+  static String fealIcon2NameJp = 'うちの仲間達';
+  static String fealIcon2NameEn = "誘拐なうちの仲間達";
 
   static String fealIcon2Des = "fealIcon2DesTr";
-  static String fealIcon2DesKr = "귀여운 동물 친구들";
-  static String fealIcon2DesJp = '可愛い動物の友達';
+  static String fealIcon2DesKr = "나를 믿고 따라온 친구들";
+  static String fealIcon2DesJp = '私を信じてついてきた仲間達';
   static String fealIcon2DesEn = "Cucumber";
 
   static String fealIcon3Name = "fealIcon3NameTr";
@@ -1134,8 +1142,8 @@ class AppString {
   static String fealIcon3DesEn = "Cucumber";
 
   static String fealIcon4Name = "fealIcon4NameTr";
-  static String fealIcon4NameKr = "외계인 친구들";
-  static String fealIcon4NameJp = '宇宙人の友達';
+  static String fealIcon4NameKr = "미확인 생물";
+  static String fealIcon4NameJp = '未確認生物';
   static String fealIcon4NameEn = "Cucumber";
 
   static String fealIcon4Des = "fealIcon4DesTr";

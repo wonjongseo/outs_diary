@@ -4,46 +4,44 @@ import 'package:flutter/widgets.dart';
 import 'package:get/state_manager.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
+import 'package:ours_log/controller/onboarding_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 
 class Onboarding6 extends StatelessWidget {
-  Onboarding6({super.key, required this.isShownMLE, required this.isShownDays});
+  const Onboarding6({super.key});
 
-  final bool isShownMLE;
-  final bool isShownDays;
-
-  var textStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: RS.w10 * 1.8,
-  );
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<UserController>(builder: (userController) {
+    var textStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: RS.w10 * 1.8,
+    );
+    return GetBuilder<OnboardingController>(builder: (onboardingController) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          FadeInRight(
-            child: Column(
-              children: [
-                Text(
-                  '어떤 약을 복용하고 계신가요?',
-                  style: textStyle,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: RS.w10 * 3.5,
-                    vertical: RS.h10,
-                  ),
-                  child: CustomTextFormField(
-                      controller: userController.teCrl,
-                      hintText: 'ex) 아침 약',
-                      onFieldSubmitted: (v) {}),
-                ),
-              ],
-            ),
-          ),
+          // FadeInRight(
+          //   child: Column(
+          //     children: [
+          //       Text(
+          //         '어떤 약을 복용하고 계신가요?',
+          //         style: textStyle,
+          //       ),
+          //       Padding(
+          //         padding: EdgeInsets.symmetric(
+          //           horizontal: RS.w10 * 3.5,
+          //           vertical: RS.h10,
+          //         ),
+          //         child: CustomTextFormField(
+          //             controller: onboardingController.teCrl,
+          //             hintText: 'ex) 아침 약',
+          //             onFieldSubmitted: (v) {}),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           // SizedBox(height: RS.h10 * 2),
-          if (isShownMLE)
+          if (onboardingController.isShownMLE)
             FadeInRight(
               child: Column(
                 children: [
@@ -54,18 +52,16 @@ class Onboarding6 extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children:
                           List.generate(morningLunchEvening.length, (index) {
-                        // bool isSelected = userController
-                        //     .selectedMorningLunchEvening
-                        //     .contains(index);
                         return GestureDetector(
-                          onTap: () => userController.aa(index),
+                          onTap: () => onboardingController
+                              .onSelectMorningLunchEvening(index),
                           child: Container(
                             width: RS.w10 * 10,
                             height: RS.w10 * 10,
                             margin:
                                 EdgeInsets.symmetric(horizontal: RS.w10 / 2),
                             decoration: BoxDecoration(
-                                border: userController
+                                border: onboardingController
                                         .selectedMorningLunchEvening
                                         .contains(index)
                                     ? Border.all(
@@ -86,7 +82,7 @@ class Onboarding6 extends StatelessWidget {
             ),
           // SizedBox(height: RS.h10 * 2),
 
-          if (isShownDays)
+          if (onboardingController.isShownDays)
             FadeInRight(
               child: Column(
                 children: [
@@ -99,15 +95,16 @@ class Onboarding6 extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: List.generate(dayKo.length, (index) {
                           // bool isSelected =
-                          //     userController.selectedDays.contains(index);
+                          //     onboardingController.selectedDays.contains(index);
                           return GestureDetector(
-                            onTap: () => userController.bb(index),
+                            onTap: () =>
+                                onboardingController.onSelectDays(index),
                             // onTap: () {
                             //   setState(() {
                             //     if (isSelected) {
-                            //       userController.selectedDays.remove(index);
+                            //       onboardingController.selectedDays.remove(index);
                             //     } else {
-                            //       userController.selectedDays.add(index);
+                            //       onboardingController.selectedDays.add(index);
                             //     }
                             //   });
                             // },
@@ -117,7 +114,7 @@ class Onboarding6 extends StatelessWidget {
                               margin:
                                   EdgeInsets.symmetric(horizontal: RS.w10 / 2),
                               decoration: BoxDecoration(
-                                  border: userController.selectedDays
+                                  border: onboardingController.selectedDays
                                           .contains(index)
                                       ? Border.all(
                                           color: Colors.pinkAccent, width: 2)
