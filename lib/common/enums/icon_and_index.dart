@@ -46,7 +46,7 @@ extension IconAndIndexExtension on IconAndIndex {
       case 1:
         return AppString.good.tr;
       case 2:
-        return AppString.nomal.tr;
+        return AppString.soso.tr;
       case 3:
         return AppString.bad.tr;
       case 4:

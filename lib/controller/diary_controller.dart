@@ -105,17 +105,20 @@ class DiaryController extends GetxController {
 
   void onDatSelected(DateTime cSelectedDay, DateTime cFocusedDay) {
     if (kEvents[cSelectedDay] != null) {
+      print('asdas');
       selectedDiary = kEvents[cSelectedDay]![0];
-      AppFunction.scrollGoToTop(scrollController);
+      AppFunction.scrollGoToBottom(scrollController);
       update();
       return;
     }
     selectedDiary = null;
 
     if (cSelectedDay.difference(now).isNegative) {
-      Get.to(() => AddDiaryScreen(
-            selectedDay: selectedDay,
-          ));
+      Get.to(
+        () => AddDiaryScreen(
+          selectedDay: selectedDay,
+        ),
+      );
     } else {
       if (!Get.isSnackbarOpen) {
         Get.snackbar(

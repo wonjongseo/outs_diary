@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/theme/light_theme.dart';
+import 'package:ours_log/common/theme/theme.dart';
 
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_expansion_card.dart';
-import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/datas/graph_data.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/respository/dairy_respository.dart';
-import 'package:ours_log/views/graph/weight_graph.dart';
+import 'package:ours_log/views/graph/widgets/custom_feal_line_graph.dart';
+import 'package:ours_log/views/graph/widgets/custom_feal_pie_chart.dart';
+import 'package:ours_log/views/graph/widgets/custom_line_graph.dart';
+import 'package:ours_log/views/graph/widgets/feal_graph.dart';
 
 class GraphBody extends StatefulWidget {
   const GraphBody({super.key});
@@ -81,23 +84,23 @@ class _GraphBodyState extends State<GraphBody> {
     setState(() {});
   }
 
-  void calculateMinMaxValueAndHeight(GraphData? temperature,
+  void calculateMinMaxValueAndHeight(GraphData? graphData,
       {bool isFeal = false}) {
     if (isFeal) {
-      temperature!.maxY = 6;
-      temperature.minY = 0;
+      graphData!.maxY = 6;
+      graphData.minY = 0;
     } else {
       double? maxY =
-          temperature!.xDatas.where((element) => element != 0).firstOrNull;
+          graphData!.xDatas.where((element) => element != 0).firstOrNull;
       double? minY =
-          temperature.xDatas.where((element) => element != 0).firstOrNull;
+          graphData.xDatas.where((element) => element != 0).firstOrNull;
 
       if (maxY == null || minY == null) {
-        temperature = null;
+        graphData = null;
         return;
       }
 
-      for (var value in temperature.xDatas) {
+      for (var value in graphData.xDatas) {
         if (value == 0) continue;
 
         if (minY! > value) {
@@ -113,8 +116,8 @@ class _GraphBodyState extends State<GraphBody> {
       minY = (minY - diff).round().toDouble();
       maxY = (maxY + diff).round().toDouble();
 
-      temperature.maxY = maxY;
-      temperature.minY = minY;
+      graphData.maxY = maxY;
+      graphData.minY = minY;
     }
   }
 
@@ -163,13 +166,13 @@ class _GraphBodyState extends State<GraphBody> {
                   CustomExpansionCard(
                     title: AppString.fealText.tr,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: RS.h10,
-                        horizontal: RS.w10 * 2,
+                      padding: EdgeInsets.only(
+                        right: RS.w10 * 2,
+                        // horizontal: ,
                       ),
                       child: fealGraphData == null
                           ? Container()
-                          : CustomFealLineGraph(
+                          : FealGraph(
                               graphData: fealGraphData!,
                               countOfDay: countOfDay,
                             ),

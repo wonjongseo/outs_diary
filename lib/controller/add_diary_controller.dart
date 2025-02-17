@@ -1,25 +1,26 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
-import 'package:ours_log/controller/background_controller.dart';
+import 'package:ours_log/controller/image_controller.dart';
+import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/health_model.dart';
-import 'package:ours_log/respository/monthly_repository.dart';
-import 'package:ours_log/views/image_picker_screen.dart';
 
 class AddDiaryController extends GetxController {
   int backgroundIndex = 0;
   int selectedFealIndex = -1;
 
-  BackgroundController backgroundController = Get.find<BackgroundController>();
+  UserController backgroundController = Get.find<UserController>();
   ScrollController scrollController = ScrollController();
   DiaryController diaryController = Get.find<DiaryController>();
-
+  CarouselSliderController carouselSliderController =
+      CarouselSliderController();
   List<int> selectedWeatherIndexs = [];
 
   List<int> painFulIndex = [];
@@ -61,7 +62,7 @@ class AddDiaryController extends GetxController {
     update();
   }
 
-  void onTapSaveBtn() {
+  void onTapSaveBtn() async {
     if (selectedFealIndex == -1) {
       AppFunction.vaildTextFeildSnackBar(
         title: AppString.requiredText.tr,
@@ -73,7 +74,12 @@ class AddDiaryController extends GetxController {
     }
 
     String whatTodo = whatToDoController.text.trim();
-    List<String> imagePhats = uploadFiles.map((e) => e.path).toList();
+
+    List<String> imagePhats = [];
+    for (var uploadFile in uploadFiles) {
+      String fileName = await ImageController.instance.saveFile(uploadFile);
+      imagePhats.add(fileName);
+    }
 
     HealthModel healthModel = createHealthModel();
     DiaryModel newDiaryModel = DiaryModel(
@@ -134,8 +140,8 @@ class AddDiaryController extends GetxController {
     whatToDoController.text = diaryModel!.whatTodo ?? '';
 
     if (diaryModel!.imagePath != null) {
-      for (var image in diaryModel!.imagePath!) {
-        uploadFiles.add(File(image));
+      for (var imageName in diaryModel!.imagePath!) {
+        uploadFiles.add(File('${ImageController.instance.path}/$imageName'));
       }
     }
 
@@ -192,11 +198,16 @@ class AddDiaryController extends GetxController {
   }
 
   void selectedPhotos() async {
-    File file = (await Get.to(() => const ImagePickerScreen()));
+    File? file = await ImageController.getImageFromLibery();
+    if (file == null) return;
+
     if (!uploadFiles.contains(file)) {
       uploadFiles.add(file);
     }
     update();
+    if (uploadFiles.length != 1) {
+      carouselSliderController.nextPage();
+    }
   }
 
   void removePhoto(int index) {
@@ -243,67 +254,4 @@ class AddDiaryController extends GetxController {
     }
     super.onClose();
   }
-
-  /**
-   
-
- // bool isMagicDay = false;
-
-  // bool? isStartedMasic;
-  // bool? isEndedMasic;
-  // DateTime? startMasicDay;
-  // DateTime? endMasicDay;
-
-  // void toggleMagicDay(bool isStartDay) {
-  //   DateTime masicDate = DateTime(
-  //     selectedDay.year,
-  //     selectedDay.month,
-  //     selectedDay.day,
-  //   );
-
-  //   if (isStartDay) {
-  //     if (startMasicDay == null) {
-  //       startMasicDay = masicDate;
-  //       if (endMasicDay == startMasicDay) {
-  //         AppFunction.invaildTextFeildSnackBar(
-  //             title: '경고!', message: '생리의 시작 일과 끝 일이 동일합니다.');
-  //       }
-  //     } else {
-  //       startMasicDay = null;
-  //     }
-  //   } else {
-  //     if (endMasicDay == null) {
-  //       endMasicDay = masicDate;
-
-  //       if (startMasicDay == endMasicDay) {
-  //         AppFunction.invaildTextFeildSnackBar(
-  //             title: '경고!', message: '생리의 시작 일과 끝 일이 동일합니다.');
-  //       }
-  //     } else {
-  //       endMasicDay = null;
-  //     }
-  //   }
-  //   // isMagicDay = !isMagicDay;
-  //   update();
-  // }
-
-  // void loadMagicDay() async {
-  //   startMasicDay =
-  //       await MonthlyRepository.getPeroid(dateTime: selectedDay, isStart: true);
-
-  //   endMasicDay = await MonthlyRepository.getPeroid(
-  //       dateTime: selectedDay, isStart: false);
-
-  //   startMasicDay!.difference(selectedDay).isNegative;
-  //   startMasicDay!.difference(selectedDay).isNegative;
-  //   if (startMasicDay != null && endMasicDay != null) {
-  //     isStartedMasic = true;
-  //     isEndedMasic = true;
-  //     update();
-  //   } else if (startMasicDay != null && endMasicDay == null) {
-  //     isStartedMasic = true;
-  //     update();
-  //   }
-  // }
-   */
 }

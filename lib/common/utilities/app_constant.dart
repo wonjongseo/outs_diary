@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:ours_log/common/enums/icon_and_index.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
 
@@ -23,8 +20,7 @@ class AppConstant {
   static const String hospitalLogModelBox = 'hospitalLogs';
   static const String stampModelBox = 'stamps';
   static const String todoModelBox = 'todos';
-  static const String fealIndexBox = 'fealIndex';
-  static const String backgroundIndexBox = 'backgroundIndex';
+
   static const String expensiveModelModelBox = 'expensives';
   static const String categoryModelModelBox = 'categories';
   static const String groceriesModelModelBox = 'groceries';
@@ -36,6 +32,8 @@ class AppConstant {
   static const String countOfReiveRequestionKey = 'countOfReiveRequestion';
   static const String hasReviewedKey = 'hasReviewed';
   static const String backgroundIndexKey = 'backgroundIndex';
+  static const String fealIndexKey = 'fealIndex';
+  static const String isDarkModeKey = 'isDarkMode';
 
   static const int countOfStampIcon = 18;
 
@@ -59,13 +57,28 @@ class AppConstant {
     AppImagePath.very_bad2,
   ];
 
-  // static List<IconAndIndex> faceIcons = [
-  //   IconAndIndex.faceLaughBeam,
-  //   IconAndIndex.faceMehBlank,
-  //   IconAndIndex.faceFrown,
-  //   IconAndIndex.faceSadTear,
-  //   IconAndIndex.faceAngry,
-  // ];
+  static List<String> fillingIcons3 = [
+    AppImagePath.very_good3,
+    AppImagePath.good3,
+    AppImagePath.soso3,
+    AppImagePath.bad3,
+    AppImagePath.very_bad3,
+  ];
+
+  static List<String> fillingIcons4 = [
+    AppImagePath.very_good4,
+    AppImagePath.good4,
+    AppImagePath.soso4,
+    AppImagePath.bad4,
+    AppImagePath.very_bad4,
+  ];
+  static List<String> fillingIcons5 = [
+    AppImagePath.very_good5,
+    AppImagePath.good5,
+    AppImagePath.soso5,
+    AppImagePath.bad5,
+    AppImagePath.very_bad5,
+  ];
 
   static List<IconAndIndex> weatherIcons = [
     IconAndIndex.sun,
@@ -87,35 +100,6 @@ class AppConstant {
     IconAndIndex.eight,
     IconAndIndex.nine,
   ];
-
-  // static List<IconData> fillingIcons = [
-  //   FontAwesomeIcons.faceLaughBeam,
-  //   FontAwesomeIcons.faceMehBlank,
-  //   FontAwesomeIcons.faceFrown,
-  //   FontAwesomeIcons.faceSadTear,
-  //   FontAwesomeIcons.faceAngry,
-  // ];
-
-  // static List<IconData> weatherIcons = [
-  //   FontAwesomeIcons.sun,
-  //   FontAwesomeIcons.cloud,
-  //   FontAwesomeIcons.wind,
-  //   FontAwesomeIcons.umbrella,
-  //   FontAwesomeIcons.snowflake,
-  // ];
-
-  // static List<IconData> dummyIcons = [
-  //   FontAwesomeIcons.faceLaughBeam,
-  //   FontAwesomeIcons.faceMehBlank,
-  //   FontAwesomeIcons.faceFrown,
-  //   FontAwesomeIcons.faceSadTear,
-  //   FontAwesomeIcons.faceAngry,
-  //   FontAwesomeIcons.faceLaughBeam,
-  //   FontAwesomeIcons.faceMehBlank,
-  //   FontAwesomeIcons.faceFrown,
-  //   FontAwesomeIcons.faceSadTear,
-  //   FontAwesomeIcons.faceAngry,
-  // ];
 }
 
 class IconAndText {

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,6 +12,7 @@ import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/c_dropdown_button.dart';
 import 'package:ours_log/common/widgets/custom_button.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
+import 'package:ours_log/controller/add_diary_controller.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
 import 'package:ours_log/respository/setting_repository.dart';
@@ -35,6 +37,9 @@ class AddHospitalVisitLogScreen extends StatefulWidget {
 class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
   String? _startTime;
   late DateTime _selectedDate;
+
+  CarouselSliderController carouselSliderController =
+      CarouselSliderController();
 
   HospitalLogController hospitalLogController =
       Get.find<HospitalLogController>();
@@ -105,12 +110,6 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
   }
 
   saveVisitLog() {
-    // if (_startTime == null) {
-    //   AppFunction.invaildTextFeildSnackBar(
-    //       title: '필수', message: '방문 시간을 선택해주세요');
-    //   scrollGoToTop();
-    //   return;
-    // }
     String hospitalName = hospitalNameCtl.text;
 
     if (hospitalName.isEmpty) {
@@ -326,6 +325,7 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
                     ),
                     SizedBox(height: RS.h10),
                     ImageOfToday(
+                      carouselSliderController: carouselSliderController,
                       label: '진단서 혹은 처방전',
                       uploadFiles: uploadFiles,
                       selectedPhotos: () async {
@@ -377,7 +377,7 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
                                       },
                                       icon: Icon(
                                         Icons.folder_copy_outlined,
-                                        size: 30,
+                                        size: RS.w10 * 3,
                                       ),
                                     ),
                                     SizedBox(width: RS.w10 * 2),

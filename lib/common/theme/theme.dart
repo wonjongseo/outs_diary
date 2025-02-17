@@ -3,13 +3,185 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
 
-const Color bluishClr = Color(0xFF4e5ae8);
-const Color yellowClr = Color(0xFFFFB746);
-const Color pinkClr = Color(0xFFff4667);
-const primaryClr = bluishClr;
-const Color darkGreyClr = Color(0xFF121212);
-const Color darkHeaderClr = Color(0xFF424242);
+ThemeData lightTheme(String systemLanguage) {
+  final ThemeData base = ThemeData.light();
+
+  return base.copyWith(
+    textTheme: ThemeData.light().textTheme.apply(
+        fontFamily:
+            systemLanguage.contains('ja') ? "ZenMaruGothic" : "CookieRunFont"),
+    scaffoldBackgroundColor: Colors.white.withOpacity(.95),
+    cardTheme: CardTheme(elevation: 2),
+    appBarTheme: const AppBarTheme(
+      // backgroundColor: AppColors.primaryColor,
+      backgroundColor: Colors.transparent,
+      surfaceTintColor: Colors.transparent,
+      titleTextStyle: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        color: Colors.black,
+      ),
+
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
+    ),
+    iconButtonTheme: IconButtonThemeData(),
+    tabBarTheme: const TabBarTheme(
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(color: Colors.white, width: 2),
+      ),
+      unselectedLabelColor: Color(0xFFB3D9D2),
+      labelColor: Colors.black,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.greenLight,
+        foregroundColor: AppColors.white,
+        splashFactory: NoSplash.splashFactory,
+        elevation: 0,
+        shadowColor: Colors.transparent,
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.black.withOpacity(.6),
+        splashFactory: NoSplash.splashFactory,
+        elevation: 0,
+        shadowColor: Colors.transparent,
+      ),
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: AppColors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+      ),
+    ),
+    dialogBackgroundColor: AppColors.white,
+    dialogTheme: DialogTheme(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.greenDark,
+      foregroundColor: Colors.white,
+    ),
+    listTileTheme: const ListTileThemeData(
+      iconColor: AppColors.greenDark,
+      tileColor: AppColors.white,
+      textColor: Colors.black,
+    ),
+    switchTheme: const SwitchThemeData(
+      thumbColor: MaterialStatePropertyAll(Color(0xFF83939C)),
+      trackColor: MaterialStatePropertyAll(Color(0xFFDADFE2)),
+    ),
+    checkboxTheme: CheckboxThemeData(
+      side: BorderSide(color: Colors.grey[700]!),
+      overlayColor: MaterialStateProperty.all(Colors.red),
+      checkColor: MaterialStateProperty.all(AppColors.primaryColor),
+      fillColor: MaterialStateProperty.resolveWith(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.grey[200];
+          }
+          return Colors.white;
+        },
+      ),
+    ),
+  );
+}
+
+ThemeData darkTheme(String systemLanguage) {
+  final ThemeData base = ThemeData.dark();
+  return base.copyWith(
+    textTheme: ThemeData.dark().textTheme.apply(
+        fontFamily:
+            systemLanguage.contains('ja') ? "ZenMaruGothic" : "CookieRunFont"),
+    iconTheme: IconThemeData(
+      color: Colors.grey[400],
+    ),
+    scaffoldBackgroundColor: AppColors.greyBackground,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.greyBackground,
+      titleTextStyle: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        color: AppColors.greyDark,
+      ),
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
+      iconTheme: IconThemeData(
+        color: AppColors.greenDark,
+      ),
+    ),
+    tabBarTheme: const TabBarTheme(
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(
+          color: AppColors.greenDark,
+          width: 2,
+        ),
+      ),
+      unselectedLabelColor: AppColors.greyDark,
+      labelColor: AppColors.greenDark,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.greenDark,
+        foregroundColor: AppColors.black,
+        splashFactory: NoSplash.splashFactory,
+        elevation: 0,
+        shadowColor: Colors.transparent,
+      ),
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: AppColors.greyBackground,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+      ),
+    ),
+    dialogBackgroundColor: AppColors.greyBackground,
+    dialogTheme: DialogTheme(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: AppColors.white.withOpacity(.6),
+        splashFactory: NoSplash.splashFactory,
+        elevation: 0,
+        shadowColor: Colors.transparent,
+      ),
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.greenDark,
+      foregroundColor: AppColors.white,
+    ),
+    listTileTheme: const ListTileThemeData(
+      iconColor: AppColors.greenDark,
+      tileColor: AppColors.black,
+    ),
+    switchTheme: const SwitchThemeData(
+      thumbColor: MaterialStatePropertyAll(AppColors.greenDark),
+      trackColor: MaterialStatePropertyAll(Color(0xFF344047)),
+    ),
+  );
+}
 
 TextStyle get subHeadingStyle {
   return TextStyle(
@@ -50,3 +222,29 @@ TextStyle get subTitleStyle {
     color: Get.isDarkMode ? Colors.grey[100] : Colors.grey[600],
   );
 }
+
+TextStyle get boldStyle {
+  return TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: RS.width20,
+  );
+}
+
+TextStyle get weekdayStyle {
+  return TextStyle(
+    color: Get.isDarkMode ? Colors.white : AppColors.greyBackground,
+  );
+}
+
+TextStyle get textFieldSufficStyle {
+  return TextStyle(color: Colors.grey[500]);
+}
+
+
+// const Color bluishClr = Color(0xFF4e5ae8);
+// const Color yellowClr = Color(0xFFFFB746);
+// const Color pinkClr = Color(0xFFff4667);
+// const primaryClr = bluishClr;
+// const Color darkGreyClr = Color(0xFF121212);
+// const Color darkHeaderClr = Color(0xFF424242);
+

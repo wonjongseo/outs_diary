@@ -1,7 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
-
-import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
@@ -12,9 +9,9 @@ import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
+import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/views/setting/set_feal_icon_screen.dart';
-import 'package:ours_log/views/setting/widgets/background1_sample.dart';
 import 'package:ours_log/views/setting/set_background_widget.dart';
 
 class SettingBody extends StatefulWidget {
@@ -27,6 +24,8 @@ class SettingBody extends StatefulWidget {
 class _SettingBodyState extends State<SettingBody> {
   String settingLanguage = '';
   String displayLanguage = '';
+  bool isDarkMode = Get.isDarkMode;
+
   @override
   void initState() {
     super.initState();
@@ -56,13 +55,13 @@ class _SettingBodyState extends State<SettingBody> {
     setState(() {});
   }
 
-  bool isDarkMode = Get.isDarkMode;
-
   void changeTheme(int index) {
     if (index == 0) {
       isDarkMode = true;
+      SettingRepository.setBool(AppConstant.isDarkModeKey, true);
       Get.changeThemeMode(ThemeMode.dark);
     } else {
+      SettingRepository.setBool(AppConstant.isDarkModeKey, false);
       isDarkMode = false;
       Get.changeThemeMode(ThemeMode.light);
     }
@@ -79,33 +78,36 @@ class _SettingBodyState extends State<SettingBody> {
             children: [
               SizedBox(height: RS.height20),
               _customListTIle(
-                title: '테마',
-                subTitle: isDarkMode ? '다크 모드' : '라이트 모드',
+                title: AppString.theme.tr,
+                subTitle:
+                    isDarkMode ? AppString.darkMode.tr : AppString.lightMode.tr,
                 imagePath: AppImagePath.good2,
-                onTap: () => changeTheme(isDarkMode ? 1 : 0),
+                onTap: () => changeTheme(isDarkMode ? 0 : 1),
                 widget: ToggleButtons(
                   onPressed: changeTheme,
-                  children: [
+                  isSelected: [isDarkMode, !isDarkMode],
+                  children: const [
                     Icon(Icons.dark_mode),
                     Icon(Icons.light_mode),
                   ],
-                  isSelected: [isDarkMode, !isDarkMode],
                 ),
               ),
               SizedBox(height: RS.height15),
-              _customListTIle(
-                title: '배경 선택',
-                subTitle: '',
-                imagePath: AppImagePath.very_good2,
-                onTap: () => Get.to(() => SetBackgroundScreen()),
-              ),
+              GetBuilder<UserController>(builder: (controller) {
+                return _customListTIle(
+                  title: AppString.background.tr,
+                  subTitle: controller.backgroundData.description,
+                  imagePath: AppImagePath.very_good2,
+                  onTap: () => Get.to(() => const SetBackgroundScreen()),
+                );
+              }),
               SizedBox(height: RS.height15),
 
               _customListTIle(
                 title: '기분 아이콘 ',
                 subTitle: '',
                 imagePath: AppImagePath.soso2,
-                onTap: () => Get.to(() => SetFealIconScreen()),
+                onTap: () => Get.to(() => const SetFealIconScreen()),
               ),
               // const SetBackgroundScreen(),
               SizedBox(height: RS.height15),
@@ -229,7 +231,6 @@ class _SettingBodyState extends State<SettingBody> {
         title: Text(
           title,
           maxLines: 1,
-          style: TextStyle(color: Get.isDarkMode ? Colors.white : Colors.grey),
         ),
         trailing: widget,
         subtitle: subTitle == null

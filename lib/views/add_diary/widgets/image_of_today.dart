@@ -15,26 +15,31 @@ class ImageOfToday extends StatelessWidget {
       required this.uploadFiles,
       required this.label,
       required this.selectedPhotos,
-      required this.removePhoto});
+      required this.removePhoto,
+      required this.carouselSliderController});
 
   final List<File> uploadFiles;
   final Function() selectedPhotos;
   final Function(int) removePhoto;
   final String label;
+  final CarouselSliderController carouselSliderController;
   @override
   Widget build(BuildContext context) {
     return ColTextAndWidget(
-      label: '${label}  ${uploadFiles.isEmpty ? '' : '+${uploadFiles.length}'}',
-      labelWidget: GestureDetector(
-        onTap: selectedPhotos,
-        child: const Icon(Icons.add),
-      ),
+      label: '$label  ${uploadFiles.isEmpty ? '' : '+${uploadFiles.length}'}',
+      labelWidget: uploadFiles.length == 3
+          ? null
+          : GestureDetector(
+              onTap: selectedPhotos,
+              child: const Icon(Icons.add),
+            ),
       widget: uploadFiles.isEmpty ? _addPhoto() : _photos(),
     );
   }
 
   CarouselSlider _photos() {
     return CarouselSlider(
+      carouselController: carouselSliderController,
       items: List.generate(
         uploadFiles.length,
         (index) => GestureDetector(

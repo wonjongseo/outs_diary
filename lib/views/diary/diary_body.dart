@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:ours_log/common/theme/light_theme.dart';
+import 'package:ours_log/common/theme/theme.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
+import 'package:ours_log/common/utilities/app_image_path.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
-import 'package:ours_log/controller/background_controller.dart';
+import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
-import 'package:ours_log/respository/monthly_repository.dart';
 import 'package:ours_log/views/home/bodys/selected_dairy.dart';
 
 import 'package:table_calendar/table_calendar.dart';
@@ -22,7 +23,7 @@ class DiaryBody extends StatefulWidget {
 
 class _DiaryBodyState extends State<DiaryBody> {
   final DiaryController diaryController = Get.find<DiaryController>();
-
+  final UserController userController = Get.find<UserController>();
   @override
   void initState() {
     super.initState();
@@ -63,21 +64,6 @@ class _DiaryBodyState extends State<DiaryBody> {
                 calendarBuilders: CalendarBuilders(
                   singleMarkerBuilder: singleMarkerBuilder,
                   prioritizedBuilder: prioritizedBuilder,
-                  rangeHighlightBuilder: (context, day, isWithinRange) {
-                    if (isWithinRange) {
-                      return Padding(
-                        padding: EdgeInsets.only(
-                          bottom: RS.h10 * 1.5,
-                        ),
-                        child: Text(
-                          '생리',
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                          ),
-                        ),
-                      );
-                    }
-                  },
                 ),
                 firstDay: diaryController.now.subtract(
                   const Duration(days: 365 * 3),
@@ -97,8 +83,16 @@ class _DiaryBodyState extends State<DiaryBody> {
     );
   }
 
-  Widget? prioritizedBuilder(context, day, focusedDay) {
+  Widget? prioritizedBuilder(context, DateTime day, focusedDay) {
     bool isNextDay = diaryController.now.difference(day).isNegative;
+    bool isToday = AppFunction.isSameDay(diaryController.now, day);
+    bool isMustPill = false;
+    // if (isToday) {
+    if (userController.selectedDays.contains(day.weekday - 1)) {
+      isMustPill = true;
+      // }
+    }
+
     return Column(
       children: [
         Container(
@@ -106,25 +100,37 @@ class _DiaryBodyState extends State<DiaryBody> {
           width: RS.w10 * 4.5,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isNextDay
-                ? Colors.grey.withOpacity(.15)
-                : Colors.grey.withOpacity(.4),
+            border: isToday
+                ? Border.all(color: Colors.pinkAccent.withValues(alpha: .5))
+                : null,
+            color: isToday
+                ? Colors.pinkAccent.withValues(alpha: .5)
+                : isNextDay
+                    ? Colors.grey.withOpacity(.15)
+                    : Colors.grey.withOpacity(.4),
           ),
           margin: EdgeInsets.only(bottom: RS.h10 / 2),
         ),
         Text(
           '${day.day}',
           style: TextStyle(
+            fontWeight: FontWeight.w500,
             color: isNextDay ? Colors.grey.withOpacity(.6) : null,
           ),
-        )
+        ),
+        if (isMustPill) ...[
+          Image.asset(
+            AppImagePath.medition1,
+            width: RS.w10 * 2.5,
+          ),
+        ]
       ],
     );
   }
 
   Widget? singleMarkerBuilder(context, day, event) {
-    BackgroundController backgroundController =
-        Get.find<BackgroundController>();
+    UserController backgroundController = Get.find<UserController>();
+    bool isToday = AppFunction.isSameDay(diaryController.now, day);
 
     if (diaryController.kEvents[day] != null) {
       DiaryModel diaryModel = diaryController.kEvents[day]![0];
@@ -132,6 +138,7 @@ class _DiaryBodyState extends State<DiaryBody> {
       return Column(
         children: [
           CircleAvatar(
+            backgroundColor: isToday ? Colors.pinkAccent : AppColors.white,
             foregroundImage: AssetImage(
               backgroundController.feals[diaryModel.fealIndex],
             ),

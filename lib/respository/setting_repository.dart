@@ -8,10 +8,10 @@ class SettingRepository {
     await box.put(key, value);
   }
 
-  static Future<bool> getBool(String key) async {
+  static Future<bool?> getBool(String key) async {
     var box = await Hive.openBox(AppConstant.settingModelBox);
 
-    return box.get(key, defaultValue: false);
+    return box.get(key, defaultValue: null);
   }
 
   static Future<void> setList(String key, List value) async {

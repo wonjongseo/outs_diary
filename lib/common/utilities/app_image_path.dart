@@ -1,4 +1,6 @@
 class AppImagePath {
+  static String appIcon = 'assets/images/ours_log_app_icon.png';
+  // FEAL
   static String very_good1 = 'assets/images/feal1/very_good.png';
   static String good1 = 'assets/images/feal1/good.png';
   static String soso1 = 'assets/images/feal1/soso.png';
@@ -11,9 +13,25 @@ class AppImagePath {
   static String bad2 = 'assets/images/feal2/bad.png';
   static String very_bad2 = 'assets/images/feal2/very_bad.png';
 
-  static String sunny = 'assets/images/sunny.png';
-  static String rainny = 'assets/images/rainny.png';
-  static String cloudy = 'assets/images/cloudy.png';
+  static String very_good3 = 'assets/images/feal3/very_good.png';
+  static String good3 = 'assets/images/feal3/good.png';
+  static String soso3 = 'assets/images/feal3/soso.png';
+  static String bad3 = 'assets/images/feal3/bad.png';
+  static String very_bad3 = 'assets/images/feal3/very_bad.png';
+
+  static String very_good4 = 'assets/images/feal4/very_good.png';
+  static String good4 = 'assets/images/feal4/good.png';
+  static String soso4 = 'assets/images/feal4/soso.png';
+  static String bad4 = 'assets/images/feal4/bad.png';
+  static String very_bad4 = 'assets/images/feal4/very_bad.png';
+
+  static String very_good5 = 'assets/images/feal5/very_good.png';
+  static String good5 = 'assets/images/feal5/good.png';
+  static String soso5 = 'assets/images/feal5/soso.png';
+  static String bad5 = 'assets/images/feal5/bad.png';
+  static String very_bad5 = 'assets/images/feal5/very_bad.png';
+
+// Background
 
   static String background11 = 'assets/images/background/background11.png';
   static String background12 = 'assets/images/background/background12.png';
@@ -27,6 +45,13 @@ class AppImagePath {
   static String background32 = 'assets/images/background/background32.png';
   static String background33 = 'assets/images/background/background33.png';
 
+  static String background41 = 'assets/images/background/background41.png';
+  static String background42 = 'assets/images/background/background42.png';
+  static String background43 = 'assets/images/background/background43.png';
+//
+  static String sunny = 'assets/images/sunny.png';
+  static String rainny = 'assets/images/rainny.png';
+  static String cloudy = 'assets/images/cloudy.png';
 //
   static String circleSetting = 'assets/images/circle_setting.png';
   static String circleSmale = 'assets/images/circle_smale.png';

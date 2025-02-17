@@ -8,4 +8,7 @@ class GraphData {
     this.maxY,
     this.minY,
   });
+
+  @override
+  String toString() => 'GraphData(xDatas: $xDatas, maxY: $maxY, minY: $minY)';
 }

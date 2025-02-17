@@ -12,6 +12,7 @@ class CustomTextFormField extends StatelessWidget {
     this.controller,
     this.sufficIcon,
     this.onTap,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   final String? hintText;
@@ -21,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final Widget? sufficIcon;
   final Function()? onTap;
+  final Function(String?)? onFieldSubmitted;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
         children: [
           Expanded(
             child: TextFormField(
+              onFieldSubmitted: onFieldSubmitted,
               onTap: onTap,
               readOnly: readOnly ?? false,
               style: TextStyle(fontSize: RS.width12),

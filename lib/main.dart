@@ -3,14 +3,15 @@ import 'package:get/get.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:ours_log/common/theme/dark_theme.dart';
-import 'package:ours_log/common/theme/light_theme.dart';
+import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/health_model.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
+import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/views/home/main_screen.dart';
+import 'package:ours_log/views/splash_screen.dart';
 
 //flutter pub run build_runner build
 void main() async {
@@ -21,22 +22,59 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String? systemLanguage;
+  ThemeMode themeMode = ThemeMode.system;
+
+  @override
+  void initState() {
+    super.initState();
+    getUsresSetting();
+  }
+
+  void getUsresSetting() async {
+    systemLanguage =
+        await SettingRepository.getString(AppConstant.settingLanguageKey);
+
+    bool? isDarkMode =
+        await SettingRepository.getBool(AppConstant.isDarkModeKey);
+
+    setState(() {
+      if (systemLanguage!.isEmpty) {
+        systemLanguage = Get.deviceLocale.toString();
+      }
+      if (isDarkMode != null) {
+        if (isDarkMode) {
+          themeMode = ThemeMode.dark;
+        } else {
+          themeMode = ThemeMode.light;
+        }
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Ours Log',
-      theme: lightTheme(Get.locale.toString()),
-      darkTheme: darkTheme(),
-      themeMode: ThemeMode.system,
-      fallbackLocale: const Locale('ko', 'KR'),
-      translations: AppTranslations(),
-      locale: Get.deviceLocale,
-      home: const MainScreen(),
-    );
+    return systemLanguage == null
+        ? Container()
+        : GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Ours Log',
+            theme: lightTheme(systemLanguage!),
+            darkTheme: darkTheme(systemLanguage!),
+            themeMode: themeMode!,
+            fallbackLocale: const Locale('ko', 'KR'),
+            translations: AppTranslations(),
+            locale: Locale(systemLanguage!),
+            home: const SplashScreen(),
+          );
   }
 }
 

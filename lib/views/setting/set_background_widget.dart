@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
-import 'package:ours_log/controller/background_controller.dart';
-import 'package:ours_log/views/background/background2.dart';
+import 'package:ours_log/controller/user_controller.dart';
+import 'package:ours_log/views/backgrounds/background_widget.dart';
 import 'package:ours_log/views/setting/widgets/background1_sample.dart';
 
 class SetBackgroundScreen extends StatelessWidget {
@@ -12,136 +12,102 @@ class SetBackgroundScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BackgroundController backgroundController =
-        Get.find<BackgroundController>();
+    UserController backgroundController = Get.find<UserController>();
     return Scaffold(
-      // backgroundColor: Colors.grey.withValues(alpha: .2),
       appBar: AppBar(
         backgroundColor: Colors.grey.withValues(alpha: .2),
       ),
-      body: BackGround2(
+      body: BackgroundWidget(
         widget: SafeArea(
           child: Stack(
             children: [
               Container(color: Colors.grey.withValues(alpha: .2)),
               CarouselSlider(
-                  items: List.generate(backgroundController.backgroundss.length,
-                      (index) {
-                    return GetBuilder<BackgroundController>(
-                      builder: (context) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Stack(
-                            children: [
-                              BackGround1Sample(
-                                backgrounds:
-                                    backgroundController.backgroundss[index],
-                                isSelected:
-                                    backgroundController.backgroundIndex ==
-                                        index,
+                items: List.generate(
+                    backgroundController.backgroundLists.length, (index) {
+                  return GetBuilder<UserController>(
+                    builder: (context) {
+                      return GestureDetector(
+                        onTap: () =>
+                            backgroundController.setBackgroundIndex(index),
+                        child: Stack(
+                          children: [
+                            BackGround1Sample(
+                              backgrounds: backgroundController
+                                  .backgroundLists[index].images,
+                              isSelected:
+                                  backgroundController.backgroundIndex == index,
+                            ),
+                            Container(
+                              margin: EdgeInsets.all(RS.w10 * 1.5),
+                              width: RS.w10 * 3,
+                              height: RS.w10 * 3,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: backgroundController.backgroundIndex ==
+                                        index
+                                    ? Colors.pinkAccent
+                                    : Colors.grey,
                               ),
-                              InkWell(
-                                onTap: () => backgroundController
-                                    .setBackgroundIndex(index),
-                                child: Container(
-                                  margin: EdgeInsets.all(RS.w10 * .8),
-                                  width: RS.w10 * 2.5,
-                                  height: RS.w10 * 2.5,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color:
-                                        backgroundController.backgroundIndex ==
-                                                index
-                                            ? Colors.pinkAccent
-                                            : Colors.grey,
-                                  ),
-                                  child: backgroundController.backgroundIndex ==
-                                          index
+                              child:
+                                  backgroundController.backgroundIndex == index
                                       ? Icon(
                                           Icons.check,
-                                          size: RS.w10 * 1.5,
+                                          size: RS.w10 * 2,
                                           color: Colors.white,
                                         )
                                       : null,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  }),
-                  options: CarouselOptions(
-                    height: 500,
-                    viewportFraction: 0.8,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    // autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 3),
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    enlargeFactor: 0.3,
-                    // onPageChanged: callbackFunction,
-                    scrollDirection: Axis.horizontal,
-                  )),
-              if (1 == 2)
-                Center(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(
-                          backgroundController.backgroundss.length, (index) {
-                        return GetBuilder<BackgroundController>(
-                          builder: (context) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomCenter,
                               child: Stack(
                                 children: [
-                                  BackGround1Sample(
-                                    backgrounds: backgroundController
-                                        .backgroundss[index],
-                                    isSelected:
-                                        backgroundController.backgroundIndex ==
-                                            index,
-                                  ),
-                                  InkWell(
-                                    onTap: () => backgroundController
-                                        .setBackgroundIndex(index),
-                                    child: Container(
-                                      margin: EdgeInsets.all(RS.w10 * .8),
-                                      width: RS.w10 * 2.5,
-                                      height: RS.w10 * 2.5,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: backgroundController
-                                                    .backgroundIndex ==
-                                                index
-                                            ? Colors.pinkAccent
-                                            : Colors.grey,
+                                  Positioned(
+                                    bottom: -2,
+                                    right: -2,
+                                    child: Text(
+                                      backgroundController
+                                          .backgroundLists[index].description,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: RS.w10 * 2.2,
+                                        color: Get.isDarkMode
+                                            ? Colors.black
+                                            : Colors.white,
                                       ),
-                                      child: backgroundController
-                                                  .backgroundIndex ==
-                                              index
-                                          ? Icon(
-                                              Icons.check,
-                                              size: RS.w10 * 1.5,
-                                              color: Colors.white,
-                                            )
-                                          : null,
                                     ),
                                   ),
+                                  Text(
+                                    backgroundController
+                                        .backgroundLists[index].description,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: RS.w10 * 2.2,
+                                    ),
+                                  )
                                 ],
                               ),
-                            );
-                          },
-                        );
-                      }),
-                    ),
-                  ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                }),
+                options: CarouselOptions(
+                  height: 570,
+                  viewportFraction: 0.8,
+                  initialPage: backgroundController.backgroundIndex,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enlargeCenterPage: true,
+                  enlargeFactor: 0.3,
+                  scrollDirection: Axis.horizontal,
                 ),
+              ),
             ],
           ),
         ),

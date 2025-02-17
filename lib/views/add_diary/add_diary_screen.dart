@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:ours_log/common/theme/light_theme.dart';
+import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
@@ -10,12 +10,10 @@ import 'package:ours_log/common/widgets/custom_expansion_card.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/common/widgets/open_close_container.dart';
 import 'package:ours_log/controller/add_diary_controller.dart';
-import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/views/add_diary/widgets/feal_selector.dart';
 import 'package:ours_log/views/add_diary/widgets/image_of_today.dart';
 import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
-import 'package:ours_log/views/add_diary/widgets/input_period.dart';
 
 class AddDiaryScreen extends StatelessWidget {
   AddDiaryScreen({
@@ -50,58 +48,61 @@ class AddDiaryScreen extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: SingleChildScrollView(
-            controller: addDiaryController.scrollController,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: RS.h10,
-                horizontal: RS.width20,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const FealSelector(),
-                  SizedBox(height: RS.h10),
-                  _healthTextFields(context),
-                  SizedBox(height: RS.h10),
-                  ExpansionIconCard(
-                    icons: AppConstant.zeroToNineIcons,
-                    label: '통증 강도',
-                    isOnlyOne: true,
-                    selectedIconIndexs: addDiaryController.painFulIndex,
-                  ),
-                  SizedBox(height: RS.height20),
-                  ColTextAndWidget(
-                    label: AppString.whatDidYouHintMsg.tr,
-                    widget: CustomTextFormField(
-                      hintText: AppString.plzEnterTextMsg.tr,
-                      controller: addDiaryController.whatToDoController,
-                      maxLines: 7,
+        child: GetBuilder<AddDiaryController>(builder: (addDiaryController) {
+          return GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: SingleChildScrollView(
+              controller: addDiaryController.scrollController,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: RS.h10,
+                  horizontal: RS.width20,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const FealSelector(),
+                    SizedBox(height: RS.h10),
+                    _healthTextFields(context),
+                    SizedBox(height: RS.h10),
+                    ExpansionIconCard(
+                      icons: AppConstant.zeroToNineIcons,
+                      label: '통증 강도',
+                      isOnlyOne: true,
+                      selectedIconIndexs: addDiaryController.painFulIndex,
                     ),
-                  ),
-                  SizedBox(height: RS.height20),
-                  ImageOfToday(
-                    label: AppString.photoOfToday.tr,
-                    uploadFiles: addDiaryController.uploadFiles,
-                    selectedPhotos: addDiaryController.selectedPhotos,
-                    removePhoto: addDiaryController.removePhoto,
-                  ),
-                  SizedBox(height: RS.height20),
-                  ExpansionIconCard(
-                    icons: AppConstant.weatherIcons,
-                    label: AppString.weatherText.tr,
-                    selectedIconIndexs:
-                        addDiaryController.selectedWeatherIndexs,
-                  ),
-                  SizedBox(height: RS.height20),
-                  SizedBox(height: RS.height20),
-                ],
+                    SizedBox(height: RS.height20),
+                    ColTextAndWidget(
+                      label: AppString.whatDidYouHintMsg.tr,
+                      widget: CustomTextFormField(
+                        hintText: AppString.plzEnterTextMsg.tr,
+                        controller: addDiaryController.whatToDoController,
+                        maxLines: 7,
+                      ),
+                    ),
+                    SizedBox(height: RS.height20),
+                    ImageOfToday(
+                      carouselSliderController:
+                          addDiaryController.carouselSliderController,
+                      label: AppString.photoOfToday.tr,
+                      uploadFiles: addDiaryController.uploadFiles,
+                      selectedPhotos: addDiaryController.selectedPhotos,
+                      removePhoto: addDiaryController.removePhoto,
+                    ),
+                    SizedBox(height: RS.height20),
+                    ExpansionIconCard(
+                      icons: AppConstant.weatherIcons,
+                      label: AppString.weatherText.tr,
+                      selectedIconIndexs:
+                          addDiaryController.selectedWeatherIndexs,
+                    ),
+                    SizedBox(height: RS.height20),
+                  ],
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

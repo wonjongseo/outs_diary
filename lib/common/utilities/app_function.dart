@@ -8,6 +8,16 @@ bool get isJp => Get.locale.toString().contains('ja');
 bool get isEn => Get.locale.toString().contains('en');
 
 class AppFunction {
+  static bool isSameDay(DateTime day1, DateTime day2) {
+    return day1.year == day2.year &&
+        day1.month == day2.month &&
+        day1.day == day2.day;
+  }
+
+  static bool isSameMonth(DateTime day1, DateTime day2) {
+    return day1.year == day2.year && day1.month == day2.month;
+  }
+
   static void requestPermisson() async {
     final permission = await PhotoManager.requestPermissionExtend();
     if (!permission.isAuth) {
@@ -29,6 +39,14 @@ class AppFunction {
   static void scrollGoToTop(ScrollController scrollController) {
     scrollController.animateTo(
       0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  static void scrollGoToBottom(ScrollController scrollController) {
+    scrollController.animateTo(
+      200,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
@@ -62,4 +80,6 @@ class AppFunction {
       );
     }
   }
+
+  static void showNoPermissionSnackBar({required message}) {}
 }

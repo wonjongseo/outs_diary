@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
-import 'package:ours_log/controller/background_controller.dart';
+import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/views/Hospital_Log/hospital_log_body.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/diary_controller.dart';
-import 'package:ours_log/views/background/background2.dart';
+import 'package:ours_log/views/backgrounds/background_widget.dart';
 import 'package:ours_log/views/diary/diary_body.dart';
 import 'package:ours_log/views/graph/graph_body.dart';
 import 'package:ours_log/views/setting/setting_body.dart';
@@ -22,12 +21,12 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   late DiaryController diaryController;
-  int bodyIndex = 3;
+  int bodyIndex = 0;
   List<Widget> bodys = [];
 
   @override
   void initState() {
-    Get.put(BackgroundController());
+    Get.put(UserController());
     Get.put(DiaryController());
     Get.put(HospitalLogController());
     setBodys();
@@ -45,15 +44,19 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [bottomNavigtionBar()],
       ),
-      body: BackGround2(
-        widget: Padding(
-          padding: EdgeInsets.symmetric(horizontal: RS.w10 * 1.2),
-          child: bodys[bodyIndex],
+      body: SafeArea(
+        child: BackgroundWidget(
+          widget: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: RS.h10 * 3,
+              horizontal: RS.w10 * 1.2,
+            ),
+            child: bodys[bodyIndex],
+          ),
         ),
       ),
     );
