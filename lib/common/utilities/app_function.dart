@@ -24,7 +24,7 @@ class AppFunction {
   static void requestPermisson() async {
     final permission = await PhotoManager.requestPermissionExtend();
     if (!permission.isAuth) {
-      return PhotoManager.openSetting();
+      // return PhotoManager.openSetting(); TODO
     }
   }
 
