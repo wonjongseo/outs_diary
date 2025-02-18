@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
@@ -12,14 +11,14 @@ import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/controller/notification_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
+import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/respository/setting_repository.dart';
 
 class AddHosipitalVisitController extends GetxController {
   String? startTime;
-  late DateTime _selectedDate;
 
-  bool isEnrollAlarm = true;
+  bool isEnrollAlarm = false;
   List savedHospitalNames = [];
   UserController userController = Get.find<UserController>();
 
@@ -43,7 +42,35 @@ class AddHosipitalVisitController extends GetxController {
 
   PersistentBottomSheetController? bottomSheetController;
 
+  bool isBeforeOneHourAlarm = false;
+  bool isBeforeSizHourAlarm = false;
+  bool isBeforeOneDayAlarm = false;
+
+  String? selectedBeforeAlram;
   DateTime selectedDate;
+  void onTapBeforeAlramTime(BuildContext context) async {
+    if (selectedBeforeAlram != null) {
+      selectedBeforeAlram = null;
+    } else {
+      TimeOfDay? pickedTime = await showTimePicker(
+        cancelText: AppString.cancelBtnTextTr.tr,
+        helpText: '몇 시간 전에 알람을 받고 싶으세요?',
+        errorInvalidText: '올바른 시간을 입력해주세요',
+        hourLabelText: AppString.hour.tr,
+        minuteLabelText: AppString.minute.tr,
+        context: context,
+        initialEntryMode: TimePickerEntryMode.inputOnly,
+        initialTime: TimeOfDay.now(),
+      );
+      if (pickedTime == null) {
+        return;
+      }
+      String formatedTime = pickedTime.format(context);
+      selectedBeforeAlram = formatedTime;
+    }
+    update();
+  }
+
   final HospitalLogModel? hospitalLogModel;
   AddHosipitalVisitController({
     required this.selectedDate,
@@ -98,12 +125,10 @@ class AddHosipitalVisitController extends GetxController {
   }
 
   void onTapVisitDay(BuildContext context) async {
-    DateTime? _pickerDate = await AppFunction.pickDate(context);
-    if (_pickerDate != null) {
-      selectedDate = _pickerDate;
+    DateTime? pickerDate = await AppFunction.pickDate(context);
+    if (pickerDate != null) {
+      selectedDate = pickerDate;
       update();
-    } else {
-      print('asasd');
     }
   }
 
@@ -169,38 +194,86 @@ class AddHosipitalVisitController extends GetxController {
       return;
     }
     String hospitalName = hospitalNameCtl.text;
-    if (isEnrollAlarm && startTime != null) {
-      int hour = int.parse(startTime!.split(':')[0]);
-      int minute = int.parse(startTime!.split(':')[1]);
-
-      DateTime scheduledDate = DateTime(_selectedDate.year, _selectedDate.month,
-          _selectedDate.day, hour, minute);
-
-      int id = AppFunction.createIdByDay(_selectedDate.day, hour, minute);
-
-      notificationService.scheduleSpecificDateNotification(
-        title: '🏥 병원 진료 알림',
-        message:
-            '${_selectedDate.month}월 ${_selectedDate.day}일 $hour:$minute에 ${hospitalName} 병원 진료가 예약되어있습니다!',
-        channelDescription: '병원 진료 예약 알람',
-        id: 333,
-        year: scheduledDate.year,
-        month: scheduledDate.month,
-        day: scheduledDate.day,
-        hour: scheduledDate.hour,
-        minute: scheduledDate.minute,
-      );
-
-      TaskModel taskModel = TaskModel(dateTime: scheduledDate, alermId: id);
-
-      userController.addTask(taskModel);
-    }
 
     if (hospitalName.isEmpty) {
       AppFunction.invaildTextFeildSnackBar(
           title: AppString.requiredText.tr, message: '병원 이름을 입력해주세요');
       AppFunction.scrollGoToTop(scrollController);
       return;
+    }
+    if (isEnrollAlarm && startTime != null) {
+      int hour = int.parse(startTime!.split(':')[0]);
+      int minute = int.parse(startTime!.split(':')[1]);
+
+      DateTime scheduledDate = DateTime(selectedDate.year, selectedDate.month,
+          selectedDate.day, hour, minute);
+
+      if (isBeforeOneDayAlarm) {
+        DateTime subScheduledDate =
+            scheduledDate.subtract(const Duration(days: 1));
+        enrollSchedule(
+          hospitalName,
+          scheduledDate.month,
+          scheduledDate.day,
+          hour,
+          minute,
+          subScheduledDate,
+        );
+      }
+      if (isBeforeSizHourAlarm) {
+        DateTime subScheduledDate =
+            scheduledDate.subtract(const Duration(hours: 6));
+        enrollSchedule(
+          hospitalName,
+          scheduledDate.month,
+          scheduledDate.day,
+          hour,
+          minute,
+          subScheduledDate,
+        );
+      }
+      if (isBeforeOneHourAlarm) {
+        DateTime subScheduledDate =
+            scheduledDate.subtract(const Duration(hours: 1));
+        enrollSchedule(
+          hospitalName,
+          scheduledDate.month,
+          scheduledDate.day,
+          hour,
+          minute,
+          subScheduledDate,
+        );
+      }
+
+      if (selectedBeforeAlram != null) {
+        if (selectedBeforeAlram != '6:00' && selectedBeforeAlram != '01:00') {
+          int? hhour = int.tryParse(selectedBeforeAlram!.split(':')[0]);
+          int? mminute = int.tryParse(selectedBeforeAlram!.split(':')[1]);
+
+          if (hhour == null && mminute == null) {
+            return;
+          }
+          print('dmminute : ${mminute}');
+
+          DateTime subScheduledDate = scheduledDate
+              .subtract(Duration(hours: hhour!, minutes: mminute!));
+          print('subScheduledDate : ${subScheduledDate}');
+
+          enrollSchedule(
+            hospitalName,
+            scheduledDate.month,
+            scheduledDate.day,
+            hour,
+            minute,
+            subScheduledDate,
+          );
+        }
+      }
+
+      userController.addTask(TaskModel(
+          taskName: '$hospitalName 방문',
+          taskDate: scheduledDate,
+          notifications: notifications));
     }
 
     String officeName = officeNameCtl.text;
@@ -213,13 +286,14 @@ class AddHosipitalVisitController extends GetxController {
 
     HospitalLogModel newHospitalLogModel = HospitalLogModel(
       startTime: startTime,
-      dateTime: _selectedDate,
+      dateTime: selectedDate,
       hospitalName: hospitalName,
       officeName: officeName,
       diseaseName: diseaseName,
       diagnosis: diagnosis,
       imagesPath: imagesPath,
       pills: pills,
+      notificationId: notificationId,
     );
 
     if (hospitalLogModel != null) {
@@ -235,5 +309,35 @@ class AddHosipitalVisitController extends GetxController {
       message:
           hospitalLogModel == null ? '병원 기록이 저장 되었습니다.' : '병원 기록이 변경 되었습니다.',
     );
+  }
+
+  List<int> notificationId = [];
+
+  List<NotificationModel> notifications = [];
+
+  void enrollSchedule(String hospitalName, int appointMonth, int appointDay,
+      int appointHour, int appointMinute, DateTime scheduledDate) {
+    int id = AppFunction.createIdByDay(
+        selectedDate.day, scheduledDate.hour, scheduledDate.minute);
+
+    String message =
+        '$appointMonth월 $appointDay일 $appointHour시$appointMinute분에 $hospitalName 병원 진료가 예약되어있습니다!';
+    print('message : ${message}');
+
+    notificationService.scheduleSpecificDateNotification(
+      title: '🏥 병원 진료 알림',
+      message: message,
+      channelDescription: '병원 진료 예약 알람',
+      id: id,
+      year: scheduledDate.year,
+      month: scheduledDate.month,
+      day: scheduledDate.day,
+      hour: scheduledDate.hour,
+      minute: scheduledDate.minute,
+    );
+
+    notificationId.add(id);
+    notifications
+        .add(NotificationModel(notiDateTime: scheduledDate, alermId: id));
   }
 }

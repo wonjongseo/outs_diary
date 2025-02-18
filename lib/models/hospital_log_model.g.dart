@@ -21,10 +21,11 @@ class HospitalLogModelAdapter extends TypeAdapter<HospitalLogModel> {
       dateTime: fields[3] as DateTime,
       hospitalName: fields[4] as String,
       imagesPath: (fields[5] as List).cast<String>(),
-      pills: (fields[9] as List?)?.cast<String>(),
       officeName: fields[6] as String?,
       diseaseName: fields[7] as String?,
       diagnosis: fields[8] as String?,
+      pills: (fields[9] as List?)?.cast<String>(),
+      notificationId: (fields[10] as List?)?.cast<int>(),
     )
       ..id = fields[0] as String
       ..createdAt = fields[1] as int;
@@ -33,7 +34,7 @@ class HospitalLogModelAdapter extends TypeAdapter<HospitalLogModel> {
   @override
   void write(BinaryWriter writer, HospitalLogModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -53,7 +54,9 @@ class HospitalLogModelAdapter extends TypeAdapter<HospitalLogModel> {
       ..writeByte(8)
       ..write(obj.diagnosis)
       ..writeByte(9)
-      ..write(obj.pills);
+      ..write(obj.pills)
+      ..writeByte(10)
+      ..write(obj.notificationId);
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
+import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
 import 'package:ours_log/respository/user_respository.dart';
@@ -54,7 +55,6 @@ class UserController extends GetxController {
 
   void getUser() async {
     userModel = await userModelRepository.loadUser();
-    print('userModel : ${userModel}');
 
     update();
   }

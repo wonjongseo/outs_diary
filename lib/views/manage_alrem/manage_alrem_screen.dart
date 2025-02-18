@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/theme/theme.dart';
+import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
+import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/controller/notification_controller.dart';
 
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/regular_task_modal.dart';
+import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/views/background/background_widget.dart';
 
 class AlermData {
@@ -38,13 +41,17 @@ class _ManageAlermScreenState extends State<ManageAlermScreen> {
   DateTime now = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    HospitalLogController hospitalLogController =
+        Get.find<HospitalLogController>();
+
     Size size = MediaQuery.of(context).size;
     return GetBuilder<UserController>(builder: (uController) {
       print(
-          'uController.userModel!.drinkPillAlerms![now.day] : ${uController.userModel!.regularTasks![now.weekday]}');
-
-      print('Get.locale : ${Get.locale}');
-
+          'uController.userModel!.tasks : ${uController.userModel!.tasks?.length}');
+      // for (NotificationModel notification
+      //     in uController.userModel!.notifications ?? []) {
+      //   print('notification.dateTime : ${notification.notiDateTime}');
+      // }
       return Scaffold(
         appBar: AppBar(),
         body: Column(
@@ -54,29 +61,20 @@ class _ManageAlermScreenState extends State<ManageAlermScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          DateFormat.yMMMMd(Get.locale.toString())
-                              .format(DateTime.now()),
-                          style: subHeadingStyle,
-                        ),
-                        Text(
-                          AppString.today.tr,
-                          style: headingStyle,
-                        ),
-                      ],
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        DateFormat.yMMMMd(Get.locale.toString())
+                            .format(DateTime.now()),
+                        style: subHeadingStyle,
+                      ),
+                      Text(
+                        AppString.today.tr,
+                        style: headingStyle,
+                      ),
+                    ],
                   ),
-                  // CustomButton(
-                  //   onTap: () async {
-                  //     await Get.to(() => const AddTaskView());
-                  //     _taskController.getTasks();
-                  //   },
-                  //   label: '+ Add Task',
-                  // )
                 ],
               ),
             ),
@@ -111,35 +109,55 @@ class _ManageAlermScreenState extends State<ManageAlermScreen> {
             SizedBox(height: RS.h10 * 2),
             if (uController.userModel!.regularTasks![now.weekday] != null)
               Column(
-                children: List.generate(
-                    uController.userModel!.regularTasks![now.weekday]!.length,
-                    (index) {
-                  return Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only(bottom: 12),
-                    child: Container(
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.pinkAccent),
-                      child: Row(
-                        children: [
-                          Text(
-                            uController
-                                .userModel!
-                                .regularTasks![now.weekday]![index]
-                                .scheduleTime,
+                children: [
+                  ...List.generate(uController.userModel!.tasks?.length ?? 0,
+                      (index) {
+                    if (AppFunction.isSameDay(
+                        uController.userModel!.tasks![index].taskDate, now)) {
+                      return Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.only(bottom: 12),
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: Colors.pinkAccent),
+                          child: Text(
+                            '${uController.userModel!.tasks![index].taskDate.hour}:${uController.userModel!.tasks![index].taskDate.minute}',
                             style: TextStyle(
                               color: Colors.black,
                             ),
                           ),
-                          Text('정기')
-                        ],
+                        ),
+                      );
+                    }
+                    return Container();
+                  }),
+                  Divider(),
+                  ...List.generate(
+                      uController.userModel!.regularTasks![now.weekday]!.length,
+                      (index) {
+                    return Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.only(bottom: 12),
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: Colors.pinkAccent),
+                        child: Text(
+                          uController.userModel!
+                              .regularTasks![now.weekday]![index].scheduleTime,
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  })
+                ],
               )
           ],
         ),

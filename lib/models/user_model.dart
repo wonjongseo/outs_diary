@@ -1,10 +1,11 @@
 import 'package:hive/hive.dart';
+import 'package:ours_log/models/task_model.dart';
 import 'package:uuid/uuid.dart';
 
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
 import 'package:ours_log/models/regular_task_modal.dart';
-import 'package:ours_log/models/task_model.dart';
+import 'package:ours_log/models/notification_model.dart';
 
 part 'user_model.g.dart';
 

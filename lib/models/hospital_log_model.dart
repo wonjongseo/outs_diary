@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
 import 'package:ours_log/common/utilities/app_constant.dart';
+import 'package:ours_log/models/notification_model.dart';
 
 part 'hospital_log_model.g.dart';
 
@@ -27,16 +28,19 @@ class HospitalLogModel {
   String? diagnosis;
   @HiveField(9)
   List<String>? pills;
+  @HiveField(10)
+  List<int>? notificationId;
 
   HospitalLogModel({
     this.startTime,
     required this.dateTime,
     required this.hospitalName,
     required this.imagesPath,
-    this.pills,
     this.officeName,
     this.diseaseName,
     this.diagnosis,
+    this.pills,
+    this.notificationId,
   }) {
     id = const Uuid().v4();
     createdAt = DateTime.now().microsecondsSinceEpoch;
@@ -44,6 +48,6 @@ class HospitalLogModel {
 
   @override
   String toString() {
-    return 'HospitalLogModel(\nid: $id, \ncreatedAt: $createdAt, \nstartTime: $startTime, \ndateTime: $dateTime, \nhospitalName: $hospitalName, \nimagesPath: $imagesPath, \nofficeName: $officeName, \ndiseaseName: $diseaseName, \ndiagnosis: $diagnosis)';
+    return 'HospitalLogModel(id: $id, createdAt: $createdAt, startTime: $startTime, dateTime: $dateTime, hospitalName: $hospitalName, imagesPath: $imagesPath, officeName: $officeName, diseaseName: $diseaseName, diagnosis: $diagnosis, pills: $pills, notificationId: $notificationId)';
   }
 }

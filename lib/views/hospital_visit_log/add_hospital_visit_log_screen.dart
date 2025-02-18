@@ -10,6 +10,7 @@ import 'package:ours_log/controller/add_hosipital_visit_controller.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
 import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/add_diary/widgets/image_of_today.dart';
+import 'package:ours_log/views/hospital_visit_log/widgets/visit_day_and_time.dart';
 
 class AddHospitalVisitLogScreen extends StatelessWidget {
   const AddHospitalVisitLogScreen({
@@ -56,114 +57,7 @@ class AddHospitalVisitLogScreen extends StatelessWidget {
                   },
                   child: Column(
                     children: [
-                      ColTextAndWidget(
-                        label: '일자',
-                        widget: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: CustomTextFormField(
-                                    hintText: controller.selectedDate == null
-                                        ? '방문 날짜'
-                                        : DateFormat(
-                                                "MM${AppString.month.tr} d${AppString.day.tr}")
-                                            .format(controller.selectedDate),
-                                    readOnly: true,
-                                    widget: IconButton(
-                                      onPressed: () =>
-                                          controller.onTapVisitDay(context),
-                                      // onPressed: () async {
-                                      //   DateTime? _pickerDate =
-                                      //       await AppFunction.pickDate(context);
-
-                                      //   if (_pickerDate != null) {
-                                      //     controller.selectedDate = _pickerDate;
-                                      //     setState(() {});
-                                      //   } else {
-                                      //     print('asasd');
-                                      //   }
-                                      // },
-                                      icon: Icon(Icons.keyboard_arrow_down),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: RS.w10),
-                                Expanded(
-                                  child: CustomTextFormField(
-                                    readOnly: true,
-                                    hintText: controller.startTime ?? '방문 시간',
-                                    widget: IconButton(
-                                      onPressed: () =>
-                                          controller.onTapVisitTime(context),
-                                      // onPressed: () async {
-                                      //   TimeOfDay? pickedTime =
-                                      //       await showTimePicker(
-                                      //     cancelText:
-                                      //         AppString.cancelBtnTextTr.tr,
-                                      //     helpText: '방문 시간을 입력해주세요.',
-                                      //     errorInvalidText: '올바른 시간을 입력해주세요',
-                                      //     hourLabelText: AppString.hour.tr,
-                                      //     minuteLabelText: AppString.minute.tr,
-                                      //     context: context,
-                                      //     initialTime: TimeOfDay.now(),
-                                      //   );
-                                      //   if (pickedTime == null) {
-                                      //     return;
-                                      //   }
-                                      //   String formatedTime =
-                                      //       pickedTime.format(context);
-                                      //   controller.startTime = formatedTime;
-                                      //   setState(() {});
-                                      // },
-                                      icon: Icon(Icons.keyboard_arrow_down),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: RS.h10 * 2),
-                            GestureDetector(
-                              onTap: controller.onTapEnrollAlarm,
-                              // onTap: () {
-                              //   controller.isEnrollAlarm =
-                              //       !controller.isEnrollAlarm;
-                              //   setState(() {});
-                              // },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    '알람 등록',
-                                    style: controller.isEnrollAlarm
-                                        ? const TextStyle(
-                                            color: Colors.pinkAccent,
-                                            fontWeight: FontWeight.w600,
-                                          )
-                                        : TextStyle(),
-                                  ),
-                                  SizedBox(width: RS.w10),
-                                  CircleAvatar(
-                                    backgroundColor: controller.isEnrollAlarm
-                                        ? Colors.pinkAccent
-                                        : Colors.grey,
-                                    radius: RS.w10 * 1.2,
-                                    child: Icon(
-                                      Icons.done,
-                                      size: RS.w10 * 1.5,
-                                      color: controller.isEnrollAlarm
-                                          ? Colors.white
-                                          : null,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      const VisitDayAndTime(),
                       SizedBox(height: RS.h10),
                       ColTextAndWidget(
                         label: '병원 이름',

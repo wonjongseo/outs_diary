@@ -13,8 +13,8 @@ class AppConstant {
   static const int todoModelHiveId = 4;
   static const int userModelHiveId = 5;
   static const int regularTaskModelHiveId = 6;
-  static const int taskModelHiveId = 7;
-  static const int handmadeModelHiveId = 8;
+  static const int notificationModelHiveId = 7;
+  static const int taskModelHiveId = 8;
   static const int groceriesModelHiveId = 9;
   static const int expensiveModelHiveId = 10;
   static const int categoryModelHiveId = 11;

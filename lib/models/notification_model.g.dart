@@ -1,44 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'task_model.dart';
+part of 'notification_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TaskModelAdapter extends TypeAdapter<TaskModel> {
+class NotificationModelAdapter extends TypeAdapter<NotificationModel> {
   @override
-  final int typeId = 8;
+  final int typeId = 7;
 
   @override
-  TaskModel read(BinaryReader reader) {
+  NotificationModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return TaskModel(
-      taskName: fields[0] as String,
-      taskDate: fields[1] as DateTime,
-      notifications: (fields[4] as List).cast<NotificationModel>(),
+    return NotificationModel(
+      notiDateTime: fields[0] as DateTime,
+      alermId: fields[1] as int,
     )
       ..id = fields[2] as String
       ..createdAt = fields[3] as int;
   }
 
   @override
-  void write(BinaryWriter writer, TaskModel obj) {
+  void write(BinaryWriter writer, NotificationModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.taskName)
+      ..write(obj.notiDateTime)
       ..writeByte(1)
-      ..write(obj.taskDate)
+      ..write(obj.alermId)
       ..writeByte(2)
       ..write(obj.id)
       ..writeByte(3)
-      ..write(obj.createdAt)
-      ..writeByte(4)
-      ..write(obj.notifications);
+      ..write(obj.createdAt);
   }
 
   @override
@@ -47,7 +44,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TaskModelAdapter &&
+      other is NotificationModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

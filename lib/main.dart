@@ -10,6 +10,7 @@ import 'package:ours_log/models/regular_task_modal.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/health_model.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
+import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
 import 'package:ours_log/respository/setting_repository.dart';
@@ -97,6 +98,9 @@ Future<void> initHive() async {
 
   if (!Hive.isAdapterRegistered(AppConstant.regularTaskModelHiveId)) {
     Hive.registerAdapter(RegularTaskModelAdapter());
+  }
+  if (!Hive.isAdapterRegistered(AppConstant.notificationModelHiveId)) {
+    Hive.registerAdapter(NotificationModelAdapter());
   }
   if (!Hive.isAdapterRegistered(AppConstant.taskModelHiveId)) {
     Hive.registerAdapter(TaskModelAdapter());
