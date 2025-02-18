@@ -124,8 +124,8 @@ class OnboardingController extends GetxController {
 
     if (isAlermEnable) {
       selectedDays.sort((a, b) => a.compareTo(b));
-      List<int> days =
-          List.generate(selectedDays.length, (index) => selectedDays[index]);
+      List<int> days = List.generate(
+          selectedDays.length, (index) => selectedDays[index] + 1);
 
       if (selectedMorningLunchEvening.contains(0)) {
         times.add(morningTime);
@@ -142,7 +142,10 @@ class OnboardingController extends GetxController {
           int hour = int.parse(time.split(':')[0]);
           int minute = int.parse(time.split(':')[1]);
 
-          int id = AppFunction.createIdByDay(day, hour, minute);
+          int id = day * Random().nextInt(1000) +
+              hour * Random().nextInt(100) +
+              minute +
+              Random().nextInt(10);
 
           notificationService.scheduleWeeklyNotification(
             title: '💊 약 복용 알림',
@@ -163,7 +166,6 @@ class OnboardingController extends GetxController {
           ));
         }
       }
-      // return;
     }
 
     UserModel userModel = UserModel(

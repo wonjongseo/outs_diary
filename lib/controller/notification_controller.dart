@@ -10,7 +10,7 @@ class NotificationService {
     _initializeNotifications();
   }
 
-  /// 📌 알람 초기화 (앱 실행 시)
+  /// 📌 알람 초기화
   Future<void> _initializeNotifications() async {
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -35,6 +35,11 @@ class NotificationService {
     required int minute,
   }) async {
     final scheduledDate = _nextInstanceOfWeekday(weekday, hour, minute);
+
+    if (scheduledDate == null) {
+      print("⚠️ 유효하지 않은 날짜입니다. 알람을 설정하지 않습니다.");
+      return;
+    }
 
     print("📢 주간 알람 등록: ${scheduledDate.toString()}");
 
@@ -74,6 +79,11 @@ class NotificationService {
   }) async {
     final scheduledDate = _setDate(DateTime(year, month, day, hour, minute));
 
+    if (scheduledDate == null) {
+      print("⚠️ 유효하지 않은 날짜입니다. 알람을 설정하지 않습니다.");
+      return;
+    }
+
     print("📢 특정 날짜 알람 등록: ${scheduledDate.toString()}");
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
@@ -98,27 +108,46 @@ class NotificationService {
     );
   }
 
-  /// 📌 매주 특정 요일과 시간의 다음 인스턴스를 계산
-  tz.TZDateTime _nextInstanceOfWeekday(int weekday, int hour, int minute) {
-    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    var scheduledDate =
-        _setDate(DateTime(now.year, now.month, now.day, hour, minute));
+  /// 📌 매주 특정 요일과 시간의 다음 인스턴스를 안전하게 계산
+  tz.TZDateTime? _nextInstanceOfWeekday(int weekday, int hour, int minute) {
+    try {
+      final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+      tz.TZDateTime scheduledDate =
+          _setDate(DateTime(now.year, now.month, now.day, hour, minute))!;
 
-    while (scheduledDate.weekday != weekday) {
-      scheduledDate = scheduledDate.add(const Duration(days: 1));
+      while (scheduledDate.weekday != weekday) {
+        scheduledDate = scheduledDate.add(const Duration(days: 1));
+      }
+
+      if (scheduledDate.isBefore(now)) {
+        scheduledDate = scheduledDate.add(const Duration(days: 7));
+      }
+
+      return scheduledDate;
+    } catch (e) {
+      print("🚨 _nextInstanceOfWeekday 오류: $e");
+      return null;
     }
-
-    if (scheduledDate.isBefore(now)) {
-      scheduledDate = scheduledDate.add(const Duration(days: 7));
-    }
-
-    return scheduledDate;
   }
 
-  /// 📌 특정 날짜를 타임존이 적용된 형태로 변환
-  tz.TZDateTime _setDate(DateTime date) {
-    return tz.TZDateTime(
-        tz.local, date.year, date.month, date.day, date.hour, date.minute);
+  /// 📌 특정 날짜를 타임존이 적용된 형태로 변환 (범위 체크 포함)
+  tz.TZDateTime? _setDate(DateTime date) {
+    try {
+      final tz.TZDateTime scheduledDate = tz.TZDateTime(
+          tz.local, date.year, date.month, date.day, date.hour, date.minute);
+
+      // ✅ 유효한 범위인지 확인
+      if (scheduledDate.millisecondsSinceEpoch < -8640000000000000 || // 최소값 체크
+          scheduledDate.millisecondsSinceEpoch > 8640000000000000) // 최대값 체크
+      {
+        throw RangeError("🚨 잘못된 날짜 범위: $scheduledDate");
+      }
+
+      return scheduledDate;
+    } catch (e) {
+      print("🚨 _setDate 오류: $e");
+      return null;
+    }
   }
 
   Future<void> cancelAllNotifications() async {

@@ -105,10 +105,10 @@ class AppFunction {
   }
 
   static int createIdByDay(int day, int hour, int minute) {
-    return day * Random().nextInt(10000) +
-        hour * Random().nextInt(1000) +
+    return day * Random().nextInt(1000) +
+        hour * Random().nextInt(100) +
         minute +
-        Random().nextInt(100);
+        Random().nextInt(10);
   }
 
   static void showNoPermissionSnackBar({required message}) {}
