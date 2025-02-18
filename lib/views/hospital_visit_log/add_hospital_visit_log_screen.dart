@@ -13,6 +13,8 @@ import 'package:ours_log/common/widgets/c_dropdown_button.dart';
 import 'package:ours_log/common/widgets/custom_button.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
+import 'package:ours_log/controller/notification_controller.dart';
+import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
 import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
@@ -36,6 +38,10 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
   String? _startTime;
   late DateTime _selectedDate;
 
+  bool isEnrollAlarm = true;
+
+  UserController userController = Get.find<UserController>();
+
   CarouselSliderController carouselSliderController =
       CarouselSliderController();
 
@@ -51,6 +57,10 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
 
   late List<TextEditingController> pillCtls = [];
   List<File> uploadFiles = [];
+
+  NotificationService notificationService = NotificationService();
+
+  PersistentBottomSheetController? bottomSheetController;
 
   @override
   void initState() {
@@ -83,6 +93,7 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
       pillCtls.add(TextEditingController());
     }
     getHospitalNams();
+    notificationService.initializeNotifications();
     super.initState();
   }
 
@@ -107,7 +118,18 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
     super.dispose();
   }
 
-  saveVisitLog() {
+  void saveVisitLog() async {
+    if (Get.isSnackbarOpen) {
+      Get.closeAllSnackbars();
+      return;
+    }
+    if (isEnrollAlarm && _startTime == null) {
+      AppFunction.invaildTextFeildSnackBar(
+          title: AppString.requiredText.tr,
+          message: '알람을 등록하기 위해서, 방문 시간을 선택해주세요.');
+      AppFunction.scrollGoToTop(scrollController);
+      return;
+    }
     String hospitalName = hospitalNameCtl.text;
 
     if (hospitalName.isEmpty) {
@@ -152,7 +174,6 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
     );
   }
 
-  PersistentBottomSheetController? bottomSheetController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -187,60 +208,113 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
                   children: [
                     ColTextAndWidget(
                       label: '일자',
-                      widget: Row(
+                      widget: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Expanded(
-                            child: CustomTextFormField(
-                              hintText: _selectedDate == null
-                                  ? '방문 날짜'
-                                  : DateFormat(
-                                          "MM${AppString.month.tr} d${AppString.day.tr}")
-                                      .format(_selectedDate),
-                              readOnly: true,
-                              widget: IconButton(
-                                onPressed: () async {
-                                  DateTime? _pickerDate =
-                                      await AppFunction.pickDate(context);
+                          Row(
+                            children: [
+                              Expanded(
+                                child: CustomTextFormField(
+                                  hintText: _selectedDate == null
+                                      ? '방문 날짜'
+                                      : DateFormat(
+                                              "MM${AppString.month.tr} d${AppString.day.tr}")
+                                          .format(_selectedDate),
+                                  readOnly: true,
+                                  widget: IconButton(
+                                    onPressed: () async {
+                                      DateTime? _pickerDate =
+                                          await AppFunction.pickDate(context);
 
-                                  if (_pickerDate != null) {
-                                    _selectedDate = _pickerDate;
-                                    setState(() {});
-                                  } else {
-                                    print('asasd');
-                                  }
-                                },
-                                icon: Icon(Icons.keyboard_arrow_down),
+                                      if (_pickerDate != null) {
+                                        _selectedDate = _pickerDate;
+                                        setState(() {});
+                                      } else {
+                                        print('asasd');
+                                      }
+                                    },
+                                    icon: Icon(Icons.keyboard_arrow_down),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          SizedBox(width: RS.w10),
-                          Expanded(
-                            child: CustomTextFormField(
-                              readOnly: true,
-                              hintText: _startTime ?? '방문 시간',
-                              widget: IconButton(
-                                onPressed: () async {
-                                  TimeOfDay? pickedTime = await showTimePicker(
-                                    cancelText: AppString.cancelBtnTextTr.tr,
-                                    helpText: '방문 시간을 입력해주세요.',
-                                    errorInvalidText: '올바른 시간을 입력해주세요',
-                                    hourLabelText: AppString.hour.tr,
-                                    minuteLabelText: AppString.minute.tr,
-                                    context: context,
-                                    initialTime: TimeOfDay.now(),
-                                  );
-                                  if (pickedTime == null) {
-                                    return;
-                                  }
-                                  String formatedTime =
-                                      pickedTime.format(context);
-                                  _startTime = formatedTime;
-                                  setState(() {});
-                                },
-                                icon: Icon(Icons.keyboard_arrow_down),
+                              SizedBox(width: RS.w10),
+                              Expanded(
+                                child: CustomTextFormField(
+                                  readOnly: true,
+                                  hintText: _startTime ?? '방문 시간',
+                                  widget: IconButton(
+                                    onPressed: () async {
+                                      TimeOfDay? pickedTime =
+                                          await showTimePicker(
+                                        cancelText:
+                                            AppString.cancelBtnTextTr.tr,
+                                        helpText: '방문 시간을 입력해주세요.',
+                                        errorInvalidText: '올바른 시간을 입력해주세요',
+                                        hourLabelText: AppString.hour.tr,
+                                        minuteLabelText: AppString.minute.tr,
+                                        context: context,
+                                        initialTime: TimeOfDay.now(),
+                                      );
+                                      if (pickedTime == null) {
+                                        return;
+                                      }
+                                      String formatedTime =
+                                          pickedTime.format(context);
+                                      _startTime = formatedTime;
+                                      setState(() {});
+                                    },
+                                    icon: Icon(Icons.keyboard_arrow_down),
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
+                          SizedBox(height: RS.h10 * 2),
+                          GestureDetector(
+                            onTap: () {
+                              isEnrollAlarm = !isEnrollAlarm;
+                              setState(() {});
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  // padding: EdgeInsets.only(bottom: RS.h10 / 2),
+                                  // decoration: BoxDecoration(
+                                  //   border: Border(
+                                  //     bottom: BorderSide(
+                                  //         color: isEnrollAlarm
+                                  //             ? Colors.pinkAccent
+                                  //             : Colors.black,
+                                  //         width: 1.5),
+                                  //   ),
+                                  // ),
+                                  child: Text(
+                                    '알람 등록',
+                                    style: isEnrollAlarm
+                                        ? const TextStyle(
+                                            color: Colors.pinkAccent,
+                                            fontWeight: FontWeight.w600,
+                                          )
+                                        : TextStyle(),
+                                  ),
+                                ),
+                                SizedBox(width: RS.w10),
+                                CircleAvatar(
+                                  backgroundColor: isEnrollAlarm
+                                      ? Colors.pinkAccent
+                                      : Colors.grey,
+                                  radius: RS.w10 * 1.2,
+                                  child: Icon(
+                                    Icons.done,
+                                    size: RS.w10 * 1.5,
+                                    color: isEnrollAlarm ? Colors.white : null,
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),

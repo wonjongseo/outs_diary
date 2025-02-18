@@ -68,26 +68,34 @@ class AppFunction {
   static void vaildTextFeildSnackBar({
     required String title,
     required String message,
+    Duration? duration,
   }) {
     AppFunction.showSnackBar(
-        title, message, FontAwesomeIcons.check, Colors.redAccent);
+      title,
+      message,
+      FontAwesomeIcons.check,
+      Colors.redAccent,
+      duration ?? const Duration(seconds: 3),
+    );
   }
 
   static void invaildTextFeildSnackBar({
     required String title,
     required String message,
+    Duration? duration,
   }) {
-    AppFunction.showSnackBar(
-        title, message, FontAwesomeIcons.exclamation, Colors.redAccent);
+    AppFunction.showSnackBar(title, message, FontAwesomeIcons.exclamation,
+        Colors.redAccent, duration ?? const Duration(seconds: 3));
   }
 
-  static void showSnackBar(
-      String title, String message, IconData iconData, Color borderColor) {
+  static void showSnackBar(String title, String message, IconData iconData,
+      Color borderColor, Duration duration) {
     if (!Get.isSnackbarOpen) {
       Get.snackbar(
         title,
         message,
         icon: Icon(iconData),
+        duration: duration,
         borderWidth: 1,
         borderColor: borderColor,
       );

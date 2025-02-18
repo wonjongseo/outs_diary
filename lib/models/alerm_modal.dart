@@ -7,11 +7,20 @@ part 'alerm_modal.g.dart';
 @HiveType(typeId: AppConstant.alermModelHiveId)
 class AlermModel {
   @HiveField(0)
-  String? scheduleTime;
+  final String scheduleTime;
   @HiveField(1)
-  String? id;
+  final int alermId;
+
+  @HiveField(2)
+  final bool isRegular;
+
   AlermModel({
-    this.scheduleTime,
-    this.id,
+    required this.scheduleTime,
+    required this.alermId,
+    this.isRegular = false,
   });
+
+  @override
+  String toString() =>
+      'AlermModel(scheduleTime: $scheduleTime, id: $alermId, isRegular: $isRegular)';
 }

@@ -24,11 +24,6 @@ class OnboardingController extends GetxController {
   void setBackgroundIndex(int index) {
     backgroundIndex = index;
     update();
-
-    SettingRepository.setInt(
-      AppConstant.backgroundIndexKey,
-      backgroundIndex,
-    );
   }
 
   // For OnBoarding3
@@ -36,11 +31,6 @@ class OnboardingController extends GetxController {
   void setFealIconIndex(int index) {
     fealIconIndex = index;
     update();
-
-    SettingRepository.setInt(
-      AppConstant.fealIndexKey,
-      fealIconIndex,
-    );
   }
 
   // For OnBoarding5
@@ -128,13 +118,13 @@ class OnboardingController extends GetxController {
   }
 
   void goToMainScreenAndSaveUserData() async {
-    List<AlermModel> alerms = [];
+    Map<int, List<AlermModel>> alerms = {};
+    List<String> times = [];
 
     if (isAlermEnable) {
+      selectedDays.sort((a, b) => a.compareTo(b));
       List<int> days = List.generate(
           selectedDays.length, (index) => selectedDays[index] + 1);
-
-      List<String> times = [];
 
       if (selectedMorningLunchEvening.contains(0)) {
         times.add(morningTime);
@@ -153,26 +143,31 @@ class OnboardingController extends GetxController {
           int id = day * 100 + hour * 10 + minute;
           notificationService.scheduleWeeklyNotification(id, day, hour, minute);
 
-          alerms.add(AlermModel(scheduleTime: time, id: id.toString()));
+          if (alerms[day] == null) {
+            alerms[day] = [];
+          }
+          alerms[day]!.add(
+              AlermModel(scheduleTime: time, alermId: id, isRegular: true));
         }
       }
     }
 
     UserModel userModel = UserModel(
-      selectedMorningLunchEvening: selectedMorningLunchEvening,
+      selectedMorningLunchEvening: times,
       selectedDays: selectedDays,
       backgroundIndex: backgroundIndex,
       fealIconIndex: fealIconIndex,
-      drinkPillAlerms: alerms,
+      alerms: alerms,
     );
 
     // return;
-    userModelRepository.saveUser(userModel);
+
+    userController.saveUser(userModel);
 
     Get.off(() => const MainScreen());
   }
 
-  UserModelRepository userModelRepository = UserModelRepository();
+  UserController userController = Get.find<UserController>();
 
   @override
   void onInit() {

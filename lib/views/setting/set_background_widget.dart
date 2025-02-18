@@ -5,7 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/user_controller.dart';
-import 'package:ours_log/views/backgrounds/background_widget.dart';
+import 'package:ours_log/views/background/background_widget.dart';
 import 'package:ours_log/views/setting/widgets/background1_sample.dart';
 
 class SetBackgroundScreen extends StatelessWidget {
@@ -36,8 +36,9 @@ class SetBackgroundScreen extends StatelessWidget {
                             BackGround1Sample(
                               backgrounds:
                                   AppConstant.backgroundLists[index].images,
-                              isSelected:
-                                  backgroundController.backgroundIndex == index,
+                              isSelected: backgroundController
+                                      .userModel?.backgroundIndex ==
+                                  index,
                             ),
                             Container(
                               margin: EdgeInsets.all(RS.w10 * 1.5),
@@ -45,19 +46,21 @@ class SetBackgroundScreen extends StatelessWidget {
                               height: RS.w10 * 3,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: backgroundController.backgroundIndex ==
+                                color: backgroundController
+                                            .userModel?.backgroundIndex ==
                                         index
                                     ? Colors.pinkAccent
                                     : Colors.grey,
                               ),
-                              child:
-                                  backgroundController.backgroundIndex == index
-                                      ? Icon(
-                                          Icons.check,
-                                          size: RS.w10 * 2,
-                                          color: Colors.white,
-                                        )
-                                      : null,
+                              child: backgroundController
+                                          .userModel?.backgroundIndex ==
+                                      index
+                                  ? Icon(
+                                      Icons.check,
+                                      size: RS.w10 * 2,
+                                      color: Colors.white,
+                                    )
+                                  : null,
                             ),
                             Align(
                               alignment: Alignment.bottomCenter,
@@ -98,7 +101,8 @@ class SetBackgroundScreen extends StatelessWidget {
                 options: CarouselOptions(
                   height: 570,
                   viewportFraction: 0.8,
-                  initialPage: backgroundController.backgroundIndex,
+                  initialPage:
+                      backgroundController.userModel?.backgroundIndex ?? 0,
                   enableInfiniteScroll: true,
                   reverse: false,
                   autoPlayInterval: Duration(seconds: 3),

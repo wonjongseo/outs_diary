@@ -1,8 +1,9 @@
 import 'package:hive/hive.dart';
+import 'package:uuid/uuid.dart';
+
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
 import 'package:ours_log/models/alerm_modal.dart';
-import 'package:uuid/uuid.dart';
 
 part 'user_model.g.dart';
 
@@ -14,11 +15,11 @@ class UserModel {
   late int createdAt;
 
   @HiveField(2)
-  List<int>? selectedMorningLunchEvening; // 0:아침, 1:점심, 2: 저녁
+  List<String>? selectedMorningLunchEvening; // 0:아침, 1:점심, 2: 저녁
   @HiveField(3)
   List<int>? selectedDays; // 0:월, 1: 화
   @HiveField(4)
-  List<AlermModel>? drinkPillAlerms;
+  Map<int, List<AlermModel>>? alerms;
 
   @HiveField(7)
   int? backgroundIndex;
@@ -28,11 +29,16 @@ class UserModel {
   UserModel({
     this.selectedMorningLunchEvening,
     this.selectedDays,
-    this.drinkPillAlerms,
+    this.alerms,
     this.backgroundIndex,
     this.fealIconIndex,
   }) {
     id = const Uuid().v4();
     createdAt = DateTime.now().microsecondsSinceEpoch;
+  }
+
+  @override
+  String toString() {
+    return 'UserModel(id: $id, createdAt: $createdAt, selectedMorningLunchEvening: $selectedMorningLunchEvening, selectedDays: $selectedDays, drinkPillAlerms: $alerms, backgroundIndex: $backgroundIndex, fealIconIndex: $fealIconIndex)';
   }
 }

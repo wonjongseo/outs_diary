@@ -17,9 +17,10 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return UserModel(
-      selectedMorningLunchEvening: (fields[2] as List?)?.cast<int>(),
+      selectedMorningLunchEvening: (fields[2] as List?)?.cast<String>(),
       selectedDays: (fields[3] as List?)?.cast<int>(),
-      drinkPillAlerms: (fields[4] as List?)?.cast<AlermModel>(),
+      alerms: (fields[4] as Map?)?.map((dynamic k, dynamic v) =>
+          MapEntry(k as int, (v as List).cast<AlermModel>())),
       backgroundIndex: fields[7] as int?,
       fealIconIndex: fields[8] as int?,
     )
@@ -40,7 +41,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       ..writeByte(3)
       ..write(obj.selectedDays)
       ..writeByte(4)
-      ..write(obj.drinkPillAlerms)
+      ..write(obj.alerms)
       ..writeByte(7)
       ..write(obj.backgroundIndex)
       ..writeByte(8)

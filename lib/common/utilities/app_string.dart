@@ -4,6 +4,7 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.today: AppString.todayJp,
           AppString.background5Desc: AppString.background5DescJp,
           AppString.noCameraPermssionMsg: AppString.noCameraPermssionMsgJp,
           AppString.noLibaryPermssion: AppString.noLibaryPermssionMsgJp,
@@ -161,6 +162,7 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.today: AppString.todayKr,
           AppString.background5Desc: AppString.background5DescKr,
           AppString.noCameraPermssionMsg: AppString.noCameraPermssionMsgKr,
           AppString.noLibaryPermssion: AppString.noLibaryPermssionMsgKr,
@@ -318,6 +320,7 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.today: AppString.todayEn,
           AppString.background5Desc: AppString.background5DescEn,
           AppString.noCameraPermssionMsg: AppString.noCameraPermssionMsgEn,
           AppString.noLibaryPermssion: AppString.requiredLibaryPermssionMsgEn,
@@ -728,6 +731,11 @@ class AppString {
   static String coutionKr = '주의';
   static String coutionJp = "注意";
   static String coutionEn = "Coution";
+
+  static String today = "todayTr";
+  static String todayKr = '오늘';
+  static String todayJp = "今日";
+  static String todayEn = "Today";
 
   static String plzSelectFeal = "plzSelectFealTrTr";
   static String plzSelectFealKr = '오늘의 기분을 선택해주세요.';

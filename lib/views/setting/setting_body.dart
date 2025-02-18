@@ -11,6 +11,7 @@ import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/respository/setting_repository.dart';
+import 'package:ours_log/views/manage_alrem/manage_alrem_screen.dart';
 import 'package:ours_log/views/setting/set_feal_icon_screen.dart';
 import 'package:ours_log/views/setting/set_background_widget.dart';
 
@@ -76,6 +77,17 @@ class _SettingBodyState extends State<SettingBody> {
         ? Container()
         : Column(
             children: [
+// Alerm
+              SizedBox(height: RS.height20),
+              _customListTIle(
+                title: '알림 관리',
+                subTitle: '',
+                onTap: () {
+                  Get.to(() => const ManageAlermScreen());
+                },
+                imagePath: AppImagePath.good2,
+              ),
+
               SizedBox(height: RS.height20),
               _customListTIle(
                 title: AppString.theme.tr,
@@ -96,7 +108,10 @@ class _SettingBodyState extends State<SettingBody> {
               GetBuilder<UserController>(builder: (controller) {
                 return _customListTIle(
                   title: AppString.background.tr,
-                  subTitle: controller.backgroundData.description,
+                  subTitle: AppConstant
+                      .backgroundLists[
+                          controller.userModel?.backgroundIndex ?? 0]
+                      .description,
                   imagePath: AppImagePath.very_good2,
                   onTap: () => Get.to(() => const SetBackgroundScreen()),
                 );

@@ -35,8 +35,8 @@ class AppConstant {
 
   static const String countOfReiveRequestionKey = 'countOfReiveRequestion';
   static const String hasReviewedKey = 'hasReviewed';
-  static const String backgroundIndexKey = 'backgroundIndex';
-  static const String fealIndexKey = 'fealIndex';
+  // static const String backgroundIndexKey = 'backgroundIndex';
+  // static const String fealIndexKey = 'fealIndex';
   static const String isDarkModeKey = 'isDarkMode';
 
   static const int countOfStampIcon = 18;

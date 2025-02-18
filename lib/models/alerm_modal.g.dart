@@ -17,19 +17,22 @@ class AlermModelAdapter extends TypeAdapter<AlermModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AlermModel(
-      scheduleTime: fields[0] as String?,
-      id: fields[1] as String?,
+      scheduleTime: fields[0] as String,
+      alermId: fields[1] as int,
+      isRegular: fields[2] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, AlermModel obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.scheduleTime)
       ..writeByte(1)
-      ..write(obj.id);
+      ..write(obj.alermId)
+      ..writeByte(2)
+      ..write(obj.isRegular);
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
+import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
@@ -139,7 +140,10 @@ class _DiaryBodyState extends State<DiaryBody> {
           CircleAvatar(
             backgroundColor: isToday ? Colors.pinkAccent : AppColors.white,
             foregroundImage: AssetImage(
-              backgroundController.feals[diaryModel.fealIndex],
+              AppConstant
+                  .fealIconLists[
+                      backgroundController.userModel?.fealIconIndex ?? 0]
+                  .iconPath[diaryModel.fealIndex],
             ),
             radius: RS.w10 * 2.5,
           ),

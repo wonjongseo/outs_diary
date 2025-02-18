@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
+import 'package:ours_log/respository/user_respository.dart';
 import 'package:ours_log/views/Hospital_Log/hospital_log_body.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/diary_controller.dart';
-import 'package:ours_log/views/backgrounds/background_widget.dart';
+import 'package:ours_log/views/background/background_widget.dart';
 import 'package:ours_log/views/diary/diary_body.dart';
 import 'package:ours_log/views/graph/graph_body.dart';
 import 'package:ours_log/views/setting/setting_body.dart';
@@ -48,6 +49,9 @@ class _MainScreenState extends State<MainScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [bottomNavigtionBar()],
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        UserModelRepository().deleteAll();
+      }),
       body: SafeArea(
         child: BackgroundWidget(
           widget: Padding(

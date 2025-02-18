@@ -23,7 +23,8 @@ class SetFealIconScreen extends StatelessWidget {
               children: List.generate(
                 AppConstant.fealIconLists.length,
                 (index) {
-                  bool isSelected = controller.fealIconIndex == index;
+                  bool isSelected =
+                      controller.userModel?.fealIconIndex == index;
                   return GestureDetector(
                     onTap: () => controller.setFealIconIndex(index),
                     child: FealIconRow(

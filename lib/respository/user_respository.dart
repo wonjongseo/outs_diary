@@ -26,10 +26,18 @@ class UserModelRepository {
     print('User Deleted!');
   }
 
+  Future<void> deleteAll() async {
+    var box = await Hive.openBox<UserModel>(AppConstant.userModelBox);
+
+    box.deleteFromDisk();
+    print('User All DELETE !!');
+  }
+
   Future<UserModel?> loadUser() async {
     var box = await Hive.openBox<UserModel>(AppConstant.userModelBox);
 
     List<UserModel> user = box.values.toList();
+    print('user.length : ${user.length}');
 
     return user.isEmpty ? null : user.first;
   }

@@ -65,6 +65,11 @@ class NotificationService {
     print("🚫 모든 알람 취소 완료");
   }
 
+  Future<void> cancellNotifications(int id) async {
+    await flutterLocalNotificationsPlugin.cancel(id);
+    print("🚫 $id 알람 취소 완료");
+  }
+
   tz.TZDateTime _nextInstanceOfWeekday(int weekday, int hour, int minute) {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     // tz.TZDateTime scheduledDate =
