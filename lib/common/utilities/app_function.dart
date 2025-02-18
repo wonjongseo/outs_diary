@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -100,6 +102,13 @@ class AppFunction {
         borderColor: borderColor,
       );
     }
+  }
+
+  static int createIdByDay(int day, int hour, int minute) {
+    return day * Random().nextInt(10000) +
+        hour * Random().nextInt(1000) +
+        minute +
+        Random().nextInt(100);
   }
 
   static void showNoPermissionSnackBar({required message}) {}

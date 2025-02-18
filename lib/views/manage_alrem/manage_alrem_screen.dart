@@ -8,7 +8,7 @@ import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/notification_controller.dart';
 
 import 'package:ours_log/controller/user_controller.dart';
-import 'package:ours_log/models/alerm_modal.dart';
+import 'package:ours_log/models/regular_task_modal.dart';
 import 'package:ours_log/views/background/background_widget.dart';
 
 class AlermData {
@@ -31,7 +31,7 @@ class _ManageAlermScreenState extends State<ManageAlermScreen> {
   NotificationService notificationService = NotificationService();
   @override
   void initState() {
-    notificationService.initializeNotifications();
+    // notificationService.initializeNotifications();
     super.initState();
   }
 
@@ -41,7 +41,7 @@ class _ManageAlermScreenState extends State<ManageAlermScreen> {
     Size size = MediaQuery.of(context).size;
     return GetBuilder<UserController>(builder: (uController) {
       print(
-          'uController.userModel!.drinkPillAlerms![now.day] : ${uController.userModel!.alerms![now.weekday]}');
+          'uController.userModel!.drinkPillAlerms![now.day] : ${uController.userModel!.regularTasks![now.weekday]}');
 
       print('Get.locale : ${Get.locale}');
 
@@ -109,10 +109,10 @@ class _ManageAlermScreenState extends State<ManageAlermScreen> {
               ),
             ),
             SizedBox(height: RS.h10 * 2),
-            if (uController.userModel!.alerms![now.weekday] != null)
+            if (uController.userModel!.regularTasks![now.weekday] != null)
               Column(
                 children: List.generate(
-                    uController.userModel!.alerms![now.weekday]!.length,
+                    uController.userModel!.regularTasks![now.weekday]!.length,
                     (index) {
                   return Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
@@ -126,7 +126,9 @@ class _ManageAlermScreenState extends State<ManageAlermScreen> {
                       child: Row(
                         children: [
                           Text(
-                            uController.userModel!.alerms![now.weekday]![index]
+                            uController
+                                .userModel!
+                                .regularTasks![now.weekday]![index]
                                 .scheduleTime,
                             style: TextStyle(
                               color: Colors.black,
@@ -164,7 +166,8 @@ class _ManageAlermScreenState extends State<ManageAlermScreen> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: uController.userModel!.alerms!.entries.map((e) {
+                    children:
+                        uController.userModel!.regularTasks!.entries.map((e) {
                       return Padding(
                         padding: EdgeInsets.only(right: RS.w10 * 4),
                         child: Column(

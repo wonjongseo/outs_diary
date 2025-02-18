@@ -1,15 +1,16 @@
+import 'dart:math';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/controller/user_controller.dart';
-import 'package:ours_log/models/alerm_modal.dart';
+import 'package:ours_log/models/regular_task_modal.dart';
 import 'package:ours_log/models/user_model.dart';
-import 'package:ours_log/respository/user_respository.dart';
+import 'package:ours_log/views/manage_alrem/manage_alrem_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/controller/notification_controller.dart';
-import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/views/home/main_screen.dart';
 import 'package:ours_log/views/onBoarding/widgets/onBoarding1/onBoarding1.dart';
 import 'package:ours_log/views/onBoarding/widgets/onBoarding2/onBoarding2.dart';
@@ -118,13 +119,13 @@ class OnboardingController extends GetxController {
   }
 
   void goToMainScreenAndSaveUserData() async {
-    Map<int, List<AlermModel>> alerms = {};
+    Map<int, List<RegularTaskModel>> alerms = {};
     List<String> times = [];
 
     if (isAlermEnable) {
       selectedDays.sort((a, b) => a.compareTo(b));
-      List<int> days = List.generate(
-          selectedDays.length, (index) => selectedDays[index] + 1);
+      List<int> days =
+          List.generate(selectedDays.length, (index) => selectedDays[index]);
 
       if (selectedMorningLunchEvening.contains(0)) {
         times.add(morningTime);
@@ -140,16 +141,29 @@ class OnboardingController extends GetxController {
         for (String time in times) {
           int hour = int.parse(time.split(':')[0]);
           int minute = int.parse(time.split(':')[1]);
-          int id = day * 100 + hour * 10 + minute;
-          notificationService.scheduleWeeklyNotification(id, day, hour, minute);
+
+          int id = AppFunction.createIdByDay(day, hour, minute);
+
+          notificationService.scheduleWeeklyNotification(
+            title: '💊 약 복용 알림',
+            message: '${day}/${intDayToString(day)}/${time} 시간에 약을 복용하세요!',
+            channelDescription: '매주 특정 요일 및 시간에 알림을 받습니다',
+            id: id,
+            weekday: day,
+            hour: hour,
+            minute: minute,
+          );
 
           if (alerms[day] == null) {
             alerms[day] = [];
           }
-          alerms[day]!.add(
-              AlermModel(scheduleTime: time, alermId: id, isRegular: true));
+          alerms[day]!.add(RegularTaskModel(
+            scheduleTime: time,
+            alermId: id,
+          ));
         }
       }
+      // return;
     }
 
     UserModel userModel = UserModel(
@@ -157,7 +171,7 @@ class OnboardingController extends GetxController {
       selectedDays: selectedDays,
       backgroundIndex: backgroundIndex,
       fealIconIndex: fealIconIndex,
-      alerms: alerms,
+      regularTasks: alerms,
     );
 
     // return;
@@ -174,7 +188,6 @@ class OnboardingController extends GetxController {
     _permissionWithNotification();
     pageController = PageController(initialPage: pageIndex);
     setBodys();
-    notificationService.initializeNotifications();
     super.onInit();
   }
 

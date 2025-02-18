@@ -6,20 +6,32 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
-import 'package:ours_log/models/alerm_modal.dart';
+import 'package:ours_log/models/regular_task_modal.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/health_model.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
+import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
 import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/views/splash_screen.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeDateFormatting();
+  await _initializeTimeZone();
   await initHive();
 
   runApp(const MyApp());
+}
+
+Future<void> _initializeTimeZone() async {
+  tz.initializeTimeZones();
+  final String currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
+  print("📌 현재 타임존: $currentTimeZone");
+  tz.setLocalLocation(tz.getLocation(currentTimeZone));
 }
 
 class MyApp extends StatefulWidget {
@@ -83,8 +95,11 @@ class _MyAppState extends State<MyApp> {
 Future<void> initHive() async {
   await Hive.initFlutter();
 
-  if (!Hive.isAdapterRegistered(AppConstant.alermModelHiveId)) {
-    Hive.registerAdapter(AlermModelAdapter());
+  if (!Hive.isAdapterRegistered(AppConstant.regularTaskModelHiveId)) {
+    Hive.registerAdapter(RegularTaskModelAdapter());
+  }
+  if (!Hive.isAdapterRegistered(AppConstant.taskModelHiveId)) {
+    Hive.registerAdapter(TaskModelAdapter());
   }
   if (!Hive.isAdapterRegistered(AppConstant.userModelHiveId)) {
     Hive.registerAdapter(UserModelAdapter());

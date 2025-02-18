@@ -12,8 +12,8 @@ class AppConstant {
   static const int stampModelHiveId = 3;
   static const int todoModelHiveId = 4;
   static const int userModelHiveId = 5;
-  static const int alermModelHiveId = 6;
-  static const int makerModelHiveId = 7;
+  static const int regularTaskModelHiveId = 6;
+  static const int taskModelHiveId = 7;
   static const int handmadeModelHiveId = 8;
   static const int groceriesModelHiveId = 9;
   static const int expensiveModelHiveId = 10;

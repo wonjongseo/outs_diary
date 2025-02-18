@@ -3,7 +3,8 @@ import 'package:uuid/uuid.dart';
 
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
-import 'package:ours_log/models/alerm_modal.dart';
+import 'package:ours_log/models/regular_task_modal.dart';
+import 'package:ours_log/models/task_model.dart';
 
 part 'user_model.g.dart';
 
@@ -19,17 +20,20 @@ class UserModel {
   @HiveField(3)
   List<int>? selectedDays; // 0:월, 1: 화
   @HiveField(4)
-  Map<int, List<AlermModel>>? alerms;
+  Map<int, List<RegularTaskModel>>? regularTasks;
+
+  @HiveField(5)
+  List<TaskModel>? tasks;
 
   @HiveField(7)
   int? backgroundIndex;
   @HiveField(8)
   int? fealIconIndex;
-
   UserModel({
     this.selectedMorningLunchEvening,
     this.selectedDays,
-    this.alerms,
+    this.regularTasks,
+    this.tasks,
     this.backgroundIndex,
     this.fealIconIndex,
   }) {
@@ -39,6 +43,6 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, createdAt: $createdAt, selectedMorningLunchEvening: $selectedMorningLunchEvening, selectedDays: $selectedDays, drinkPillAlerms: $alerms, backgroundIndex: $backgroundIndex, fealIconIndex: $fealIconIndex)';
+    return 'UserModel(id: $id, createdAt: $createdAt, selectedMorningLunchEvening: $selectedMorningLunchEvening, selectedDays: $selectedDays, drinkPillAlerms: $regularTasks, backgroundIndex: $backgroundIndex, fealIconIndex: $fealIconIndex)';
   }
 }

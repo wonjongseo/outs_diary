@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
+import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
 import 'package:ours_log/respository/user_respository.dart';
 
@@ -12,6 +13,17 @@ class UserController extends GetxController {
   }
 
   UserModelRepository userModelRepository = UserModelRepository();
+
+  void addTask(TaskModel task) {
+    if (userModel == null) return;
+    if (userModel!.tasks == null) {
+      userModel!.tasks = [];
+    }
+    userModel!.tasks!.add(task);
+    userModelRepository.saveUser(userModel!);
+
+    getUser();
+  }
 
   List<String> get feals {
     return AppConstant.fealIconLists[userModel?.fealIconIndex ?? 0].iconPath;

@@ -1,45 +1,53 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  Future<void> initializeNotifications() async {
-    tz.initializeTimeZones(); // 타임존 초기화
-
-    const AndroidInitializationSettings androidInitSettings =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-
-    const DarwinInitializationSettings iosInitSettings =
-        DarwinInitializationSettings();
-
-    const InitializationSettings initSettings = InitializationSettings(
-      android: androidInitSettings,
-      iOS: iosInitSettings,
-    );
-
-    await flutterLocalNotificationsPlugin.initialize(initSettings);
+  /// 생성자에서 초기화
+  NotificationService() {
+    _initializeNotifications();
   }
 
-  Future<void> scheduleWeeklyNotification(
-      int id, int day, int hour, int minute) async {
-    final tz.TZDateTime scheduledDate =
-        _nextInstanceOfWeekday(day, hour, minute);
+  /// 📌 알람 초기화 (앱 실행 시)
+  Future<void> _initializeNotifications() async {
+    const AndroidInitializationSettings androidSettings =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    print("📢 알람 등록: 요일=$day, 시간=${hour}:${minute}, 실제 예약 시간=$scheduledDate");
+    const DarwinInitializationSettings iosSettings =
+        DarwinInitializationSettings();
+
+    const InitializationSettings settings =
+        InitializationSettings(android: androidSettings, iOS: iosSettings);
+
+    await flutterLocalNotificationsPlugin.initialize(settings);
+  }
+
+  /// 📌 매주 특정 요일/시간에 반복되는 알람 설정
+  Future<void> scheduleWeeklyNotification({
+    required int id,
+    required String title,
+    required String message,
+    required String channelDescription,
+    required int weekday,
+    required int hour,
+    required int minute,
+  }) async {
+    final scheduledDate = _nextInstanceOfWeekday(weekday, hour, minute);
+
+    print("📢 주간 알람 등록: ${scheduledDate.toString()}");
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
-      id, // 고유 ID (요일 * 100 + 시간 * 10 + 분)
-      '💊 약 복용 알림',
-      '지정된 시간에 약을 복용하세요!',
+      id,
+      title,
+      message,
       scheduledDate,
-      const NotificationDetails(
+      NotificationDetails(
         android: AndroidNotificationDetails(
           'weekly_notification_channel',
           'Weekly Notifications',
-          channelDescription: '매주 특정 요일 및 시간에 알림을 받습니다',
+          channelDescription: channelDescription,
           importance: Importance.high,
           priority: Priority.high,
         ),
@@ -52,28 +60,47 @@ class NotificationService {
     );
   }
 
-  tz.TZDateTime _setDate(DateTime date) {
-    Duration offSet = DateTime.now().timeZoneOffset;
-    DateTime local = date.add(-offSet);
+  /// 📌 특정 날짜에 한 번만 울리는 알람 설정
+  Future<void> scheduleSpecificDateNotification({
+    required int id,
+    required String title,
+    required String message,
+    required String channelDescription,
+    required int year,
+    required int month,
+    required int day,
+    required int hour,
+    required int minute,
+  }) async {
+    final scheduledDate = _setDate(DateTime(year, month, day, hour, minute));
 
-    return tz.TZDateTime(tz.local, local.year, local.month, local.day,
-        local.hour, local.minute, local.second);
+    print("📢 특정 날짜 알람 등록: ${scheduledDate.toString()}");
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      id,
+      title,
+      message,
+      scheduledDate,
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          'specific_date_notification_channel',
+          'Specific Date Notifications',
+          channelDescription: channelDescription,
+          importance: Importance.high,
+          priority: Priority.high,
+        ),
+        iOS: DarwinNotificationDetails(),
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.wallClockTime,
+      matchDateTimeComponents: DateTimeComponents.dateAndTime,
+    );
   }
 
-  Future<void> cancelAllNotifications() async {
-    await flutterLocalNotificationsPlugin.cancelAll();
-    print("🚫 모든 알람 취소 완료");
-  }
-
-  Future<void> cancellNotifications(int id) async {
-    await flutterLocalNotificationsPlugin.cancel(id);
-    print("🚫 $id 알람 취소 완료");
-  }
-
+  /// 📌 매주 특정 요일과 시간의 다음 인스턴스를 계산
   tz.TZDateTime _nextInstanceOfWeekday(int weekday, int hour, int minute) {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    // tz.TZDateTime scheduledDate =
-    //     tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, minute);
     var scheduledDate =
         _setDate(DateTime(now.year, now.month, now.day, hour, minute));
 
@@ -86,5 +113,21 @@ class NotificationService {
     }
 
     return scheduledDate;
+  }
+
+  /// 📌 특정 날짜를 타임존이 적용된 형태로 변환
+  tz.TZDateTime _setDate(DateTime date) {
+    return tz.TZDateTime(
+        tz.local, date.year, date.month, date.day, date.hour, date.minute);
+  }
+
+  Future<void> cancelAllNotifications() async {
+    await flutterLocalNotificationsPlugin.cancelAll();
+    print("🚫 모든 알람 취소 완료");
+  }
+
+  Future<void> cancellNotifications(int id) async {
+    await flutterLocalNotificationsPlugin.cancel(id);
+    print("🚫 $id 알람 취소 완료");
   }
 }

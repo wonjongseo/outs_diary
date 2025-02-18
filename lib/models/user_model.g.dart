@@ -19,8 +19,9 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
     return UserModel(
       selectedMorningLunchEvening: (fields[2] as List?)?.cast<String>(),
       selectedDays: (fields[3] as List?)?.cast<int>(),
-      alerms: (fields[4] as Map?)?.map((dynamic k, dynamic v) =>
-          MapEntry(k as int, (v as List).cast<AlermModel>())),
+      regularTasks: (fields[4] as Map?)?.map((dynamic k, dynamic v) =>
+          MapEntry(k as int, (v as List).cast<RegularTaskModel>())),
+      tasks: (fields[5] as List?)?.cast<TaskModel>(),
       backgroundIndex: fields[7] as int?,
       fealIconIndex: fields[8] as int?,
     )
@@ -31,7 +32,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       ..writeByte(3)
       ..write(obj.selectedDays)
       ..writeByte(4)
-      ..write(obj.alerms)
+      ..write(obj.regularTasks)
+      ..writeByte(5)
+      ..write(obj.tasks)
       ..writeByte(7)
       ..write(obj.backgroundIndex)
       ..writeByte(8)

@@ -81,16 +81,14 @@ class HospitalLogController extends GetxController {
   }
 
   void onDaySelected(DateTime cSelectedDay, DateTime cFocusedDay) {
-    if (!isSameDay(selectedDay, cSelectedDay)) {
-      selectedDay = cSelectedDay;
-      focusedDay = cFocusedDay;
+    selectedDay = cSelectedDay;
+    focusedDay = cFocusedDay;
 
-      selectedEvents.value = getEventsForDay(selectedDay!);
+    selectedEvents.value = getEventsForDay(selectedDay!);
 
-      if (selectedEvents.value.isEmpty) {
-        Get.to(() => AddHospitalVisitLogScreen(selectedDate: cSelectedDay));
-      }
-      update();
+    if (selectedEvents.value.isEmpty) {
+      Get.to(() => AddHospitalVisitLogScreen(selectedDate: cSelectedDay));
     }
+    update();
   }
 }

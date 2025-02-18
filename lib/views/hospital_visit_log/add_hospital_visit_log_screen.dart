@@ -16,9 +16,12 @@ import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/controller/notification_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
+import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/add_diary/widgets/image_of_today.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class AddHospitalVisitLogScreen extends StatefulWidget {
   const AddHospitalVisitLogScreen({
@@ -93,7 +96,7 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
       pillCtls.add(TextEditingController());
     }
     getHospitalNams();
-    notificationService.initializeNotifications();
+    // notificationService.initializeNotifications();
     super.initState();
   }
 
@@ -131,6 +134,32 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
       return;
     }
     String hospitalName = hospitalNameCtl.text;
+    if (isEnrollAlarm && _startTime != null) {
+      int hour = int.parse(_startTime!.split(':')[0]);
+      int minute = int.parse(_startTime!.split(':')[1]);
+
+      DateTime scheduledDate = DateTime(_selectedDate.year, _selectedDate.month,
+          _selectedDate.day, hour, minute);
+
+      int id = AppFunction.createIdByDay(_selectedDate.day, hour, minute);
+
+      notificationService.scheduleSpecificDateNotification(
+        title: '🏥 병원 진료 알림',
+        message:
+            '${_selectedDate.month}월 ${_selectedDate.day}일 $hour:$minute에 ${hospitalName} 병원 진료가 예약되어있습니다!',
+        channelDescription: '병원 진료 예약 알람',
+        id: 333,
+        year: scheduledDate.year,
+        month: scheduledDate.month,
+        day: scheduledDate.day,
+        hour: scheduledDate.hour,
+        minute: scheduledDate.minute,
+      );
+
+      TaskModel taskModel = TaskModel(dateTime: scheduledDate, alermId: id);
+
+      userController.addTask(taskModel);
+    }
 
     if (hospitalName.isEmpty) {
       AppFunction.invaildTextFeildSnackBar(
@@ -279,26 +308,14 @@ class _AddHospitalVisitLogScreenState extends State<AddHospitalVisitLogScreen> {
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Container(
-                                  // padding: EdgeInsets.only(bottom: RS.h10 / 2),
-                                  // decoration: BoxDecoration(
-                                  //   border: Border(
-                                  //     bottom: BorderSide(
-                                  //         color: isEnrollAlarm
-                                  //             ? Colors.pinkAccent
-                                  //             : Colors.black,
-                                  //         width: 1.5),
-                                  //   ),
-                                  // ),
-                                  child: Text(
-                                    '알람 등록',
-                                    style: isEnrollAlarm
-                                        ? const TextStyle(
-                                            color: Colors.pinkAccent,
-                                            fontWeight: FontWeight.w600,
-                                          )
-                                        : TextStyle(),
-                                  ),
+                                Text(
+                                  '알람 등록',
+                                  style: isEnrollAlarm
+                                      ? const TextStyle(
+                                          color: Colors.pinkAccent,
+                                          fontWeight: FontWeight.w600,
+                                        )
+                                      : TextStyle(),
                                 ),
                                 SizedBox(width: RS.w10),
                                 CircleAvatar(
