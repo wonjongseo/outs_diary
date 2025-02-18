@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
-
-class Task {
-  int? id;
-  String? title;
-  String? note;
-  int? isCompleted;
-  String? date;
-  String? startTime;
-  String? endTime;
-  int? color;
-  int? remind;
-  String? repeat;
-}
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_utils/get_utils.dart';
+import 'package:intl/intl.dart';
+import 'package:ours_log/models/task_model.dart';
 
 class TaskTile extends StatelessWidget {
-  const TaskTile({super.key, this.task});
+  const TaskTile({super.key, required this.task});
 
-  final Task? task;
+  final TaskModel task;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,8 +17,9 @@ class TaskTile extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: _getBGClr(task?.color ?? 0)),
+          borderRadius: BorderRadius.circular(16),
+          color: _getBGClr(0),
+        ),
         child: Row(
           children: [
             Expanded(
@@ -35,7 +27,7 @@ class TaskTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    task?.title ?? '',
+                    task.taskName,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -53,7 +45,8 @@ class TaskTile extends StatelessWidget {
                       ),
                       SizedBox(width: 4),
                       Text(
-                        '${task!.startTime} - ${task!.endTime}',
+                        DateFormat.Hm(Get.locale.toString())
+                            .format(task.taskDate),
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.grey[100],
@@ -63,7 +56,7 @@ class TaskTile extends StatelessWidget {
                   ),
                   SizedBox(height: 12),
                   Text(
-                    task?.note ?? '',
+                    'task?.note',
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.grey[100],
@@ -81,7 +74,7 @@ class TaskTile extends StatelessWidget {
             RotatedBox(
               quarterTurns: 3,
               child: Text(
-                task!.isCompleted == 1 ? 'COMPLETED' : 'TODO',
+                task.isRegular ? '정기 일정' : '',
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,

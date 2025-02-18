@@ -1,8 +1,8 @@
 import 'package:hive/hive.dart';
+import 'package:uuid/uuid.dart';
 
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/models/notification_model.dart';
-import 'package:uuid/uuid.dart';
 
 part 'task_model.g.dart';
 
@@ -18,12 +18,20 @@ class TaskModel {
   late int createdAt;
   @HiveField(4)
   List<NotificationModel> notifications;
+  @HiveField(5, defaultValue: false)
+  bool isRegular;
   TaskModel({
     required this.taskName,
     required this.taskDate,
     required this.notifications,
+    this.isRegular = false,
   }) {
     id = const Uuid().v4();
     createdAt = DateTime.now().microsecondsSinceEpoch;
+  }
+
+  @override
+  String toString() {
+    return 'TaskModel(taskName: $taskName, taskDate: $taskDate, id: $id, createdAt: $createdAt, notifications: $notifications, isRegular: $isRegular)';
   }
 }

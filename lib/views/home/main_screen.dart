@@ -50,12 +50,12 @@ class _MainScreenState extends State<MainScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [bottomNavigtionBar()],
       ),
-      // floatingActionButton: FloatingActionButton(onPressed: () async {
-      //   NotificationService notification = NotificationService();
-      //   // await notification.initializeNotifications();
-      //   notification.cancelAllNotifications();
-      //   UserModelRepository().deleteAll();
-      // }),
+      floatingActionButton: FloatingActionButton(onPressed: () async {
+        NotificationService notification = NotificationService();
+        // await notification.initializeNotifications();
+        notification.cancelAllNotifications();
+        UserModelRepository().deleteAll();
+      }),
       body: SafeArea(
         child: BackgroundWidget(
           widget: Padding(

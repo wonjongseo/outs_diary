@@ -21,6 +21,10 @@ class AppFunction {
     return day1.year == day2.year && day1.month == day2.month;
   }
 
+  static bool isSameWeekDay(DateTime day1, DateTime day2) {
+    return day1.weekday == day2.weekday;
+  }
+
   static void requestPermisson() async {
     final permission = await PhotoManager.requestPermissionExtend();
     if (!permission.isAuth) {

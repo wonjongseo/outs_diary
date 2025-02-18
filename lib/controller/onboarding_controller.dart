@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/controller/user_controller.dart';
+import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/regular_task_modal.dart';
+import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
 import 'package:ours_log/views/manage_alrem/manage_alrem_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -119,7 +121,8 @@ class OnboardingController extends GetxController {
   }
 
   void goToMainScreenAndSaveUserData() async {
-    Map<int, List<RegularTaskModel>> alerms = {};
+    // Map<int, List<RegularTaskModel>> alerms = {};
+    List<TaskModel> tasks = [];
     List<String> times = [];
 
     if (isAlermEnable) {
@@ -136,20 +139,18 @@ class OnboardingController extends GetxController {
       if (selectedMorningLunchEvening.contains(2)) {
         times.add(eveningTime);
       }
-
+      DateTime now = DateTime.now();
       for (int day in days) {
-        for (String time in times) {
-          int hour = int.parse(time.split(':')[0]);
-          int minute = int.parse(time.split(':')[1]);
+        if (selectedMorningLunchEvening.contains(0)) {
+          int hour = int.parse(morningTime.split(':')[0]);
+          int minute = int.parse(morningTime.split(':')[1]);
+          int id = AppFunction.createIdByDay(day, hour, minute);
 
-          int id = day * Random().nextInt(1000) +
-              hour * Random().nextInt(100) +
-              minute +
-              Random().nextInt(10);
-
-          notificationService.scheduleWeeklyNotification(
-            title: '💊 약 복용 알림',
-            message: '${day}/${intDayToString(day)}/${time} 시간에 약을 복용하세요!',
+          DateTime? taskTime =
+              await notificationService.scheduleWeeklyNotification(
+            title: '💊 아침 약 복용 알림',
+            message:
+                '${day}/${intDayToString(day)}/${morningTime} 시간에 약을 복용하세요!',
             channelDescription: '매주 특정 요일 및 시간에 알림을 받습니다',
             id: id,
             weekday: day,
@@ -157,14 +158,100 @@ class OnboardingController extends GetxController {
             minute: minute,
           );
 
-          if (alerms[day] == null) {
-            alerms[day] = [];
+          if (taskTime == null) {
+            break;
           }
-          alerms[day]!.add(RegularTaskModel(
-            scheduleTime: time,
-            alermId: id,
-          ));
+          tasks.add(
+            TaskModel(
+              taskName: '아침 약',
+              taskDate: taskTime,
+              notifications: [
+                NotificationModel(notiDateTime: taskTime, alermId: id)
+              ],
+              isRegular: true,
+            ),
+          );
         }
+
+        if (selectedMorningLunchEvening.contains(1)) {
+          int hour = int.parse(lunchTime.split(':')[0]);
+          int minute = int.parse(lunchTime.split(':')[1]);
+          int id = AppFunction.createIdByDay(day, hour, minute);
+
+          DateTime? taskTime =
+              await notificationService.scheduleWeeklyNotification(
+            title: '💊잠심 약 복용 알림',
+            message: '${day}/${intDayToString(day)}/${lunchTime} 시간에 약을 복용하세요!',
+            channelDescription: '매주 특정 요일 및 시간에 알림을 받습니다',
+            id: id,
+            weekday: day,
+            hour: hour,
+            minute: minute,
+          );
+          if (taskTime == null) {
+            break;
+          }
+          tasks.add(
+            TaskModel(
+              taskName: '점심 약',
+              taskDate: taskTime,
+              notifications: [
+                NotificationModel(notiDateTime: taskTime, alermId: id)
+              ],
+              isRegular: true,
+            ),
+          );
+        }
+
+        if (selectedMorningLunchEvening.contains(2)) {
+          int hour = int.parse(eveningTime.split(':')[0]);
+          int minute = int.parse(eveningTime.split(':')[1]);
+          int id = AppFunction.createIdByDay(day, hour, minute);
+
+          DateTime? taskTime =
+              await notificationService.scheduleWeeklyNotification(
+            title: '💊저녁 약 복용 알림',
+            message:
+                '${day}/${intDayToString(day)}/${eveningTime} 시간에 약을 복용하세요!',
+            channelDescription: '매주 특정 요일 및 시간에 알림을 받습니다',
+            id: id,
+            weekday: day,
+            hour: hour,
+            minute: minute,
+          );
+          if (taskTime == null) {
+            break;
+          }
+          tasks.add(
+            TaskModel(
+              taskName: '저녁 약',
+              taskDate: taskTime,
+              notifications: [
+                NotificationModel(notiDateTime: taskTime, alermId: id)
+              ],
+              isRegular: true,
+            ),
+          );
+        }
+        // for (String time in times) {
+        //   int hour = int.parse(time.split(':')[0]);
+        //   int minute = int.parse(time.split(':')[1]);
+
+        //   int id = day * Random().nextInt(1000) +
+        //       hour * Random().nextInt(100) +
+        //       minute +
+        //       Random().nextInt(10);
+
+        //   notificationService.scheduleWeeklyNotification(
+        //     title: '💊 약 복용 알림',
+        //     message: '${day}/${intDayToString(day)}/${time} 시간에 약을 복용하세요!',
+        //     channelDescription: '매주 특정 요일 및 시간에 알림을 받습니다',
+        //     id: id,
+        //     weekday: day,
+        //     hour: hour,
+        //     minute: minute,
+        //   );
+        // }
       }
     }
 
@@ -173,7 +260,7 @@ class OnboardingController extends GetxController {
       selectedDays: selectedDays,
       backgroundIndex: backgroundIndex,
       fealIconIndex: fealIconIndex,
-      regularTasks: alerms,
+      tasks: tasks,
     );
 
     // return;

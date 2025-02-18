@@ -12,6 +12,8 @@ import 'package:ours_log/controller/notification_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/regular_task_modal.dart';
 import 'package:ours_log/models/notification_model.dart';
+import 'package:ours_log/models/task_model.dart';
+import 'package:ours_log/task_tile.dart';
 import 'package:ours_log/views/background/background_widget.dart';
 
 class AlermData {
@@ -48,10 +50,11 @@ class _ManageAlermScreenState extends State<ManageAlermScreen> {
     return GetBuilder<UserController>(builder: (uController) {
       print(
           'uController.userModel!.tasks : ${uController.userModel!.tasks?.length}');
-      // for (NotificationModel notification
-      //     in uController.userModel!.notifications ?? []) {
-      //   print('notification.dateTime : ${notification.notiDateTime}');
-      // }
+
+      for (TaskModel task in uController.userModel!.tasks!) {
+        print('task : ${task}');
+      }
+
       return Scaffold(
         appBar: AppBar(),
         body: Column(
@@ -107,137 +110,57 @@ class _ManageAlermScreenState extends State<ManageAlermScreen> {
               ),
             ),
             SizedBox(height: RS.h10 * 2),
-            if (uController.userModel!.regularTasks![now.weekday] != null)
-              Column(
-                children: [
-                  ...List.generate(uController.userModel!.tasks?.length ?? 0,
-                      (index) {
-                    if (AppFunction.isSameDay(
-                        uController.userModel!.tasks![index].taskDate, now)) {
-                      return Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.only(bottom: 12),
-                        child: Container(
-                          padding: EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: Colors.pinkAccent),
-                          child: Text(
-                            '${uController.userModel!.tasks![index].taskDate.hour}:${uController.userModel!.tasks![index].taskDate.minute}',
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-                    return Container();
-                  }),
-                  Divider(),
-                  ...List.generate(
-                      uController.userModel!.regularTasks![now.weekday]!.length,
-                      (index) {
-                    return Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.only(bottom: 12),
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: Colors.pinkAccent),
-                        child: Text(
-                          uController.userModel!
-                              .regularTasks![now.weekday]![index].scheduleTime,
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    );
-                  })
-                ],
-              )
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ...List.generate(uController.userModel!.tasks?.length ?? 0,
+                        (index) {
+                      if (uController.userModel!.tasks![index].isRegular) {
+                        if (AppFunction.isSameWeekDay(
+                            uController.userModel!.tasks![index].taskDate,
+                            now)) {
+                          return TaskTile(
+                            task: uController.userModel!.tasks![index],
+                          );
+                        }
+                      } else if (AppFunction.isSameDay(
+                          uController.userModel!.tasks![index].taskDate, now)) {
+                        return TaskTile(
+                          task: uController.userModel!.tasks![index],
+                        );
+                      }
+                      return Container();
+                    }),
+                    Divider(),
+                    // ...List.generate(
+                    //     uController.userModel!.regularTasks![now.weekday]!.length,
+                    //     (index) {
+                    //   return Container(
+                    //     padding: EdgeInsets.symmetric(horizontal: 20),
+                    //     width: MediaQuery.of(context).size.width,
+                    //     margin: EdgeInsets.only(bottom: 12),
+                    //     child: Container(
+                    //       padding: EdgeInsets.all(16),
+                    //       decoration: BoxDecoration(
+                    //           borderRadius: BorderRadius.circular(16),
+                    //           color: Colors.pinkAccent),
+                    //       child: Text(
+                    //         uController.userModel!
+                    //             .regularTasks![now.weekday]![index].scheduleTime,
+                    //         style: TextStyle(
+                    //           color: Colors.black,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   );
+                    // })
+                  ],
+                ),
+              ),
+            )
           ],
         ),
-      );
-    });
-    return GetBuilder<UserController>(builder: (uController) {
-      // uController.userModel!.drinkPillAlerms!.forEach((key, value) {
-      //   print(key);
-      //   print(value);
-      // });
-      // print('uController.userModel : ${uController.userModel}');
-
-      return Scaffold(
-        appBar: AppBar(),
-        body: BackgroundWidget(
-            widget: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: RS.h10 * 2,
-              horizontal: RS.w10 * 1.6,
-            ),
-            child: Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children:
-                        uController.userModel!.regularTasks!.entries.map((e) {
-                      return Padding(
-                        padding: EdgeInsets.only(right: RS.w10 * 4),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              width: 80,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.grey, width: 1),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  intDayToString(e.key - 1),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: RS.h10),
-                            Column(
-                              children: e.value.map((alarm) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    print('alarm. : ${alarm.alermId}');
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                        width: 60,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          color: Colors.pinkAccent,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: Center(
-                                            child: Text(alarm.scheduleTime))),
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ],
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        )),
       );
     });
   }
@@ -245,19 +168,19 @@ class _ManageAlermScreenState extends State<ManageAlermScreen> {
 
 String intDayToString(int? day) {
   switch (day) {
-    case 0:
-      return '월';
     case 1:
-      return '화';
+      return '월';
     case 2:
-      return '수';
+      return '화';
     case 3:
-      return '목';
+      return '수';
     case 4:
-      return '금';
+      return '목';
     case 5:
-      return '토';
+      return '금';
     case 6:
+      return '토';
+    case 7:
       return '일';
     default:
       return '월';

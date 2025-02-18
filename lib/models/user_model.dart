@@ -20,8 +20,9 @@ class UserModel {
   List<String>? selectedMorningLunchEvening; // 0:아침, 1:점심, 2: 저녁
   @HiveField(3)
   List<int>? selectedDays; // 0:월, 1: 화
-  @HiveField(4)
-  Map<int, List<RegularTaskModel>>? regularTasks;
+  // @HiveField(4)
+  // // Map<int, List<RegularTaskModel>>? regularTasks;
+  // List<TaskModel> tasks;
 
   @HiveField(5)
   List<TaskModel>? tasks;
@@ -33,7 +34,6 @@ class UserModel {
   UserModel({
     this.selectedMorningLunchEvening,
     this.selectedDays,
-    this.regularTasks,
     this.tasks,
     this.backgroundIndex,
     this.fealIconIndex,
@@ -44,6 +44,6 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, createdAt: $createdAt, selectedMorningLunchEvening: $selectedMorningLunchEvening, selectedDays: $selectedDays, drinkPillAlerms: $regularTasks, backgroundIndex: $backgroundIndex, fealIconIndex: $fealIconIndex)';
+    return 'UserModel(id: $id, createdAt: $createdAt, selectedMorningLunchEvening: $selectedMorningLunchEvening, selectedDays: $selectedDays, backgroundIndex: $backgroundIndex, fealIconIndex: $fealIconIndex)';
   }
 }

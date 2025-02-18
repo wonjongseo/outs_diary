@@ -25,7 +25,7 @@ class NotificationService {
   }
 
   /// 📌 매주 특정 요일/시간에 반복되는 알람 설정
-  Future<void> scheduleWeeklyNotification({
+  Future<tz.TZDateTime?> scheduleWeeklyNotification({
     required int id,
     required String title,
     required String message,
@@ -38,7 +38,7 @@ class NotificationService {
 
     if (scheduledDate == null) {
       print("⚠️ 유효하지 않은 날짜입니다. 알람을 설정하지 않습니다.");
-      return;
+      return null;
     }
 
     print("📢 주간 알람 등록: ${scheduledDate.toString()}");
@@ -63,6 +63,8 @@ class NotificationService {
           UILocalNotificationDateInterpretation.wallClockTime,
       matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
     );
+
+    return scheduledDate;
   }
 
   /// 📌 특정 날짜에 한 번만 울리는 알람 설정
@@ -119,9 +121,9 @@ class NotificationService {
         scheduledDate = scheduledDate.add(const Duration(days: 1));
       }
 
-      if (scheduledDate.isBefore(now)) {
-        scheduledDate = scheduledDate.add(const Duration(days: 7));
-      }
+      // if (scheduledDate.isBefore(now)) {
+      //   scheduledDate = scheduledDate.add(const Duration(days: 7));
+      // }
 
       return scheduledDate;
     } catch (e) {

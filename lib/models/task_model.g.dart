@@ -20,6 +20,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       taskName: fields[0] as String,
       taskDate: fields[1] as DateTime,
       notifications: (fields[4] as List).cast<NotificationModel>(),
+      isRegular: fields[5] == null ? false : fields[5] as bool,
     )
       ..id = fields[2] as String
       ..createdAt = fields[3] as int;
@@ -28,7 +29,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
   @override
   void write(BinaryWriter writer, TaskModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.taskName)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       ..writeByte(3)
       ..write(obj.createdAt)
       ..writeByte(4)
-      ..write(obj.notifications);
+      ..write(obj.notifications)
+      ..writeByte(5)
+      ..write(obj.isRegular);
   }
 
   @override
