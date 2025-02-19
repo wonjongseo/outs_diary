@@ -24,7 +24,7 @@ class OnBoarding2Card extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: isSelected ? Colors.pinkAccent : Colors.grey,
+          color: isSelected ? AppColors.primaryColor : Colors.grey,
         ),
       ),
       child: Row(
@@ -56,7 +56,7 @@ class OnBoarding2Card extends StatelessWidget {
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.grey[400]!),
                         color: AppColors.white,
-                        // color: Colors.pinkAccent,
+                        // color: AppColors.primaryColor,
                       ),
                       child: Center(
                         child: Icon(displayArticle.icons[index]),

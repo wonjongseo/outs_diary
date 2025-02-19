@@ -6,10 +6,9 @@ import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/notification_model.dart';
-import 'package:ours_log/models/regular_task_modal.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
-import 'package:ours_log/views/manage_alrem/manage_alrem_screen.dart';
+import 'package:ours_log/views/onBoarding/widgets/onBoarding8.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:ours_log/controller/notification_controller.dart';
@@ -82,6 +81,9 @@ class OnboardingController extends GetxController {
       await [Permission.notification].request();
     }
   }
+
+  // For OnBoarding8
+  int selectedColorIndex = 0;
 
   int pageIndex = 0;
   late PageController pageController;
@@ -233,25 +235,6 @@ class OnboardingController extends GetxController {
             ),
           );
         }
-        // for (String time in times) {
-        //   int hour = int.parse(time.split(':')[0]);
-        //   int minute = int.parse(time.split(':')[1]);
-
-        //   int id = day * Random().nextInt(1000) +
-        //       hour * Random().nextInt(100) +
-        //       minute +
-        //       Random().nextInt(10);
-
-        //   notificationService.scheduleWeeklyNotification(
-        //     title: '💊 약 복용 알림',
-        //     message: '${day}/${intDayToString(day)}/${time} 시간에 약을 복용하세요!',
-        //     channelDescription: '매주 특정 요일 및 시간에 알림을 받습니다',
-        //     id: id,
-        //     weekday: day,
-        //     hour: hour,
-        //     minute: minute,
-        //   );
-        // }
       }
     }
 
@@ -260,6 +243,7 @@ class OnboardingController extends GetxController {
       selectedDays: selectedDays,
       backgroundIndex: backgroundIndex,
       fealIconIndex: fealIconIndex,
+      colorIndex: selectedColorIndex,
       tasks: tasks,
     );
 
@@ -288,6 +272,7 @@ class OnboardingController extends GetxController {
       FadeInRight(child: const Onboarding5()),
       FadeInRight(child: Onboarding6()),
       FadeInRight(child: const Onboarding7()),
+      FadeInRight(child: const Onboarding8()),
     ]);
   }
 

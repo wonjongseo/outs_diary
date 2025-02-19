@@ -168,7 +168,6 @@ class _GraphBodyState extends State<GraphBody> {
                     child: Padding(
                       padding: EdgeInsets.only(
                         right: RS.w10 * 2,
-                        // horizontal: ,
                       ),
                       child: fealGraphData == null
                           ? Container()

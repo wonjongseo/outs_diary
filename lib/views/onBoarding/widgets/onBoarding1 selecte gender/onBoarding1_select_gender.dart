@@ -1,3 +1,4 @@
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -54,8 +55,9 @@ class OnBoarding1 extends StatelessWidget {
                 width: size.width / 3 - 30,
                 height: size.width / 3 - 30,
                 decoration: BoxDecoration(
-                  color:
-                      genderType == GenderType.MAIL ? Colors.pinkAccent : null,
+                  color: genderType == GenderType.MAIL
+                      ? AppColors.primaryColor
+                      : null,
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(color: Colors.grey),
                 ),
@@ -81,7 +83,7 @@ class OnBoarding1 extends StatelessWidget {
                 height: size.width / 3 - 30,
                 decoration: BoxDecoration(
                   color: genderType == GenderType.FEMAIL
-                      ? Colors.pinkAccent
+                      ? AppColors.primaryColor
                       : null,
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(color: Colors.grey),
@@ -108,7 +110,7 @@ class OnBoarding1 extends StatelessWidget {
                 height: size.width / 3 - 30,
                 decoration: BoxDecoration(
                   color: genderType == GenderType.ANOTHER
-                      ? Colors.pinkAccent
+                      ? AppColors.primaryColor
                       : null,
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(color: Colors.grey),

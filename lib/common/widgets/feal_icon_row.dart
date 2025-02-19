@@ -26,7 +26,7 @@ class FealIconRow extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected ? Colors.pinkAccent : Colors.grey,
+            color: isSelected ? AppColors.primaryColor : Colors.grey,
           ),
         ),
         child: Row(

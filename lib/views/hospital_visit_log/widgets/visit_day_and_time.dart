@@ -1,3 +1,4 @@
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -60,8 +61,8 @@ class VisitDayAndTime extends StatelessWidget {
                   Text(
                     '알람 등록',
                     style: controller.isEnrollAlarm
-                        ? const TextStyle(
-                            color: Colors.pinkAccent,
+                        ? TextStyle(
+                            color: AppColors.primaryColor,
                             fontWeight: FontWeight.w600,
                           )
                         : const TextStyle(),
@@ -69,7 +70,7 @@ class VisitDayAndTime extends StatelessWidget {
                   SizedBox(width: RS.w10),
                   CircleAvatar(
                     backgroundColor: controller.isEnrollAlarm
-                        ? Colors.pinkAccent
+                        ? AppColors.primaryColor
                         : Colors.grey,
                     radius: RS.w10 * 1.2,
                     child: Icon(
@@ -82,10 +83,10 @@ class VisitDayAndTime extends StatelessWidget {
               ),
             ),
             if (controller.isEnrollAlarm) ...[
-              SizedBox(height: RS.h10 * 4),
+              SizedBox(height: RS.h10 * 2),
               Column(
                 children: [
-                  const Text('알람을 받을 시간을 선택해주세요!'),
+                  const Text('알람을 받을 시간을 선택해주세요'),
                   SizedBox(height: RS.h10 * 2),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -168,7 +169,7 @@ class SelectBeforeAlarmTime extends StatelessWidget {
       width: width,
       margin: EdgeInsets.symmetric(horizontal: RS.w10 / 2),
       decoration: BoxDecoration(
-        color: isActive ? Colors.pinkAccent : Colors.grey[300],
+        color: isActive ? AppColors.primaryColor : Colors.grey[300],
         borderRadius: BorderRadius.circular(10),
       ),
       child: Center(

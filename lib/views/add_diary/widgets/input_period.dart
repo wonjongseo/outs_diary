@@ -23,8 +23,8 @@ class InputPeriod extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: true
-                      ? Colors.pinkAccent
-                      : Colors.pinkAccent.withValues(alpha: .5),
+                      ? AppColors.primaryColor
+                      : AppColors.primaryColor.withValues(alpha: .5),
                   foregroundColor: true ? Colors.white : Colors.grey,
                   padding: EdgeInsets.symmetric(
                     horizontal: RS.w10 * 5,

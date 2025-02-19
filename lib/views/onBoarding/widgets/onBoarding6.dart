@@ -1,3 +1,4 @@
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
@@ -42,7 +43,7 @@ class Onboarding6 extends StatelessWidget {
                                         .selectedMorningLunchEvening
                                         .contains(index)
                                     ? Border.all(
-                                        color: Colors.pinkAccent, width: 2)
+                                        color: AppColors.primaryColor, width: 2)
                                     : Border.all(color: Colors.grey, width: 1),
                                 borderRadius:
                                     BorderRadius.circular(RS.w10 * 2.5)),
@@ -83,7 +84,8 @@ class Onboarding6 extends StatelessWidget {
                                     border: onboardingController.selectedDays
                                             .contains(index)
                                         ? Border.all(
-                                            color: Colors.pinkAccent, width: 2)
+                                            color: AppColors.primaryColor,
+                                            width: 2)
                                         : Border.all(
                                             color: Colors.grey, width: 1),
                                     borderRadius:

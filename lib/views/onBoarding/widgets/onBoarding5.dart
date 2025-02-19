@@ -1,3 +1,4 @@
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/state_manager.dart';
@@ -31,12 +32,11 @@ class Onboarding5 extends StatelessWidget {
                   width: size.width / 3 - 30,
                   height: size.width / 3 - 30,
                   decoration: BoxDecoration(
-                    color: onboardingController.isDrinkingPill != null &&
-                            onboardingController.isDrinkingPill == true
-                        ? Colors.pinkAccent
-                        : null,
                     borderRadius: BorderRadius.circular(RS.w10 * 1.5),
-                    border: Border.all(color: Colors.grey),
+                    border: onboardingController.isDrinkingPill != null &&
+                            onboardingController.isDrinkingPill == true
+                        ? Border.all(color: AppColors.primaryColor, width: 2)
+                        : Border.all(color: Colors.grey),
                   ),
                   child: const Center(
                     child: Column(
@@ -54,12 +54,11 @@ class Onboarding5 extends StatelessWidget {
                   width: size.width / 3 - 30,
                   height: size.width / 3 - 30,
                   decoration: BoxDecoration(
-                    color: onboardingController.isDrinkingPill != null &&
+                    borderRadius: BorderRadius.circular(RS.w10 * 1.5),
+                    border: onboardingController.isDrinkingPill != null &&
                             onboardingController.isDrinkingPill == false
-                        ? Colors.pinkAccent
-                        : null,
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.grey),
+                        ? Border.all(color: AppColors.primaryColor, width: 2)
+                        : Border.all(color: Colors.grey),
                   ),
                   child: const Center(
                     child: Column(

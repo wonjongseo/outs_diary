@@ -4,6 +4,8 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.updatedText: AppString.updatedTextJp,
+          AppString.askShutDownMsg: AppString.askShutDownMsgJp,
           AppString.today: AppString.todayJp,
           AppString.background5Desc: AppString.background5DescJp,
           AppString.noCameraPermssionMsg: AppString.noCameraPermssionMsgJp,
@@ -68,7 +70,7 @@ class AppTranslations extends Translations {
           AppString.hasipitalTextTr: AppString.hasipitalTextJp,
           AppString.hasipitalNumTextTr: AppString.hasipitalNumTextJp,
           AppString.yesTextTr: AppString.yesTextJp,
-          AppString.noTextTr: AppString.noTextJp,
+          AppString.noText: AppString.noTextJp,
           AppString.coutionTr: AppString.coutionJp,
           AppString.plzSelectFeal: AppString.plzSelectFealJp,
           AppString.previousDeletePetMsg2Tr: AppString.previousDeletePetMsg2Jp,
@@ -152,8 +154,6 @@ class AppTranslations extends Translations {
           AppString.stampIsText: AppString.stampIsTextJp,
           AppString.changedVisiableMsg: AppString.changedVisiableMsgJp,
           AppString.changedInVisiableMsg: AppString.changedInVisiableMsgJp,
-          AppString.yesBtn: AppString.yesBtnJp,
-          AppString.noBtn: AppString.noBtnJp,
           AppString.errorCreateEmail1: AppString.errorCreateEmail1Jp,
           AppString.errorCreateEmail2: AppString.errorCreateEmail2Jp,
           AppString.tipOffMessage: AppString.tipOffMessageJp,
@@ -162,6 +162,8 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.updatedText: AppString.updatedTextKr,
+          AppString.askShutDownMsg: AppString.askShutDownMsgKr,
           AppString.today: AppString.todayKr,
           AppString.background5Desc: AppString.background5DescKr,
           AppString.noCameraPermssionMsg: AppString.noCameraPermssionMsgKr,
@@ -223,7 +225,7 @@ class AppTranslations extends Translations {
           AppString.hasipitalTextTr: AppString.hasipitalTextKr,
           AppString.hasipitalNumTextTr: AppString.hasipitalNumTextKr,
           AppString.yesTextTr: AppString.yesTextKr,
-          AppString.noTextTr: AppString.noTextKr,
+          AppString.noText: AppString.noTextKr,
           AppString.coutionTr: AppString.coutionKr,
           AppString.plzSelectFeal: AppString.plzSelectFealKr,
           AppString.previousDeletePetMsg2Tr: AppString.previousDeletePetMsg2Kr,
@@ -307,8 +309,6 @@ class AppTranslations extends Translations {
           AppString.stampIsText: AppString.stampIsTextKr,
           AppString.changedVisiableMsg: AppString.changedVisiableMsgKr,
           AppString.changedInVisiableMsg: AppString.changedInVisiableMsgkr,
-          AppString.yesBtn: AppString.yesBtnKr,
-          AppString.noBtn: AppString.noBtnKr,
           AppString.errorCreateEmail1: AppString.errorCreateEmail1Kr,
           AppString.errorCreateEmail2: AppString.errorCreateEmail2Kr,
           AppString.tipOffMessage: AppString.tipOffMessageKr,
@@ -320,6 +320,8 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.updatedText: AppString.updatedTextEn,
+          AppString.askShutDownMsg: AppString.askShutDownMsgEn,
           AppString.today: AppString.todayEn,
           AppString.background5Desc: AppString.background5DescEn,
           AppString.noCameraPermssionMsg: AppString.noCameraPermssionMsgEn,
@@ -381,7 +383,7 @@ class AppTranslations extends Translations {
           AppString.hasipitalTextTr: AppString.hasipitalTextEn,
           AppString.hasipitalNumTextTr: AppString.hasipitalNumTextEn,
           AppString.yesTextTr: AppString.yesTextEn,
-          AppString.noTextTr: AppString.noTextEn,
+          AppString.noText: AppString.noTextEn,
           AppString.coutionTr: AppString.coutionEn,
           AppString.plzSelectFeal: AppString.plzSelectFealEn,
           AppString.previousDeletePetMsg2Tr: AppString.previousDeletePetMsg2En,
@@ -465,8 +467,6 @@ class AppTranslations extends Translations {
           AppString.stampIsText: AppString.stampIsTextEn,
           AppString.changedVisiableMsg: AppString.changedVisiableMsgEn,
           AppString.changedInVisiableMsg: AppString.changedInVisiableMsgEn,
-          AppString.yesBtn: AppString.yesBtnEn,
-          AppString.noBtn: AppString.noBtnEn,
           AppString.errorCreateEmail1: AppString.errorCreateEmail1En,
           AppString.errorCreateEmail2: AppString.errorCreateEmail2En,
           AppString.tipOffMessage: AppString.tipOffMessageEn,
@@ -722,7 +722,12 @@ class AppString {
   static String yesTextJp = "はい";
   static String yesTextEn = "Yes";
 
-  static String noTextTr = "noTextTr";
+  static String updatedText = "updatedTextTr";
+  static String updatedTextKr = '변경됨';
+  static String updatedTextJp = "変更済み";
+  static String updatedTextEn = "Updated";
+
+  static String noText = "noTextTr";
   static String noTextKr = '아니요';
   static String noTextJp = "いいえ";
   static String noTextEn = "No";
@@ -1199,16 +1204,6 @@ class AppString {
   static String changedInVisiableMsgJp = 'が未表示に変更されました。';
   static String changedInVisiableMsgEn = "has been changed invisiblely";
 
-  static String yesBtn = "yesBtnTr";
-  static String yesBtnKr = '네!';
-  static String yesBtnJp = "はい!";
-  static String yesBtnEn = "Yes!";
-
-  static String noBtn = "noBtnTr";
-  static String noBtnKr = '아뇨!';
-  static String noBtnJp = "いいえ!";
-  static String noBtnEn = "No!";
-
   static String noCameraPermssionMsg = 'noCameraPermssionMsgTr';
   static String noCameraPermssionMsgKr = '카메라 접근 권한이 없습니다.';
   static String noCameraPermssionMsgJp = 'カメラのアクセス権限がないです。';
@@ -1256,6 +1251,11 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String setLanguageKr = '언어 선택';
   static String setLanguageJp = '言語選択';
   static String setLanguageEn = "Language";
+
+  static String askShutDownMsg = 'askShutDownMsgTr';
+  static String askShutDownMsgKr = '재기동 하시겠습니까?';
+  static String askShutDownMsgJp = '再起動しますか。';
+  static String askShutDownMsgEn = "Would you like to restart the app?";
 
   static String reportMsgContect = "reportMsgContectTr";
   static String reportMsgContectEn = "";

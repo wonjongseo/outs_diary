@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
+import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/controller/image_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
@@ -64,7 +65,7 @@ class AddDiaryController extends GetxController {
 
   void onTapSaveBtn() async {
     if (selectedFealIndex == -1) {
-      AppFunction.vaildTextFeildSnackBar(
+      AppSnackbar.vaildTextFeildSnackBar(
         title: AppString.requiredText.tr,
         message: AppString.plzSelectFeal.tr,
       );
@@ -99,7 +100,7 @@ class AddDiaryController extends GetxController {
 
     diaryController.insert(newDiaryModel);
 
-    AppFunction.vaildTextFeildSnackBar(
+    AppSnackbar.vaildTextFeildSnackBar(
         title: '성공', message: '${selectedDay.day}일의 건강이 기록되었습니다.');
   }
 

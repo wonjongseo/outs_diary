@@ -66,7 +66,7 @@ class ImageOfToday extends StatelessWidget {
                 child: IconButton(
                   style: IconButton.styleFrom(
                     padding: EdgeInsets.zero,
-                    backgroundColor: Colors.pinkAccent,
+                    backgroundColor: AppColors.primaryColor,
                     foregroundColor: AppColors.white,
                     minimumSize: const Size(30, 30),
                   ),

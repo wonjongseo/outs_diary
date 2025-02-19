@@ -16,7 +16,7 @@ class CustomButton extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: RS.w10),
         height: 60,
         decoration: BoxDecoration(
-          color: Colors.pinkAccent,
+          color: AppColors.primaryColor,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Center(

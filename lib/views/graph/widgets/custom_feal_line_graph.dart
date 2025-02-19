@@ -1,3 +1,4 @@
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ class CustomFealLineGraph extends StatelessWidget {
       aspectRatio: 1.75,
       child: LineChart(
         LineChartData(
+          gridData: const FlGridData(show: true, drawVerticalLine: false),
           lineTouchData: LineTouchData(
               touchTooltipData: LineTouchTooltipData(
             getTooltipColor: (touchedSpot) => Colors.grey,
@@ -92,7 +94,7 @@ class CustomFealLineGraph extends StatelessWidget {
                 reservedSize: 50,
                 interval: 1,
                 getTitlesWidget: (value, meta) {
-                  Color color = Colors.pinkAccent;
+                  Color color = AppColors.primaryColor;
                   String text = '';
 
                   switch (value) {

@@ -51,18 +51,22 @@ class _FealGraphState extends State<FealGraph> {
         children: [
           GestureDetector(
             onTap: onToggleGraph,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                if (pageIndex == 1) Icon(Icons.keyboard_arrow_left),
-                Text(pageIndex == 0 ? '원형 그래프' : '그래프'),
-                if (pageIndex == 0) Icon(Icons.keyboard_arrow_right),
-              ],
+            child: Padding(
+              padding: EdgeInsets.only(left: RS.w10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  if (pageIndex == 1) const Icon(Icons.keyboard_arrow_left),
+                  Text(pageIndex == 0 ? '원형 그래프' : '선형 그래프'),
+                  if (pageIndex == 0) const Icon(Icons.keyboard_arrow_right),
+                ],
+              ),
             ),
           ),
           SizedBox(height: RS.h10),
           Expanded(
             child: PageView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               controller: pageController,
               itemCount: 2,
               itemBuilder: (context, index) {

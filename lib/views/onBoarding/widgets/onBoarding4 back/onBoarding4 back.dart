@@ -54,7 +54,7 @@
 //                           decoration: BoxDecoration(
 //                             shape: BoxShape.circle,
 //                             color: backgroundController.backgroundIndex == index
-//                                 ? Colors.pinkAccent
+//                                 ? AppColors.primaryColor
 //                                 : Colors.grey,
 //                           ),
 //                           child: backgroundController.backgroundIndex == index

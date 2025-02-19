@@ -1,3 +1,4 @@
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,7 +50,7 @@ class SetBackgroundScreen extends StatelessWidget {
                                 color: backgroundController
                                             .userModel?.backgroundIndex ==
                                         index
-                                    ? Colors.pinkAccent
+                                    ? AppColors.primaryColor
                                     : Colors.grey,
                               ),
                               child: backgroundController

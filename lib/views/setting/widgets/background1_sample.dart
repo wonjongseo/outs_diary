@@ -1,3 +1,4 @@
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
@@ -26,7 +27,7 @@ class BackGround1Sample extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(RS.w10 / 2),
           border: Border.all(
-            color: isSelected ? Colors.pinkAccent : Colors.grey,
+            color: isSelected ? AppColors.primaryColor : Colors.grey,
             width: isSelected ? 3 : 2,
           ),
         ),

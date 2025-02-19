@@ -65,7 +65,7 @@ class _ExpansionIconCardState extends State<ExpansionIconCard> {
                       size: RS.w10 * 4,
                       color: widget.selectedIconIndexs.contains(index) ||
                               selectedIndex == index
-                          ? Colors.pinkAccent
+                          ? AppColors.primaryColor
                           : null,
                     ),
                     SizedBox(height: RS.h10 / 2),
@@ -77,7 +77,7 @@ class _ExpansionIconCardState extends State<ExpansionIconCard> {
                       style: TextStyle(
                         color: widget.selectedIconIndexs.contains(index) ||
                                 selectedIndex == index
-                            ? Colors.pinkAccent
+                            ? AppColors.primaryColor
                             : null,
                       ),
                     )

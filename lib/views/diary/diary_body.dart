@@ -101,10 +101,11 @@ class _DiaryBodyState extends State<DiaryBody> {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: isToday
-                ? Border.all(color: Colors.pinkAccent.withValues(alpha: .5))
+                ? Border.all(
+                    color: AppColors.primaryColor.withValues(alpha: .5))
                 : null,
             color: isToday
-                ? Colors.pinkAccent.withValues(alpha: .5)
+                ? AppColors.primaryColor.withValues(alpha: .5)
                 : isNextDay
                     ? Colors.grey.withOpacity(.15)
                     : Colors.grey.withOpacity(.4),
@@ -138,7 +139,7 @@ class _DiaryBodyState extends State<DiaryBody> {
       return Column(
         children: [
           CircleAvatar(
-            backgroundColor: isToday ? Colors.pinkAccent : AppColors.white,
+            backgroundColor: isToday ? AppColors.primaryColor : AppColors.white,
             foregroundImage: AssetImage(
               AppConstant
                   .fealIconLists[

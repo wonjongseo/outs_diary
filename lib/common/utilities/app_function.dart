@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
+
 import 'package:photo_manager/photo_manager.dart';
 
 bool get isKo => Get.locale.toString().contains('ko');
@@ -71,43 +71,6 @@ class AppFunction {
     );
   }
 
-  static void vaildTextFeildSnackBar({
-    required String title,
-    required String message,
-    Duration? duration,
-  }) {
-    AppFunction.showSnackBar(
-      title,
-      message,
-      FontAwesomeIcons.check,
-      Colors.redAccent,
-      duration ?? const Duration(seconds: 3),
-    );
-  }
-
-  static void invaildTextFeildSnackBar({
-    required String title,
-    required String message,
-    Duration? duration,
-  }) {
-    AppFunction.showSnackBar(title, message, FontAwesomeIcons.exclamation,
-        Colors.redAccent, duration ?? const Duration(seconds: 3));
-  }
-
-  static void showSnackBar(String title, String message, IconData iconData,
-      Color borderColor, Duration duration) {
-    if (!Get.isSnackbarOpen) {
-      Get.snackbar(
-        title,
-        message,
-        icon: Icon(iconData),
-        duration: duration,
-        borderWidth: 1,
-        borderColor: borderColor,
-      );
-    }
-  }
-
   static int createIdByDay(int day, int hour, int minute) {
     return day * Random().nextInt(1000) +
         hour * Random().nextInt(100) +
@@ -116,4 +79,25 @@ class AppFunction {
   }
 
   static void showNoPermissionSnackBar({required message}) {}
+}
+
+String intDayToString(int? day) {
+  switch (day) {
+    case 1:
+      return '월';
+    case 2:
+      return '화';
+    case 3:
+      return '수';
+    case 4:
+      return '목';
+    case 5:
+      return '금';
+    case 6:
+      return '토';
+    case 7:
+      return '일';
+    default:
+      return '월';
+  }
 }

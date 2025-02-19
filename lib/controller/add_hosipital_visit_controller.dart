@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
+import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/controller/notification_controller.dart';
@@ -187,27 +188,26 @@ class AddHosipitalVisitController extends GetxController {
       return;
     }
     if (isEnrollAlarm && startTime == null) {
-      AppFunction.invaildTextFeildSnackBar(
+      AppSnackbar.invaildTextFeildSnackBar(
           title: AppString.requiredText.tr,
           message: '알람을 등록하기 위해서, 방문 시간을 선택해주세요.');
       AppFunction.scrollGoToTop(scrollController);
       return;
     }
     String hospitalName = hospitalNameCtl.text;
-
     if (hospitalName.isEmpty) {
-      AppFunction.invaildTextFeildSnackBar(
+      AppSnackbar.invaildTextFeildSnackBar(
           title: AppString.requiredText.tr, message: '병원 이름을 입력해주세요');
       AppFunction.scrollGoToTop(scrollController);
       return;
     }
+
+    int hour = int.parse(startTime!.split(':')[0]);
+    int minute = int.parse(startTime!.split(':')[1]);
+
+    DateTime scheduledDate = DateTime(
+        selectedDate.year, selectedDate.month, selectedDate.day, hour, minute);
     if (isEnrollAlarm && startTime != null) {
-      int hour = int.parse(startTime!.split(':')[0]);
-      int minute = int.parse(startTime!.split(':')[1]);
-
-      DateTime scheduledDate = DateTime(selectedDate.year, selectedDate.month,
-          selectedDate.day, hour, minute);
-
       if (isBeforeOneDayAlarm) {
         DateTime subScheduledDate =
             scheduledDate.subtract(const Duration(days: 1));
@@ -253,11 +253,9 @@ class AddHosipitalVisitController extends GetxController {
           if (hhour == null && mminute == null) {
             return;
           }
-          print('dmminute : ${mminute}');
 
           DateTime subScheduledDate = scheduledDate
               .subtract(Duration(hours: hhour!, minutes: mminute!));
-          print('subScheduledDate : ${subScheduledDate}');
 
           enrollSchedule(
             hospitalName,
@@ -269,12 +267,11 @@ class AddHosipitalVisitController extends GetxController {
           );
         }
       }
-
-      userController.addTask(TaskModel(
-          taskName: '$hospitalName 방문',
-          taskDate: scheduledDate,
-          notifications: notifications));
     }
+    userController.addTask(TaskModel(
+        taskName: '$hospitalName 방문',
+        taskDate: scheduledDate,
+        notifications: notifications));
 
     String officeName = officeNameCtl.text;
     String diseaseName = diseaseNameCtl.text;
@@ -304,7 +301,7 @@ class AddHosipitalVisitController extends GetxController {
     hospitalLogController.save(newHospitalLogModel);
     Get.back();
 
-    AppFunction.vaildTextFeildSnackBar(
+    AppSnackbar.vaildTextFeildSnackBar(
       title: hospitalLogModel == null ? '저장' : '변경',
       message:
           hospitalLogModel == null ? '병원 기록이 저장 되었습니다.' : '병원 기록이 변경 되었습니다.',

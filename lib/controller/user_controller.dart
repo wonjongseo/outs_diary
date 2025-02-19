@@ -3,6 +3,7 @@ import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
+import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/respository/user_respository.dart';
 
 class UserController extends GetxController {
@@ -13,6 +14,8 @@ class UserController extends GetxController {
     getUser();
   }
 
+  bool isDarkMode = false;
+
   UserModelRepository userModelRepository = UserModelRepository();
 
   void addTask(TaskModel task) {
@@ -21,6 +24,23 @@ class UserController extends GetxController {
       userModel!.tasks = [];
     }
     userModel!.tasks!.add(task);
+    userModelRepository.saveUser(userModel!);
+
+    getUser();
+  }
+
+  void changePrimaryColor(int index) {
+    userModel!.colorIndex = index;
+    userModelRepository.saveUser(userModel!);
+    getUser();
+  }
+
+  void deleteTask(TaskModel task) {
+    if (userModel == null) return;
+    if (userModel!.tasks == null) {
+      return;
+    }
+    userModel!.tasks!.remove(task);
     userModelRepository.saveUser(userModel!);
 
     getUser();
@@ -49,8 +69,15 @@ class UserController extends GetxController {
   @override
   void onInit() async {
     getUser();
+    getThemeData();
     // getBackgroundIndex();
     super.onInit();
+  }
+
+  void getThemeData() async {
+    isDarkMode =
+        await SettingRepository.getBool(AppConstant.isDarkModeKey) ?? false;
+    print('isDarkMode : ${isDarkMode}');
   }
 
   void getUser() async {

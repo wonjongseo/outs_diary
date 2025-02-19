@@ -22,6 +22,7 @@ class CustomLineGraph extends StatelessWidget {
       aspectRatio: 1.75,
       child: LineChart(
         LineChartData(
+          gridData: const FlGridData(show: true, drawVerticalLine: false),
           lineBarsData: [
             LineChartBarData(
               preventCurveOverShooting: true,

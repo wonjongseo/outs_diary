@@ -87,7 +87,7 @@ class OnBoardingScreen extends StatelessWidget {
                       (onboardingController.pageIndex + 1) /
                       10)
                   .toDouble(),
-              color: Colors.pinkAccent,
+              color: AppColors.primaryColor,
             ),
           ),
           if (onboardingController.pageIndex == 0) SizedBox(width: RS.w10 * 3),
@@ -105,7 +105,7 @@ class OnBoardingScreen extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: RS.w10),
           height: RS.h10 * 6,
           decoration: BoxDecoration(
-            color: Colors.pinkAccent,
+            color: AppColors.primaryColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Center(

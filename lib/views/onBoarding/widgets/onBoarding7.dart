@@ -1,11 +1,9 @@
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
-import 'package:ours_log/controller/notification_controller.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
-import 'package:ours_log/controller/user_controller.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class Onboarding7 extends StatefulWidget {
   const Onboarding7({super.key});
@@ -74,7 +72,7 @@ class _Onboarding7State extends State<Onboarding7> {
                       if (timeOfDay == null) {
                         return;
                       }
-                      userController.morningTime =
+                      userController.lunchTime =
                           '${timeOfDay.hour}:${timeOfDay.minute}';
                       setState(() {});
                     },
@@ -156,7 +154,7 @@ class AppointPillTime extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: RS.w10),
             decoration: BoxDecoration(
               color: isAlermEnable
-                  ? Colors.pinkAccent.withValues(alpha: .8)
+                  ? AppColors.primaryColor.withValues(alpha: .8)
                   : Colors.grey,
               borderRadius: BorderRadius.circular(RS.w10 * 1.5),
             ),

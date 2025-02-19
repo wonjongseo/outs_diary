@@ -1,3 +1,4 @@
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,7 +53,7 @@ class OnBoarding2 extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: backgroundController.backgroundIndex == index
-                                ? Colors.pinkAccent
+                                ? AppColors.primaryColor
                                 : Colors.grey,
                           ),
                           child: backgroundController.backgroundIndex == index
