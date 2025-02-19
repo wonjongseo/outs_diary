@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
@@ -16,12 +15,10 @@ import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/views/add_diary/add_diary_screen.dart';
 import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/full_Image_screen.dart';
+import 'package:ours_log/views/home/widgets/circle_aver_health_widget.dart';
 
 class SelectedDiary extends StatelessWidget {
-  const SelectedDiary({
-    super.key,
-    required this.diaryController,
-  });
+  const SelectedDiary({super.key, required this.diaryController});
 
   final DiaryController diaryController;
 
@@ -51,7 +48,7 @@ class SelectedDiary extends StatelessWidget {
                     ),
                     SizedBox(width: RS.w10),
                     Text(
-                      DateFormat.MMMEd(isKo ? 'ko' : 'ja')
+                      DateFormat.MMMEd(Get.locale.toString())
                           .format(diaryController.selectedDiary!.dateTime),
                     ),
                   ],
@@ -69,7 +66,7 @@ class SelectedDiary extends StatelessWidget {
                         );
                       },
                       icon: FaIcon(
-                        FontAwesomeIcons.edit,
+                        FontAwesomeIcons.pen,
                         size: RS.width20,
                       ),
                     ),
@@ -85,6 +82,9 @@ class SelectedDiary extends StatelessWidget {
               ],
             ),
             const Divider(),
+            if (diaryController.selectedDiary!.health != null) ...[
+              averHealthValue(),
+            ],
             ColTextAndWidget(
               label: AppString.whatDidYouHintMsg.tr,
               widget: CustomTextFormField(
@@ -97,7 +97,7 @@ class SelectedDiary extends StatelessWidget {
             if (diaryController.selectedDiary!.imagePath != null &&
                 diaryController.selectedDiary!.imagePath!.isNotEmpty)
               ColTextAndWidget(
-                label: '이런 일 들 이 있었죠~?',
+                label: AppString.photo.tr,
                 widget: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -114,10 +114,8 @@ class SelectedDiary extends StatelessWidget {
                             height: RS.w10 * 14,
                             margin: EdgeInsets.only(right: RS.w10),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(RS.w10 * 4),
-                              border: Border.all(
-                                color: Colors.grey,
-                              ),
+                              borderRadius: BorderRadius.circular(RS.w10 * 2),
+                              border: Border.all(color: Colors.grey),
                               image: DecorationImage(
                                 image: FileImage(
                                   File(imageUrl),
@@ -134,6 +132,46 @@ class SelectedDiary extends StatelessWidget {
               )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget averHealthValue() {
+    return Padding(
+      padding: EdgeInsets.all(RS.w10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          if (diaryController.selectedDiary!.health!.temperatures != null)
+            Tooltip(
+              message:
+                  diaryController.selectedDiary!.health!.tooltipMsgTemperature,
+              triggerMode: TooltipTriggerMode.tap,
+              child: CircleAverHealthWidget(
+                title: AppString.temperature.tr,
+                averValue:
+                    diaryController.selectedDiary!.health!.avgTemperature,
+              ),
+            ),
+          if (diaryController.selectedDiary!.health!.pulses != null)
+            Tooltip(
+              message: diaryController.selectedDiary!.health!.tooltipMsgPulse,
+              triggerMode: TooltipTriggerMode.tap,
+              child: CircleAverHealthWidget(
+                title: AppString.pulse.tr,
+                averValue: diaryController.selectedDiary!.health!.avgPulse,
+              ),
+            ),
+          if (diaryController.selectedDiary!.health!.weights != null)
+            Tooltip(
+              message: diaryController.selectedDiary!.health!.tooltipMsgWeight,
+              triggerMode: TooltipTriggerMode.tap,
+              child: CircleAverHealthWidget(
+                title: AppString.weight.tr,
+                averValue: diaryController.selectedDiary!.health!.avgWeight,
+              ),
+            ),
+        ],
       ),
     );
   }

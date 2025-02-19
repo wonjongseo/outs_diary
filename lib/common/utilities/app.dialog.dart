@@ -77,7 +77,7 @@ class AppDialog {
               child: Padding(
                 padding: EdgeInsets.all(RS.width15),
                 child: Text(
-                  AppString.yesTextTr.tr,
+                  AppString.yesText.tr,
                   style: TextStyle(
                     fontSize: RS.height14,
                     fontWeight: FontWeight.w600,

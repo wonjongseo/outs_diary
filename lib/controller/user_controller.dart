@@ -18,6 +18,32 @@ class UserController extends GetxController {
 
   UserModelRepository userModelRepository = UserModelRepository();
 
+  void toggleExpandedTemperature(bool v) {
+    userModel!.userUtilModel!.expandedTemperature =
+        !userModel!.userUtilModel!.expandedTemperature;
+
+    userModelRepository.saveUser(userModel!);
+    print('userModel!.userUtilModel! : ${userModel!.userUtilModel!}');
+
+    update();
+  }
+
+  void toggleExpandedPulse(bool v) {
+    userModel!.userUtilModel!.expandedPulse =
+        !userModel!.userUtilModel!.expandedPulse;
+
+    userModelRepository.saveUser(userModel!);
+    update();
+  }
+
+  void toggleExpandedbloodPressure(bool v) {
+    userModel!.userUtilModel!.expandedBloodPressure =
+        !userModel!.userUtilModel!.expandedBloodPressure;
+
+    userModelRepository.saveUser(userModel!);
+    update();
+  }
+
   void addTask(TaskModel task) {
     if (userModel == null) return;
     if (userModel!.tasks == null) {
@@ -82,6 +108,7 @@ class UserController extends GetxController {
 
   void getUser() async {
     userModel = await userModelRepository.loadUser();
+    print('userModel.userUtilModel : ${userModel!.userUtilModel}');
 
     update();
   }

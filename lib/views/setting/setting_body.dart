@@ -1,9 +1,12 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app.dialog.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
@@ -128,7 +131,7 @@ class _SettingBodyState extends State<SettingBody> {
                                 child: CircleAvatar(
                                   radius: RS.w10 * 2,
                                   foregroundColor: Colors.white,
-                                  backgroundColor: AppColors.pinkClr,
+                                  backgroundColor: AppColors.priPinkClr,
                                   child:
                                       userController.userModel!.colorIndex == 0
                                           ? Icon(Icons.done)
@@ -141,7 +144,7 @@ class _SettingBodyState extends State<SettingBody> {
                                 child: CircleAvatar(
                                   radius: RS.w10 * 2,
                                   foregroundColor: Colors.white,
-                                  backgroundColor: AppColors.yellowClr,
+                                  backgroundColor: AppColors.priYellowClr,
                                   child:
                                       userController.userModel!.colorIndex == 1
                                           ? Icon(Icons.done)
@@ -154,7 +157,7 @@ class _SettingBodyState extends State<SettingBody> {
                                 child: CircleAvatar(
                                   radius: RS.w10 * 2,
                                   foregroundColor: Colors.white,
-                                  backgroundColor: AppColors.greenClr,
+                                  backgroundColor: AppColors.priGreenClr,
                                   child:
                                       userController.userModel!.colorIndex == 2
                                           ? Icon(Icons.done)
@@ -167,7 +170,7 @@ class _SettingBodyState extends State<SettingBody> {
                                 child: CircleAvatar(
                                   radius: RS.w10 * 2,
                                   foregroundColor: Colors.white,
-                                  backgroundColor: AppColors.bluishClr,
+                                  backgroundColor: AppColors.priBluishClr,
                                   child:
                                       userController.userModel!.colorIndex == 3
                                           ? Icon(Icons.done)
@@ -180,7 +183,7 @@ class _SettingBodyState extends State<SettingBody> {
                                 child: CircleAvatar(
                                   radius: RS.w10 * 2,
                                   foregroundColor: Colors.white,
-                                  backgroundColor: AppColors.pubbleClr,
+                                  backgroundColor: AppColors.priPubbleClr,
                                   child:
                                       userController.userModel!.colorIndex == 4
                                           ? Icon(Icons.done)
@@ -307,6 +310,13 @@ class _SettingBodyState extends State<SettingBody> {
     }
     await Future.delayed(const Duration(milliseconds: 500));
 
+    bool result = await AppDialog.changeSystemLanguage();
+
+    if (result && kReleaseMode) {
+      exit(0);
+    }
+
+    setState(() {});
     setState(() {});
   }
 

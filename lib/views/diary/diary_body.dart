@@ -11,24 +11,15 @@ import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
-import 'package:ours_log/views/home/bodys/selected_dairy.dart';
+import 'package:ours_log/views/home/widgets/selected_dairy.dart';
 
 import 'package:table_calendar/table_calendar.dart';
 
-class DiaryBody extends StatefulWidget {
+class DiaryBody extends StatelessWidget {
   DiaryBody({super.key});
 
-  @override
-  State<DiaryBody> createState() => _DiaryBodyState();
-}
-
-class _DiaryBodyState extends State<DiaryBody> {
   final DiaryController diaryController = Get.find<DiaryController>();
   final UserController userController = Get.find<UserController>();
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +43,11 @@ class _DiaryBodyState extends State<DiaryBody> {
                   weekdayStyle: weekdayStyle,
                   weekendStyle: weekdayStyle,
                 ),
-                locale: isKo ? 'ko' : 'ja',
+                locale: isKo
+                    ? 'ko'
+                    : isJp
+                        ? 'ja'
+                        : 'en',
                 daysOfWeekHeight: RS.h10 * 3,
                 headerVisible: false,
                 onPageChanged: diaryController.onPageChanged,

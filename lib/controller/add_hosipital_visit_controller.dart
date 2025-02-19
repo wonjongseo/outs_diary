@@ -167,8 +167,8 @@ class AddHosipitalVisitController extends GetxController {
   void onTapVisitTime(BuildContext context) async {
     TimeOfDay? pickedTime = await showTimePicker(
       cancelText: AppString.cancelBtnTextTr.tr,
-      helpText: '방문 시간을 입력해주세요.',
-      errorInvalidText: '올바른 시간을 입력해주세요',
+      helpText: AppString.plzInputvisitTime.tr,
+      errorInvalidText: AppString.plzInputCollectTime.tr,
       hourLabelText: AppString.hour.tr,
       minuteLabelText: AppString.minute.tr,
       context: context,

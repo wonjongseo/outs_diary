@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
+import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
 
@@ -13,9 +14,8 @@ class Onboarding8 extends StatelessWidget {
       print('controller.backgroundIndex : ${controller.backgroundIndex}');
 
       return Column(children: [
-        Text('앱의 메인 색상을 선택해주세요!'),
+        Text(AppString.plzInputAppColor.tr),
         SizedBox(height: RS.h10 * 3),
-        // Text('앱의 메인 색상을 선택해주세요!'),
         Padding(
           padding: EdgeInsets.all(8.0),
           child: Row(
@@ -29,7 +29,7 @@ class Onboarding8 extends StatelessWidget {
                 child: CircleAvatar(
                   radius: RS.w10 * 3,
                   foregroundColor: Colors.white,
-                  backgroundColor: AppColors.pinkClr,
+                  backgroundColor: AppColors.priPinkClr,
                   child: controller.selectedColorIndex == 0
                       ? Icon(Icons.done)
                       : null,
@@ -46,7 +46,7 @@ class Onboarding8 extends StatelessWidget {
                       : null,
                   radius: RS.w10 * 3,
                   foregroundColor: Colors.white,
-                  backgroundColor: AppColors.yellowClr,
+                  backgroundColor: AppColors.priYellowClr,
                 ),
               ),
               GestureDetector(
@@ -57,7 +57,7 @@ class Onboarding8 extends StatelessWidget {
                 child: CircleAvatar(
                   radius: RS.w10 * 3,
                   foregroundColor: Colors.white,
-                  backgroundColor: AppColors.greenClr,
+                  backgroundColor: AppColors.priGreenClr,
                   child: controller.selectedColorIndex == 2
                       ? Icon(Icons.done)
                       : null,
@@ -71,7 +71,7 @@ class Onboarding8 extends StatelessWidget {
                 child: CircleAvatar(
                   radius: RS.w10 * 3,
                   foregroundColor: Colors.white,
-                  backgroundColor: AppColors.bluishClr,
+                  backgroundColor: AppColors.priBluishClr,
                   child: controller.selectedColorIndex == 3
                       ? Icon(Icons.done)
                       : null,
@@ -85,7 +85,7 @@ class Onboarding8 extends StatelessWidget {
                 child: CircleAvatar(
                   radius: RS.w10 * 3,
                   foregroundColor: Colors.white,
-                  backgroundColor: AppColors.pubbleClr,
+                  backgroundColor: AppColors.priPubbleClr,
                   child: controller.selectedColorIndex == 4
                       ? Icon(Icons.done)
                       : null,

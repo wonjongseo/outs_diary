@@ -4,6 +4,53 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.completeSetting: AppString.completeSettingJp,
+          AppString.regularSchedule: AppString.regularScheduleJp,
+          AppString.doYouCancleAlram: AppString.doYouCancleAlramJp,
+          AppString.cancledNotification: AppString.cancledNotificationJp,
+          AppString.photo: AppString.photoJp,
+          AppString.average: AppString.averageJp,
+          AppString.enrollVisitHospitalLog: AppString.enrollVisitHospitalLogJp,
+          AppString.scheduleManagement: AppString.scheduleManagementJp,
+          AppString.circularGraph: AppString.circularGraphJp,
+          AppString.linearGraph: AppString.linearGraphJp,
+          AppString.medicalCertificateOrPrescription:
+              AppString.medicalCertificateOrPrescriptionJp,
+          AppString.prescribedMedicine: AppString.prescribedMedicineJp,
+          AppString.hospitalName: AppString.hospitalNameJp,
+          AppString.officeName: AppString.officeNameJp,
+          AppString.diseaseName: AppString.diseaseNameJp,
+          AppString.diagnosis: AppString.diagnosisJp,
+          AppString.plzInputvisitTime: AppString.plzInputvisitTimeJp,
+          AppString.selectText: AppString.selectTextJp,
+          AppString.beforeDay: AppString.beforeDayJp,
+          AppString.beforeHour: AppString.beforeHourJp,
+          AppString.days: AppString.daysJp,
+          AppString.visitDay: AppString.visitDayJp,
+          AppString.visitTime: AppString.visitTimeJp,
+          AppString.enrollAlarm: AppString.enrollAlarmJp,
+          AppString.savedHealthRecord: AppString.savedHealthRecordJp,
+          AppString.painLevel: AppString.painLevelJp,
+          AppString.pillText: AppString.pillTextJp,
+          AppString.pillcCannelDescription: AppString.pillcCannelDescriptionJp,
+          AppString.drinkPillAlram: AppString.drinkPillAlramJp,
+          AppString.timeToDrink: AppString.timeToDrinkJp,
+          AppString.plzInputAppColor: AppString.plzInputAppColorJp,
+          AppString.plzInputCollectTime: AppString.plzInputCollectTimeJp,
+          AppString.plzAlarmTime: AppString.plzAlarmTimeJp,
+          AppString.doYouAlarmWhenDrinkPill:
+              AppString.doYouAlarmWhenDrinkPillJp,
+          AppString.whatWeekDayYouDrink: AppString.whatWeekDayYouDrinkJp,
+          AppString.monday: AppString.mondayJp,
+          AppString.tuesday: AppString.tuesdayJp,
+          AppString.wednesday: AppString.wednesdayJp,
+          AppString.thursday: AppString.thursdayJp,
+          AppString.friday: AppString.fridayJp,
+          AppString.saturday: AppString.saturdayJp,
+          AppString.sunday: AppString.sundayJp,
+          AppString.whatTimeDoYouDrinkPill: AppString.whatTimeDoYouDrinkPillJp,
+          AppString.doYouDrinkPill: AppString.doYouDrinkPillTextJp,
+          AppString.plzSelectFealIcon: AppString.plzSelectFealIconJp,
           AppString.updatedText: AppString.updatedTextJp,
           AppString.askShutDownMsg: AppString.askShutDownMsgJp,
           AppString.today: AppString.todayJp,
@@ -69,7 +116,7 @@ class AppTranslations extends Translations {
           AppString.hospitalVisitLog: AppString.hospitalVisitLogJp,
           AppString.hasipitalTextTr: AppString.hasipitalTextJp,
           AppString.hasipitalNumTextTr: AppString.hasipitalNumTextJp,
-          AppString.yesTextTr: AppString.yesTextJp,
+          AppString.yesText: AppString.yesTextJp,
           AppString.noText: AppString.noTextJp,
           AppString.coutionTr: AppString.coutionJp,
           AppString.plzSelectFeal: AppString.plzSelectFealJp,
@@ -77,11 +124,6 @@ class AppTranslations extends Translations {
           AppString.previousDeletePetMsg3Tr: AppString.previousDeletePetMsg3Jp,
           AppString.previousDeletePetMsg4Tr: AppString.previousDeletePetMsg4Jp,
           AppString.editStampText: AppString.editStampTextJp,
-          AppString.stamp1Tr: AppString.stamp1Jp,
-          AppString.stamp2Tr: AppString.stamp2Jp,
-          AppString.stamp3Tr: AppString.stamp3Jp,
-          AppString.stamp4Tr: AppString.stamp4Jp,
-          AppString.stamp5Tr: AppString.stamp5Jp,
           AppString.sunny: AppString.sunnyJp,
           AppString.cloud: AppString.cloudJp,
           AppString.wind: AppString.windJp,
@@ -129,7 +171,7 @@ class AppTranslations extends Translations {
           AppString.foodExpenses: AppString.foodExpensesJp,
           AppString.plzSetting: AppString.hospitalExpensesJp,
           AppString.selectBackgroundMsg: AppString.entertainmentExpensesJp,
-          AppString.lifeExpenses: AppString.lifeExpensesJp,
+          AppString.noBackground: AppString.noBackgroundJp,
           AppString.productNameCtrAlertMsg: AppString.productNameCtrAlertMsgJp,
           AppString.priceCtrAlertMsg: AppString.priceCtrAlertMsgJp,
           AppString.categoryCtrAlertMsg: AppString.categoryCtrAlertMsgJp,
@@ -162,6 +204,53 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.completeSetting: AppString.completeSettingKr,
+          AppString.regularSchedule: AppString.regularScheduleKr,
+          AppString.doYouCancleAlram: AppString.doYouCancleAlramKr,
+          AppString.cancledNotification: AppString.cancledNotificationKr,
+          AppString.photo: AppString.photoKr,
+          AppString.average: AppString.averageKr,
+          AppString.enrollVisitHospitalLog: AppString.enrollVisitHospitalLogKr,
+          AppString.scheduleManagement: AppString.scheduleManagementKr,
+          AppString.circularGraph: AppString.circularGraphKr,
+          AppString.linearGraph: AppString.linearGraphKr,
+          AppString.medicalCertificateOrPrescription:
+              AppString.medicalCertificateOrPrescriptionKr,
+          AppString.prescribedMedicine: AppString.prescribedMedicineKr,
+          AppString.hospitalName: AppString.hospitalNameKr,
+          AppString.officeName: AppString.officeNameKr,
+          AppString.diseaseName: AppString.diseaseNameKr,
+          AppString.diagnosis: AppString.diagnosisKr,
+          AppString.plzInputvisitTime: AppString.plzInputvisitTimeKr,
+          AppString.selectText: AppString.selectTextKr,
+          AppString.beforeDay: AppString.beforeDayKr,
+          AppString.beforeHour: AppString.beforeHourKr,
+          AppString.days: AppString.daysKr,
+          AppString.visitDay: AppString.visitDayKr,
+          AppString.visitTime: AppString.visitTimeKr,
+          AppString.enrollAlarm: AppString.enrollAlarmKr,
+          AppString.savedHealthRecord: AppString.savedHealthRecordKr,
+          AppString.painLevel: AppString.painLevelKr,
+          AppString.pillText: AppString.pillTextKr,
+          AppString.pillcCannelDescription: AppString.pillcCannelDescriptionKr,
+          AppString.drinkPillAlram: AppString.drinkPillAlramKr,
+          AppString.timeToDrink: AppString.timeToDrinkKr,
+          AppString.plzInputAppColor: AppString.plzInputAppColorKr,
+          AppString.plzInputCollectTime: AppString.plzInputCollectTimeKr,
+          AppString.plzAlarmTime: AppString.plzAlarmTimeKr,
+          AppString.doYouAlarmWhenDrinkPill:
+              AppString.doYouAlarmWhenDrinkPillKr,
+          AppString.whatWeekDayYouDrink: AppString.whatWeekDayYouDrinkKr,
+          AppString.monday: AppString.mondayKr,
+          AppString.tuesday: AppString.tuesdayKr,
+          AppString.wednesday: AppString.wednesdayKr,
+          AppString.thursday: AppString.thursdayKr,
+          AppString.friday: AppString.fridayKr,
+          AppString.saturday: AppString.saturdayKr,
+          AppString.sunday: AppString.sundayKr,
+          AppString.whatTimeDoYouDrinkPill: AppString.whatTimeDoYouDrinkPillKr,
+          AppString.doYouDrinkPill: AppString.doYouDrinkPillTextKr,
+          AppString.plzSelectFealIcon: AppString.plzSelectFealIconKr,
           AppString.updatedText: AppString.updatedTextKr,
           AppString.askShutDownMsg: AppString.askShutDownMsgKr,
           AppString.today: AppString.todayKr,
@@ -224,7 +313,7 @@ class AppTranslations extends Translations {
           AppString.hospitalVisitLog: AppString.hospitalVisitLogKr,
           AppString.hasipitalTextTr: AppString.hasipitalTextKr,
           AppString.hasipitalNumTextTr: AppString.hasipitalNumTextKr,
-          AppString.yesTextTr: AppString.yesTextKr,
+          AppString.yesText: AppString.yesTextKr,
           AppString.noText: AppString.noTextKr,
           AppString.coutionTr: AppString.coutionKr,
           AppString.plzSelectFeal: AppString.plzSelectFealKr,
@@ -232,11 +321,6 @@ class AppTranslations extends Translations {
           AppString.previousDeletePetMsg3Tr: AppString.previousDeletePetMsg3Kr,
           AppString.previousDeletePetMsg4Tr: AppString.previousDeletePetMsg4Kr,
           AppString.editStampText: AppString.editStampTextKr,
-          AppString.stamp1Tr: AppString.stamp1Kr,
-          AppString.stamp2Tr: AppString.stamp2Kr,
-          AppString.stamp3Tr: AppString.stamp3Kr,
-          AppString.stamp4Tr: AppString.stamp4Kr,
-          AppString.stamp5Tr: AppString.stamp5Kr,
           AppString.sunny: AppString.sunnyKr,
           AppString.cloud: AppString.cloudKr,
           AppString.wind: AppString.windKr,
@@ -284,7 +368,7 @@ class AppTranslations extends Translations {
           AppString.foodExpenses: AppString.foodExpensesKr,
           AppString.plzSetting: AppString.hospitalExpensesKr,
           AppString.selectBackgroundMsg: AppString.entertainmentExpensesKr,
-          AppString.lifeExpenses: AppString.lifeExpensesKr,
+          AppString.noBackground: AppString.noBackgroundKr,
           AppString.productNameCtrAlertMsg: AppString.productNameCtrAlertMsgKr,
           AppString.priceCtrAlertMsg: AppString.priceCtrAlertMsgKr,
           AppString.categoryCtrAlertMsg: AppString.categoryCtrAlertMsgKr,
@@ -320,6 +404,53 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.completeSetting: AppString.completeSettingEn,
+          AppString.regularSchedule: AppString.regularScheduleEn,
+          AppString.doYouCancleAlram: AppString.doYouCancleAlramEn,
+          AppString.cancledNotification: AppString.cancledNotificationEn,
+          AppString.photo: AppString.photoEn,
+          AppString.average: AppString.averageEn,
+          AppString.enrollVisitHospitalLog: AppString.enrollVisitHospitalLogEn,
+          AppString.scheduleManagement: AppString.scheduleManagementEn,
+          AppString.circularGraph: AppString.circularGraphEn,
+          AppString.linearGraph: AppString.linearGraphEn,
+          AppString.medicalCertificateOrPrescription:
+              AppString.medicalCertificateOrPrescriptionEn,
+          AppString.prescribedMedicine: AppString.prescribedMedicineEn,
+          AppString.hospitalName: AppString.hospitalNameEn,
+          AppString.officeName: AppString.officeNameEn,
+          AppString.diseaseName: AppString.diseaseNameEn,
+          AppString.diagnosis: AppString.diagnosisEn,
+          AppString.plzInputvisitTime: AppString.plzInputvisitTimeEn,
+          AppString.selectText: AppString.selectTextEn,
+          AppString.beforeDay: AppString.beforeDayEn,
+          AppString.beforeHour: AppString.beforeHourEn,
+          AppString.days: AppString.daysEn,
+          AppString.visitDay: AppString.visitDayEn,
+          AppString.visitTime: AppString.visitTimeEn,
+          AppString.enrollAlarm: AppString.enrollAlarmEn,
+          AppString.savedHealthRecord: AppString.savedHealthRecordEn,
+          AppString.painLevel: AppString.painLevelEn,
+          AppString.pillText: AppString.pillTextEn,
+          AppString.pillcCannelDescription: AppString.pillcCannelDescriptionEn,
+          AppString.drinkPillAlram: AppString.drinkPillAlramEn,
+          AppString.timeToDrink: AppString.timeToDrinkEn,
+          AppString.plzInputAppColor: AppString.plzInputAppColorEn,
+          AppString.plzInputCollectTime: AppString.plzInputCollectTimeEn,
+          AppString.plzAlarmTime: AppString.plzAlarmTimeEn,
+          AppString.doYouAlarmWhenDrinkPill:
+              AppString.doYouAlarmWhenDrinkPillEn,
+          AppString.whatWeekDayYouDrink: AppString.whatWeekDayYouDrinkEn,
+          AppString.monday: AppString.mondayEn,
+          AppString.tuesday: AppString.tuesdayEn,
+          AppString.wednesday: AppString.wednesdayEn,
+          AppString.thursday: AppString.thursdayEn,
+          AppString.friday: AppString.fridayEn,
+          AppString.saturday: AppString.saturdayEn,
+          AppString.sunday: AppString.sundayEn,
+          AppString.whatTimeDoYouDrinkPill: AppString.whatTimeDoYouDrinkPillEn,
+          AppString.doYouDrinkPill: AppString.doYouDrinkPillTextEn,
+          AppString.plzSelectFealIcon: AppString.plzSelectFealIconEn,
           AppString.updatedText: AppString.updatedTextEn,
           AppString.askShutDownMsg: AppString.askShutDownMsgEn,
           AppString.today: AppString.todayEn,
@@ -382,7 +513,7 @@ class AppTranslations extends Translations {
           AppString.hospitalVisitLog: AppString.hospitalVisitLogEn,
           AppString.hasipitalTextTr: AppString.hasipitalTextEn,
           AppString.hasipitalNumTextTr: AppString.hasipitalNumTextEn,
-          AppString.yesTextTr: AppString.yesTextEn,
+          AppString.yesText: AppString.yesTextEn,
           AppString.noText: AppString.noTextEn,
           AppString.coutionTr: AppString.coutionEn,
           AppString.plzSelectFeal: AppString.plzSelectFealEn,
@@ -390,11 +521,6 @@ class AppTranslations extends Translations {
           AppString.previousDeletePetMsg3Tr: AppString.previousDeletePetMsg3En,
           AppString.previousDeletePetMsg4Tr: AppString.previousDeletePetMsg4En,
           AppString.editStampText: AppString.editStampTextEn,
-          AppString.stamp1Tr: AppString.stamp1En,
-          AppString.stamp2Tr: AppString.stamp2En,
-          AppString.stamp3Tr: AppString.stamp3En,
-          AppString.stamp4Tr: AppString.stamp4En,
-          AppString.stamp5Tr: AppString.stamp5En,
           AppString.sunny: AppString.sunnyEn,
           AppString.cloud: AppString.cloudEn,
           AppString.wind: AppString.windEn,
@@ -442,7 +568,7 @@ class AppTranslations extends Translations {
           AppString.foodExpenses: AppString.foodExpensesEn,
           AppString.plzSetting: AppString.hospitalExpensesEn,
           AppString.selectBackgroundMsg: AppString.entertainmentExpensesEn,
-          AppString.lifeExpenses: AppString.lifeExpensesEn,
+          AppString.noBackground: AppString.noBackgroundEn,
           AppString.productNameCtrAlertMsg: AppString.productNameCtrAlertMsgEn,
           AppString.priceCtrAlertMsg: AppString.priceCtrAlertMsgEn,
           AppString.categoryCtrAlertMsg: AppString.categoryCtrAlertMsgEn,
@@ -481,7 +607,75 @@ class AppTranslations extends Translations {
 }
 
 class AppString {
-  // 제조사를 입력헤주세요
+  static String days = 'daystr';
+  static String daysKr = '일자';
+  static String daysJp = '日付';
+  static String daysEn = "days";
+
+  static String visitDay = 'visitDaytr';
+  static String visitDayKr = '방문 날자';
+  static String visitDayJp = '来院の日';
+  static String visitDayEn = "visitDayEn";
+
+  static String visitTime = 'visitTimetr';
+  static String visitTimeKr = '방문 시간';
+  static String visitTimeJp = '来院の時間';
+  static String visitTimeEn = "visitTimeEn";
+
+  static String plzInputvisitTime = 'plzInputvisitTimetr';
+  static String plzInputvisitTimeKr = '방문 시간을 입력해주세요.';
+  static String plzInputvisitTimeJp = '来院の時間を入力してください。';
+  static String plzInputvisitTimeEn = "plzInputvisitTime";
+
+  static String enrollAlarm = 'enrollAlarmtr';
+  static String enrollAlarmKr = '알람 등록';
+  static String enrollAlarmJp = 'アラム登録';
+  static String enrollAlarmEn = "Enroll Alarm";
+
+  static String plzSelectAlarmTime = 'plzSelectAlarmTimetr';
+  static String plzSelectAlarmTimeKr = '알람을 받을 시간을 선택해주세요';
+  static String plzSelectAlarmTimeJp = 'アラムを受ける時間を選んでください。';
+  static String plzSelectAlarmTimeEn = "plzSelectAlarmTime";
+
+  static String beforeDay = 'beforeDaytr';
+  static String beforeDayKr = '일 전';
+  static String beforeDayJp = '日前';
+  static String beforeDayEn = "beforeOneDay";
+
+  static String beforeHour = 'beforeHourtr';
+  static String beforeHourKr = '시간 전';
+  static String beforeHourJp = '時間前';
+  static String beforeHourEn = "beforeHour";
+
+  static String pillText = 'pillTexttr';
+  static String pillTextKr = '약';
+  static String pillTextJp = '薬';
+  static String pillTextEn = "Pill";
+
+  static String pillcCannelDescription = 'pillcCannelDescriptiontr';
+  static String pillcCannelDescriptionKr = '매주 특정 요일 및 시간에 알림을 받습니다';
+  static String pillcCannelDescriptionJp = '毎週特定の曜日及び時間にアラムが鳴ります';
+  static String pillcCannelDescriptionEn = "pillcCannelDescription";
+
+  static String drinkPillAlram = 'drinkPillAlramtr';
+  static String drinkPillAlramKr = '약 복용 알림';
+  static String drinkPillAlramJp = '薬の服用のアラム';
+  static String drinkPillAlramEn = "drinkPillAlram";
+
+  static String timeToDrink = 'timeToDrinktr';
+  static String timeToDrinkKr = '약 먹을 시간입니다!';
+  static String timeToDrinkJp = '薬を飲む時間です！';
+  static String timeToDrinkEn = "timeToDrink";
+
+  static String plzInputAppColor = 'plzInputAppColortr';
+  static String plzInputAppColorKr = '앱의 색상을 선택해주세요';
+  static String plzInputAppColorJp = 'アプリのカラーを選択してください';
+  static String plzInputAppColorEn = "plzInputAppColor";
+
+  static String dontSaveFuture = 'dontSaveFuturetr';
+  static String dontSaveFutureKr = '미래는 저장할 수 없습니다.';
+  static String dontSaveFutureJp = '未来には保存できません。';
+  static String dontSaveFutureEn = "dontSaveFutureEn";
 
   static String changedSystemLanguageMsg = 'changedSystemLanguageMsgTr';
   static String changedSystemLanguageMsgKr =
@@ -492,9 +686,14 @@ class AppString {
       "The System Language is changed.\nIf you want to change the app font, It is required to Restart";
 
   static String howFealToday = 'howFealTodaytr';
-  static String howFealTodayKr = '오늘 기분은 어떠세요~?';
-  static String howFealTodayJp = 'どんな1日でしたか？';
-  static String howFealTodayEn = "There is no expenditure in ";
+  static String howFealTodayKr = '어떤 감정의 하루였나요.';
+  static String howFealTodayJp = 'どのような感情の1日でしたか。';
+  static String howFealTodayEn = "howFealToday";
+
+  static String painLevel = 'painLeveltr';
+  static String painLevelKr = '통증 강도';
+  static String painLevelJp = '痛みの強さ';
+  static String painLevelEn = "painLevel";
 
   static String fealText = 'fealTextTr';
   static String fealTextKr = '감정';
@@ -535,6 +734,11 @@ class AppString {
   static String pulseKr = '맥박';
   static String pulseJp = '脈拍';
   static String pulseEn = "pulse";
+
+  static String plzSelectFealIcon = 'plzSelectFealIconTr';
+  static String plzSelectFealIconKr = '감정 아이콘을 선택해주세요.';
+  static String plzSelectFealIconJp = '感情アイコンを選んでください。';
+  static String plzSelectFealIconEn = "plzSelectFealIcon";
 
   static String koreanText = 'koreanTextTr';
   static String koreanTextKr = '한국어';
@@ -581,6 +785,11 @@ class AppString {
   static String periodJp = "生理期間";
   static String periodEn = "period";
 
+  static String whatTimeDoYouDrinkPill = "whatTimeDoYouDrinkPillTr";
+  static String whatTimeDoYouDrinkPillKr = "하루에 몇번 드시고 계신가요 ?";
+  static String whatTimeDoYouDrinkPillJp = "1日に何回お飲みですか。";
+  static String whatTimeDoYouDrinkPillEn = "whatTimeDoYouDrinkPill";
+
   static String englishText = 'englishTextTr';
   static String englishTextKr = '영어';
   static String englishTextJp = '英語';
@@ -611,6 +820,16 @@ class AppString {
   static String maleJp = "男性";
   static String maleEn = "Male";
 
+  static String plzAlarmTime = "plzAlarmTimeTr";
+  static String plzAlarmTimeKr = "알림 시간을 입력해주세요";
+  static String plzAlarmTimeJp = "アラム時間を入力してくださ";
+  static String plzAlarmTimeEn = "plzAlarmTime";
+
+  static String plzInputCollectTime = "plzInputCollectTimeTr";
+  static String plzInputCollectTimeKr = "올바른 형식의 시간을 입력해주세요";
+  static String plzInputCollectTimeJp = "正しい形式の時間を入力してください";
+  static String plzInputCollectTimeEn = "plzInputCollectTime";
+
   static String female = "femaleTr";
   static String femaleKr = "여자";
   static String femaleJp = "女性";
@@ -620,6 +839,38 @@ class AppString {
   static String anotherKr = "그 외";
   static String anotherJp = "その他";
   static String anotherEn = "another";
+
+  static String hospitalName = "hospitalNameTr";
+  static String hospitalNameKr = "병원 이름";
+  static String hospitalNameJp = "病院名";
+  static String hospitalNameEn = "hospitalName";
+
+  static String officeName = "officeNameTr";
+  static String officeNameKr = "진료과";
+  static String officeNameJp = "診療科";
+  static String officeNameEn = "the medical department";
+
+  static String diseaseName = "diseaseNameTr";
+  static String diseaseNameKr = "진단 이름";
+  static String diseaseNameJp = "診断名";
+  static String diseaseNameEn = "Diagnostic Name";
+
+  static String diagnosis = "diagnosisTr";
+  static String diagnosisKr = "진단 결과";
+  static String diagnosisJp = "診断結果";
+  static String diagnosisEn = "the result of diagnosis";
+
+  static String prescribedMedicine = "prescribedMedicineTr";
+  static String prescribedMedicineKr = "처방 받은 약";
+  static String prescribedMedicineJp = "処方薬";
+  static String prescribedMedicineEn = "prescribed medicine";
+
+  static String medicalCertificateOrPrescription =
+      "medicalCertificateOrPrescriptionTr";
+  static String medicalCertificateOrPrescriptionKr = "진단서 혹은 처방전";
+  static String medicalCertificateOrPrescriptionJp = "診断書もしくは処方箋";
+  static String medicalCertificateOrPrescriptionEn =
+      "medical certificates or prescriptions";
 
   static String regularHospital = "regularHospitalTr";
   static String regularHospitalKr = "자주가는 병원";
@@ -697,6 +948,11 @@ class AppString {
   static String dayTextJp = "日";
   static String dayTextEn = "Day";
 
+  static String doYouDrinkPill = "doYouDrinkPillTextTr";
+  static String doYouDrinkPillTextKr = '약을 복용중이신가요 ?';
+  static String doYouDrinkPillTextJp = "薬をお飲みですか";
+  static String doYouDrinkPillTextEn = "doYouDrinkPill";
+
   static String healthLog = "healthLogTr";
   static String healthLogKr = '건강 기록';
   static String healthLogJp = "健康記録";
@@ -717,7 +973,7 @@ class AppString {
   static String hasipitalNumTextJp = "病院の電話番号";
   static String hasipitalNumTextEn = "Hasipital phone number";
 
-  static String yesTextTr = "yesTextTr";
+  static String yesText = "yesTextTr";
   static String yesTextKr = '네';
   static String yesTextJp = "はい";
   static String yesTextEn = "Yes";
@@ -743,8 +999,8 @@ class AppString {
   static String todayEn = "Today";
 
   static String plzSelectFeal = "plzSelectFealTrTr";
-  static String plzSelectFealKr = '오늘의 기분을 선택해주세요.';
-  static String plzSelectFealJp = "今日の気分を選択してください。";
+  static String plzSelectFealKr = '오늘의 감정을 선택해주세요.';
+  static String plzSelectFealJp = "今日の感情を選択してください。";
   static String plzSelectFealEn = "plzSelectFealEn";
 
   static String previousDeletePetMsg2Tr = "previousDeletePetMsg2Tr";
@@ -766,31 +1022,6 @@ class AppString {
   static String editStampTextKr = '스탬프 편집';
   static String editStampTextJp = "スタンプ編集";
   static String editStampTextEn = "Edit Stamp";
-
-  static String stamp1Tr = "stamp1Tr";
-  static String stamp1Kr = '약 1';
-  static String stamp1Jp = "薬１";
-  static String stamp1En = "Pill 1";
-
-  static String stamp2Tr = "stamp2Tr";
-  static String stamp2Kr = '약 2';
-  static String stamp2Jp = "薬２";
-  static String stamp2En = "Pill 2";
-
-  static String stamp3Tr = "stamp3Tr";
-  static String stamp3Kr = '병원';
-  static String stamp3Jp = "病院";
-  static String stamp3En = "Hospital";
-
-  static String stamp4Tr = "stamp4Tr";
-  static String stamp4Kr = '입원';
-  static String stamp4Jp = "入院";
-  static String stamp4En = "Admission";
-
-  static String stamp5Tr = "stamp5Tr";
-  static String stamp5Kr = '퇴원';
-  static String stamp5Jp = "退院";
-  static String stamp5En = "Discharge";
 
   static String sunny = "sunnyTr";
   static String sunnyKr = '맑음';
@@ -873,6 +1104,11 @@ class AppString {
   static String completeTextKr = '완료';
   static String completeTextJp = "完了";
   static String completeTextEn = "Complete";
+
+  static String savedHealthRecord = "savedHealthRecordTr";
+  static String savedHealthRecordKr = '일의 건강이 기록되었습니다.';
+  static String savedHealthRecordJp = "日の健康が記録されました。";
+  static String savedHealthRecordEn = "savedHealthRecord";
 
   static String updateMsg = "updateMsgTr";
   static String updateMsgKr = '변경 되었습니다.';
@@ -1041,23 +1277,68 @@ class AppString {
 
   static String beforeStart = "beforeStart";
   static String beforeStartKr = "를 시작하기 전에\n";
-  static String beforeStartJp = 'を始める雨に\n';
+  static String beforeStartJp = 'を始める前に\n';
   static String beforeStartEn = "beforeStart\n";
 
   static String plzSetting = "plzSettingTr";
-  static String hospitalExpensesKr = "몇 가지 세팅을 해주세요!";
-  static String hospitalExpensesJp = '何この設定を行なってください！';
+  static String hospitalExpensesKr = "몇 가지 세팅을 해주세요.";
+  static String hospitalExpensesJp = '何個の設定を行なってください。';
   static String hospitalExpensesEn = "Medical expenses";
 
   static String selectBackgroundMsg = "selectBackgroundMsgTr";
-  static String entertainmentExpensesKr = "배경을 선택해주세요!";
-  static String entertainmentExpensesJp = '背景を選んでください！';
+  static String entertainmentExpensesKr = "배경을 선택해주세요.";
+  static String entertainmentExpensesJp = '背景を選んでください。';
   static String entertainmentExpensesEn = "Entertainment expenses";
 
-  static String lifeExpenses = "lifeExpensesTr";
-  static String lifeExpensesKr = "생활비";
-  static String lifeExpensesJp = '生活費';
-  static String lifeExpensesEn = "Living expenses";
+  static String noBackground = "noBackgroundTr";
+  static String noBackgroundKr = "배경 없음";
+  static String noBackgroundJp = '背景なし';
+  static String noBackgroundEn = "noBackground";
+
+  static String monday = "mondayTr";
+  static String mondayKr = "월";
+  static String mondayJp = '月';
+  static String mondayEn = "\$";
+
+  static String tuesday = "tuesdayTr";
+  static String tuesdayKr = "화";
+  static String tuesdayJp = '火';
+  static String tuesdayEn = "\$";
+
+  static String wednesday = "wednesdayTr";
+  static String wednesdayKr = "수";
+  static String wednesdayJp = '水';
+  static String wednesdayEn = "\$";
+
+  static String thursday = "thursdayTr";
+  static String thursdayKr = "목";
+  static String thursdayJp = '木';
+  static String thursdayEn = "\$";
+
+  static String friday = "fridayTr";
+  static String fridayKr = "금";
+  static String fridayJp = '金';
+  static String fridayEn = "\$";
+
+  static String saturday = "saturdayTr";
+  static String saturdayKr = "토";
+  static String saturdayJp = '土';
+  static String saturdayEn = "\$";
+
+  static String sunday = "sundayTr";
+  static String sundayKr = "일";
+  static String sundayJp = '日';
+  static String sundayEn = "\$";
+
+  static String whatWeekDayYouDrink = "whatWeekDayYouDrinkTr";
+  static String whatWeekDayYouDrinkKr = "어떤 요일에 복용하고 계신가요 ?";
+  static String whatWeekDayYouDrinkJp = 'どんな曜日にお飲みですか。';
+  static String whatWeekDayYouDrinkEn = "whatWeekDayYouDrink";
+
+  static String doYouAlarmWhenDrinkPill = "doYouAlarmWhenDrinkPillTr";
+  static String doYouAlarmWhenDrinkPillKr = "약 복용시간 알람을 받으시겠습니까 ?";
+  static String doYouAlarmWhenDrinkPillJp = '薬を飲む時間のアラムをお受けしますか。';
+  static String doYouAlarmWhenDrinkPillEn = "doYouAlarmWhenDrinkPill";
 
   static String moneySign = "moneySignTr";
   static String moneySignKr = "₩";
@@ -1252,6 +1533,11 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String setLanguageJp = '言語選択';
   static String setLanguageEn = "Language";
 
+  static String selectText = 'selectTextTr';
+  static String selectTextKr = '선택';
+  static String selectTextJp = '選択';
+  static String selectTextEn = "selectText";
+
   static String askShutDownMsg = 'askShutDownMsgTr';
   static String askShutDownMsgKr = '재기동 하시겠습니까?';
   static String askShutDownMsgJp = '再起動しますか。';
@@ -1300,4 +1586,55 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
 
 ▪️イメージを添付して頂ければ、バグ・エラーを修正するのにとても助かります！🙇‍♂️▪️
 """;
+
+  static String enrollVisitHospitalLog = 'enrollVisitHospitalLogTr';
+  static String enrollVisitHospitalLogKr = '병원 방문 기록 등록';
+  static String enrollVisitHospitalLogJp = '来院記録登録';
+  static String enrollVisitHospitalLogEn = "enrollVisitHospitalLog";
+
+  static String scheduleManagement = 'scheduleManagementTr';
+  static String scheduleManagementKr = '일정 관리';
+  static String scheduleManagementJp = '予定管理';
+  static String scheduleManagementEn = "Schedule Management";
+
+  static String circularGraph = 'circularGraphTr';
+  static String circularGraphKr = '원형 그래프';
+  static String circularGraphJp = '円形グラフ';
+  static String circularGraphEn = "Circular Graph";
+
+  static String linearGraph = 'linearGraphTr';
+  static String linearGraphKr = '선형 그래프';
+  static String linearGraphJp = '線形グラフ';
+  static String linearGraphEn = "Linear Graph";
+
+  static String completeSetting = 'completeSettingTr';
+  static String completeSettingKr = '설정이 완료되었습니다.\n설정 페이지에서 변경하실 수 있습니다.';
+  static String completeSettingJp = '設定が完了しました。\n設定ページより変更できます。';
+  static String completeSettingEn =
+      "Setup is complete.\nYou can change it on the settings page.";
+
+  static String regularSchedule = 'regularScheduleTr';
+  static String regularScheduleKr = '정기 일정';
+  static String regularScheduleJp = '定期予定';
+  static String regularScheduleEn = "Regular schedule ";
+
+  static String doYouCancleAlram = 'doYouCancleAlramTr';
+  static String doYouCancleAlramKr = ' 을 취소하시나요?';
+  static String doYouCancleAlramJp = ' をキャンセルしますか？';
+  static String doYouCancleAlramEn = "Are you canceling the alarm?";
+
+  static String cancledNotification = 'cancledNotificationTr';
+  static String cancledNotificationKr = '개의 알람이 취소되었습니다.';
+  static String cancledNotificationJp = '個のアラームがキャンセルされました。';
+  static String cancledNotificationEn = "alarm(s) have been canceled.";
+
+  static String photo = 'photoTr';
+  static String photoKr = '사진';
+  static String photoJp = '写真';
+  static String photoEn = "Photos";
+
+  static String average = 'averageTr';
+  static String averageKr = '평균 ';
+  static String averageJp = '平均';
+  static String averageEn = "Average ";
 }

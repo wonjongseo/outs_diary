@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/theme/theme.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
@@ -10,10 +11,13 @@ import 'package:ours_log/common/widgets/custom_expansion_card.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/common/widgets/open_close_container.dart';
 import 'package:ours_log/controller/add_diary_controller.dart';
+import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/views/add_diary/widgets/feal_selector.dart';
+import 'package:ours_log/views/add_diary/widgets/health_info_text_fields.dart';
 import 'package:ours_log/views/add_diary/widgets/image_of_today.dart';
 import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
+import 'package:ours_log/views/add_diary/widgets/morning_lunch_evening_widget.dart';
 
 class AddDiaryScreen extends StatelessWidget {
   AddDiaryScreen({
@@ -58,47 +62,107 @@ class AddDiaryScreen extends StatelessWidget {
                   vertical: RS.h10,
                   horizontal: RS.width20,
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const FealSelector(),
-                    SizedBox(height: RS.h10),
-                    _healthTextFields(context),
-                    SizedBox(height: RS.h10),
-                    ExpansionIconCard(
-                      icons: AppConstant.zeroToNineIcons,
-                      label: '통증 강도',
-                      isOnlyOne: true,
-                      selectedIconIndexs: addDiaryController.painFulIndex,
-                    ),
-                    SizedBox(height: RS.height20),
-                    ColTextAndWidget(
-                      label: AppString.whatDidYouHintMsg.tr,
-                      widget: CustomTextFormField(
-                        hintText: AppString.plzEnterTextMsg.tr,
-                        controller: addDiaryController.whatToDoController,
-                        maxLines: 7,
+                child: GetBuilder<UserController>(builder: (userController) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const FealSelector(),
+                      SizedBox(height: RS.h10),
+                      _healthTextFields(context),
+                      // CustomExpansionCard(
+                      //   title: AppString.temperature.tr,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: MorningLunchEveningWidget(
+                      //       controllers: addDiaryController.temperatureCtls,
+                      //       label: AppString.temperature.tr,
+                      //       sufficText: '°C',
+                      //     ),
+                      //   ),
+                      //   initiallyExpanded: userController
+                      //       .userModel!.userUtilModel.expandedTemperature,
+                      //   onExpansionChanged:
+                      //       userController.toggleExpandedTemperature,
+                      // ),
+                      // SizedBox(height: RS.h10),
+                      // CustomExpansionCard(
+                      //   title: AppString.pulse.tr,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: MorningLunchEveningWidget(
+                      //       controllers: addDiaryController.pulseCtls,
+                      //       label: AppString.pulse.tr,
+                      //       sufficText: '回/min',
+                      //     ),
+                      //   ),
+                      //   initiallyExpanded: userController
+                      //       .userModel!.userUtilModel.expandedPulse,
+                      //   onExpansionChanged: userController.toggleExpandedPulse,
+                      // ),
+                      // SizedBox(height: RS.h10),
+                      // CustomExpansionCard(
+                      //   title: AppString.bloodPressure.tr,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: MorningLunchEveningWidget(
+                      //       controllers: addDiaryController.bloodPressureCtls,
+                      //       label: AppString.bloodPressure.tr,
+                      //       sufficText: 'mm Hg',
+                      //     ),
+                      //   ),
+                      //   initiallyExpanded: userController
+                      //       .userModel!.userUtilModel.expandedBloodPressure,
+                      //   onExpansionChanged:
+                      //       userController.toggleExpandedbloodPressure,
+                      // ),
+                      // SizedBox(height: RS.h10),
+                      // ColTextAndWidget(
+                      //   label: '체중',
+                      //   widget: CustomTextFormField(
+                      //     controller: addDiaryController.weightCtls[0],
+                      //     hintText: AppString.weight.tr,
+                      //     sufficIcon: Text(
+                      //       'kg',
+                      //       style: textFieldSufficStyle,
+                      //     ),
+                      //   ),
+                      // ),
+                      SizedBox(height: RS.h10 * 2),
+                      ExpansionIconCard(
+                        icons: AppConstant.zeroToNineIcons,
+                        label: AppString.painLevel.tr,
+                        isOnlyOne: true,
+                        selectedIconIndexs: addDiaryController.painFulIndex,
                       ),
-                    ),
-                    SizedBox(height: RS.height20),
-                    ImageOfToday(
-                      carouselSliderController:
-                          addDiaryController.carouselSliderController,
-                      label: AppString.photoOfToday.tr,
-                      uploadFiles: addDiaryController.uploadFiles,
-                      selectedPhotos: addDiaryController.selectedPhotos,
-                      removePhoto: addDiaryController.removePhoto,
-                    ),
-                    SizedBox(height: RS.height20),
-                    ExpansionIconCard(
-                      icons: AppConstant.weatherIcons,
-                      label: AppString.weatherText.tr,
-                      selectedIconIndexs:
-                          addDiaryController.selectedWeatherIndexs,
-                    ),
-                    SizedBox(height: RS.height20),
-                  ],
-                ),
+                      SizedBox(height: RS.height20),
+                      ColTextAndWidget(
+                        label: AppString.whatDidYouHintMsg.tr,
+                        widget: CustomTextFormField(
+                          hintText: AppString.plzEnterTextMsg.tr,
+                          controller: addDiaryController.whatToDoController,
+                          maxLines: 7,
+                        ),
+                      ),
+                      SizedBox(height: RS.height20),
+                      ImageOfToday(
+                        carouselSliderController:
+                            addDiaryController.carouselSliderController,
+                        label: AppString.photoOfToday.tr,
+                        uploadFiles: addDiaryController.uploadFiles,
+                        selectedPhotos: addDiaryController.selectedPhotos,
+                        removePhoto: addDiaryController.removePhoto,
+                      ),
+                      SizedBox(height: RS.height20),
+                      ExpansionIconCard(
+                        icons: AppConstant.weatherIcons,
+                        label: AppString.weatherText.tr,
+                        selectedIconIndexs:
+                            addDiaryController.selectedWeatherIndexs,
+                      ),
+                      SizedBox(height: RS.height20),
+                    ],
+                  );
+                }),
               ),
             ),
           );
@@ -122,7 +186,7 @@ class AddDiaryScreen extends StatelessWidget {
             morningLunchEveningWidget(
               addDiaryController.pulseCtls,
               AppString.pulse.tr,
-              '',
+              '1回/min',
             ),
             morningLunchEveningWidget(
               addDiaryController.bloodPressureCtls,
@@ -165,17 +229,17 @@ class AddDiaryScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: RS.width20),
-          Expanded(
-            child: CustomTextFormField(
-              controller: controllers[1],
-              hintText: AppString.lunch.tr,
-              sufficIcon: Text(
-                sufficText,
-                style: textFieldSufficStyle,
-              ),
-            ),
-          ),
+          // SizedBox(width: RS.width20),
+          // Expanded(
+          //   child: CustomTextFormField(
+          //     controller: controllers[1],
+          //     hintText: AppString.lunch.tr,
+          //     sufficIcon: Text(
+          //       sufficText,
+          //       style: textFieldSufficStyle,
+          //     ),
+          //   ),
+          // ),
           SizedBox(width: RS.width20),
           Expanded(
             child: CustomTextFormField(

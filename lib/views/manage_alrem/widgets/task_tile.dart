@@ -8,11 +8,11 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
+import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/notification_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/task_model.dart';
-import 'package:ours_log/views/manage_alrem/change_notification_screen.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({super.key, required this.task});
@@ -27,10 +27,9 @@ class TaskTile extends StatelessWidget {
       return GestureDetector(
         onTap: () async {
           int count = 0;
-          String titleName = task.isRegular
+          String titleName = task.isRegular // MESSAGE TODO
               ? '"${DateFormat.EEEE(Get.locale.toString()).format(task.taskDate)}의 정기 알림"'
               : '(${DateFormat.yMMMEd(Get.locale.toString()).format(task.taskDate)}의 알림)\n"${task.taskName}"';
-
           bool result = await AppDialog.selectionDialog(
               title: Text('$titleName 을 끄시나요?'));
 
@@ -42,18 +41,19 @@ class TaskTile extends StatelessWidget {
 
             userController.deleteTask(task);
 
-            AppSnackbar.showSuccessChangedMsgSnackBar('$count개의 알람이 취소되었습니다.');
+            AppSnackbar.showSuccessChangedMsgSnackBar(
+                '$count${AppString.cancledNotification.tr}');
           }
         },
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: RS.w10 * 2),
           width: MediaQuery.of(context).size.width,
-          margin: EdgeInsets.only(bottom: 12),
+          margin: EdgeInsets.only(bottom: RS.w10 * 1.2),
           child: Container(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.all(RS.w10 * 1.6),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: _getBGClr(0),
+              color: AppColors.primaryColor,
             ),
             child: Row(
               children: [
@@ -64,7 +64,7 @@ class TaskTile extends StatelessWidget {
                       Text(
                         task.taskName,
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: RS.w10 * 1.6,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -76,9 +76,9 @@ class TaskTile extends StatelessWidget {
                           Icon(
                             Icons.access_time_rounded,
                             color: Colors.grey[200],
-                            size: 18,
+                            size: RS.w10 * 1.8,
                           ),
-                          SizedBox(width: 4),
+                          SizedBox(width: RS.w10 * .4),
                           Text(
                             DateFormat.Hm(Get.locale.toString())
                                 .format(task.taskDate),
@@ -89,11 +89,11 @@ class TaskTile extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 12),
+                      SizedBox(height: RS.h10 * 1.2),
                       Text(
-                        task.isRegular ? '정기 일정' : '',
+                        task.isRegular ? AppString.regularSchedule.tr : '',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: RS.w10 * 1.5,
                           color: Colors.grey[100],
                         ),
                       )
@@ -101,8 +101,8 @@ class TaskTile extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  height: 60,
+                  margin: EdgeInsets.symmetric(horizontal: RS.w10),
+                  height: RS.h10 * 6,
                   width: .5,
                   color: Colors.grey[200]!.withOpacity(.7),
                 ),
@@ -117,19 +117,5 @@ class TaskTile extends StatelessWidget {
         ),
       );
     });
-  }
-
-  Color _getBGClr(int index) {
-    switch (index) {
-      // case 0:
-      //   return primaryClr;
-      // case 1:
-      //   return pinkClr;
-      // case 2:
-      //   return yellowClr;
-
-      default:
-        return AppColors.primaryColor;
-    }
   }
 }

@@ -27,7 +27,7 @@ class AddHospitalVisitLogScreen extends StatelessWidget {
         selectedDate: selectedDate, hospitalLogModel: hospitalLogModel));
     return GetBuilder<AddHosipitalVisitController>(builder: (controller) {
       return Scaffold(
-        appBar: AppBar(title: Text('병원 방문 기록 등록')),
+        appBar: AppBar(title: Text(AppString.enrollVisitHospitalLog.tr)),
         bottomNavigationBar: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -59,7 +59,7 @@ class AddHospitalVisitLogScreen extends StatelessWidget {
                       const VisitDayAndTime(),
                       SizedBox(height: RS.h10),
                       ColTextAndWidget(
-                        label: '병원 이름',
+                        label: AppString.hospitalName.tr,
                         widget: CustomTextFormField(
                           controller: controller.hospitalNameCtl,
                           widget: controller.savedHospitalNames.isEmpty
@@ -74,21 +74,21 @@ class AddHospitalVisitLogScreen extends StatelessWidget {
                       ),
                       SizedBox(height: RS.h10),
                       ColTextAndWidget(
-                        label: '진료과',
+                        label: AppString.officeName.tr,
                         widget: CustomTextFormField(
                           controller: controller.officeNameCtl,
                         ),
                       ),
                       SizedBox(height: RS.h10),
                       ColTextAndWidget(
-                        label: '진단 이름',
+                        label: AppString.diseaseName.tr,
                         widget: CustomTextFormField(
                           controller: controller.diseaseNameCtl,
                         ),
                       ),
                       SizedBox(height: RS.h10),
                       ColTextAndWidget(
-                        label: '진단 결과',
+                        label: AppString.diagnosis.tr,
                         widget: CustomTextFormField(
                           maxLines: 4,
                           controller: controller.diagnosisCtl,
@@ -96,7 +96,7 @@ class AddHospitalVisitLogScreen extends StatelessWidget {
                       ),
                       SizedBox(height: RS.h10),
                       ColTextAndWidget(
-                        label: '처방 받은 약물',
+                        label: AppString.prescribedMedicine.tr,
                         labelWidget: IconButton(
                           icon: Icon(Icons.add),
                           onPressed: controller.addPillCtl,
@@ -117,7 +117,7 @@ class AddHospitalVisitLogScreen extends StatelessWidget {
                       ImageOfToday(
                           carouselSliderController:
                               controller.carouselSliderController,
-                          label: '진단서 혹은 처방전',
+                          label: AppString.medicalCertificateOrPrescription.tr,
                           uploadFiles: controller.uploadFiles,
                           selectedPhotos: () async {
                             showModalBottomSheet(

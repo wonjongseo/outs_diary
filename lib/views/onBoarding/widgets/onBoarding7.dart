@@ -2,6 +2,7 @@ import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
+import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
 
@@ -24,7 +25,7 @@ class _Onboarding7State extends State<Onboarding7> {
       ),
       child: Column(
         children: [
-          Text('약 복용시간 알람을 받으시겠습니까 ?'),
+          Text(AppString.doYouAlarmWhenDrinkPill.tr),
           SizedBox(height: RS.h10 * 1.5),
           ToggleButtons(
             onPressed: (v) {
@@ -39,7 +40,25 @@ class _Onboarding7State extends State<Onboarding7> {
               userController.isAlermEnable,
               !userController.isAlermEnable
             ],
-            children: const [Text('ON'), Text('OFF')],
+            children: [
+              Text(
+                'ON',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: userController.isAlermEnable
+                      ? AppColors.primaryColor
+                      : null,
+                ),
+              ),
+              Text(
+                'OFF',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: !userController.isAlermEnable
+                        ? AppColors.primaryColor
+                        : null),
+              )
+            ],
           ),
           SizedBox(height: RS.h10 * 3),
           if (userController.selectedMorningLunchEvening.contains(0))
@@ -47,8 +66,9 @@ class _Onboarding7State extends State<Onboarding7> {
               onTap: !userController.isAlermEnable
                   ? null
                   : () async {
-                      TimeOfDay? timeOfDay =
-                          await AppFunction.pickTime(context);
+                      TimeOfDay? timeOfDay = await AppFunction.pickTime(context,
+                          helpText: AppString.plzAlarmTime.tr,
+                          errorInvalidText: AppString.plzInputCollectTime.tr);
                       if (timeOfDay == null) {
                         return;
                       }
@@ -57,7 +77,7 @@ class _Onboarding7State extends State<Onboarding7> {
                       setState(() {});
                     },
               child: AppointPillTime(
-                title: '아침',
+                title: AppString.morning.tr,
                 time: userController.morningTime,
                 isAlermEnable: userController.isAlermEnable,
               ),
@@ -67,8 +87,9 @@ class _Onboarding7State extends State<Onboarding7> {
               onTap: !userController.isAlermEnable
                   ? null
                   : () async {
-                      TimeOfDay? timeOfDay =
-                          await AppFunction.pickTime(context);
+                      TimeOfDay? timeOfDay = await AppFunction.pickTime(context,
+                          helpText: AppString.plzAlarmTime.tr,
+                          errorInvalidText: AppString.plzInputCollectTime.tr);
                       if (timeOfDay == null) {
                         return;
                       }
@@ -78,7 +99,7 @@ class _Onboarding7State extends State<Onboarding7> {
                     },
               child: AppointPillTime(
                 isAlermEnable: userController.isAlermEnable,
-                title: '점심',
+                title: AppString.lunch.tr,
                 time: userController.lunchTime,
               ),
             ),
@@ -87,8 +108,9 @@ class _Onboarding7State extends State<Onboarding7> {
               onTap: !userController.isAlermEnable
                   ? null
                   : () async {
-                      TimeOfDay? timeOfDay =
-                          await AppFunction.pickTime(context);
+                      TimeOfDay? timeOfDay = await AppFunction.pickTime(context,
+                          helpText: AppString.plzAlarmTime.tr,
+                          errorInvalidText: AppString.plzInputCollectTime.tr);
                       if (timeOfDay == null) {
                         return;
                       }
@@ -98,7 +120,7 @@ class _Onboarding7State extends State<Onboarding7> {
                     },
               child: AppointPillTime(
                 isAlermEnable: userController.isAlermEnable,
-                title: '저녁',
+                title: AppString.evening.tr,
                 time: userController.eveningTime,
               ),
             ),
@@ -142,7 +164,7 @@ class AppointPillTime extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   fontSize: RS.w10 * 2,
                   color: isAlermEnable ? null : Colors.grey,
                 ),
@@ -164,8 +186,8 @@ class AppointPillTime extends StatelessWidget {
                 Text(
                   time,
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: RS.w10 * 2,
+                    fontWeight: FontWeight.w600,
+                    fontSize: RS.w10 * 1.8,
                     color: isAlermEnable ? null : Colors.grey,
                   ),
                 ),

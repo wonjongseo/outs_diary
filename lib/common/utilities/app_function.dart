@@ -59,11 +59,12 @@ class AppFunction {
     );
   }
 
-  static Future<TimeOfDay?> pickTime(BuildContext context) async {
+  static Future<TimeOfDay?> pickTime(BuildContext context,
+      {required String helpText, required String errorInvalidText}) async {
     return await showTimePicker(
       cancelText: AppString.cancelBtnTextTr.tr,
-      helpText: '방문 시간을 입력해주세요.',
-      errorInvalidText: '올바른 시간을 입력해주세요',
+      helpText: helpText,
+      errorInvalidText: errorInvalidText,
       hourLabelText: AppString.hour.tr,
       minuteLabelText: AppString.minute.tr,
       context: context,

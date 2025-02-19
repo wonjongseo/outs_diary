@@ -4,6 +4,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
+import 'package:ours_log/common/utilities/app_snackbar.dart';
+import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
@@ -91,7 +93,12 @@ class OnboardingController extends GetxController {
   Curve pageCurves = Curves.linear;
 
   void backToPage() {
-    pageIndex--;
+    if (pageIndex == 6 && isDrinkingPill == null) {
+      pageIndex -= 3;
+    } else {
+      pageIndex--;
+    }
+
     pageController.jumpToPage(pageIndex);
     update();
   }
@@ -123,7 +130,6 @@ class OnboardingController extends GetxController {
   }
 
   void goToMainScreenAndSaveUserData() async {
-    // Map<int, List<RegularTaskModel>> alerms = {};
     List<TaskModel> tasks = [];
     List<String> times = [];
 
@@ -141,7 +147,6 @@ class OnboardingController extends GetxController {
       if (selectedMorningLunchEvening.contains(2)) {
         times.add(eveningTime);
       }
-      DateTime now = DateTime.now();
       for (int day in days) {
         if (selectedMorningLunchEvening.contains(0)) {
           int hour = int.parse(morningTime.split(':')[0]);
@@ -150,10 +155,11 @@ class OnboardingController extends GetxController {
 
           DateTime? taskTime =
               await notificationService.scheduleWeeklyNotification(
-            title: '💊 아침 약 복용 알림',
+            title:
+                '💊 (${AppString.morning.tr}) ${AppString.drinkPillAlram.tr}',
             message:
-                '${day}/${intDayToString(day)}/${morningTime} 시간에 약을 복용하세요!',
-            channelDescription: '매주 특정 요일 및 시간에 알림을 받습니다',
+                '${intDayToString(day)}/${morningTime} ${AppString.timeToDrink.tr}',
+            channelDescription: AppString.pillcCannelDescription.tr,
             id: id,
             weekday: day,
             hour: hour,
@@ -165,7 +171,7 @@ class OnboardingController extends GetxController {
           }
           tasks.add(
             TaskModel(
-              taskName: '아침 약',
+              taskName: '${AppString.morning.tr}${AppString.pillText.tr}',
               taskDate: taskTime,
               notifications: [
                 NotificationModel(notiDateTime: taskTime, alermId: id)
@@ -182,9 +188,10 @@ class OnboardingController extends GetxController {
 
           DateTime? taskTime =
               await notificationService.scheduleWeeklyNotification(
-            title: '💊잠심 약 복용 알림',
-            message: '${day}/${intDayToString(day)}/${lunchTime} 시간에 약을 복용하세요!',
-            channelDescription: '매주 특정 요일 및 시간에 알림을 받습니다',
+            title: '💊 (${AppString.lunch.tr}) ${AppString.drinkPillAlram.tr}',
+            message:
+                '${intDayToString(day)}/${lunchTime} ${AppString.timeToDrink.tr}',
+            channelDescription: AppString.pillcCannelDescription.tr,
             id: id,
             weekday: day,
             hour: hour,
@@ -195,7 +202,7 @@ class OnboardingController extends GetxController {
           }
           tasks.add(
             TaskModel(
-              taskName: '점심 약',
+              taskName: '${AppString.lunch.tr}${AppString.pillText.tr}',
               taskDate: taskTime,
               notifications: [
                 NotificationModel(notiDateTime: taskTime, alermId: id)
@@ -212,10 +219,11 @@ class OnboardingController extends GetxController {
 
           DateTime? taskTime =
               await notificationService.scheduleWeeklyNotification(
-            title: '💊저녁 약 복용 알림',
+            title:
+                '💊 (${AppString.evening.tr}) ${AppString.drinkPillAlram.tr}',
             message:
-                '${day}/${intDayToString(day)}/${eveningTime} 시간에 약을 복용하세요!',
-            channelDescription: '매주 특정 요일 및 시간에 알림을 받습니다',
+                '${intDayToString(day)}/${eveningTime} ${AppString.timeToDrink.tr}',
+            channelDescription: AppString.pillcCannelDescription.tr,
             id: id,
             weekday: day,
             hour: hour,
@@ -226,7 +234,7 @@ class OnboardingController extends GetxController {
           }
           tasks.add(
             TaskModel(
-              taskName: '저녁 약',
+              taskName: '${AppString.evening.tr}${AppString.pillText.tr}',
               taskDate: taskTime,
               notifications: [
                 NotificationModel(notiDateTime: taskTime, alermId: id)
@@ -239,7 +247,6 @@ class OnboardingController extends GetxController {
     }
 
     UserModel userModel = UserModel(
-      selectedMorningLunchEvening: times,
       selectedDays: selectedDays,
       backgroundIndex: backgroundIndex,
       fealIconIndex: fealIconIndex,
@@ -247,11 +254,11 @@ class OnboardingController extends GetxController {
       tasks: tasks,
     );
 
-    // return;
-
     userController.saveUser(userModel);
 
     Get.off(() => const MainScreen());
+
+    AppSnackbar.showSuccessMsgSnackBar(AppString.completeSetting.tr);
   }
 
   UserController userController = Get.find<UserController>();
@@ -270,7 +277,7 @@ class OnboardingController extends GetxController {
       FadeInRight(child: const OnBoarding2()),
       FadeInRight(child: const OnBoarding3()),
       FadeInRight(child: const Onboarding5()),
-      FadeInRight(child: Onboarding6()),
+      FadeInRight(child: const Onboarding6()),
       FadeInRight(child: const Onboarding7()),
       FadeInRight(child: const Onboarding8()),
     ]);

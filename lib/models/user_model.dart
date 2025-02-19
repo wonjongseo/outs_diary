@@ -1,10 +1,8 @@
 import 'package:hive/hive.dart';
+import 'package:ours_log/models/user_util_model.dart';
 import 'package:uuid/uuid.dart';
 
 import 'package:ours_log/common/utilities/app_constant.dart';
-import 'package:ours_log/controller/onboarding_controller.dart';
-import 'package:ours_log/models/notification_model.dart';
-import 'package:ours_log/models/regular_task_modal.dart';
 import 'package:ours_log/models/task_model.dart';
 
 part 'user_model.g.dart';
@@ -16,22 +14,19 @@ class UserModel {
   @HiveField(1)
   late int createdAt;
   @HiveField(2)
-  List<String>? selectedMorningLunchEvening; // 0:아침, 1:점심, 2: 저녁
-  @HiveField(3)
   List<int>? selectedDays; // 0:월, 1: 화
-  // @HiveField(4)
-  // // Map<int, List<RegularTaskModel>>? regularTasks;
-  // List<TaskModel> tasks;
-  @HiveField(4)
+  @HiveField(3)
   int? colorIndex;
-  @HiveField(5)
+  @HiveField(4)
   List<TaskModel>? tasks;
-  @HiveField(7)
+  @HiveField(5)
   int? backgroundIndex;
-  @HiveField(8)
+  @HiveField(6)
   int? fealIconIndex;
+  @HiveField(7)
+  UserUtilModel userUtilModel = UserUtilModel();
+
   UserModel({
-    this.selectedMorningLunchEvening,
     this.selectedDays,
     this.colorIndex,
     this.tasks,
@@ -44,6 +39,6 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, createdAt: $createdAt, selectedMorningLunchEvening: $selectedMorningLunchEvening, selectedDays: $selectedDays, backgroundIndex: $backgroundIndex, fealIconIndex: $fealIconIndex)';
+    return 'UserModel(id: $id, createdAt: $createdAt, selectedDays: $selectedDays, colorIndex: $colorIndex, tasks: $tasks, backgroundIndex: $backgroundIndex, fealIconIndex: $fealIconIndex, )';
   }
 }

@@ -18,7 +18,7 @@ class VisitDayAndTime extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return GetBuilder<AddHosipitalVisitController>(builder: (controller) {
       return ColTextAndWidget(
-        label: '일자',
+        label: AppString.days.tr,
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -27,7 +27,7 @@ class VisitDayAndTime extends StatelessWidget {
                 Expanded(
                   child: CustomTextFormField(
                     hintText: controller.selectedDate == null
-                        ? '방문 날짜'
+                        ? AppString.visitDay.tr
                         : DateFormat(
                                 "MM${AppString.month.tr} d${AppString.day.tr}")
                             .format(controller.selectedDate),
@@ -42,7 +42,7 @@ class VisitDayAndTime extends StatelessWidget {
                 Expanded(
                   child: CustomTextFormField(
                     readOnly: true,
-                    hintText: controller.startTime ?? '방문 시간',
+                    hintText: controller.startTime ?? AppString.visitTime.tr,
                     widget: IconButton(
                       onPressed: () => controller.onTapVisitTime(context),
                       icon: const Icon(Icons.keyboard_arrow_down),
@@ -59,7 +59,7 @@ class VisitDayAndTime extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    '알람 등록',
+                    AppString.enrollAlarm.tr,
                     style: controller.isEnrollAlarm
                         ? TextStyle(
                             color: AppColors.primaryColor,
@@ -86,7 +86,7 @@ class VisitDayAndTime extends StatelessWidget {
               SizedBox(height: RS.h10 * 2),
               Column(
                 children: [
-                  const Text('알람을 받을 시간을 선택해주세요'),
+                  Text(AppString.plzSelectAlarmTime.tr),
                   SizedBox(height: RS.h10 * 2),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -101,7 +101,7 @@ class VisitDayAndTime extends StatelessWidget {
                           },
                           child: SelectBeforeAlarmTime(
                               width: size.width * .2,
-                              text: '하루 전',
+                              text: '1${AppString.beforeDayEn.tr}',
                               isActive: controller.isBeforeOneDayAlarm),
                         ),
                         GestureDetector(
@@ -112,7 +112,7 @@ class VisitDayAndTime extends StatelessWidget {
                           },
                           child: SelectBeforeAlarmTime(
                               width: size.width * .2,
-                              text: '6시간 전',
+                              text: '6${AppString.beforeHour.tr}',
                               isActive: controller.isBeforeSizHourAlarm),
                         ),
                         GestureDetector(
@@ -123,7 +123,7 @@ class VisitDayAndTime extends StatelessWidget {
                           },
                           child: SelectBeforeAlarmTime(
                               width: size.width * .2,
-                              text: '1시간 전',
+                              text: '1${AppString.beforeHour.tr}',
                               isActive: controller.isBeforeOneHourAlarm),
                         ),
                         GestureDetector(
@@ -131,7 +131,7 @@ class VisitDayAndTime extends StatelessWidget {
                           child: SelectBeforeAlarmTime(
                               width: size.width * .2,
                               text: controller.selectedBeforeAlram == null
-                                  ? '선택'
+                                  ? AppString.selectText.tr
                                   : '${controller.selectedBeforeAlram!} 전',
                               isActive: controller.selectedBeforeAlram == null
                                   ? false

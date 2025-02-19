@@ -1,7 +1,9 @@
+import 'package:get/utils.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/state_manager.dart';
+import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
@@ -16,7 +18,7 @@ class Onboarding5 extends StatelessWidget {
       return Column(
         children: [
           Text(
-            '약을 복용중이신가요 ?',
+            AppString.doYouDrinkPill.tr,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: RS.w10 * 1.8,
@@ -38,11 +40,11 @@ class Onboarding5 extends StatelessWidget {
                         ? Border.all(color: AppColors.primaryColor, width: 2)
                         : Border.all(color: Colors.grey),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('네'),
+                        Text(AppString.yesText.tr),
                       ],
                     ),
                   ),
@@ -60,11 +62,11 @@ class Onboarding5 extends StatelessWidget {
                         ? Border.all(color: AppColors.primaryColor, width: 2)
                         : Border.all(color: Colors.grey),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('아니요'),
+                        Text(AppString.noText.tr),
                       ],
                     ),
                   ),

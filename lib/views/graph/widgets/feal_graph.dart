@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/datas/graph_data.dart';
 import 'package:ours_log/views/graph/widgets/custom_feal_line_graph.dart';
@@ -57,7 +59,9 @@ class _FealGraphState extends State<FealGraph> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   if (pageIndex == 1) const Icon(Icons.keyboard_arrow_left),
-                  Text(pageIndex == 0 ? '원형 그래프' : '선형 그래프'),
+                  Text(pageIndex == 0
+                      ? AppString.circularGraph.tr
+                      : AppString.linearGraph.tr),
                   if (pageIndex == 0) const Icon(Icons.keyboard_arrow_right),
                 ],
               ),

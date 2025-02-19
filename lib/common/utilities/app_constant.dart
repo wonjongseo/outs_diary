@@ -15,7 +15,7 @@ class AppConstant {
   static const int regularTaskModelHiveId = 6;
   static const int notificationModelHiveId = 7;
   static const int taskModelHiveId = 8;
-  static const int groceriesModelHiveId = 9;
+  static const int userUtilModelHiveId = 9;
   static const int expensiveModelHiveId = 10;
   static const int categoryModelHiveId = 11;
 
@@ -175,7 +175,7 @@ class AppConstant {
     ),
     BackgroundData(
       images: [],
-      description: '배경 없음',
+      description: AppString.noBackground.tr,
       lefts: [],
       rights: [],
       tops: [],

@@ -11,7 +11,9 @@ class CustomExpansionCard extends StatelessWidget {
       this.children,
       required this.child,
       this.subTitle,
+      this.initiallyExpanded = true,
       this.titleWidget,
+      this.onExpansionChanged,
       this.subTitleWidget});
 
   final String title;
@@ -19,12 +21,15 @@ class CustomExpansionCard extends StatelessWidget {
   final String? subTitle;
   final Widget? subTitleWidget;
   final List<Widget>? children;
+  final bool initiallyExpanded;
+  final Function(bool)? onExpansionChanged;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTileCard(
-      initiallyExpanded: true,
+      onExpansionChanged: onExpansionChanged,
+      initiallyExpanded: initiallyExpanded,
       elevation: 0,
       title: titleWidget == null ? Text(title) : titleWidget!,
       subtitle: subTitleWidget == null && subTitle == null

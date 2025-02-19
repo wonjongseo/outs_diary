@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 
 import 'package:ours_log/common/utilities/app_function.dart';
+import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/feal_icon_row.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
@@ -21,9 +22,7 @@ class OnBoarding3 extends StatelessWidget {
             fontWeight: FontWeight.bold,
             fontSize: RS.width18,
           ),
-          TextSpan(
-            text: isKo ? '아이콘을 선택해주세요!' : 'どんな記録を入れますか？',
-          ),
+          TextSpan(text: AppString.plzSelectFealIcon.tr),
         ),
         SizedBox(height: RS.h10),
         GetBuilder<OnboardingController>(builder: (controller) {

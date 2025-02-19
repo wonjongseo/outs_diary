@@ -6,43 +6,6 @@ import 'package:ours_log/controller/user_controller.dart';
 class AppColors {
   AppColors._();
 
-  // static Color getPrimaryColor(int index) {
-  //   if (Get.isDarkMode) {
-  //     print('Dark');
-
-  //     switch (index) {
-  //       case 0:
-  //         return darkPinkClr;
-  //       case 1:
-  //         return darkYellowClr;
-  //       case 2:
-  //         return darkGreenClr;
-  //       case 3:
-  //         return darkBluishClr;
-  //       case 4:
-  //         return darkPubbleClr;
-  //       default:
-  //         return darkPinkClr;
-  //     }
-  //   } else {
-  //     print('Light');
-  //     switch (index) {
-  //       case 0:
-  //         return pinkClr;
-  //       case 1:
-  //         return yellowClr;
-  //       case 2:
-  //         return greenClr;
-  //       case 3:
-  //         return bluishClr;
-  //       case 4:
-  //         return pubbleClr;
-  //       default:
-  //         return pinkClr;
-  //     }
-  //   }
-  // }
-
   static Color get primaryColor {
     int selectedColorIndex = 0;
     if (Get.isRegistered<OnboardingController>()) {
@@ -61,61 +24,108 @@ class AppColors {
     if (Get.isDarkMode) {
       switch (selectedColorIndex) {
         case 0:
-          return darkPinkClr;
+          return priDarkPinkClr;
         case 1:
-          return darkYellowClr;
+          return priDarkYellowClr;
         case 2:
-          return darkGreenClr;
+          return priDarkGreenClr;
         case 3:
-          return darkBluishClr;
+          return priDarkBluishClr;
         case 4:
-          return darkPubbleClr;
+          return priDarkPubbleClr;
       }
     } else {
       switch (selectedColorIndex) {
         case 0:
-          return pinkClr;
+          return priPinkClr;
         case 1:
-          return yellowClr;
+          return priYellowClr;
         case 2:
-          return greenClr;
+          return priGreenClr;
         case 3:
-          return bluishClr;
+          return priBluishClr;
 
         case 4:
-          return pubbleClr;
+          return priPubbleClr;
       }
     }
 
-    return pubbleClr;
+    return priPubbleClr;
   }
 
-  static const Color pinkClr = Color(0xFFff4667);
-  static const Color yellowClr = Color(0xFFFFB746);
-  static const Color greenClr = Color(0xFF00C853);
-  static const Color bluishClr = Color(0xFF4e5ae8);
-  static const Color pubbleClr = Color(0xFF6200EA);
+  static Color get secondaryColor {
+    int selectedColorIndex = 0;
+    if (Get.isRegistered<OnboardingController>()) {
+      OnboardingController onboardingController =
+          Get.find<OnboardingController>();
+      selectedColorIndex = onboardingController.selectedColorIndex;
+    }
 
-  static const Color darkPinkClr = Color(0xFFb32d4c);
-  static const Color darkYellowClr = Color(0xFFb27934);
-  static const Color darkGreenClr = Color(0xFF007a38);
-  static const Color darkBluishClr = Color(0xFF3a44b7);
-  static const Color darkPubbleClr = Color(0xFF3e009e);
+    if (Get.isRegistered<UserController>()) {
+      UserController userController = Get.find<UserController>();
+      if (userController.userModel != null) {
+        selectedColorIndex = userController.userModel!.colorIndex ?? 3;
+      }
+    }
 
-  static const Color darkPinkClr2 = Color(0xFFcc0033);
-  static const Color darkYellowClr2 = Color(0xFFcc7a00);
-  static const Color darkGreenClr2 = Color(0xFF007A3D);
-  static const Color darkBluishClr2 = Color(0xFF3D5AFE);
-  static const Color darkPubbleClr2 = Color(0xFF3700B3);
+    if (Get.isDarkMode) {
+      switch (selectedColorIndex) {
+        case 0:
+          return secDarkPinkClr;
+        case 1:
+          return secDarkYellowClr;
+        case 2:
+          return secDarkGreenClr;
+        case 3:
+          return secDarkBluishClr;
+        case 4:
+          return secDarkPubbleClr;
+      }
+    } else {
+      switch (selectedColorIndex) {
+        case 0:
+          return secPinkClr;
+        case 1:
+          return secYellowClr;
+        case 2:
+          return secGreenClr;
+        case 3:
+          return secBluishClr;
 
-  static const Color darkPinkClrSecondary2 = Color(0xFF4A148C);
-  static const Color darkYellowClrSecondary2 = Color(0xFF009688);
-  static const Color darkGreenClrSecondary2 = Color(0xFFB71C1C);
-  static const Color darkBluishClrSecondary2 = Color(0xFF1A237E);
-  static const Color darkPubbleClrSecondary2 = Color(0xFF880E4F);
+        case 4:
+          return secPubbleClr;
+      }
+    }
+
+    return priPubbleClr;
+  }
+
+  static const Color priPinkClr = Color(0xFFff4667);
+  static const Color priYellowClr = Color(0xFFFFB746);
+  static const Color priGreenClr = Color(0xFF00C853);
+  static const Color priBluishClr = Color(0xFF4e5ae8);
+  static const Color priPubbleClr = Color(0xFF6200EA);
+
+  static const Color secPinkClr = Color(0xFF6A1B9A);
+  static const Color secYellowClr = Color(0xFF00BFA5);
+  static const Color secGreenClr = Color(0xFFD50000);
+  static const Color secBluishClr = Color(0xFF2962FF);
+  static const Color secPubbleClr = Color(0xFFC51162);
+
+  static const Color priDarkPinkClr = Color(0xFFb32d4c);
+  static const Color priDarkYellowClr = Color(0xFFb27934);
+  static const Color priDarkGreenClr = Color(0xFF007a38);
+  static const Color priDarkBluishClr = Color(0xFF3a44b7);
+  static const Color priDarkPubbleClr = Color(0xFF3e009e);
+
+  static const Color secDarkPinkClr = Color(0xFF4A148C);
+  static const Color secDarkYellowClr = Color(0xFF009688);
+  static const Color secDarkGreenClr = Color(0xFFB71C1C);
+  static const Color secDarkBluishClr = Color(0xFF1A237E);
+  static const Color secDarkPubbleClr = Color(0xFF880E4F);
 
   //
-  static const Color secondaryColor = Color(0xFFFC2E20);
+  // static const Color secondaryColor = Color(0xFFFC2E20);
   static const Color greenDark = Color(0xFF00A884);
   static const Color greenLight = Color(0xFF008069);
 

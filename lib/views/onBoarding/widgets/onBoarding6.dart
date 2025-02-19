@@ -1,7 +1,10 @@
+import 'package:get/utils.dart';
+import 'package:intl/intl.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
+import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 
 import 'package:ours_log/controller/onboarding_controller.dart';
@@ -23,7 +26,7 @@ class Onboarding6 extends StatelessWidget {
             FadeInRight(
               child: Column(
                 children: [
-                  Text('하루에 몇번 드시고 계신가요?', style: textStyle),
+                  Text(AppString.whatTimeDoYouDrinkPill.tr, style: textStyle),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: RS.h10),
                     child: Row(
@@ -62,7 +65,7 @@ class Onboarding6 extends StatelessWidget {
             FadeInRight(
               child: Column(
                 children: [
-                  Text('어떤 요일에 복용하고 계신가요?', style: textStyle),
+                  Text(AppString.whatWeekDayYouDrink.tr, style: textStyle),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: RS.h10),
                     child: SingleChildScrollView(
@@ -110,5 +113,18 @@ class Onboarding6 extends StatelessWidget {
 }
 //월 수 금  일
 
-List<String> morningLunchEvening = ['아침', '점심', '저녁'];
-List<String> dayKo = ['월', '화', '수', '목', '금', '토', '일'];
+List<String> morningLunchEvening = [
+  AppString.morning.tr,
+  AppString.lunch.tr,
+  AppString.evening.tr
+];
+
+List<String> dayKo = [
+  AppString.monday.tr,
+  AppString.tuesday.tr,
+  AppString.wednesday.tr,
+  AppString.thursday.tr,
+  AppString.friday.tr,
+  AppString.saturday.tr,
+  AppString.sunday.tr,
+];

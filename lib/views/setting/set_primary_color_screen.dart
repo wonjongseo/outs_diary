@@ -30,7 +30,7 @@ class SetPrimaryColorScreen extends StatelessWidget {
                     child: CircleAvatar(
                       radius: RS.w10 * 3,
                       foregroundColor: Colors.white,
-                      backgroundColor: AppColors.pinkClr,
+                      backgroundColor: AppColors.priPinkClr,
                       child: controller.userModel!.colorIndex == 0
                           ? Icon(Icons.done)
                           : null,
@@ -47,7 +47,7 @@ class SetPrimaryColorScreen extends StatelessWidget {
                           : null,
                       radius: RS.w10 * 3,
                       foregroundColor: Colors.white,
-                      backgroundColor: AppColors.yellowClr,
+                      backgroundColor: AppColors.priYellowClr,
                     ),
                   ),
                   GestureDetector(
@@ -58,7 +58,7 @@ class SetPrimaryColorScreen extends StatelessWidget {
                     child: CircleAvatar(
                       radius: RS.w10 * 3,
                       foregroundColor: Colors.white,
-                      backgroundColor: AppColors.greenClr,
+                      backgroundColor: AppColors.priGreenClr,
                       child: controller.userModel!.colorIndex == 2
                           ? Icon(Icons.done)
                           : null,
@@ -72,7 +72,7 @@ class SetPrimaryColorScreen extends StatelessWidget {
                     child: CircleAvatar(
                       radius: RS.w10 * 3,
                       foregroundColor: Colors.white,
-                      backgroundColor: AppColors.bluishClr,
+                      backgroundColor: AppColors.priBluishClr,
                       child: controller.userModel!.colorIndex == 3
                           ? Icon(Icons.done)
                           : null,
@@ -86,7 +86,7 @@ class SetPrimaryColorScreen extends StatelessWidget {
                     child: CircleAvatar(
                       radius: RS.w10 * 3,
                       foregroundColor: Colors.white,
-                      backgroundColor: AppColors.pubbleClr,
+                      backgroundColor: AppColors.priPubbleClr,
                       child: controller.userModel!.colorIndex == 4
                           ? Icon(Icons.done)
                           : null,

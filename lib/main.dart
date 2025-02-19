@@ -13,6 +13,7 @@ import 'package:ours_log/models/hospital_log_model.dart';
 import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
+import 'package:ours_log/models/user_util_model.dart';
 import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/views/splash_screen.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -104,6 +105,10 @@ Future<void> initHive() async {
   }
   if (!Hive.isAdapterRegistered(AppConstant.taskModelHiveId)) {
     Hive.registerAdapter(TaskModelAdapter());
+  }
+
+  if (!Hive.isAdapterRegistered(AppConstant.userUtilModelHiveId)) {
+    Hive.registerAdapter(UserUtilModelAdapter());
   }
   if (!Hive.isAdapterRegistered(AppConstant.userModelHiveId)) {
     Hive.registerAdapter(UserModelAdapter());

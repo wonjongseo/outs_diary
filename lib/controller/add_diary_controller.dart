@@ -52,7 +52,7 @@ class AddDiaryController extends GetxController {
       loadHealthModel();
       update();
     } else {
-      forText();
+      // forText();
     }
     super.onInit();
   }
@@ -101,7 +101,9 @@ class AddDiaryController extends GetxController {
     diaryController.insert(newDiaryModel);
 
     AppSnackbar.vaildTextFeildSnackBar(
-        title: '성공', message: '${selectedDay.day}일의 건강이 기록되었습니다.');
+        title: AppString.completeText.tr,
+        message:
+            '${selectedDay.day}${AppString.savedHealthRecord.tr}'); //TODO EN
   }
 
   HealthModel createHealthModel() {

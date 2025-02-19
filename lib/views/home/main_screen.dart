@@ -91,7 +91,8 @@ class _MainScreenState extends State<MainScreen> {
               label: AppString.healthLog.tr, icon: Text('')),
           BottomNavigationBarItem(
               label: AppString.hospitalVisitLog.tr, icon: Text('')),
-          BottomNavigationBarItem(label: '일정 관리', icon: Text('')),
+          BottomNavigationBarItem(
+              label: AppString.scheduleManagement.tr, icon: Text('')),
           BottomNavigationBarItem(
               label: AppString.healthGraph.tr, icon: Text('')),
           BottomNavigationBarItem(
