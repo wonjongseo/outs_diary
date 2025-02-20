@@ -8,8 +8,8 @@ import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
-import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
-import 'package:ours_log/views/add_diary/widgets/image_of_today.dart';
+import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
+import 'package:ours_log/views/edit_diary/widgets/image_of_today.dart';
 import 'package:ours_log/views/image_picker_screen.dart';
 
 class HospitalVisitLogBody extends StatefulWidget {

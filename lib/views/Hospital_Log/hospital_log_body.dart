@@ -10,7 +10,7 @@ import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
-import 'package:ours_log/views/hospital_visit_log/add_hospital_visit_log_screen.dart';
+import 'package:ours_log/views/edit_hospital_visit_log/edit_hospital_visit_log_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class HospitalLogBody extends StatelessWidget {

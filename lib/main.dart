@@ -8,6 +8,8 @@ import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/models/blood_pressure_model.dart';
+import 'package:ours_log/models/day_period_type.dart';
+import 'package:ours_log/models/done_pill_day_modal.dart';
 import 'package:ours_log/models/regular_task_modal.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/health_model.dart';
@@ -16,8 +18,8 @@ import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
 import 'package:ours_log/models/user_util_model.dart';
+import 'package:ours_log/models/week_day_type.dart';
 import 'package:ours_log/respository/setting_repository.dart';
-import 'package:ours_log/respository/user_respository.dart';
 import 'package:ours_log/views/splash_screen.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -99,6 +101,17 @@ class _MyAppState extends State<MyApp> {
 
 Future<void> initHive() async {
   await Hive.initFlutter();
+
+  if (!Hive.isAdapterRegistered(AppConstant.donePillDayModelHiveId)) {
+    Hive.registerAdapter(DonePillDayModelAdapter());
+  }
+  if (!Hive.isAdapterRegistered(AppConstant.weekDayTypeHiveId)) {
+    Hive.registerAdapter(WeekDayTypeAdapter());
+  }
+
+  if (!Hive.isAdapterRegistered(AppConstant.dayPeriodTypeHiveId)) {
+    Hive.registerAdapter(DayPeriodTypeAdapter());
+  }
 
   if (!Hive.isAdapterRegistered(AppConstant.regularTaskModelHiveId)) {
     Hive.registerAdapter(RegularTaskModelAdapter());

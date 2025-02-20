@@ -8,6 +8,7 @@ import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 
 import 'package:ours_log/controller/onboarding_controller.dart';
+import 'package:ours_log/models/week_day_type.dart';
 
 class Onboarding6 extends StatelessWidget {
   const Onboarding6({super.key});
@@ -76,8 +77,8 @@ class Onboarding6 extends StatelessWidget {
                           dayKo.length,
                           (index) {
                             return GestureDetector(
-                              onTap: () =>
-                                  onboardingController.onSelectDays(index),
+                              onTap: () => onboardingController
+                                  .onSelectDays(WeekDayType.values[index]),
                               child: Container(
                                 width: RS.w10 * 8,
                                 height: RS.w10 * 10,
@@ -85,7 +86,7 @@ class Onboarding6 extends StatelessWidget {
                                     horizontal: RS.w10 / 2),
                                 decoration: BoxDecoration(
                                     border: onboardingController.selectedDays
-                                            .contains(index)
+                                            .contains(WeekDayType.values[index])
                                         ? Border.all(
                                             color: AppColors.primaryColor,
                                             width: 2)

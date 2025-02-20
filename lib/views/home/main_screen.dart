@@ -75,30 +75,29 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget bottomNavigtionBar() {
     return GetBuilder<UserController>(builder: (context) {
-      return BottomNavigationBar(
-        currentIndex: bodyIndex,
-        type: BottomNavigationBarType.fixed,
-        onTap: (value) {
-          bodyIndex = value;
-          setState(() {});
-        },
-        selectedLabelStyle: TextStyle(
-          color: AppColors.primaryColor,
-          fontWeight: FontWeight.w500,
+      return Container(
+        color: Colors.red,
+        child: BottomNavigationBar(
+          currentIndex: bodyIndex,
+          type: BottomNavigationBarType.fixed,
+          onTap: (value) {
+            bodyIndex = value;
+            setState(() {});
+          },
+          selectedItemColor: AppColors.primaryColor,
+          items: [
+            BottomNavigationBarItem(
+                label: AppString.healthLog.tr, icon: Text('')),
+            BottomNavigationBarItem(
+                label: AppString.hospitalVisitLog.tr, icon: Text('')),
+            BottomNavigationBarItem(
+                label: AppString.scheduleManagement.tr, icon: Text('')),
+            BottomNavigationBarItem(
+                label: AppString.healthGraph.tr, icon: Text('')),
+            BottomNavigationBarItem(
+                label: AppString.settingTr.tr, icon: Text('')),
+          ],
         ),
-        selectedItemColor: AppColors.primaryColor,
-        items: [
-          BottomNavigationBarItem(
-              label: AppString.healthLog.tr, icon: Text('')),
-          BottomNavigationBarItem(
-              label: AppString.hospitalVisitLog.tr, icon: Text('')),
-          BottomNavigationBarItem(
-              label: AppString.scheduleManagement.tr, icon: Text('')),
-          BottomNavigationBarItem(
-              label: AppString.healthGraph.tr, icon: Text('')),
-          BottomNavigationBarItem(
-              label: AppString.settingTr.tr, icon: Text('')),
-        ],
       );
     });
   }

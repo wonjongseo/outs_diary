@@ -11,6 +11,7 @@ import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
+import 'package:ours_log/models/week_day_type.dart';
 import 'package:ours_log/views/home/widgets/selected_dairy.dart';
 
 import 'package:table_calendar/table_calendar.dart';
@@ -66,8 +67,7 @@ class DiaryBody extends StatelessWidget {
                 rowHeight: RS.h10 * 10.4,
                 onDaySelected: controller.onDatSelected,
               ),
-              if (diaryController.selectedDiary != null)
-                SelectedDiary(diaryController: diaryController)
+              if (diaryController.selectedDiary != null) SelectedDiary()
             ],
           ),
         );
@@ -76,13 +76,20 @@ class DiaryBody extends StatelessWidget {
   }
 
   Widget? prioritizedBuilder(context, DateTime day, focusedDay) {
-    bool isNextDay = diaryController.now.difference(day).isNegative;
+    bool isNextDay = diaryController.now.day - day.day < 0;
     bool isToday = AppFunction.isSameDay(diaryController.now, day);
     bool isMustPill = false;
-    // if (isToday) {
-    // if (userController.selectedDays.contains(day.weekday - 1)) {
-    //   isMustPill = true;
-    // }
+
+    List<WeekDayType>? selectedPillDays =
+        userController.userModel!.selectedPillDays;
+
+    if (isToday) {
+      if (selectedPillDays != null && selectedPillDays.isNotEmpty) {
+        if (selectedPillDays.contains(WeekDayType.values[day.weekday - 1])) {
+          isMustPill = true;
+        }
+      }
+    }
 
     return Column(
       children: [

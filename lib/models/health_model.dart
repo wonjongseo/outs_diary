@@ -115,6 +115,15 @@ class HealthModel {
     return avg;
   }
 
+  bool get argIsNotZero {
+    return avgTemperature != 0 ||
+        avgBasicTemperature != 0 ||
+        avgMaxBloodPressure != 0 ||
+        avgMinBloodPressure != 0 ||
+        avgWeight != 0 ||
+        avgPulse != 0;
+  }
+
   String get tooltipMsgTemperature {
     String message = '';
     if (temperatures == null) return message;

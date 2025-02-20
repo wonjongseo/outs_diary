@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
-import 'package:ours_log/controller/add_diary_controller.dart';
+import 'package:ours_log/controller/edit_diary_controller.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
 
 class InputPeriod extends StatelessWidget {

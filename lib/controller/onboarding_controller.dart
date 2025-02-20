@@ -7,9 +7,11 @@ import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/controller/user_controller.dart';
+import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
+import 'package:ours_log/models/week_day_type.dart';
 import 'package:ours_log/views/onBoarding/widgets/onBoarding8.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -48,7 +50,7 @@ class OnboardingController extends GetxController {
   bool isShownMLE = true;
   bool isShownDays = false;
   List<int> selectedMorningLunchEvening = []; // 0:아침, 1:점심, 2: 저녁
-  List<int> selectedDays = []; // 0:월, 1: 화
+  List<WeekDayType> selectedDays = []; // 0:월, 1: 화
 
   void onSelectMorningLunchEvening(int index) {
     bool isSelected = selectedMorningLunchEvening.contains(index);
@@ -60,7 +62,7 @@ class OnboardingController extends GetxController {
     update();
   }
 
-  void onSelectDays(int index) {
+  void onSelectDays(WeekDayType index) {
     bool isSelected = selectedDays.contains(index);
     if (isSelected) {
       selectedDays.remove(index);
@@ -132,20 +134,24 @@ class OnboardingController extends GetxController {
   void goToMainScreenAndSaveUserData() async {
     List<TaskModel> tasks = [];
     List<String> times = [];
+    List<DayPeriodType>? dayPeriodTypes = [];
 
     if (isAlermEnable) {
-      selectedDays.sort((a, b) => a.compareTo(b));
+      selectedDays.sort((a, b) => a.index.compareTo(b.index));
       List<int> days = List.generate(
-          selectedDays.length, (index) => selectedDays[index] + 1);
+          selectedDays.length, (index) => selectedDays[index].index + 1);
 
       if (selectedMorningLunchEvening.contains(0)) {
         times.add(morningTime);
+        dayPeriodTypes.add(DayPeriodType.morning);
       }
       if (selectedMorningLunchEvening.contains(1)) {
         times.add(lunchTime);
+        dayPeriodTypes.add(DayPeriodType.afternoon);
       }
       if (selectedMorningLunchEvening.contains(2)) {
         times.add(eveningTime);
+        dayPeriodTypes.add(DayPeriodType.evening);
       }
       for (int day in days) {
         if (selectedMorningLunchEvening.contains(0)) {
@@ -247,11 +253,12 @@ class OnboardingController extends GetxController {
     }
 
     UserModel userModel = UserModel(
-      selectedDays: selectedDays,
+      selectedPillDays: selectedDays,
       backgroundIndex: backgroundIndex,
       fealIconIndex: fealIconIndex,
       colorIndex: selectedColorIndex,
       tasks: tasks,
+      dayPeriodTypes: dayPeriodTypes,
     );
 
     userController.saveUser(userModel);

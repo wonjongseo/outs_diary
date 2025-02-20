@@ -18,7 +18,6 @@ ThemeData lightTheme(String systemLanguage) {
     scaffoldBackgroundColor: AppColors.white,
     cardTheme: const CardTheme(elevation: 2),
     appBarTheme: const AppBarTheme(
-      // backgroundColor: AppColors.primaryColor,
       backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
       titleTextStyle: TextStyle(
@@ -26,7 +25,6 @@ ThemeData lightTheme(String systemLanguage) {
         fontWeight: FontWeight.w600,
         color: Colors.black,
       ),
-
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
@@ -43,10 +41,7 @@ ThemeData lightTheme(String systemLanguage) {
       unselectedLabelColor: Color(0xFFB3D9D2),
       labelColor: Colors.black,
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: Colors.white,
-      elevation: 0,
-    ),
+
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.greenLight,
@@ -64,9 +59,9 @@ ThemeData lightTheme(String systemLanguage) {
         shadowColor: Colors.transparent,
       ),
     ),
-    bottomSheetTheme: const BottomSheetThemeData(
+    bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: AppColors.white,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(20),
         ),
@@ -82,7 +77,7 @@ ThemeData lightTheme(String systemLanguage) {
       backgroundColor: AppColors.greenDark,
       foregroundColor: Colors.white,
     ),
-    listTileTheme: const ListTileThemeData(
+    listTileTheme: ListTileThemeData(
       iconColor: AppColors.greenDark,
       tileColor: AppColors.white,
       textColor: Colors.black,
@@ -93,7 +88,7 @@ ThemeData lightTheme(String systemLanguage) {
     ),
     checkboxTheme: CheckboxThemeData(
       side: BorderSide(color: Colors.grey[700]!),
-      overlayColor: MaterialStateProperty.all(Colors.red),
+      overlayColor: WidgetStateProperty.all(Colors.red),
       checkColor: MaterialStateProperty.all(AppColors.primaryColor),
       fillColor: MaterialStateProperty.resolveWith(
         (Set<MaterialState> states) {
@@ -177,7 +172,7 @@ ThemeData darkTheme(String systemLanguage) {
         shadowColor: Colors.transparent,
       ),
     ),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: AppColors.greenDark,
       foregroundColor: AppColors.white,
     ),
@@ -185,9 +180,9 @@ ThemeData darkTheme(String systemLanguage) {
       iconColor: AppColors.greenDark,
       tileColor: AppColors.black,
     ),
-    switchTheme: const SwitchThemeData(
-      thumbColor: MaterialStatePropertyAll(AppColors.greenDark),
-      trackColor: MaterialStatePropertyAll(Color(0xFF344047)),
+    switchTheme: SwitchThemeData(
+      thumbColor: WidgetStatePropertyAll(AppColors.greenDark),
+      trackColor: WidgetStatePropertyAll(Color(0xFF344047)),
     ),
   );
 }

@@ -17,7 +17,9 @@ class AppConstant {
   static const int taskModelHiveId = 8;
   static const int userUtilModelHiveId = 9;
   static const int bloodPressureModelHiveId = 10;
-  static const int categoryModelHiveId = 11;
+  static const int dayPeriodTypeHiveId = 11;
+  static const int weekDayTypeHiveId = 12;
+  static const int donePillDayModelHiveId = 13;
 
   static const String settingModelBox = 'settings';
   static const String diaryModelBox = 'diarys';

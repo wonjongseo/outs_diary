@@ -7,7 +7,7 @@ import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/diary_controller.dart';
-import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
+import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
 
 class ImageOfToday extends StatelessWidget {
   const ImageOfToday(

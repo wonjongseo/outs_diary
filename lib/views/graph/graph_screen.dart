@@ -202,8 +202,8 @@ class _MyWidgetState extends State<MyWidget> {
           touchTooltipData:
               LineTouchTooltipData(getTooltipItems: (touchedSpots) {
         return touchedSpots.map((touchedSpot) {
-          return LineTooltipItem("${touchedSpot.y.toInt()}0K",
-              const TextStyle(color: AppColors.white));
+          return LineTooltipItem(
+              "${touchedSpot.y.toInt()}0K", TextStyle(color: AppColors.white));
         }).toList();
       })),
     );

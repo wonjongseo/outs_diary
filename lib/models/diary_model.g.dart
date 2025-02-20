@@ -19,10 +19,10 @@ class DiaryModelAdapter extends TypeAdapter<DiaryModel> {
     return DiaryModel(
       dateTime: fields[2] as DateTime,
       fealIndex: fields[3] as int,
-      weatherIconIndex: (fields[4] as List?)?.cast<int>(),
       whatTodo: fields[5] as String?,
       imagePath: (fields[6] as List?)?.cast<String>(),
       painfulIndex: fields[8] as int?,
+      donePillDayModels: (fields[4] as List?)?.cast<DonePillDayModel>(),
       health: fields[7] as HealthModel?,
     )
       ..id = fields[0] as String
@@ -42,7 +42,7 @@ class DiaryModelAdapter extends TypeAdapter<DiaryModel> {
       ..writeByte(3)
       ..write(obj.fealIndex)
       ..writeByte(4)
-      ..write(obj.weatherIconIndex)
+      ..write(obj.donePillDayModels)
       ..writeByte(5)
       ..write(obj.whatTodo)
       ..writeByte(6)

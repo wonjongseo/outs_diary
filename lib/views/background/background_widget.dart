@@ -10,6 +10,7 @@ import 'package:ours_log/datas/background_data.dart';
 class BackgroundWidget extends StatelessWidget {
   const BackgroundWidget({super.key, required this.widget});
   final Widget widget;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

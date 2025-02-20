@@ -9,7 +9,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/respository/dairy_respository.dart';
-import 'package:ours_log/views/add_diary/add_diary_screen.dart';
+import 'package:ours_log/views/edit_diary/edit_diary_screen.dart';
 
 class DiaryController extends GetxController {
   DateTime now = DateTime.now();
@@ -50,13 +50,12 @@ class DiaryController extends GetxController {
       return;
     }
     selectedDiary = null;
+    Duration diff = cSelectedDay.difference(now);
 
-    if (cSelectedDay.difference(now).isNegative) {
-      Get.to(
-        () => EditDiaryScreen(
-          selectedDay: selectedDay,
-        ),
-      );
+    if (diff.inDays <= 0) {
+      Get.to(() => EditDiaryScreen(
+            selectedDay: selectedDay,
+          ));
     } else {
       if (!Get.isSnackbarOpen) {
         Get.snackbar(

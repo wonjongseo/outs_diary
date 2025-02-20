@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/theme/theme.dart';
-import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
+import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_button.dart';
 import 'package:ours_log/common/widgets/custom_expansion_card.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/common/widgets/open_close_container.dart';
-import 'package:ours_log/controller/add_diary_controller.dart';
+import 'package:ours_log/controller/edit_diary_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
+import 'package:ours_log/models/task_model.dart';
+import 'package:ours_log/views/edit_diary/widgets/day_done_pill_row.dart';
 import 'package:ours_log/views/edit_diary/widgets/feal_selector.dart';
-import 'package:ours_log/views/edit_diary/widgets/image_of_today.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
+import 'package:ours_log/views/edit_diary/widgets/image_of_today.dart';
 import 'package:ours_log/views/edit_diary/widgets/morning_lunch_evening_blood_pressure_widget.dart';
 import 'package:ours_log/views/edit_diary/widgets/morning_lunch_evening_temp_and_pulse_widget.dart';
 
@@ -30,10 +32,10 @@ class EditDiaryScreen extends StatelessWidget {
   final DateTime selectedDay;
   final DiaryModel? diaryModel;
 
-  late EditDiaryController addDiaryController;
+  late EditDiaryController editDiaryController;
   @override
   Widget build(BuildContext context) {
-    addDiaryController = Get.put(
+    editDiaryController = Get.put(
       EditDiaryController(
         selectedDay: selectedDay,
         diaryModel: diaryModel,
@@ -47,17 +49,17 @@ class EditDiaryScreen extends StatelessWidget {
           children: [
             CustomButton(
               label: AppString.saveText.tr,
-              onTap: addDiaryController.onTapSaveBtn,
+              onTap: editDiaryController.onTapSaveBtn,
             )
           ],
         ),
       ),
       body: SafeArea(
-        child: GetBuilder<EditDiaryController>(builder: (addDiaryController) {
+        child: GetBuilder<EditDiaryController>(builder: (editDiaryController) {
           return GestureDetector(
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             child: SingleChildScrollView(
-              controller: addDiaryController.scrollController,
+              controller: editDiaryController.scrollController,
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: RS.h10,
@@ -69,10 +71,13 @@ class EditDiaryScreen extends StatelessWidget {
                     children: [
                       const FealSelector(),
                       SizedBox(height: RS.h10),
+                      if (editDiaryController.donePillDayModels.isNotEmpty)
+                        const DayDonePillRow(),
+                      SizedBox(height: RS.h10),
                       ColTextAndWidget(
                         label: AppString.weight.tr,
                         widget: CustomTextFormField(
-                          controller: addDiaryController.weightCtls[0],
+                          controller: editDiaryController.weightCtls[0],
                           hintText: AppString.weight.tr,
                           sufficIcon: Text(
                             'kg',
@@ -93,7 +98,7 @@ class EditDiaryScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: MorningLunchEveningTempAndPulseWidget(
-                            controllers: addDiaryController.temperatureCtls,
+                            controllers: editDiaryController.temperatureCtls,
                             label: AppString.temperature.tr,
                             sufficText: '°C',
                             keyboardType: const TextInputType.numberWithOptions(
@@ -112,7 +117,7 @@ class EditDiaryScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: MorningLunchEveningTempAndPulseWidget(
-                            controllers: addDiaryController.pulseCtls,
+                            controllers: editDiaryController.pulseCtls,
                             label: AppString.pulse.tr,
                             sufficText: '${AppString.count.tr}/min',
                             keyboardType: TextInputType.number,
@@ -131,9 +136,9 @@ class EditDiaryScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: MorningLunchEveningBloodPressureWidget(
                             maxControllers:
-                                addDiaryController.maxBloodPressureCtls,
+                                editDiaryController.maxBloodPressureCtls,
                             minControllers:
-                                addDiaryController.minBloodPressureCtls,
+                                editDiaryController.minBloodPressureCtls,
                             label: AppString.bloodPressure.tr,
                             sufficText: 'mm Hg',
                           ),
@@ -148,34 +153,27 @@ class EditDiaryScreen extends StatelessWidget {
                         icons: AppConstant.zeroToNineIcons,
                         label: AppString.painLevel.tr,
                         isOnlyOne: true,
-                        selectedIconIndexs: addDiaryController.painFulIndex,
+                        selectedIconIndexs: editDiaryController.painFulIndex,
                       ),
                       SizedBox(height: RS.height20),
-                      // ColTextAndWidget(
-                      //   label: AppString.whatDidYouHintMsg.tr,
-                      //   widget: CustomTextFormField(
-                      //     hintText: AppString.plzEnterTextMsg.tr,
-                      //     controller: addDiaryController.whatToDoController,
-                      //     maxLines: 7,
-                      //   ),
-                      // ),
-                      // SizedBox(height: RS.height20),
-                      // ImageOfToday(
-                      //   carouselSliderController:
-                      //       addDiaryController.carouselSliderController,
-                      //   label: AppString.photoOfToday.tr,
-                      //   uploadFiles: addDiaryController.uploadFiles,
-                      //   selectedPhotos: addDiaryController.selectedPhotos,
-                      //   removePhoto: addDiaryController.removePhoto,
-                      // ),
-                      // SizedBox(height: RS.height20),
-                      // ExpansionIconCard(
-                      //   icons: AppConstant.weatherIcons,
-                      //   label: AppString.weatherText.tr,
-                      //   selectedIconIndexs:
-                      //       addDiaryController.selectedWeatherIndexs,
-                      // ),
-                      // SizedBox(height: RS.height20),
+                      ColTextAndWidget(
+                        label: AppString.whatDidYouHintMsg.tr,
+                        widget: CustomTextFormField(
+                          hintText: AppString.plzEnterTextMsg.tr,
+                          controller: editDiaryController.whatToDoController,
+                          maxLines: 7,
+                        ),
+                      ),
+                      SizedBox(height: RS.height20),
+                      ImageOfToday(
+                        carouselSliderController:
+                            editDiaryController.carouselSliderController,
+                        label: AppString.photoOfToday.tr,
+                        uploadFiles: editDiaryController.uploadFiles,
+                        selectedPhotos: editDiaryController.selectedPhotos,
+                        removePhoto: editDiaryController.removePhoto,
+                      ),
+                      SizedBox(height: RS.height20),
                     ],
                   );
                 }),
@@ -205,17 +203,6 @@ class EditDiaryScreen extends StatelessWidget {
               ),
             ),
           ),
-          // SizedBox(width: RS.width20),
-          // Expanded(
-          //   child: CustomTextFormField(
-          //     controller: controllers[1],
-          //     hintText: AppString.lunch.tr,
-          //     sufficIcon: Text(
-          //       sufficText,
-          //       style: textFieldSufficStyle,
-          //     ),
-          //   ),
-          // ),
           SizedBox(width: RS.width20),
           Expanded(
             child: CustomTextFormField(

@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
-import 'package:ours_log/controller/add_hosipital_visit_controller.dart';
+import 'package:ours_log/controller/edit_hosipital_visit_controller.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
 
 class VisitDayAndTime extends StatelessWidget {

@@ -9,22 +9,25 @@ import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
+import 'package:ours_log/common/widgets/done_circle_icon.dart';
 import 'package:ours_log/controller/image_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
-import 'package:ours_log/views/add_diary/add_diary_screen.dart';
-import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
+import 'package:ours_log/models/day_period_type.dart';
+import 'package:ours_log/views/edit_diary/edit_diary_screen.dart';
+import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
+import 'package:ours_log/views/edit_diary/widgets/day_done_pill_row.dart';
 import 'package:ours_log/views/full_Image_screen.dart';
+import 'package:ours_log/views/home/widgets/aver_health_value.dart';
 import 'package:ours_log/views/home/widgets/circle_aver_health_widget.dart';
 
 class SelectedDiary extends StatelessWidget {
-  const SelectedDiary({super.key, required this.diaryController});
-
-  final DiaryController diaryController;
+  const SelectedDiary({super.key});
 
   @override
   Widget build(BuildContext context) {
-    UserController backgroundController = Get.find<UserController>();
+    UserController userController = Get.find<UserController>();
+    DiaryController diaryController = Get.find<DiaryController>();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: RS.w10),
       child: Container(
@@ -42,7 +45,7 @@ class SelectedDiary extends StatelessWidget {
                 Row(
                   children: [
                     Image.asset(
-                      backgroundController
+                      userController
                           .feals[diaryController.selectedDiary!.fealIndex],
                       width: RS.w10 * 6,
                     ),
@@ -56,17 +59,12 @@ class SelectedDiary extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () async {
-                        // diaryController.getAllData();
-
-                        Get.to(
-                          () => EditDiaryScreen(
-                            selectedDay:
-                                diaryController.selectedDiary!.dateTime,
-                            diaryModel: diaryController.selectedDiary,
-                          ),
-                        );
-                      },
+                      onPressed: () => Get.to(
+                        () => EditDiaryScreen(
+                          selectedDay: diaryController.selectedDiary!.dateTime,
+                          diaryModel: diaryController.selectedDiary,
+                        ),
+                      ),
                       icon: FaIcon(
                         FontAwesomeIcons.pen,
                         size: RS.width20,
@@ -84,8 +82,29 @@ class SelectedDiary extends StatelessWidget {
               ],
             ),
             const Divider(),
-            if (diaryController.selectedDiary!.health != null) ...[
-              averHealthValue(),
+            if (diaryController.selectedDiary!.health != null &&
+                diaryController.selectedDiary!.health!.argIsNotZero) ...[
+              const AverHealthValue(),
+            ],
+            if (diaryController.selectedDiary!.donePillDayModels != null &&
+                diaryController
+                    .selectedDiary!.donePillDayModels!.isNotEmpty) ...[
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(
+                    diaryController.selectedDiary!.donePillDayModels!.length,
+                    (index) => DoneCircleIcon(
+                      backgroundColor: diaryController
+                              .selectedDiary!.donePillDayModels![index].isDone
+                          ? AppColors.primaryColor
+                          : Colors.grey,
+                      label: diaryController.selectedDiary!
+                          .donePillDayModels![index].dayPeriod.label,
+                    ),
+                  ),
+                ),
+              )
             ],
             ColTextAndWidget(
               label: AppString.whatDidYouHintMsg.tr,
@@ -134,46 +153,6 @@ class SelectedDiary extends StatelessWidget {
               )
           ],
         ),
-      ),
-    );
-  }
-
-  Widget averHealthValue() {
-    return Padding(
-      padding: EdgeInsets.all(RS.w10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          if (diaryController.selectedDiary!.health!.temperatures != null)
-            Tooltip(
-              message:
-                  diaryController.selectedDiary!.health!.tooltipMsgTemperature,
-              triggerMode: TooltipTriggerMode.tap,
-              child: CircleAverHealthWidget(
-                title: AppString.temperature.tr,
-                averValue:
-                    diaryController.selectedDiary!.health!.avgTemperature,
-              ),
-            ),
-          if (diaryController.selectedDiary!.health!.pulses != null)
-            Tooltip(
-              message: diaryController.selectedDiary!.health!.tooltipMsgPulse,
-              triggerMode: TooltipTriggerMode.tap,
-              child: CircleAverHealthWidget(
-                title: AppString.pulse.tr,
-                averValue: diaryController.selectedDiary!.health!.avgPulse,
-              ),
-            ),
-          if (diaryController.selectedDiary!.health!.weights != null)
-            Tooltip(
-              message: diaryController.selectedDiary!.health!.tooltipMsgWeight,
-              triggerMode: TooltipTriggerMode.tap,
-              child: CircleAverHealthWidget(
-                title: AppString.weight.tr,
-                averValue: diaryController.selectedDiary!.health!.avgWeight,
-              ),
-            ),
-        ],
       ),
     );
   }

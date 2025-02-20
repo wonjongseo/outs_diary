@@ -17,36 +17,39 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return UserModel(
-      selectedDays: (fields[2] as List?)?.cast<int>(),
-      colorIndex: fields[3] as int?,
-      tasks: (fields[4] as List?)?.cast<TaskModel>(),
-      backgroundIndex: fields[5] as int?,
-      fealIconIndex: fields[6] as int?,
+      selectedPillDays: (fields[2] as List?)?.cast<WeekDayType>(),
+      colorIndex: fields[4] as int?,
+      tasks: (fields[5] as List?)?.cast<TaskModel>(),
+      backgroundIndex: fields[6] as int?,
+      fealIconIndex: fields[7] as int?,
+      dayPeriodTypes: (fields[3] as List?)?.cast<DayPeriodType>(),
     )
       ..id = fields[0] as String
       ..createdAt = fields[1] as int
-      ..userUtilModel = fields[7] as UserUtilModel;
+      ..userUtilModel = fields[8] as UserUtilModel;
   }
 
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.createdAt)
       ..writeByte(2)
-      ..write(obj.selectedDays)
+      ..write(obj.selectedPillDays)
       ..writeByte(3)
-      ..write(obj.colorIndex)
+      ..write(obj.dayPeriodTypes)
       ..writeByte(4)
-      ..write(obj.tasks)
+      ..write(obj.colorIndex)
       ..writeByte(5)
-      ..write(obj.backgroundIndex)
+      ..write(obj.tasks)
       ..writeByte(6)
-      ..write(obj.fealIconIndex)
+      ..write(obj.backgroundIndex)
       ..writeByte(7)
+      ..write(obj.fealIconIndex)
+      ..writeByte(8)
       ..write(obj.userUtilModel);
   }
 

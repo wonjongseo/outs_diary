@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:ours_log/models/done_pill_day_modal.dart';
 import 'package:uuid/uuid.dart';
 
 import 'package:ours_log/common/utilities/app_constant.dart';
@@ -17,7 +18,7 @@ class DiaryModel {
   @HiveField(3)
   final int fealIndex;
   @HiveField(4)
-  final List<int>? weatherIconIndex;
+  List<DonePillDayModel>? donePillDayModels;
 
   @HiveField(5)
   final String? whatTodo;
@@ -32,10 +33,10 @@ class DiaryModel {
   DiaryModel({
     required this.dateTime,
     required this.fealIndex,
-    this.weatherIconIndex,
     this.whatTodo,
     this.imagePath,
     this.painfulIndex,
+    this.donePillDayModels,
     this.health,
   }) {
     id = const Uuid().v4();
@@ -44,7 +45,7 @@ class DiaryModel {
 
   @override
   String toString() {
-    return 'DiaryModel(id: $id, createdAt: $createdAt, dateTime: $dateTime, fealIndex: $fealIndex, weatherIconIndex: $weatherIconIndex, whatTodo: $whatTodo, imagePath: $imagePath, health: $health, painfulIndex: $painfulIndex)';
+    return 'DiaryModel(id: $id, createdAt: $createdAt, dateTime: $dateTime, fealIndex: $fealIndex, whatTodo: $whatTodo, imagePath: $imagePath, health: $health, painfulIndex: $painfulIndex)';
   }
 }
 

@@ -11,14 +11,20 @@ import 'package:ours_log/controller/image_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/blood_pressure_model.dart';
+import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/models/diary_model.dart';
+import 'package:ours_log/models/done_pill_day_modal.dart';
 import 'package:ours_log/models/health_model.dart';
+import 'package:ours_log/models/week_day_type.dart';
 
 class EditDiaryController extends GetxController {
   int backgroundIndex = 0;
   int selectedFealIndex = -1;
 
-  UserController backgroundController = Get.find<UserController>();
+  // List<DayPeriodType>? isDonePillOfDay;
+  List<DonePillDayModel> donePillDayModels = [];
+
+  UserController userController = Get.find<UserController>();
   ScrollController scrollController = ScrollController();
   DiaryController diaryController = Get.find<DiaryController>();
   CarouselSliderController carouselSliderController =
@@ -47,9 +53,28 @@ class EditDiaryController extends GetxController {
   final DateTime selectedDay;
   EditDiaryController({this.diaryModel, required this.selectedDay});
 
+  void onToggleDonePillDayModel(int index) {
+    donePillDayModels[index].isDone = !donePillDayModels[index].isDone;
+    update();
+  }
+
   @override
   void onInit() async {
     whatToDoController = TextEditingController();
+
+    final userModel = userController.userModel!;
+    final selectedDays = userModel.selectedPillDays;
+    final dayPeriodTypes = userModel.dayPeriodTypes;
+
+    if (selectedDays?.isNotEmpty == true &&
+        selectedDays!.contains(WeekDayType.values[selectedDay.weekday - 1])) {
+      donePillDayModels.addAll(
+        dayPeriodTypes
+                ?.map((e) => DonePillDayModel(dayPeriod: e, isDone: false)) ??
+            [],
+      );
+    }
+
     if (diaryModel != null) {
       loadDiaryModel();
       loadHealthModel();
@@ -91,7 +116,7 @@ class EditDiaryController extends GetxController {
       fealIndex: selectedFealIndex,
       whatTodo: whatTodo,
       imagePath: imagePhats,
-      weatherIconIndex: selectedWeatherIndexs,
+      donePillDayModels: donePillDayModels,
       painfulIndex: painFulIndex.isEmpty ? null : painFulIndex[0],
       health: healthModel,
     );
@@ -155,14 +180,13 @@ class EditDiaryController extends GetxController {
 
   void loadDiaryModel() {
     whatToDoController.text = diaryModel!.whatTodo ?? '';
-
+    donePillDayModels = diaryModel!.donePillDayModels ?? [];
     if (diaryModel!.imagePath != null) {
       for (var imageName in diaryModel!.imagePath!) {
         uploadFiles.add(File('${ImageController.instance.path}/$imageName'));
       }
     }
 
-    selectedWeatherIndexs = diaryModel!.weatherIconIndex ?? [];
     selectedFealIndex = diaryModel!.fealIndex;
   }
 

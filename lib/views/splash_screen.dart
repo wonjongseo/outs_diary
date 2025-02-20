@@ -31,7 +31,6 @@ class _SplashScreenState extends State<SplashScreen> {
   late UserController userController;
   initControllers() async {
     userController = Get.put(UserController());
-
     Get.put(DiaryController());
     Get.put(HospitalLogController());
     Get.put(ImageController());

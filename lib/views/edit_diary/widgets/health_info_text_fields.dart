@@ -5,7 +5,7 @@ import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_expansion_card.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
-import 'package:ours_log/controller/add_diary_controller.dart';
+import 'package:ours_log/controller/edit_diary_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/edit_diary/widgets/morning_lunch_evening_temp_and_pulse_widget.dart';

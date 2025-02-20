@@ -34,7 +34,7 @@ class FullmageScreen extends StatelessWidget {
               ),
               IconButton(
                 onPressed: Get.back,
-                icon: const FaIcon(
+                icon: FaIcon(
                   FontAwesomeIcons.x,
                   color: AppColors.white,
                 ),
