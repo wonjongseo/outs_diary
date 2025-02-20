@@ -13,14 +13,15 @@ import 'package:ours_log/common/widgets/open_close_container.dart';
 import 'package:ours_log/controller/add_diary_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
-import 'package:ours_log/views/add_diary/widgets/feal_selector.dart';
-import 'package:ours_log/views/add_diary/widgets/image_of_today.dart';
-import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
-import 'package:ours_log/views/add_diary/widgets/morning_lunch_evening_blood_pressure_widget.dart';
-import 'package:ours_log/views/add_diary/widgets/morning_lunch_evening_temp_and_pulse_widget.dart';
+import 'package:ours_log/views/edit_diary/widgets/feal_selector.dart';
+import 'package:ours_log/views/edit_diary/widgets/image_of_today.dart';
+import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
+import 'package:ours_log/views/edit_diary/widgets/morning_lunch_evening_blood_pressure_widget.dart';
+import 'package:ours_log/views/edit_diary/widgets/morning_lunch_evening_temp_and_pulse_widget.dart';
 
-class AddDiaryScreen extends StatelessWidget {
-  AddDiaryScreen({
+// ignore: must_be_immutable
+class EditDiaryScreen extends StatelessWidget {
+  EditDiaryScreen({
     super.key,
     required this.selectedDay,
     this.diaryModel,
@@ -29,11 +30,11 @@ class AddDiaryScreen extends StatelessWidget {
   final DateTime selectedDay;
   final DiaryModel? diaryModel;
 
-  late AddDiaryController addDiaryController;
+  late EditDiaryController addDiaryController;
   @override
   Widget build(BuildContext context) {
     addDiaryController = Get.put(
-      AddDiaryController(
+      EditDiaryController(
         selectedDay: selectedDay,
         diaryModel: diaryModel,
       ),
@@ -52,7 +53,7 @@ class AddDiaryScreen extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: GetBuilder<AddDiaryController>(builder: (addDiaryController) {
+        child: GetBuilder<EditDiaryController>(builder: (addDiaryController) {
           return GestureDetector(
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             child: SingleChildScrollView(

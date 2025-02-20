@@ -14,7 +14,7 @@ import 'package:ours_log/models/blood_pressure_model.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/health_model.dart';
 
-class AddDiaryController extends GetxController {
+class EditDiaryController extends GetxController {
   int backgroundIndex = 0;
   int selectedFealIndex = -1;
 
@@ -45,7 +45,7 @@ class AddDiaryController extends GetxController {
 
   final DiaryModel? diaryModel;
   final DateTime selectedDay;
-  AddDiaryController({this.diaryModel, required this.selectedDay});
+  EditDiaryController({this.diaryModel, required this.selectedDay});
 
   @override
   void onInit() async {

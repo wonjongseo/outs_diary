@@ -12,7 +12,7 @@ class FealSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AddDiaryController>(builder: (addDiaryController) {
+    return GetBuilder<EditDiaryController>(builder: (addDiaryController) {
       return Container(
         padding: EdgeInsets.all(RS.width8),
         decoration: BoxDecoration(

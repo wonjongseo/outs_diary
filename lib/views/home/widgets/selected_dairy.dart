@@ -60,7 +60,7 @@ class SelectedDiary extends StatelessWidget {
                         // diaryController.getAllData();
 
                         Get.to(
-                          () => AddDiaryScreen(
+                          () => EditDiaryScreen(
                             selectedDay:
                                 diaryController.selectedDiary!.dateTime,
                             diaryModel: diaryController.selectedDiary,

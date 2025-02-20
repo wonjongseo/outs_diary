@@ -53,7 +53,7 @@ class DiaryController extends GetxController {
 
     if (cSelectedDay.difference(now).isNegative) {
       Get.to(
-        () => AddDiaryScreen(
+        () => EditDiaryScreen(
           selectedDay: selectedDay,
         ),
       );

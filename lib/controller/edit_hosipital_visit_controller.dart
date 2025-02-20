@@ -16,7 +16,7 @@ import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/respository/setting_repository.dart';
 
-class AddHosipitalVisitController extends GetxController {
+class EditHosipitalVisitController extends GetxController {
   String? startTime;
 
   bool isEnrollAlarm = false;
@@ -73,7 +73,7 @@ class AddHosipitalVisitController extends GetxController {
   }
 
   final HospitalLogModel? hospitalLogModel;
-  AddHosipitalVisitController({
+  EditHosipitalVisitController({
     required this.selectedDate,
     this.hospitalLogModel,
   });

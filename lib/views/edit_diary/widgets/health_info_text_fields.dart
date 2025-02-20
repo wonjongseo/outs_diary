@@ -7,15 +7,15 @@ import 'package:ours_log/common/widgets/custom_expansion_card.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/controller/add_diary_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
-import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
-import 'package:ours_log/views/add_diary/widgets/morning_lunch_evening_temp_and_pulse_widget.dart';
+import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
+import 'package:ours_log/views/edit_diary/widgets/morning_lunch_evening_temp_and_pulse_widget.dart';
 
 class HealthInfoTextFields extends StatelessWidget {
   const HealthInfoTextFields({super.key});
 
   @override
   Widget build(BuildContext context) {
-    AddDiaryController addDiaryController = Get.find<AddDiaryController>();
+    EditDiaryController addDiaryController = Get.find<EditDiaryController>();
     return GetBuilder<UserController>(builder: (userController) {
       return CustomExpansionCard(
         title: AppString.health.tr,

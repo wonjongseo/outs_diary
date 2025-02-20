@@ -7,8 +7,8 @@ import 'package:ours_log/common/widgets/custom_button.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/controller/add_hosipital_visit_controller.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
-import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
-import 'package:ours_log/views/add_diary/widgets/image_of_today.dart';
+import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
+import 'package:ours_log/views/edit_diary/widgets/image_of_today.dart';
 import 'package:ours_log/views/hospital_visit_log/widgets/visit_day_and_time.dart';
 
 class AddHospitalVisitLogScreen extends StatelessWidget {
@@ -23,9 +23,9 @@ class AddHospitalVisitLogScreen extends StatelessWidget {
   // String? _startTime;
   @override
   Widget build(BuildContext context) {
-    Get.put(AddHosipitalVisitController(
+    Get.put(EditHosipitalVisitController(
         selectedDate: selectedDate, hospitalLogModel: hospitalLogModel));
-    return GetBuilder<AddHosipitalVisitController>(builder: (controller) {
+    return GetBuilder<EditHosipitalVisitController>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(title: Text(AppString.enrollVisitHospitalLog.tr)),
         bottomNavigationBar: SafeArea(
