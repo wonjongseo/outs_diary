@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ours_log/controller/notification_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
+import 'package:ours_log/respository/dairy_respository.dart';
 import 'package:ours_log/respository/user_respository.dart';
 import 'package:ours_log/views/Hospital_Log/hospital_log_body.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
@@ -54,9 +55,9 @@ class _MainScreenState extends State<MainScreen> {
       ),
       floatingActionButton: FloatingActionButton.small(onPressed: () async {
         NotificationService notification = NotificationService();
-        // await notification.initializeNotifications();
         notification.cancelAllNotifications();
         UserModelRepository().deleteAll();
+        DiaryRepository().deleteAll();
       }),
       body: SafeArea(
         child: BackgroundWidget(
@@ -77,14 +78,14 @@ class _MainScreenState extends State<MainScreen> {
       return BottomNavigationBar(
         currentIndex: bodyIndex,
         type: BottomNavigationBarType.fixed,
-        // backgroundColor:
-        //     Get.isDarkMode ? AppColors.greyBackground : Colors.grey[100]!,
         onTap: (value) {
           bodyIndex = value;
           setState(() {});
         },
         selectedLabelStyle: TextStyle(
-            color: AppColors.primaryColor, fontWeight: FontWeight.w500),
+          color: AppColors.primaryColor,
+          fontWeight: FontWeight.w500,
+        ),
         selectedItemColor: AppColors.primaryColor,
         items: [
           BottomNavigationBarItem(

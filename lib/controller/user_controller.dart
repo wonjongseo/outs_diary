@@ -18,12 +18,59 @@ class UserController extends GetxController {
 
   UserModelRepository userModelRepository = UserModelRepository();
 
+  void toggleExpanded(bool v, int index) {
+    switch (index) {
+      case 0:
+        userModel!.userUtilModel.expandedTemperature = v;
+        break;
+      case 1:
+        userModel!.userUtilModel.expandedPulse = v;
+        break;
+      case 2:
+        userModel!.userUtilModel.expandedBloodPressure = v;
+        break;
+      case 3:
+        userModel!.userUtilModel.expandedPainLevel = v;
+        break;
+      case 4:
+        userModel!.userUtilModel.expandedFealGraph = v;
+        break;
+      case 5:
+        userModel!.userUtilModel.expandedWeightGraph = v;
+        break;
+      case 6:
+        userModel!.userUtilModel.expandedTemperatureGraph = v;
+        break;
+      case 7:
+        userModel!.userUtilModel.expandedPulseGraph = v;
+        break;
+      case 8:
+        userModel!.userUtilModel.expandedBloodPressureGraph = v;
+        break;
+      case 9:
+        userModel!.userUtilModel.expandedPainLevelGraph = v;
+        break;
+    }
+
+    userModelRepository.saveUser(userModel!);
+
+    update();
+  }
+
+  void toggleExpandedPainLevel(bool v) {
+    userModel!.userUtilModel!.expandedPainLevel =
+        !userModel!.userUtilModel!.expandedPainLevel;
+
+    userModelRepository.saveUser(userModel!);
+
+    update();
+  }
+
   void toggleExpandedTemperature(bool v) {
     userModel!.userUtilModel!.expandedTemperature =
         !userModel!.userUtilModel!.expandedTemperature;
 
     userModelRepository.saveUser(userModel!);
-    print('userModel!.userUtilModel! : ${userModel!.userUtilModel!}');
 
     update();
   }
@@ -108,8 +155,52 @@ class UserController extends GetxController {
 
   void getUser() async {
     userModel = await userModelRepository.loadUser();
-    print('userModel.userUtilModel : ${userModel!.userUtilModel}');
 
     update();
   }
 }
+
+// class UserUtilController extends GetxController {
+//   bool expandedTemperature = true;
+//   bool expandedPulse = true;
+//   bool expandedBloodPressure = true;
+//   bool expandedPainLevel = true;
+//   bool expandedFealGraph = true;
+//   bool expandedTemperatureGraph = true;
+//   bool expandedPulseGraph = true;
+//   bool expandedBloodPressureGraph = true;
+//   bool expandedPainLevelGraph = true;
+
+//   UserController userController = Get.find<UserController>();
+
+//   @override
+//   void onInit() {
+//     expandedTemperature =
+//         userController.userModel!.userUtilModel.expandedTemperature;
+//     expandedPulse = userController.userModel!.userUtilModel.expandedPulse;
+//     expandedBloodPressure =
+//         userController.userModel!.userUtilModel.expandedBloodPressure;
+//     expandedPainLevel =
+//         userController.userModel!.userUtilModel.expandedPainLevel;
+//     expandedFealGraph =
+//         userController.userModel!.userUtilModel.expandedFealGraph;
+//     expandedTemperatureGraph =
+//         userController.userModel!.userUtilModel.expandedTemperatureGraph;
+//     expandedPulseGraph =
+//         userController.userModel!.userUtilModel.expandedPulseGraph;
+//     expandedBloodPressureGraph =
+//         userController.userModel!.userUtilModel.expandedBloodPressureGraph;
+//     expandedPainLevelGraph =
+//         userController.userModel!.userUtilModel.expandedPainLevelGraph;
+//     super.onInit();
+//   }
+
+//   void toggleExpandedPainLevel(bool v) {
+//     userController.userModel!.userUtilModel!.expandedPainLevel =
+//         !userController.userModel!.userUtilModel!.expandedPainLevel;
+
+//     userController.userModelRepository.saveUser(userController.userModel!);
+
+//     update();
+//   }
+// }

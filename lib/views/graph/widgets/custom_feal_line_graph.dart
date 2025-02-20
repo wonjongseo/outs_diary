@@ -70,7 +70,7 @@ class CustomFealLineGraph extends StatelessWidget {
                         graphData.xDatas[index],
                       ),
               ),
-              color: Colors.grey,
+              color: AppColors.primaryColor,
               dotData: const FlDotData(show: true),
               belowBarData: BarAreaData(show: false),
             ),

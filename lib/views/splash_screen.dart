@@ -7,6 +7,7 @@ import 'package:ours_log/controller/image_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
+import 'package:ours_log/respository/user_respository.dart';
 import 'package:ours_log/views/home/main_screen.dart';
 import 'package:ours_log/views/onBoarding/onBoarding_screen.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -30,6 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
   late UserController userController;
   initControllers() async {
     userController = Get.put(UserController());
+
     Get.put(DiaryController());
     Get.put(HospitalLogController());
     Get.put(ImageController());

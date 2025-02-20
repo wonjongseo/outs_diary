@@ -1,7 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
+import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 
 import 'package:photo_manager/photo_manager.dart';
@@ -11,6 +14,22 @@ bool get isJp => Get.locale.toString().contains('ja');
 bool get isEn => Get.locale.toString().contains('en');
 
 class AppFunction {
+  static void copyWord(String text) {
+    Clipboard.setData(ClipboardData(text: text));
+
+    if (!Get.isSnackbarOpen) {
+      Get.closeAllSnackbars();
+
+      String message = '「$text」${AppString.copyWordMsg.tr}';
+
+      AppSnackbar.showSnackBar(
+          title: 'Copy',
+          message: message,
+          icon: Icons.done,
+          color: AppColors.primaryColor);
+    }
+  }
+
   static bool isSameDay(DateTime day1, DateTime day2) {
     return day1.year == day2.year &&
         day1.month == day2.month &&

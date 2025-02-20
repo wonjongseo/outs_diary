@@ -5,16 +5,17 @@ import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 
 class CustomExpansionCard extends StatelessWidget {
-  const CustomExpansionCard(
-      {super.key,
-      required this.title,
-      this.children,
-      required this.child,
-      this.subTitle,
-      this.initiallyExpanded = true,
-      this.titleWidget,
-      this.onExpansionChanged,
-      this.subTitleWidget});
+  const CustomExpansionCard({
+    super.key,
+    required this.title,
+    this.children,
+    required this.child,
+    this.titleWidget,
+    this.subTitleWidget,
+    this.subTitle,
+    this.initiallyExpanded = true,
+    this.onExpansionChanged,
+  });
 
   final String title;
   final Widget? titleWidget;

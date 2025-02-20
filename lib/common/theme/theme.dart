@@ -14,8 +14,9 @@ ThemeData lightTheme(String systemLanguage) {
     textTheme: ThemeData.light().textTheme.apply(
         fontFamily:
             systemLanguage.contains('ja') ? "ZenMaruGothic" : "CookieRunFont"),
-    scaffoldBackgroundColor: Colors.white.withOpacity(.95),
-    cardTheme: CardTheme(elevation: 2),
+    // scaffoldBackgroundColor: Colors.white.withOpacity(.95),
+    scaffoldBackgroundColor: AppColors.white,
+    cardTheme: const CardTheme(elevation: 2),
     appBarTheme: const AppBarTheme(
       // backgroundColor: AppColors.primaryColor,
       backgroundColor: Colors.transparent,
@@ -41,6 +42,10 @@ ThemeData lightTheme(String systemLanguage) {
       ),
       unselectedLabelColor: Color(0xFFB3D9D2),
       labelColor: Colors.black,
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      elevation: 0,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -112,6 +117,10 @@ ThemeData darkTheme(String systemLanguage) {
       color: Colors.grey[400],
     ),
     scaffoldBackgroundColor: AppColors.greyBackground,
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: AppColors.greyBackground,
+      elevation: 0,
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.greyBackground,
       titleTextStyle: TextStyle(

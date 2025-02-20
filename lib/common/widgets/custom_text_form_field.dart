@@ -11,8 +11,10 @@ class CustomTextFormField extends StatelessWidget {
     this.readOnly,
     this.controller,
     this.sufficIcon,
+    this.keyboardType,
     this.onTap,
     this.onFieldSubmitted,
+    this.maxLength,
   }) : super(key: key);
 
   final String? hintText;
@@ -23,6 +25,8 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? sufficIcon;
   final Function()? onTap;
   final Function(String?)? onFieldSubmitted;
+  final TextInputType? keyboardType;
+  final int? maxLength;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,6 +38,8 @@ class CustomTextFormField extends StatelessWidget {
         children: [
           Expanded(
             child: TextFormField(
+              maxLength: maxLength,
+              keyboardType: keyboardType,
               onFieldSubmitted: onFieldSubmitted,
               onTap: onTap,
               readOnly: readOnly ?? false,
@@ -41,6 +47,7 @@ class CustomTextFormField extends StatelessWidget {
               maxLines: maxLines ?? 1,
               controller: controller,
               decoration: InputDecoration(
+                counterText: "",
                 prefixIconConstraints:
                     const BoxConstraints(minHeight: 0, minWidth: 0),
                 suffixIconConstraints:

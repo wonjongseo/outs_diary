@@ -1,12 +1,12 @@
 class GraphData {
   final List<double> xDatas;
-  double? maxY;
-  double? minY;
+  double maxY;
+  double minY;
 
   GraphData({
     required this.xDatas,
-    this.maxY,
-    this.minY,
+    this.maxY = 0,
+    this.minY = 0,
   });
 
   @override

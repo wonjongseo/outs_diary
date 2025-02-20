@@ -4,6 +4,9 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.feal: AppString.fealJp,
+          AppString.icon: AppString.iconJp,
+          AppString.count: AppString.countJp,
           AppString.completeSetting: AppString.completeSettingJp,
           AppString.regularSchedule: AppString.regularScheduleJp,
           AppString.doYouCancleAlram: AppString.doYouCancleAlramJp,
@@ -204,6 +207,9 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.feal: AppString.fealKr,
+          AppString.icon: AppString.iconKr,
+          AppString.count: AppString.countKr,
           AppString.completeSetting: AppString.completeSettingKr,
           AppString.regularSchedule: AppString.regularScheduleKr,
           AppString.doYouCancleAlram: AppString.doYouCancleAlramKr,
@@ -404,6 +410,9 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.feal: AppString.fealEn,
+          AppString.icon: AppString.iconEn,
+          AppString.count: AppString.countEn,
           AppString.completeSetting: AppString.completeSettingEn,
           AppString.regularSchedule: AppString.regularScheduleEn,
           AppString.doYouCancleAlram: AppString.doYouCancleAlramEn,
@@ -794,6 +803,11 @@ class AppString {
   static String englishTextKr = '영어';
   static String englishTextJp = '英語';
   static String englishTextEn = "English";
+
+  static String count = 'countTr';
+  static String countKr = '회';
+  static String countJp = '回';
+  static String countEn = "count";
 
   static String japaneseText = 'japaneseTextTr';
   static String japaneseTextKr = '일본어';
@@ -1637,4 +1651,15 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String averageKr = '평균 ';
   static String averageJp = '平均';
   static String averageEn = "Average ";
+
+  //
+  static String feal = 'fealTr';
+  static String fealKr = '감정';
+  static String fealJp = '感情';
+  static String fealEn = "Feal";
+
+  static String icon = 'iconTr';
+  static String iconKr = '아이콘';
+  static String iconJp = 'アイコン';
+  static String iconEn = "Icon";
 }

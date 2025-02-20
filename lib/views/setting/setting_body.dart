@@ -196,23 +196,23 @@ class _SettingBodyState extends State<SettingBody> {
                   ),
                 ),
                 SizedBox(height: RS.height20),
-
-                GetBuilder<UserController>(builder: (controller) {
-                  return _customListTIle(
-                    title: AppString.background.tr,
-                    subTitle: AppConstant
-                        .backgroundLists[
-                            controller.userModel?.backgroundIndex ?? 0]
-                        .description,
-                    imagePath: AppImagePath.very_good2,
-                    onTap: () => Get.to(() => const SetBackgroundScreen()),
-                  );
-                }),
+                _customListTIle(
+                  title: AppString.background.tr,
+                  subTitle: AppConstant
+                      .backgroundLists[
+                          userController.userModel?.backgroundIndex ?? 0]
+                      .description,
+                  imagePath: AppImagePath.very_good2,
+                  onTap: () => Get.to(() => const SetBackgroundScreen()),
+                ),
                 SizedBox(height: RS.height15),
 
                 _customListTIle(
-                  title: '기분 아이콘 ',
-                  subTitle: '',
+                  title: '${AppString.feal.tr} ${AppString.icon.tr}',
+                  subTitle: AppConstant
+                      .fealIconLists[
+                          userController.userModel?.fealIconIndex ?? 0]
+                      .description,
                   imagePath: AppImagePath.soso2,
                   onTap: () => Get.to(() => const SetFealIconScreen()),
                 ),
@@ -276,14 +276,14 @@ class _SettingBodyState extends State<SettingBody> {
                       recipients: ['visionwill3322@gmail.com'],
                       isHTML: false,
                     );
-                    // try {
-                    //   await FlutterEmailSender.send(email);
-                    // } catch (e) {
-                    //   bool result = await CommonDialog.errorNoEnrolledEmail();
-                    //   if (result) {
-                    //     AppFunction.copyWord('visionwill3322@gmail.com');
-                    //   }
-                    // }
+                    try {
+                      await FlutterEmailSender.send(email);
+                    } catch (e) {
+                      bool result = await AppDialog.errorNoEnrolledEmail();
+                      if (result) {
+                        AppFunction.copyWord('visionwill3322@gmail.com');
+                      }
+                    }
                   },
                 ),
                 const Spacer(flex: 3),

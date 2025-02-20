@@ -14,10 +14,6 @@ class DiaryRepository {
   Future<bool> isExistDiary(DiaryModel diary) async {
     var box = await Hive.openBox<DiaryModel>(AppConstant.diaryModelBox);
 
-    // 데이터 저장
-    // await box.add(diary);
-    // bool isExistdiary = await box.containsKey(
-    //     '${diary.name}-${UtilFunction.getDayYYYYMMDD(diary.birthDay)}-${diary.genderType.gender}');
     bool isExistdiary = await box.containsKey(diary.id);
 
     return isExistdiary;
@@ -26,9 +22,6 @@ class DiaryRepository {
   Future<void> deleteDiary(DiaryModel diary) async {
     var box = await Hive.openBox<DiaryModel>(AppConstant.diaryModelBox);
 
-    // 데이터 저장
-    // await box.delete(
-    //     '${diary.name}-${UtilFunction.getDayYYYYMMDD(diary.birthDay)}-${diary.genderType.gender}');
     await box.delete(diary.id);
     print('Dog Deleted!');
   }
@@ -49,11 +42,17 @@ class DiaryRepository {
   Future<List<DiaryModel>> loadDiaries() async {
     var box = await Hive.openBox<DiaryModel>(AppConstant.diaryModelBox);
 
-    // 데이터 읽기
     List<DiaryModel> diarys = box.values.toList();
     diarys.sort((a, b) => a.createdAt.compareTo(b.createdAt));
 
     for (var diary in diarys) {}
     return diarys;
+  }
+
+  Future<void> deleteAll() async {
+    var box = await Hive.openBox<DiaryModel>(AppConstant.diaryModelBox);
+
+    box.deleteFromDisk();
+    print('DiaryModel All DELETE !!');
   }
 }

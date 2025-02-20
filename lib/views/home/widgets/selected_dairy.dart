@@ -56,7 +56,9 @@ class SelectedDiary extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        // diaryController.getAllData();
+
                         Get.to(
                           () => AddDiaryScreen(
                             selectedDay:

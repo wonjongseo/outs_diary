@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
+
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/models/health_model.dart';
 
@@ -43,7 +44,7 @@ class DiaryModel {
 
   @override
   String toString() {
-    return 'DiaryModel(\n id: $id\n createdAt: $createdAt\n dateTime: $dateTime\n fealIndex: $fealIndex\n weatherIconIndex: $weatherIconIndex\n whatTodo: $whatTodo\n health: $health \nimagePath: $imagePath)';
+    return 'DiaryModel(id: $id, createdAt: $createdAt, dateTime: $dateTime, fealIndex: $fealIndex, weatherIconIndex: $weatherIconIndex, whatTodo: $whatTodo, imagePath: $imagePath, health: $health, painfulIndex: $painfulIndex)';
   }
 }
 

@@ -8,7 +8,7 @@ import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/controller/add_diary_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/views/add_diary/widgets/col_text_and_widget.dart';
-import 'package:ours_log/views/add_diary/widgets/morning_lunch_evening_widget.dart';
+import 'package:ours_log/views/add_diary/widgets/morning_lunch_evening_temp_and_pulse_widget.dart';
 
 class HealthInfoTextFields extends StatelessWidget {
   const HealthInfoTextFields({super.key});
@@ -23,22 +23,28 @@ class HealthInfoTextFields extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: RS.w10),
           child: Column(
             children: [
-              MorningLunchEveningWidget(
+              MorningLunchEveningTempAndPulseWidget(
+                keyboardType: TextInputType.number,
+                maxLength: 3,
                 controllers: addDiaryController.temperatureCtls,
                 label: AppString.temperature.tr,
                 sufficText: '°C',
                 // enableMorLunEvenTextField:
                 //     userController.userModel!.enableMorLunEvenTempTextField!,
               ),
-              MorningLunchEveningWidget(
+              MorningLunchEveningTempAndPulseWidget(
+                keyboardType: TextInputType.number,
+                maxLength: 3,
                 controllers: addDiaryController.pulseCtls,
                 label: AppString.pulse.tr,
                 sufficText: '回/min',
                 // enableMorLunEvenTextField:
                 //     userController.userModel!.enableMorLunEvenPulseTextField!,
               ),
-              MorningLunchEveningWidget(
-                controllers: addDiaryController.bloodPressureCtls,
+              MorningLunchEveningTempAndPulseWidget(
+                keyboardType: TextInputType.number,
+                maxLength: 3,
+                controllers: addDiaryController.maxBloodPressureCtls,
                 label: AppString.bloodPressure.tr,
                 sufficText: 'mm Hg',
                 // enableMorLunEvenTextField: userController

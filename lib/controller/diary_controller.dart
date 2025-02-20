@@ -9,68 +9,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/respository/dairy_respository.dart';
-import 'package:ours_log/respository/monthly_repository.dart';
 import 'package:ours_log/views/add_diary/add_diary_screen.dart';
-
-// class MontlyController extends GetxController {
-//   DateTime now = DateTime.now();
-//   late DateTime selectedDay;
-//   late DateTime focusedDay;
-
-//   PeriodModel periodModel = PeriodModel();
-
-//   ScrollController scrollController = ScrollController();
-//   DiaryController diaryController = Get.find<DiaryController>();
-
-//   final kEvents = LinkedHashMap<DateTime, List<DiaryModel>>(
-//     equals: isSameDay,
-//     hashCode: getHashCode,
-//   );
-
-//   List<DiaryModel> getEventsForDay(DateTime day) {
-//     // Implementation example
-//     return kEvents[day] ?? [];
-//   }
-
-//   void onPageChanged(DateTime focusedDay) {
-//     this.focusedDay = focusedDay;
-//     diaryController.getAllData();
-//   }
-
-//   void onDatSelected(DateTime cSelectedDay, DateTime cFocusedDay) {
-//     if (kEvents[cSelectedDay] != null) {
-//       selectedDiary = kEvents[cSelectedDay]![0];
-//       AppFunction.scrollGoToTop(scrollController);
-//       update();
-//       return;
-//     }
-//     selectedDiary = null;
-
-//     if (cSelectedDay.difference(now).isNegative) {
-//       Get.to(() => AddDiaryScreen(selectedDay: selectedDay));
-//     } else {
-//       if (!Get.isSnackbarOpen) {
-//         Get.snackbar(
-//           '경고',
-//           '미래는 저장할 수 없어요.',
-//           icon: Icon(Icons.done),
-//           borderWidth: 1,
-//           borderColor: Colors.redAccent,
-//         );
-//       }
-//     }
-//     selectedDay = cSelectedDay;
-//     focusedDay = cFocusedDay;
-//   }
-
-//   @override
-//   void onInit() async {
-//     selectedDay = now;
-//     focusedDay = now;
-//     AppFunction.requestPermisson();
-//     super.onInit();
-//   }
-// }
 
 class DiaryController extends GetxController {
   DateTime now = DateTime.now();
@@ -105,7 +44,6 @@ class DiaryController extends GetxController {
 
   void onDatSelected(DateTime cSelectedDay, DateTime cFocusedDay) {
     if (kEvents[cSelectedDay] != null) {
-      print('asdas');
       selectedDiary = kEvents[cSelectedDay]![0];
       AppFunction.scrollGoToBottom(scrollController);
       update();
@@ -155,11 +93,14 @@ class DiaryController extends GetxController {
     getAllData();
   }
 
-  void insert(DiaryModel diaryModel) {
+  void insert(DiaryModel diaryModel) async {
     _diaryRepository.saveDiary(diaryModel);
-    selectedDiary = diaryModel;
     getAllData();
-    Get.offAll(() => MainScreen());
+    selectedDiary = diaryModel;
+
+    Get.offAll(() => const MainScreen());
+    await Future.delayed(const Duration(milliseconds: 100));
+    AppFunction.scrollGoToBottom(scrollController);
   }
 
   final kEvents = LinkedHashMap<DateTime, List<DiaryModel>>(

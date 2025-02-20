@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/models/blood_pressure_model.dart';
 
 part 'health_model.g.dart';
 
@@ -13,11 +14,11 @@ class HealthModel {
   @HiveField(1)
   List<double>? basicTemperatures;
   @HiveField(2)
-  List<double>? bloodPressures;
+  BloodPressureModel? bloodPressures;
   @HiveField(3)
   List<double>? weights;
   @HiveField(4)
-  List<double>? pulses;
+  List<int>? pulses;
 
   HealthModel({
     this.temperatures,
@@ -32,10 +33,15 @@ class HealthModel {
       return 0.0;
     }
     double avg = 0.0;
+    int count = 0;
     for (var temperature in temperatures!) {
+      if (temperature != 0) {
+        count++;
+      }
       avg += temperature;
     }
-    avg = double.parse((avg / temperatures!.length).toStringAsFixed(1));
+    if (count == 0) return 0.0;
+    avg = double.parse((avg / count).toStringAsFixed(2));
 
     return avg;
   }
@@ -53,17 +59,20 @@ class HealthModel {
     return avg;
   }
 
-  double get avgBloodPressure {
+  int get avgMaxBloodPressure {
     if (bloodPressures == null) {
-      return 0.0;
+      return 0;
     }
-    double avg = 0.0;
-    for (var bloodPressure in bloodPressures!) {
-      avg += bloodPressure;
-    }
-    avg = double.parse((avg / bloodPressures!.length).toStringAsFixed(1));
 
-    return avg;
+    return bloodPressures!.avgMax;
+  }
+
+  int get avgMinBloodPressure {
+    if (bloodPressures == null) {
+      return 0;
+    }
+
+    return bloodPressures!.avgMin;
   }
 
   double get avgWeight {
@@ -71,10 +80,18 @@ class HealthModel {
       return 0.0;
     }
     double avg = 0.0;
+    int count = 0;
+
     for (var weight in weights!) {
+      if (weight != 0) {
+        count++;
+      }
       avg += weight;
     }
-    avg = double.parse((avg / weights!.length).toStringAsFixed(1));
+    if (count == 0) {
+      return 0;
+    }
+    avg = double.parse((avg / count).toStringAsFixed(2));
     return avg;
   }
 
@@ -83,10 +100,18 @@ class HealthModel {
       return 0.0;
     }
     double avg = 0.0;
+    int count = 0;
+
     for (var pulse in pulses!) {
+      if (pulse != 0) {
+        count++;
+      }
       avg += pulse;
     }
-    avg = double.parse((avg / pulses!.length).toStringAsFixed(1));
+    if (count == 0) {
+      return 0;
+    }
+    avg = double.parse((avg / count).toStringAsFixed(1));
     return avg;
   }
 
@@ -126,23 +151,23 @@ class HealthModel {
     return message;
   }
 
-  String get tooltipMsgBloodPressure {
-    String message = '';
-    if (bloodPressures == null) return message;
+  // String get tooltipMsgBloodPressure {
+  //   String message = '';
+  //   if (bloodPressures == null) return message;
 
-    if (bloodPressures![0] != 0) {
-      message += '${AppString.morning.tr}: ${bloodPressures![0]}';
-    }
+  //   if (bloodPressures![0] != 0) {
+  //     message += '${AppString.morning.tr}: ${bloodPressures![0]}';
+  //   }
 
-    if (bloodPressures![1] != 0) {
-      message += ' ${AppString.lunch.tr}: ${bloodPressures![1]}';
-    }
-    if (bloodPressures![2] != 0) {
-      message += ' ${AppString.evening.tr}: ${bloodPressures![2]}';
-    }
+  //   if (bloodPressures![1] != 0) {
+  //     message += ' ${AppString.lunch.tr}: ${bloodPressures![1]}';
+  //   }
+  //   if (bloodPressures![2] != 0) {
+  //     message += ' ${AppString.evening.tr}: ${bloodPressures![2]}';
+  //   }
 
-    return message;
-  }
+  //   return message;
+  // }
 
   String get tooltipMsgWeight {
     String message = '';
@@ -178,5 +203,10 @@ class HealthModel {
     }
 
     return message;
+  }
+
+  @override
+  String toString() {
+    return 'HealthModel(temperatures: $temperatures, basicTemperatures: $basicTemperatures, bloodPressures: $bloodPressures, weights: $weights, pulses: $pulses)';
   }
 }

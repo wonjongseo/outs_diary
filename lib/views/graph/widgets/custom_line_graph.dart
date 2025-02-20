@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/datas/graph_data.dart';
@@ -10,14 +11,27 @@ class CustomLineGraph extends StatelessWidget {
     super.key,
     required this.countOfDay,
     required this.graphData,
+    this.graphData2,
   });
 
   final int countOfDay;
 
   final GraphData graphData;
+  final GraphData? graphData2;
 
   @override
   Widget build(BuildContext context) {
+    double maxY = graphData.maxY;
+    double minY = graphData.minY;
+
+    if (graphData2 != null) {
+      if (graphData2!.maxY > graphData.maxY) {
+        maxY = graphData2!.maxY;
+      }
+      if (graphData2!.minY < graphData.minY) {
+        minY = graphData2!.minY;
+      }
+    }
     return AspectRatio(
       aspectRatio: 1.75,
       child: LineChart(
@@ -37,10 +51,28 @@ class CustomLineGraph extends StatelessWidget {
                         graphData.xDatas[index],
                       ),
               ),
-              color: Colors.grey,
+              color: AppColors.primaryColor,
               dotData: const FlDotData(show: true),
               belowBarData: BarAreaData(show: false),
             ),
+            if (graphData2 != null)
+              LineChartBarData(
+                preventCurveOverShooting: true,
+                isStrokeCapRound: true,
+                isStrokeJoinRound: true,
+                spots: List.generate(
+                  graphData2!.xDatas.length,
+                  (index) => graphData2!.xDatas[index] == 0
+                      ? FlSpot.nullSpot
+                      : FlSpot(
+                          index.toDouble(),
+                          graphData2!.xDatas[index],
+                        ),
+                ),
+                color: AppColors.secondaryColor,
+                dotData: const FlDotData(show: true),
+                belowBarData: BarAreaData(show: false),
+              ),
           ],
           titlesData: FlTitlesData(
             topTitles: unShowTitles(),
@@ -67,8 +99,16 @@ class CustomLineGraph extends StatelessWidget {
           ),
           minX: 0,
           maxX: (countOfDay - 1).toDouble(),
-          minY: graphData.minY,
-          maxY: graphData.maxY,
+          maxY: maxY,
+          minY: minY,
+          // minY: graphData2 == null
+          //     ? graphData.minY
+          //     : graphData.minY ?? 0 + graphData2!.minY!,
+          // // maxY: graphData.maxY,
+
+          // maxY: graphData2 == null
+          //     ? graphData.maxY
+          //     : graphData.maxY ?? 0 + graphData2!.maxY!,
         ),
       ),
     );

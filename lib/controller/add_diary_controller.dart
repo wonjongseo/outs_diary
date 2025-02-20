@@ -10,6 +10,7 @@ import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/controller/image_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
+import 'package:ours_log/models/blood_pressure_model.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/health_model.dart';
 
@@ -33,7 +34,9 @@ class AddDiaryController extends GetxController {
       List.generate(3, (index) => TextEditingController());
   List<TextEditingController> basicTemperatureCtls =
       List.generate(3, (index) => TextEditingController());
-  List<TextEditingController> bloodPressureCtls =
+  List<TextEditingController> maxBloodPressureCtls = //systolic
+      List.generate(3, (index) => TextEditingController());
+  List<TextEditingController> minBloodPressureCtls = //systolic
       List.generate(3, (index) => TextEditingController());
   List<TextEditingController> weightCtls =
       List.generate(3, (index) => TextEditingController());
@@ -109,9 +112,11 @@ class AddDiaryController extends GetxController {
   HealthModel createHealthModel() {
     List<double> temperatures = [];
     List<double> basicTemperatures = [];
-    List<double> bloodPressures = [];
+    List<int> maxBloodPressures = [];
+    List<int> minBloodPressures = [];
+
     List<double> weights = [];
-    List<double> pulses = [];
+    List<int> pulses = [];
     for (var controller in temperatureCtls) {
       temperatures.add(double.tryParse(controller.text) ?? 0.0);
     }
@@ -119,19 +124,28 @@ class AddDiaryController extends GetxController {
     for (var controller in basicTemperatureCtls) {
       basicTemperatures.add(double.tryParse(controller.text) ?? 0.0);
     }
-    for (var controller in bloodPressureCtls) {
-      bloodPressures.add(double.tryParse(controller.text) ?? 0.0);
-    }
+
     for (var controller in weightCtls) {
       weights.add(double.tryParse(controller.text) ?? 0.0);
     }
     for (var controller in pulseCtls) {
-      pulses.add(double.tryParse(controller.text) ?? 0.0);
+      pulses.add(int.tryParse(controller.text) ?? 0);
     }
+
+    for (var controller in maxBloodPressureCtls) {
+      maxBloodPressures.add(int.tryParse(controller.text) ?? 0);
+    }
+
+    for (var controller in minBloodPressureCtls) {
+      minBloodPressures.add(int.tryParse(controller.text) ?? 0);
+    }
+    BloodPressureModel bloodPressureModel =
+        BloodPressureModel(max: maxBloodPressures, min: minBloodPressures);
+
     HealthModel healthModel = HealthModel(
       temperatures: temperatures,
       basicTemperatures: basicTemperatures,
-      bloodPressures: bloodPressures,
+      bloodPressures: bloodPressureModel,
       weights: weights,
       pulses: pulses,
     );
@@ -177,9 +191,21 @@ class AddDiaryController extends GetxController {
     }
 
     if (healthModel.bloodPressures != null) {
-      for (var i = 0; i < healthModel.bloodPressures!.length; i++) {
-        if (healthModel.bloodPressures![i] != 0.0) {
-          bloodPressureCtls[i].text = healthModel.bloodPressures![i].toString();
+      if (healthModel.bloodPressures!.max != null) {
+        for (var i = 0; i < healthModel.bloodPressures!.max!.length; i++) {
+          if (healthModel.bloodPressures!.max![i] != 0.0) {
+            maxBloodPressureCtls[i].text =
+                healthModel.bloodPressures!.max![i].toString();
+          }
+        }
+      }
+
+      if (healthModel.bloodPressures!.min != null) {
+        for (var i = 0; i < healthModel.bloodPressures!.min!.length; i++) {
+          if (healthModel.bloodPressures!.min![i] != 0.0) {
+            minBloodPressureCtls[i].text =
+                healthModel.bloodPressures!.min![i].toString();
+          }
         }
       }
     }
@@ -225,7 +251,7 @@ class AddDiaryController extends GetxController {
     for (var basicTemperatureCtl in basicTemperatureCtls) {
       basicTemperatureCtl.text = (Random().nextInt(3) + 30).toString();
     }
-    for (var bloodPressureCtl in bloodPressureCtls) {
+    for (var bloodPressureCtl in maxBloodPressureCtls) {
       bloodPressureCtl.text = (Random().nextInt(3) + 30).toString();
     }
     for (var weightCtl in weightCtls) {
@@ -246,7 +272,10 @@ class AddDiaryController extends GetxController {
     for (var basicTemperatureCtl in basicTemperatureCtls) {
       basicTemperatureCtl.dispose();
     }
-    for (var bloodPressureCtl in bloodPressureCtls) {
+    for (var bloodPressureCtl in maxBloodPressureCtls) {
+      bloodPressureCtl.dispose();
+    }
+    for (var bloodPressureCtl in minBloodPressureCtls) {
       bloodPressureCtl.dispose();
     }
     for (var weightCtl in weightCtls) {

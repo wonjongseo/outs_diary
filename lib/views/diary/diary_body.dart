@@ -43,11 +43,7 @@ class DiaryBody extends StatelessWidget {
                   weekdayStyle: weekdayStyle,
                   weekendStyle: weekdayStyle,
                 ),
-                locale: isKo
-                    ? 'ko'
-                    : isJp
-                        ? 'ja'
-                        : 'en',
+                locale: Get.locale.toString(),
                 daysOfWeekHeight: RS.h10 * 3,
                 headerVisible: false,
                 onPageChanged: diaryController.onPageChanged,

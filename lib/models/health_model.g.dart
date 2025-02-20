@@ -19,9 +19,9 @@ class HealthModelAdapter extends TypeAdapter<HealthModel> {
     return HealthModel(
       temperatures: (fields[0] as List?)?.cast<double>(),
       basicTemperatures: (fields[1] as List?)?.cast<double>(),
-      bloodPressures: (fields[2] as List?)?.cast<double>(),
+      bloodPressures: fields[2] as BloodPressureModel?,
       weights: (fields[3] as List?)?.cast<double>(),
-      pulses: (fields[4] as List?)?.cast<double>(),
+      pulses: (fields[4] as List?)?.cast<int>(),
     );
   }
 

@@ -14,7 +14,9 @@ class ExpansionIconCard extends StatefulWidget {
     required this.icons,
     required this.selectedIconIndexs,
     this.isOnlyOne = false,
+    this.initiallyExpanded = true,
     required this.label,
+    this.onExpansionChanged,
     this.width,
   }) : super(key: key);
 
@@ -22,8 +24,9 @@ class ExpansionIconCard extends StatefulWidget {
   final List<int> selectedIconIndexs;
   final bool isOnlyOne;
   final String label;
+  final bool initiallyExpanded;
   final double? width;
-
+  final Function(bool)? onExpansionChanged;
   @override
   State<ExpansionIconCard> createState() => _ExpansionIconCardState();
 }
@@ -34,6 +37,8 @@ class _ExpansionIconCardState extends State<ExpansionIconCard> {
   @override
   Widget build(BuildContext context) {
     return CustomExpansionCard(
+      onExpansionChanged: widget.onExpansionChanged,
+      initiallyExpanded: widget.initiallyExpanded,
       title: widget.label,
       child: Wrap(
         children: List.generate(

@@ -16,7 +16,7 @@ class AppConstant {
   static const int notificationModelHiveId = 7;
   static const int taskModelHiveId = 8;
   static const int userUtilModelHiveId = 9;
-  static const int expensiveModelHiveId = 10;
+  static const int bloodPressureModelHiveId = 10;
   static const int categoryModelHiveId = 11;
 
   static const String settingModelBox = 'settings';
