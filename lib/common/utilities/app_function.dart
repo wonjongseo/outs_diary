@@ -64,6 +64,7 @@ class AppFunction {
       {DateTime? firstDate}) async {
     return await showDatePicker(
       context: context,
+      locale: Get.deviceLocale,
       initialDate: DateTime.now(),
       firstDate:
           firstDate ?? DateTime.now().subtract(const Duration(days: 365 * 3)),

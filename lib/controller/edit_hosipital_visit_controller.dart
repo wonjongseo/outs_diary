@@ -55,13 +55,13 @@ class EditHosipitalVisitController extends GetxController {
     } else {
       TimeOfDay? pickedTime = await showTimePicker(
         cancelText: AppString.cancelBtnTextTr.tr,
-        helpText: '몇 시간 전에 알람을 받고 싶으세요?',
-        errorInvalidText: '올바른 시간을 입력해주세요',
+        helpText: AppString.whatTimeBeforeScrhdule.tr,
+        errorInvalidText: AppString.plzInputCollectTime.tr,
         hourLabelText: AppString.hour.tr,
         minuteLabelText: AppString.minute.tr,
         context: context,
         initialEntryMode: TimePickerEntryMode.inputOnly,
-        initialTime: TimeOfDay.now(),
+        initialTime: const TimeOfDay(hour: 0, minute: 30),
       );
       if (pickedTime == null) {
         return;

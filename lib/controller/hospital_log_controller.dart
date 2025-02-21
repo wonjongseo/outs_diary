@@ -87,7 +87,7 @@ class HospitalLogController extends GetxController {
     selectedEvents.value = getEventsForDay(selectedDay!);
 
     if (selectedEvents.value.isEmpty) {
-      Get.to(() => AddHospitalVisitLogScreen(selectedDate: cSelectedDay));
+      Get.to(() => EditHospitalVisitLogScreen(selectedDate: cSelectedDay));
     }
     update();
   }

@@ -50,6 +50,14 @@ class InputHealthDayPeriod extends StatelessWidget {
                     SizedBox(width: RS.w10 * 2),
                     Expanded(
                       child: CustomTextFormField(
+                        hintStyle:
+                            Theme.of(context).textTheme.labelSmall?.copyWith(
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .labelSmall
+                                      ?.color
+                                      ?.withOpacity(0.3),
+                                ),
                         maxLength: maxLength,
                         keyboardType: keyboardType,
                         hintText: hintText,
@@ -64,6 +72,14 @@ class InputHealthDayPeriod extends StatelessWidget {
                       SizedBox(width: RS.w10),
                       Expanded(
                         child: CustomTextFormField(
+                          hintStyle:
+                              Theme.of(context).textTheme.labelSmall?.copyWith(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .labelSmall
+                                        ?.color
+                                        ?.withOpacity(0.3),
+                                  ),
                           keyboardType: TextInputType.number,
                           hintText: hintText2,
                           controller: controllers2![index],

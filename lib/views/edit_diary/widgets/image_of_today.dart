@@ -19,7 +19,7 @@ class ImageOfToday extends StatelessWidget {
       required this.carouselSliderController});
 
   final List<File> uploadFiles;
-  final Function() selectedPhotos;
+  final Function()? selectedPhotos;
   final Function(int) removePhoto;
   final String label;
   final CarouselSliderController carouselSliderController;

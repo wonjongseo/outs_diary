@@ -15,7 +15,7 @@ class CircleAverHealthWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: RS.w10),
+      padding: EdgeInsets.only(right: RS.w10),
       child: Container(
         padding: EdgeInsets.all(RS.w10 * .8),
         decoration: BoxDecoration(

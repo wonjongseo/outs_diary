@@ -23,7 +23,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   late DiaryController diaryController;
-  int bodyIndex = 0;
+  int bodyIndex = 1;
   List<Widget> bodys = [];
 
   @override

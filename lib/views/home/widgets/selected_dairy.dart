@@ -20,6 +20,7 @@ import 'package:ours_log/views/edit_diary/edit_diary_screen.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/full_Image_screen.dart';
 import 'package:ours_log/views/home/widgets/aver_health_value.dart';
+import 'package:ours_log/views/home/widgets/circle_aver_health_widget.dart';
 
 class SelectedDiary extends StatelessWidget {
   const SelectedDiary({super.key});
@@ -42,38 +43,26 @@ class SelectedDiary extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _FealIconAndDay(userController, diaryController),
+          const Divider(),
+          SizedBox(height: RS.h10),
           if (diaryModel.donePillDayModels!.isNotEmpty) ...[
-            const Divider(),
-            SizedBox(height: RS.h10),
-            ColTextAndWidget(
-              vertical: RS.h10 / 2,
-              label: AppString.healthMemo,
-              widget: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  diaryModel.donePillDayModels!.length,
-                  (index) => DoneCircleIcon(
-                    backgroundColor: diaryController
-                            .selectedDiary!.donePillDayModels![index].isDone
-                        ? AppColors.primaryColor
-                        : Colors.grey,
-                    label: diaryModel.donePillDayModels![index].dayPeriod.label,
-                  ),
-                ),
-              ),
-            ),
+            _DonePill(diaryModel, diaryController),
             SizedBox(height: RS.h10 * 1.5),
           ],
           if (diaryModel.health != null && diaryModel.health!.argIsNotZero) ...[
             ColTextAndWidget(
               vertical: RS.h10 / 2,
               label: AppString.averageHealthValue.tr,
+              labelWidget: diaryModel.painfulIndex == null
+                  ? null
+                  : Text(
+                      '${AppString.painLevel.tr}: ${diaryModel.painfulIndex!}'),
               widget: const AverHealthValue(),
             ),
             SizedBox(height: RS.h10 * 1.5),
           ],
           if (diaryModel.poopConditions != null &&
-              diaryModel.poopConditions!.isNotEmpty)
+              diaryModel.poopConditions!.isNotEmpty) ...[
             ColTextAndWidget(
               vertical: RS.h10 / 2,
               label: AppString.poop.tr,
@@ -108,6 +97,8 @@ class SelectedDiary extends StatelessWidget {
                     )),
               ),
             ),
+            SizedBox(height: RS.h10 * 1.5),
+          ],
           if (diaryModel.whatTodo != null &&
               diaryModel.whatTodo!.isNotEmpty) ...[
             ColTextAndWidget(
@@ -120,7 +111,7 @@ class SelectedDiary extends StatelessWidget {
                 maxLines: (diaryModel.whatTodo ?? '').split('\n').length,
               ),
             ),
-            SizedBox(height: RS.h10 * 1.5),
+            SizedBox(height: RS.h10),
           ],
           if (diaryModel.imagePath != null &&
               diaryModel.imagePath!.isNotEmpty) ...[
@@ -162,6 +153,27 @@ class SelectedDiary extends StatelessWidget {
             SizedBox(height: RS.h10 * 1.5),
           ]
         ],
+      ),
+    );
+  }
+
+  ColTextAndWidget _DonePill(
+      DiaryModel diaryModel, DiaryController diaryController) {
+    return ColTextAndWidget(
+      vertical: RS.h10 / 2,
+      label: AppString.healthMemo,
+      widget: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          diaryModel.donePillDayModels!.length,
+          (index) => DoneCircleIcon(
+            backgroundColor:
+                diaryController.selectedDiary!.donePillDayModels![index].isDone
+                    ? AppColors.primaryColor
+                    : Colors.grey,
+            label: diaryModel.donePillDayModels![index].dayPeriod.label,
+          ),
+        ),
       ),
     );
   }

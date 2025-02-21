@@ -4,7 +4,7 @@ class CDropdownButton extends StatelessWidget {
   const CDropdownButton(
       {super.key, required this.items, required this.onChanged});
   final List items;
-  final Function(dynamic) onChanged;
+  final Function(dynamic)? onChanged;
   @override
   Widget build(BuildContext context) {
     return DropdownButton(

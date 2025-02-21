@@ -1,3 +1,4 @@
+import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,8 +12,10 @@ import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
 class VisitDayAndTime extends StatelessWidget {
   const VisitDayAndTime({
     super.key,
+    required this.isEdit,
   });
 
+  final bool isEdit;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -22,35 +25,7 @@ class VisitDayAndTime extends StatelessWidget {
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: CustomTextFormField(
-                    hintText: controller.selectedDate == null
-                        ? AppString.visitDay.tr
-                        : DateFormat(
-                                "MM${AppString.month.tr} d${AppString.day.tr}")
-                            .format(controller.selectedDate),
-                    readOnly: true,
-                    widget: IconButton(
-                      onPressed: () => controller.onTapVisitDay(context),
-                      icon: const Icon(Icons.keyboard_arrow_down),
-                    ),
-                  ),
-                ),
-                SizedBox(width: RS.w10 * 2),
-                Expanded(
-                  child: CustomTextFormField(
-                    readOnly: true,
-                    hintText: controller.startTime ?? AppString.visitTime.tr,
-                    widget: IconButton(
-                      onPressed: () => controller.onTapVisitTime(context),
-                      icon: const Icon(Icons.keyboard_arrow_down),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            _DayAndTimeSelector(controller, context),
             SizedBox(height: RS.h10 * 3),
             GestureDetector(
               onTap: controller.onTapEnrollAlarm,
@@ -101,7 +76,7 @@ class VisitDayAndTime extends StatelessWidget {
                           },
                           child: SelectBeforeAlarmTime(
                               width: size.width * .2,
-                              text: '1${AppString.beforeDayEn.tr}',
+                              text: '1${AppString.beforeDay.tr}',
                               isActive: controller.isBeforeOneDayAlarm),
                         ),
                         GestureDetector(
@@ -148,6 +123,40 @@ class VisitDayAndTime extends StatelessWidget {
       );
     });
   }
+
+  Row _DayAndTimeSelector(
+      EditHosipitalVisitController controller, BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: CustomTextFormField(
+            hintText: controller.selectedDate == null
+                ? AppString.visitDay.tr
+                : DateFormat("MM${AppString.month.tr} d${AppString.day.tr}")
+                    .format(controller.selectedDate),
+            readOnly: true,
+            widget: IconButton(
+              onPressed:
+                  isEdit ? () => controller.onTapVisitDay(context) : null,
+              icon: const Icon(Icons.keyboard_arrow_down),
+            ),
+          ),
+        ),
+        SizedBox(width: RS.w10 * 2),
+        Expanded(
+          child: CustomTextFormField(
+            readOnly: true,
+            hintText: controller.startTime ?? AppString.visitTime.tr,
+            widget: IconButton(
+              onPressed:
+                  isEdit ? () => controller.onTapVisitTime(context) : null,
+              icon: const Icon(Icons.keyboard_arrow_down),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 class SelectBeforeAlarmTime extends StatelessWidget {
@@ -169,7 +178,8 @@ class SelectBeforeAlarmTime extends StatelessWidget {
       width: width,
       margin: EdgeInsets.symmetric(horizontal: RS.w10 / 2),
       decoration: BoxDecoration(
-        color: isActive ? AppColors.primaryColor : Colors.grey[300],
+        border: isActive ? null : Border.all(color: Colors.grey),
+        color: isActive ? AppColors.primaryColor : null,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Center(
@@ -177,7 +187,7 @@ class SelectBeforeAlarmTime extends StatelessWidget {
           text,
           style: TextStyle(
             fontSize: RS.w10 * 1.2,
-            color: isActive ? Colors.white : null,
+            color: textWhiteOrBlack,
           ),
         ),
       ),

@@ -190,8 +190,16 @@ Color get textWhiteOrBlack {
   return Get.isDarkMode ? AppColors.white : AppColors.darkBackground;
 }
 
-Color get boxWhiteOrBlack {
+Color get textBlackOrWhite {
+  return Get.isDarkMode ? AppColors.darkBackground : AppColors.white;
+}
+
+Color get boxBlackOrWhite {
   return Get.isDarkMode ? AppColors.black : AppColors.white;
+}
+
+Color get boxWhiteOrBlack {
+  return Get.isDarkMode ? AppColors.white : AppColors.black;
 }
 
 TextStyle get subHeadingStyle {

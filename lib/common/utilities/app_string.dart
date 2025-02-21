@@ -4,6 +4,8 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.whatTimeBeforeScrhdule: AppString.whatTimeBeforeScrhduleJp,
+          AppString.plzSelectAlarmTime: AppString.plzSelectAlarmTimeJp,
           AppString.averageHealthValue: AppString.averageHealthValueJp,
           AppString.permission: AppString.permissionJp,
           AppString.noRecord: AppString.noRecordJp,
@@ -220,6 +222,8 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.whatTimeBeforeScrhdule: AppString.whatTimeBeforeScrhduleKr,
+          AppString.plzSelectAlarmTime: AppString.plzSelectAlarmTimeKr,
           AppString.averageHealthValue: AppString.averageHealthValueKr,
           AppString.permission: AppString.permissionKr,
           AppString.noRecord: AppString.noRecordKr,
@@ -436,6 +440,8 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.whatTimeBeforeScrhdule: AppString.whatTimeBeforeScrhduleEn,
+          AppString.plzSelectAlarmTime: AppString.plzSelectAlarmTimeEn,
           AppString.averageHealthValue: AppString.averageHealthValueEn,
           AppString.permission: AppString.permissionEn,
           AppString.noRecord: AppString.noRecordEn,
@@ -684,8 +690,13 @@ class AppString {
 
   static String plzSelectAlarmTime = 'plzSelectAlarmTimetr';
   static String plzSelectAlarmTimeKr = '알람을 받을 시간을 선택해주세요';
-  static String plzSelectAlarmTimeJp = 'アラムを受ける時間を選んでください。';
+  static String plzSelectAlarmTimeJp = 'アラムを受ける時間を選んでください';
   static String plzSelectAlarmTimeEn = "plzSelectAlarmTime";
+
+  static String whatTimeBeforeScrhdule = 'whatTimeBeforeScrhduletr';
+  static String whatTimeBeforeScrhduleKr = '몇 시간 전에 알람을 받고 싶으세요?';
+  static String whatTimeBeforeScrhduleJp = '何時間前にアラムを受けますか？';
+  static String whatTimeBeforeScrhduleEn = "whatTimeBeforeScrhdule";
 
   static String beforeDay = 'beforeDaytr';
   static String beforeDayKr = '일 전';
