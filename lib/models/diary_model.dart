@@ -33,8 +33,7 @@ class DiaryModel {
   final int? painfulIndex;
 
   @HiveField(9)
-  List<PoopConditionType>? poopConditions;
-  List<PoopConditionModel>? aa;
+  List<PoopConditionModel>? poopConditions;
 
   DiaryModel({
     required this.dateTime,

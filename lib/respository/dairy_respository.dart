@@ -46,6 +46,8 @@ class DiaryRepository {
     diarys.sort((a, b) => a.createdAt.compareTo(b.createdAt));
 
     for (var diary in diarys) {}
+    print('diarys : ${diarys}');
+
     return diarys;
   }
 

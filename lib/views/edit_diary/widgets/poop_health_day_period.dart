@@ -35,28 +35,42 @@ class PoopDayPeriod extends StatelessWidget {
                       child: CustomTextFormField(
                         hintStyle: const TextStyle(),
                         readOnly: true,
-                        hintText:
-                            editDiaryController.poopConditionTypes[index] ==
-                                    null
-                                ? ''
-                                : editDiaryController
-                                    .poopConditionTypes[index]!.label,
-                        widget: DropdownButton(
-                          padding: EdgeInsets.only(right: RS.w10),
-                          iconSize: RS.w10 * 2.5,
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          underline: const SizedBox(),
-                          items: List.generate(PoopConditionType.values.length,
-                              (index) {
-                            PoopConditionType poopCondition =
-                                PoopConditionType.values[index];
-                            return DropdownMenuItem(
-                              value: poopCondition,
-                              child: Text(poopCondition.label),
-                            );
-                          }),
-                          onChanged: (v) =>
-                              editDiaryController.selectPoopCondition(v, index),
+                        hintText: editDiaryController
+                                    .getDayPeriodPoopCondition(index) ==
+                                null
+                            ? ''
+                            : editDiaryController
+                                .getDayPeriodPoopCondition(index)!
+                                .label,
+                        widget: Row(
+                          children: [
+                            DropdownButton(
+                              padding: EdgeInsets.only(right: RS.w10),
+                              iconSize: RS.w10 * 2.5,
+                              icon: const Icon(Icons.keyboard_arrow_down),
+                              underline: const SizedBox(),
+                              items: List.generate(
+                                  PoopConditionType.values.length, (index) {
+                                PoopConditionType poopCondition =
+                                    PoopConditionType.values[index];
+                                return DropdownMenuItem(
+                                  value: poopCondition,
+                                  child: Text(poopCondition.label),
+                                );
+                              }),
+                              onChanged: (v) => editDiaryController
+                                  .setDayPeriodPoopCondition(index, v),
+                            ),
+                            if (editDiaryController
+                                    .getDayPeriodPoopCondition(index) !=
+                                null)
+                              IconButton(
+                                  onPressed: () {
+                                    editDiaryController
+                                        .setDayPeriodPoopCondition(index, null);
+                                  },
+                                  icon: const Icon(Icons.remove))
+                          ],
                         ),
                       ),
                     ),

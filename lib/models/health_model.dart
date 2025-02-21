@@ -21,8 +21,6 @@ class HealthModel {
   List<double>? weights;
   @HiveField(4)
   List<int>? pulses;
-  @HiveField(5)
-  List<PoopConditionModel>? checkedpPoopCondition;
 
   HealthModel({
     this.temperatures,
@@ -30,7 +28,6 @@ class HealthModel {
     this.bloodPressures,
     this.weights,
     this.pulses,
-    this.checkedpPoopCondition,
   });
 
   double get avgTemperature {

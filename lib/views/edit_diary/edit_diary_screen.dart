@@ -13,7 +13,6 @@ import 'package:ours_log/common/widgets/open_close_container.dart';
 import 'package:ours_log/controller/edit_diary_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
-import 'package:ours_log/models/poop_condition_type.dart';
 import 'package:ours_log/views/edit_diary/widgets/day_done_pill_row.dart';
 import 'package:ours_log/views/edit_diary/widgets/feal_selector.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';

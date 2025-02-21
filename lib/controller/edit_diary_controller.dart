@@ -15,6 +15,7 @@ import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/done_pill_day_modal.dart';
 import 'package:ours_log/models/health_model.dart';
+import 'package:ours_log/models/poop_condition.dart';
 import 'package:ours_log/models/poop_condition_type.dart';
 import 'package:ours_log/models/week_day_type.dart';
 import 'package:ours_log/services/app_review_service.dart';
@@ -24,6 +25,32 @@ class EditDiaryController extends GetxController {
   final DateTime selectedDay;
   int backgroundIndex = 0, selectedFealIndex = -1;
 
+  PoopConditionType? moringPoop, lunchPoop, eveningPoop;
+
+  PoopConditionType? getDayPeriodPoopCondition(int index) {
+    switch (index) {
+      case 0:
+        return moringPoop;
+      case 1:
+        return lunchPoop;
+      case 2:
+        return eveningPoop;
+    }
+    return null;
+  }
+
+  void setDayPeriodPoopCondition(int index, PoopConditionType? poopCondition) {
+    switch (index) {
+      case 0:
+        moringPoop = poopCondition;
+      case 1:
+        lunchPoop = poopCondition;
+      case 2:
+        eveningPoop = poopCondition;
+    }
+    update();
+  }
+
   List<int> painFulIndex = [],
       selectedFealingIndex = [],
       selectedWeatherIndexs = [];
@@ -32,15 +59,7 @@ class EditDiaryController extends GetxController {
 
   List<DonePillDayModel> donePillDayModels = [];
 
-  List<PoopConditionType?> poopConditionTypes =
-      List.generate(DayPeriodType.values.length, (_) => null);
-
   EditDiaryController({this.diaryModel, required this.selectedDay});
-
-  void selectPoopCondition(PoopConditionType? poopCondition, int index) {
-    poopConditionTypes[index] = poopCondition;
-    update();
-  }
 
   @override
   void onInit() async {
@@ -101,20 +120,28 @@ class EditDiaryController extends GetxController {
       return;
     }
 
+    List<PoopConditionModel> poopConditionTypes = [];
+    if (moringPoop != null) {
+      poopConditionTypes.add(PoopConditionModel(
+          poopConditionType: moringPoop!,
+          dayPeriodType: DayPeriodType.morning));
+    }
+    if (lunchPoop != null) {
+      poopConditionTypes.add(PoopConditionModel(
+          poopConditionType: lunchPoop!,
+          dayPeriodType: DayPeriodType.afternoon));
+    }
+    if (eveningPoop != null) {
+      poopConditionTypes.add(PoopConditionModel(
+          poopConditionType: eveningPoop!,
+          dayPeriodType: DayPeriodType.evening));
+    }
     String whatTodo = whatToDoController.text.trim();
 
     List<String> imagePhats = [];
     for (var uploadFile in uploadFiles) {
       String fileName = await ImageController.instance.saveFile(uploadFile);
       imagePhats.add(fileName);
-    }
-
-    List<PoopConditionType> poopConditions = [];
-
-    for (var poopConditionType in poopConditionTypes) {
-      if (poopConditionType != null) {
-        poopConditions.add(poopConditionType);
-      }
     }
 
     HealthModel healthModel = createHealthModel();
@@ -126,7 +153,7 @@ class EditDiaryController extends GetxController {
       donePillDayModels: donePillDayModels,
       painfulIndex: painFulIndex.isEmpty ? null : painFulIndex[0],
       health: healthModel,
-      poopConditions: poopConditions,
+      poopConditions: poopConditionTypes,
     );
 
     if (diaryModel != null) {
@@ -190,7 +217,17 @@ class EditDiaryController extends GetxController {
     print('diaryModel!.poopConditions : ${diaryModel!.poopConditions}');
 
     if (diaryModel!.poopConditions != null) {
-      poopConditionTypes = diaryModel!.poopConditions!;
+      for (PoopConditionModel poop in diaryModel!.poopConditions!) {
+        switch (poop.dayPeriodType) {
+          case DayPeriodType.morning:
+            moringPoop = poop.poopConditionType;
+
+          case DayPeriodType.afternoon:
+            lunchPoop = poop.poopConditionType;
+          case DayPeriodType.evening:
+            eveningPoop = poop.poopConditionType;
+        }
+      }
     }
 
     if (diaryModel!.painfulIndex != null) {

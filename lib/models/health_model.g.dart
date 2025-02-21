@@ -22,13 +22,13 @@ class HealthModelAdapter extends TypeAdapter<HealthModel> {
       bloodPressures: fields[2] as BloodPressureModel?,
       weights: (fields[3] as List?)?.cast<double>(),
       pulses: (fields[4] as List?)?.cast<int>(),
-    )..checkedpPoopCondition = (fields[5] as List).cast<PoopConditionModel>();
+    );
   }
 
   @override
   void write(BinaryWriter writer, HealthModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.temperatures)
       ..writeByte(1)
@@ -38,9 +38,7 @@ class HealthModelAdapter extends TypeAdapter<HealthModel> {
       ..writeByte(3)
       ..write(obj.weights)
       ..writeByte(4)
-      ..write(obj.pulses)
-      ..writeByte(5)
-      ..write(obj.checkedpPoopCondition);
+      ..write(obj.pulses);
   }
 
   @override

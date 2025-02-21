@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/models/poop_condition_type.dart';
@@ -11,8 +12,13 @@ class PoopConditionModel {
   PoopConditionType poopConditionType;
   @HiveField(1)
   DayPeriodType dayPeriodType;
+
   PoopConditionModel({
     required this.poopConditionType,
     required this.dayPeriodType,
   });
+
+  @override
+  String toString() =>
+      'PoopConditionModel(poopConditionType: $poopConditionType, dayPeriodType: $dayPeriodType)';
 }

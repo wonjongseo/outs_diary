@@ -30,7 +30,6 @@ class SelectedDiary extends StatelessWidget {
     DiaryController diaryController = Get.find<DiaryController>();
 
     DiaryModel diaryModel = diaryController.selectedDiary!;
-    print('diaryModel.poopConditions : ${diaryModel.poopConditions}');
 
     return Container(
       padding: const EdgeInsets.all(10.0),
@@ -43,9 +42,9 @@ class SelectedDiary extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _FealIconAndDay(userController, diaryController),
-          const Divider(),
-          SizedBox(height: RS.h10),
           if (diaryModel.donePillDayModels!.isNotEmpty) ...[
+            const Divider(),
+            SizedBox(height: RS.h10),
             ColTextAndWidget(
               vertical: RS.h10 / 2,
               label: AppString.healthMemo,
@@ -78,20 +77,36 @@ class SelectedDiary extends StatelessWidget {
             ColTextAndWidget(
               vertical: RS.h10 / 2,
               label: AppString.poop.tr,
-              widget: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: List.generate(
-                    diaryModel.poopConditions!.length,
-                    (index) => Container(
-                      padding: EdgeInsets.all(RS.w10),
-                      margin: EdgeInsets.symmetric(horizontal: RS.w10),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Text(diaryController
-                          .selectedDiary!.poopConditions![index].label),
-                    ),
-                  )),
+              widget: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: List.generate(
+                      diaryModel.poopConditions!.length,
+                      (index) => Container(
+                          padding: EdgeInsets.all(RS.w10),
+                          margin: EdgeInsets.only(right: RS.w10),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Row(
+                            children: [
+                              Text(
+                                diaryController.selectedDiary!
+                                    .poopConditions![index].dayPeriodType.label,
+                              ),
+                              SizedBox(width: RS.w10),
+                              Text(
+                                diaryController
+                                    .selectedDiary!
+                                    .poopConditions![index]
+                                    .poopConditionType
+                                    .label,
+                              ),
+                            ],
+                          )),
+                    )),
+              ),
             ),
           if (diaryModel.whatTodo != null &&
               diaryModel.whatTodo!.isNotEmpty) ...[

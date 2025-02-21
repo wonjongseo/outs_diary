@@ -23,7 +23,7 @@ class DiaryModelAdapter extends TypeAdapter<DiaryModel> {
       imagePath: (fields[6] as List?)?.cast<String>(),
       painfulIndex: fields[8] as int?,
       donePillDayModels: (fields[4] as List?)?.cast<DonePillDayModel>(),
-      poopConditions: (fields[9] as List?)?.cast<PoopConditionType>(),
+      poopConditions: (fields[9] as List?)?.cast<PoopConditionModel>(),
       health: fields[7] as HealthModel?,
     )
       ..id = fields[0] as String
