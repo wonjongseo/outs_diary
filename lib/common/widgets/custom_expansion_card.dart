@@ -40,14 +40,7 @@ class CustomExpansionCard extends StatelessWidget {
               : subTitleWidget!,
       expandedColor: Get.isDarkMode ? AppColors.black : AppColors.white,
       shadowColor: Colors.transparent,
-      children: children == null
-          ? [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: RS.h10),
-                child: child,
-              )
-            ]
-          : children!,
+      children: children == null ? [child] : children!,
     );
   }
 }

@@ -6,19 +6,17 @@ class DoneCircleIcon extends StatelessWidget {
     super.key,
     required this.label,
     required this.backgroundColor,
+    this.width,
   });
 
   final String label;
   final Color backgroundColor;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: RS.w10 * 9,
+      width: width ?? RS.w10 * 9,
       height: RS.h10 * 4,
-      // padding: EdgeInsets.symmetric(
-      //   vertical: RS.h10 * .8,
-      //   horizontal: RS.w10 * 1.5,
-      // ),
       margin: EdgeInsets.symmetric(horizontal: RS.w10 * .5),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade300),

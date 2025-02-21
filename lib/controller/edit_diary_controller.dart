@@ -11,50 +11,39 @@ import 'package:ours_log/controller/image_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/blood_pressure_model.dart';
-import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/done_pill_day_modal.dart';
 import 'package:ours_log/models/health_model.dart';
+import 'package:ours_log/models/poop_condition.dart';
+import 'package:ours_log/models/poop_condition_type.dart';
 import 'package:ours_log/models/week_day_type.dart';
 
 class EditDiaryController extends GetxController {
-  int backgroundIndex = 0;
-  int selectedFealIndex = -1;
-
-  // List<DayPeriodType>? isDonePillOfDay;
-  List<DonePillDayModel> donePillDayModels = [];
-
-  UserController userController = Get.find<UserController>();
-  ScrollController scrollController = ScrollController();
-  DiaryController diaryController = Get.find<DiaryController>();
-  CarouselSliderController carouselSliderController =
-      CarouselSliderController();
-  List<int> selectedWeatherIndexs = [];
-
-  List<int> painFulIndex = [];
-  List<int> selectedFealingIndex = [];
-  List<File> uploadFiles = [];
-  late TextEditingController whatToDoController;
-
-  List<TextEditingController> temperatureCtls =
-      List.generate(3, (index) => TextEditingController());
-  List<TextEditingController> basicTemperatureCtls =
-      List.generate(3, (index) => TextEditingController());
-  List<TextEditingController> maxBloodPressureCtls = //systolic
-      List.generate(3, (index) => TextEditingController());
-  List<TextEditingController> minBloodPressureCtls = //systolic
-      List.generate(3, (index) => TextEditingController());
-  List<TextEditingController> weightCtls =
-      List.generate(3, (index) => TextEditingController());
-  List<TextEditingController> pulseCtls =
-      List.generate(3, (index) => TextEditingController());
-
   final DiaryModel? diaryModel;
   final DateTime selectedDay;
+  int backgroundIndex = 0, selectedFealIndex = -1;
+
+  List<int> painFulIndex = [],
+      selectedFealingIndex = [],
+      selectedWeatherIndexs = [];
+
+  List<File> uploadFiles = [];
+
+  List<DonePillDayModel> donePillDayModels = [];
+
+  List<PoopConditionType> poopConditionTypes = [];
+  List<PoopConditionModel> poopConditionModels = [];
   EditDiaryController({this.diaryModel, required this.selectedDay});
 
-  void onToggleDonePillDayModel(int index) {
-    donePillDayModels[index].isDone = !donePillDayModels[index].isDone;
+  void selectPoopCondition(PoopConditionType poopCondition, {int? index}) {
+    if (index != null) {
+      if (poopConditionTypes.length < index) {
+        return;
+      }
+      poopConditionTypes[index] = poopCondition;
+    } else {
+      poopConditionTypes.add(poopCondition);
+    }
     update();
   }
 
@@ -88,6 +77,11 @@ class EditDiaryController extends GetxController {
   onTapFealIcon(int index) {
     selectedFealIndex = index;
 
+    update();
+  }
+
+  void onToggleDonePillDayModel(int index) {
+    donePillDayModels[index].isDone = !donePillDayModels[index].isDone;
     update();
   }
 
@@ -310,4 +304,26 @@ class EditDiaryController extends GetxController {
     }
     super.onClose();
   }
+
+  UserController userController = Get.find<UserController>();
+  ScrollController scrollController = ScrollController();
+  DiaryController diaryController = Get.find<DiaryController>();
+
+  CarouselSliderController carouselSliderController =
+      CarouselSliderController();
+
+  late TextEditingController whatToDoController;
+
+  List<TextEditingController> temperatureCtls =
+      List.generate(3, (index) => TextEditingController());
+  List<TextEditingController> basicTemperatureCtls =
+      List.generate(3, (index) => TextEditingController());
+  List<TextEditingController> maxBloodPressureCtls = //systolic
+      List.generate(3, (index) => TextEditingController());
+  List<TextEditingController> minBloodPressureCtls = //systolic
+      List.generate(3, (index) => TextEditingController());
+  List<TextEditingController> weightCtls =
+      List.generate(3, (index) => TextEditingController());
+  List<TextEditingController> pulseCtls =
+      List.generate(3, (index) => TextEditingController());
 }

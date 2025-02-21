@@ -1,31 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_util_model.dart';
+part of 'poop_condition.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserUtilModelAdapter extends TypeAdapter<UserUtilModel> {
+class PoopConditionModelAdapter extends TypeAdapter<PoopConditionModel> {
   @override
-  final int typeId = 9;
+  final int typeId = 16;
 
   @override
-  UserUtilModel read(BinaryReader reader) {
+  PoopConditionModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return UserUtilModel()
-      ..expandedFields = (fields[0] as Map).cast<IsExpandtionType, bool>();
+    return PoopConditionModel(
+      poopConditionType: fields[0] as PoopConditionType,
+      isChecked: fields[1] as bool,
+    );
   }
 
   @override
-  void write(BinaryWriter writer, UserUtilModel obj) {
+  void write(BinaryWriter writer, PoopConditionModel obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.expandedFields);
+      ..write(obj.poopConditionType)
+      ..writeByte(1)
+      ..write(obj.isChecked);
   }
 
   @override
@@ -34,7 +38,7 @@ class UserUtilModelAdapter extends TypeAdapter<UserUtilModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserUtilModelAdapter &&
+      other is PoopConditionModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:ours_log/models/is_expandtion_type.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
-import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_button.dart';
@@ -13,13 +13,14 @@ import 'package:ours_log/common/widgets/open_close_container.dart';
 import 'package:ours_log/controller/edit_diary_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
-import 'package:ours_log/models/task_model.dart';
+import 'package:ours_log/models/poop_condition_type.dart';
 import 'package:ours_log/views/edit_diary/widgets/day_done_pill_row.dart';
 import 'package:ours_log/views/edit_diary/widgets/feal_selector.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/edit_diary/widgets/image_of_today.dart';
 import 'package:ours_log/views/edit_diary/widgets/morning_lunch_evening_blood_pressure_widget.dart';
 import 'package:ours_log/views/edit_diary/widgets/morning_lunch_evening_temp_and_pulse_widget.dart';
+import 'package:ours_log/views/edit_diary/widgets/poop_condition_selector.dart';
 
 // ignore: must_be_immutable
 class EditDiaryScreen extends StatelessWidget {
@@ -92,14 +93,16 @@ class EditDiaryScreen extends StatelessWidget {
                       CustomExpansionCard(
                         title: AppString.temperature.tr,
                         initiallyExpanded: userController
-                            .userModel!.userUtilModel.expandedTemperature,
-                        onExpansionChanged:
-                            userController.toggleExpandedTemperature,
+                                .userModel!
+                                .userUtilModel
+                                .expandedFields[IsExpandtionType.temperature] ??
+                            false,
+                        onExpansionChanged: (bool v) => userController
+                            .toggleExpanded(IsExpandtionType.temperature),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: MorningLunchEveningTempAndPulseWidget(
                             controllers: editDiaryController.temperatureCtls,
-                            label: AppString.temperature.tr,
                             sufficText: '°C',
                             keyboardType: const TextInputType.numberWithOptions(
                               decimal: true,
@@ -112,13 +115,16 @@ class EditDiaryScreen extends StatelessWidget {
                       CustomExpansionCard(
                         title: AppString.pulse.tr,
                         initiallyExpanded: userController
-                            .userModel!.userUtilModel.expandedPulse,
-                        onExpansionChanged: userController.toggleExpandedPulse,
+                                .userModel!
+                                .userUtilModel
+                                .expandedFields[IsExpandtionType.pulse] ??
+                            false,
+                        onExpansionChanged: (bool v) => userController
+                            .toggleExpanded(IsExpandtionType.pulse),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: MorningLunchEveningTempAndPulseWidget(
                             controllers: editDiaryController.pulseCtls,
-                            label: AppString.pulse.tr,
                             sufficText: '${AppString.count.tr}/min',
                             keyboardType: TextInputType.number,
                             maxLength: 3,
@@ -129,9 +135,11 @@ class EditDiaryScreen extends StatelessWidget {
                       CustomExpansionCard(
                         title: AppString.bloodPressure.tr,
                         initiallyExpanded: userController
-                            .userModel!.userUtilModel.expandedBloodPressure,
-                        onExpansionChanged:
-                            userController.toggleExpandedbloodPressure,
+                                    .userModel!.userUtilModel.expandedFields[
+                                IsExpandtionType.bloodPressure] ??
+                            false,
+                        onExpansionChanged: (bool v) => userController
+                            .toggleExpanded(IsExpandtionType.bloodPressure),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: MorningLunchEveningBloodPressureWidget(
@@ -139,7 +147,6 @@ class EditDiaryScreen extends StatelessWidget {
                                 editDiaryController.maxBloodPressureCtls,
                             minControllers:
                                 editDiaryController.minBloodPressureCtls,
-                            label: AppString.bloodPressure.tr,
                             sufficText: 'mm Hg',
                           ),
                         ),
@@ -147,25 +154,19 @@ class EditDiaryScreen extends StatelessWidget {
                       SizedBox(height: RS.h10),
                       ExpansionIconCard(
                         initiallyExpanded: userController
-                            .userModel!.userUtilModel.expandedPainLevel,
-                        onExpansionChanged:
-                            userController.toggleExpandedPainLevel,
+                                .userModel!
+                                .userUtilModel
+                                .expandedFields[IsExpandtionType.painLevel] ??
+                            false,
+                        onExpansionChanged: (bool v) => userController
+                            .toggleExpanded(IsExpandtionType.painLevel),
                         icons: AppConstant.zeroToNineIcons,
                         label: AppString.painLevel.tr,
                         isOnlyOne: true,
                         selectedIconIndexs: editDiaryController.painFulIndex,
                       ),
                       SizedBox(height: RS.height20),
-                      ExpansionIconCard(
-                        initiallyExpanded: userController
-                            .userModel!.userUtilModel.expandedPoopCondition,
-                        onExpansionChanged:
-                            userController.toggleExpandedPainLevel,
-                        icons: AppConstant.zeroToNineIcons,
-                        label: AppString.painLevel.tr,
-                        isOnlyOne: true,
-                        selectedIconIndexs: editDiaryController.painFulIndex,
-                      ),
+                      PoopConditionSelector(),
                       SizedBox(height: RS.height20),
                       ColTextAndWidget(
                         label: AppString.healthMemo,

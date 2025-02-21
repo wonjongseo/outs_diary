@@ -4,6 +4,12 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.poopCondition1: AppString.poopCondition1Jp,
+          AppString.poopCondition2: AppString.poopCondition2Jp,
+          AppString.poopCondition3: AppString.poopCondition3Jp,
+          AppString.poopCondition4: AppString.poopCondition4Jp,
+          AppString.poopCondition5: AppString.poopCondition5Jp,
+          AppString.poopCondition6: AppString.poopCondition6Jp,
           AppString.memo: AppString.memoJp,
           AppString.feal: AppString.fealJp,
           AppString.icon: AppString.iconJp,
@@ -207,6 +213,12 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.poopCondition1: AppString.poopCondition1Kr,
+          AppString.poopCondition2: AppString.poopCondition2Kr,
+          AppString.poopCondition3: AppString.poopCondition3Kr,
+          AppString.poopCondition4: AppString.poopCondition4Kr,
+          AppString.poopCondition5: AppString.poopCondition5Kr,
+          AppString.poopCondition6: AppString.poopCondition6Kr,
           AppString.memo: AppString.memoKr,
           AppString.feal: AppString.fealKr,
           AppString.icon: AppString.iconKr,
@@ -410,6 +422,12 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.poopCondition1: AppString.poopCondition1En,
+          AppString.poopCondition2: AppString.poopCondition2En,
+          AppString.poopCondition3: AppString.poopCondition3En,
+          AppString.poopCondition4: AppString.poopCondition4En,
+          AppString.poopCondition5: AppString.poopCondition5En,
+          AppString.poopCondition6: AppString.poopCondition6En,
           AppString.memo: AppString.memoEn,
           AppString.feal: AppString.fealEn,
           AppString.icon: AppString.iconEn,
@@ -1664,4 +1682,34 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String iconKr = '아이콘';
   static String iconJp = 'アイコン';
   static String iconEn = "Icon";
+
+  static String poopCondition1 = 'poopCondition1Tr';
+  static String poopCondition1Kr = '코로코로';
+  static String poopCondition1Jp = 'コロコロ';
+  static String poopCondition1En = "poopCondition1";
+
+  static String poopCondition2 = 'poopCondition2Tr';
+  static String poopCondition2Kr = '딱딱함';
+  static String poopCondition2Jp = '硬い';
+  static String poopCondition2En = "poopCondition2";
+
+  static String poopCondition3 = 'poopCondition3Tr';
+  static String poopCondition3Kr = '보통';
+  static String poopCondition3Jp = '普通';
+  static String poopCondition3En = "poopCondition3";
+
+  static String poopCondition4 = 'poopCondition4Tr';
+  static String poopCondition4Kr = '부드러움';
+  static String poopCondition4Jp = '柔らかい';
+  static String poopCondition4En = "poopCondition4";
+
+  static String poopCondition5 = 'poopCondition5Tr';
+  static String poopCondition5Kr = '진흙 같음';
+  static String poopCondition5Jp = '泥っぽい';
+  static String poopCondition5En = "poopCondition5";
+
+  static String poopCondition6 = 'poopCondition6Tr';
+  static String poopCondition6Kr = '물 같음';
+  static String poopCondition6Jp = '水っぽい';
+  static String poopCondition6En = "poopCondition6";
 }

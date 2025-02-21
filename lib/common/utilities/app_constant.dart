@@ -20,6 +20,9 @@ class AppConstant {
   static const int dayPeriodTypeHiveId = 11;
   static const int weekDayTypeHiveId = 12;
   static const int donePillDayModelHiveId = 13;
+  static const int isExpandtionTypeHiveId = 14;
+  static const int poopConditionTypeHiveId = 15;
+  static const int poopConditionModelHiveId = 16;
 
   static const String settingModelBox = 'settings';
   static const String diaryModelBox = 'diarys';

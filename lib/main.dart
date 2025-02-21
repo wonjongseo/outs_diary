@@ -6,12 +6,15 @@ import 'package:get/get.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:ours_log/models/is_expandtion_type.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/models/blood_pressure_model.dart';
 import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/models/done_pill_day_modal.dart';
+import 'package:ours_log/models/poop_condition.dart';
+import 'package:ours_log/models/poop_condition_type.dart';
 import 'package:ours_log/models/regular_task_modal.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/health_model.dart';
@@ -104,6 +107,16 @@ class _MyAppState extends State<MyApp> {
 Future<void> initHive() async {
   await Hive.initFlutter();
 
+  if (!Hive.isAdapterRegistered(AppConstant.poopConditionTypeHiveId)) {
+    Hive.registerAdapter(PoopConditionTypeAdapter());
+  }
+  if (!Hive.isAdapterRegistered(AppConstant.poopConditionModelHiveId)) {
+    Hive.registerAdapter(PoopConditionModelAdapter());
+  }
+
+  if (!Hive.isAdapterRegistered(AppConstant.isExpandtionTypeHiveId)) {
+    Hive.registerAdapter(IsExpandtionTypeAdapter());
+  }
   if (!Hive.isAdapterRegistered(AppConstant.donePillDayModelHiveId)) {
     Hive.registerAdapter(DonePillDayModelAdapter());
   }

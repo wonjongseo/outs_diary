@@ -4,6 +4,8 @@ import 'package:hive/hive.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/models/blood_pressure_model.dart';
+import 'package:ours_log/models/poop_condition.dart';
+import 'package:ours_log/models/poop_condition_type.dart';
 
 part 'health_model.g.dart';
 
@@ -19,6 +21,8 @@ class HealthModel {
   List<double>? weights;
   @HiveField(4)
   List<int>? pulses;
+  @HiveField(5)
+  late List<PoopConditionModel> checkedpPoopCondition;
 
   HealthModel({
     this.temperatures,
@@ -26,7 +30,13 @@ class HealthModel {
     this.bloodPressures,
     this.weights,
     this.pulses,
-  });
+  }) {
+    checkedpPoopCondition = List.generate(
+      PoopConditionType.values.length,
+      (index) => PoopConditionModel(
+          poopConditionType: PoopConditionType.values[index], isChecked: false),
+    );
+  }
 
   double get avgTemperature {
     if (temperatures == null) {

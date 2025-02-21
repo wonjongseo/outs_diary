@@ -1,10 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/app_image_path.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/done_circle_icon.dart';
 import 'package:ours_log/controller/edit_diary_controller.dart';
 import 'package:ours_log/models/day_period_type.dart';

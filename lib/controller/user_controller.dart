@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:ours_log/models/is_expandtion_type.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
@@ -17,74 +18,11 @@ class UserController extends GetxController {
 
   UserModelRepository userModelRepository = UserModelRepository();
 
-  void toggleExpanded(bool v, int index) {
-    switch (index) {
-      case 0:
-        userModel!.userUtilModel.expandedTemperature = v;
-        break;
-      case 1:
-        userModel!.userUtilModel.expandedPulse = v;
-        break;
-      case 2:
-        userModel!.userUtilModel.expandedBloodPressure = v;
-        break;
-      case 3:
-        userModel!.userUtilModel.expandedPainLevel = v;
-        break;
-      case 4:
-        userModel!.userUtilModel.expandedFealGraph = v;
-        break;
-      case 5:
-        userModel!.userUtilModel.expandedWeightGraph = v;
-        break;
-      case 6:
-        userModel!.userUtilModel.expandedTemperatureGraph = v;
-        break;
-      case 7:
-        userModel!.userUtilModel.expandedPulseGraph = v;
-        break;
-      case 8:
-        userModel!.userUtilModel.expandedBloodPressureGraph = v;
-        break;
-      case 9:
-        userModel!.userUtilModel.expandedPainLevelGraph = v;
-        break;
-    }
+  void toggleExpanded(IsExpandtionType field) {
+    if (!userModel!.userUtilModel.expandedFields.containsKey(field)) return;
 
-    userModelRepository.saveUser(userModel!);
-
-    update();
-  }
-
-  void toggleExpandedPainLevel(bool v) {
-    userModel!.userUtilModel!.expandedPainLevel =
-        !userModel!.userUtilModel!.expandedPainLevel;
-
-    userModelRepository.saveUser(userModel!);
-
-    update();
-  }
-
-  void toggleExpandedTemperature(bool v) {
-    userModel!.userUtilModel!.expandedTemperature =
-        !userModel!.userUtilModel!.expandedTemperature;
-
-    userModelRepository.saveUser(userModel!);
-
-    update();
-  }
-
-  void toggleExpandedPulse(bool v) {
-    userModel!.userUtilModel!.expandedPulse =
-        !userModel!.userUtilModel!.expandedPulse;
-
-    userModelRepository.saveUser(userModel!);
-    update();
-  }
-
-  void toggleExpandedbloodPressure(bool v) {
-    userModel!.userUtilModel!.expandedBloodPressure =
-        !userModel!.userUtilModel!.expandedBloodPressure;
+    userModel!.userUtilModel.expandedFields[field] =
+        !userModel!.userUtilModel.expandedFields[field]!;
 
     userModelRepository.saveUser(userModel!);
     update();

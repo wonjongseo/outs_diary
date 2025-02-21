@@ -12,13 +12,11 @@ class MorningLunchEveningBloodPressureWidget extends StatelessWidget {
     super.key,
     required this.maxControllers,
     required this.minControllers,
-    required this.label,
     required this.sufficText,
   });
 
   final List<TextEditingController> maxControllers;
   final List<TextEditingController> minControllers;
-  final String label;
   final String sufficText;
 
   @override

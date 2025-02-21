@@ -11,14 +11,12 @@ class MorningLunchEveningTempAndPulseWidget extends StatelessWidget {
   const MorningLunchEveningTempAndPulseWidget({
     super.key,
     required this.controllers,
-    required this.label,
     required this.sufficText,
     required this.keyboardType,
     required this.maxLength,
   });
 
   final List<TextEditingController> controllers;
-  final String label;
   final String sufficText;
   final TextInputType keyboardType;
   final int maxLength;
@@ -68,7 +66,6 @@ class MorningLunchEveningTempAndPulseWidget extends StatelessWidget {
                         maxLength: maxLength,
                         controller: controllers[1],
                         keyboardType: keyboardType,
-                        // hintText: AppString.lunch.tr,
                         sufficIcon: Text(
                           sufficText,
                           style: textFieldSufficStyle,
@@ -87,7 +84,6 @@ class MorningLunchEveningTempAndPulseWidget extends StatelessWidget {
                         maxLength: maxLength,
                         controller: controllers[2],
                         keyboardType: keyboardType,
-                        // hintText: AppString.evening.tr,
                         sufficIcon: Text(
                           sufficText,
                           style: textFieldSufficStyle,
@@ -104,57 +100,3 @@ class MorningLunchEveningTempAndPulseWidget extends StatelessWidget {
     });
   }
 }
-
- // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Text(label),
-            //     Row(
-            //       children: [
-            //         Container(
-            //           margin: EdgeInsets.symmetric(horizontal: 6),
-            //           decoration: BoxDecoration(
-            //               color: enableMorning
-            //                   ? AppColors.primaryColor
-            //                   : Colors.grey,
-            //               borderRadius: BorderRadius.circular(12),
-            //               boxShadow: [
-            //                 BoxShadow(color: Colors.grey, offset: Offset(0, 1))
-            //               ]),
-            //           padding:
-            //               EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-            //           child: Text(AppString.morning.tr),
-            //         ),
-            //         Container(
-            //           margin: EdgeInsets.symmetric(horizontal: 6),
-            //           decoration: BoxDecoration(
-            //               color: enableLunch
-            //                   ? AppColors.primaryColor
-            //                   : Colors.grey,
-            //               borderRadius: BorderRadius.circular(12),
-            //               boxShadow: [
-            //                 BoxShadow(color: Colors.grey, offset: Offset(0, 1))
-            //               ]),
-            //           padding:
-            //               EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-            //           child: Text(AppString.lunch.tr),
-            //         ),
-            //         Container(
-            //           margin: EdgeInsets.symmetric(horizontal: 6),
-            //           decoration: BoxDecoration(
-            //               color: enableEvening
-            //                   ? AppColors.primaryColor
-            //                   : Colors.grey,
-            //               borderRadius: BorderRadius.circular(12),
-            //               boxShadow: [
-            //                 BoxShadow(color: Colors.grey, offset: Offset(0, 1))
-            //               ]),
-            //           padding:
-            //               EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-            //           child: Text(AppString.evening.tr),
-            //         ),
-            //       ],
-            //     ),
-            //   ],
-            // ),
-            // SizedBox(height: RS.h10),

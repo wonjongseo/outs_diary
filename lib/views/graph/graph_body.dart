@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:ours_log/models/is_expandtion_type.dart';
 import 'package:ours_log/common/theme/theme.dart';
 
 import 'package:ours_log/common/utilities/app_string.dart';
@@ -201,10 +202,11 @@ class _GraphBodyState extends State<GraphBody> {
                 child: Column(
                   children: [
                     CustomExpansionCard(
-                      initiallyExpanded: userController
-                          .userModel!.userUtilModel.expandedFealGraph,
-                      onExpansionChanged: (p0) =>
-                          userController.toggleExpanded(p0, 4),
+                      initiallyExpanded: userController.userModel!.userUtilModel
+                              .expandedFields[IsExpandtionType.fealGraph] ??
+                          false,
+                      onExpansionChanged: (bool v) => userController
+                          .toggleExpanded(IsExpandtionType.fealGraph),
                       title: AppString.fealText.tr,
                       child: Padding(
                         padding: EdgeInsets.only(
@@ -221,10 +223,11 @@ class _GraphBodyState extends State<GraphBody> {
                     SizedBox(height: RS.h10),
                     CustomExpansionCard(
                       title: AppString.weight.tr,
-                      initiallyExpanded: userController
-                          .userModel!.userUtilModel.expandedWeightGraph,
-                      onExpansionChanged: (p0) =>
-                          userController.toggleExpanded(p0, 5),
+                      initiallyExpanded: userController.userModel!.userUtilModel
+                              .expandedFields[IsExpandtionType.weightGraph] ??
+                          false,
+                      onExpansionChanged: (bool v) => userController
+                          .toggleExpanded(IsExpandtionType.weightGraph),
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: RS.h10,
@@ -241,9 +244,11 @@ class _GraphBodyState extends State<GraphBody> {
                     SizedBox(height: RS.h10),
                     CustomExpansionCard(
                       initiallyExpanded: userController
-                          .userModel!.userUtilModel.expandedTemperatureGraph,
-                      onExpansionChanged: (p0) =>
-                          userController.toggleExpanded(p0, 6),
+                                  .userModel!.userUtilModel.expandedFields[
+                              IsExpandtionType.temperatureGraph] ??
+                          false,
+                      onExpansionChanged: (bool v) => userController
+                          .toggleExpanded(IsExpandtionType.temperatureGraph),
                       title: AppString.temperature.tr,
                       child: Padding(
                         padding: EdgeInsets.symmetric(
@@ -260,10 +265,11 @@ class _GraphBodyState extends State<GraphBody> {
                     ),
                     SizedBox(height: RS.h10),
                     CustomExpansionCard(
-                      initiallyExpanded: userController
-                          .userModel!.userUtilModel.expandedPulseGraph,
-                      onExpansionChanged: (p0) =>
-                          userController.toggleExpanded(p0, 7),
+                      initiallyExpanded: userController.userModel!.userUtilModel
+                              .expandedFields[IsExpandtionType.pulseGraph] ??
+                          false,
+                      onExpansionChanged: (bool v) => userController
+                          .toggleExpanded(IsExpandtionType.pulseGraph),
                       title: AppString.pulse.tr,
                       child: Padding(
                         padding: EdgeInsets.symmetric(
@@ -281,9 +287,11 @@ class _GraphBodyState extends State<GraphBody> {
                     SizedBox(height: RS.h10),
                     CustomExpansionCard(
                       initiallyExpanded: userController
-                          .userModel!.userUtilModel.expandedBloodPressureGraph,
-                      onExpansionChanged: (p0) =>
-                          userController.toggleExpanded(p0, 8),
+                                  .userModel!.userUtilModel.expandedFields[
+                              IsExpandtionType.bloodPressureGraph] ??
+                          false,
+                      onExpansionChanged: (bool v) => userController
+                          .toggleExpanded(IsExpandtionType.bloodPressureGraph),
                       title: AppString.bloodPressure.tr,
                       child: Padding(
                         padding: EdgeInsets.symmetric(
