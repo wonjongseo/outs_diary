@@ -1,5 +1,4 @@
 import 'package:get/utils.dart';
-import 'package:intl/intl.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';

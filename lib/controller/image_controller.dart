@@ -21,7 +21,6 @@ class ImageController extends GetxController {
   }
 
   static getDirectory() async {
-    print('getDirectory');
     directory = await getLibraryDirectory();
   }
 

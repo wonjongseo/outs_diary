@@ -29,7 +29,6 @@ class DiaryController extends GetxController {
     selectedDay = now;
     focusedDay = now;
 
-    AppFunction.requestPermisson();
     getAllData();
     super.onInit();
   }

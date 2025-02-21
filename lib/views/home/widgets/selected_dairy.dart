@@ -107,7 +107,7 @@ class SelectedDiary extends StatelessWidget {
               )
             ],
             ColTextAndWidget(
-              label: AppString.whatDidYouHintMsg.tr,
+              label: AppString.healthMemo,
               widget: CustomTextFormField(
                 hintText: diaryController.selectedDiary!.whatTodo,
                 maxLines: (diaryController.selectedDiary!.whatTodo ?? '')

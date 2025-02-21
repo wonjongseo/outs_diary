@@ -4,6 +4,7 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.memo: AppString.memoJp,
           AppString.feal: AppString.fealJp,
           AppString.icon: AppString.iconJp,
           AppString.count: AppString.countJp,
@@ -72,7 +73,6 @@ class AppTranslations extends Translations {
           AppString.start: AppString.startJp,
           AppString.englishText: AppString.englishTextJp,
           AppString.japaneseText: AppString.japaneseTextJp,
-          AppString.whatDidYouHintMsg: AppString.whatDidYouHintMsgJp,
           AppString.howFealToday: AppString.howFealTodayJp,
           AppString.savedText: AppString.savedTextJp,
           AppString.good: AppString.goodJp,
@@ -207,6 +207,7 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.memo: AppString.memoKr,
           AppString.feal: AppString.fealKr,
           AppString.icon: AppString.iconKr,
           AppString.count: AppString.countKr,
@@ -275,7 +276,6 @@ class AppTranslations extends Translations {
           AppString.start: AppString.startKr,
           AppString.englishText: AppString.englishTextKr,
           AppString.japaneseText: AppString.japaneseTextKr,
-          AppString.whatDidYouHintMsg: AppString.whatDidYouHintMsgKr,
           AppString.howFealToday: AppString.howFealTodayKr,
           AppString.savedText: AppString.savedTextKr,
           AppString.good: AppString.goodKr,
@@ -410,6 +410,7 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.memo: AppString.memoEn,
           AppString.feal: AppString.fealEn,
           AppString.icon: AppString.iconEn,
           AppString.count: AppString.countEn,
@@ -478,7 +479,6 @@ class AppTranslations extends Translations {
           AppString.start: AppString.startEn,
           AppString.englishText: AppString.englishTextEn,
           AppString.japaneseText: AppString.japaneseTextEn,
-          AppString.whatDidYouHintMsg: AppString.whatDidYouHintMsgEn,
           AppString.howFealToday: AppString.howFealTodayEn,
           AppString.savedText: AppString.savedTextEn,
           AppString.good: AppString.goodEn,
@@ -616,6 +616,8 @@ class AppTranslations extends Translations {
 }
 
 class AppString {
+  static String healthMemo = '${AppString.health.tr} ${AppString.memo.tr}';
+
   static String days = 'daystr';
   static String daysKr = '일자';
   static String daysJp = '日付';
@@ -719,11 +721,6 @@ class AppString {
   static String weatherTextJp = '天気';
   static String weatherTextEn = "Edit Profile";
 
-  static String whatDidYouHintMsg = 'whatDidYouHintMsgTr';
-  static String whatDidYouHintMsgKr = '오늘은 어떤 일이 있었나요 ?';
-  static String whatDidYouHintMsgJp = '今日はどんな事がありましたか？';
-  static String whatDidYouHintMsgEn = "English";
-
   static String bloodPressure = 'bloodPressureTr';
   static String bloodPressureKr = '혈압';
   static String bloodPressureJp = '血圧';
@@ -763,6 +760,11 @@ class AppString {
   static String healthKr = '건강';
   static String healthJp = '健康';
   static String healthEn = "Health";
+
+  static String memo = "memoTr";
+  static String memoKr = '메모';
+  static String memoJp = "メモ";
+  static String memoEn = "Memo";
 
   static String addPhoto = 'addPhotoTr';
   static String addPhotoKr = '사진 추가';

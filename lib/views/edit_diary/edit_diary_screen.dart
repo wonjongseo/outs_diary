@@ -156,8 +156,19 @@ class EditDiaryScreen extends StatelessWidget {
                         selectedIconIndexs: editDiaryController.painFulIndex,
                       ),
                       SizedBox(height: RS.height20),
+                      ExpansionIconCard(
+                        initiallyExpanded: userController
+                            .userModel!.userUtilModel.expandedPoopCondition,
+                        onExpansionChanged:
+                            userController.toggleExpandedPainLevel,
+                        icons: AppConstant.zeroToNineIcons,
+                        label: AppString.painLevel.tr,
+                        isOnlyOne: true,
+                        selectedIconIndexs: editDiaryController.painFulIndex,
+                      ),
+                      SizedBox(height: RS.height20),
                       ColTextAndWidget(
-                        label: AppString.whatDidYouHintMsg.tr,
+                        label: AppString.healthMemo,
                         widget: CustomTextFormField(
                           hintText: AppString.plzEnterTextMsg.tr,
                           controller: editDiaryController.whatToDoController,
@@ -168,7 +179,7 @@ class EditDiaryScreen extends StatelessWidget {
                       ImageOfToday(
                         carouselSliderController:
                             editDiaryController.carouselSliderController,
-                        label: AppString.photoOfToday.tr,
+                        label: AppString.photo.tr,
                         uploadFiles: editDiaryController.uploadFiles,
                         selectedPhotos: editDiaryController.selectedPhotos,
                         removePhoto: editDiaryController.removePhoto,

@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
-import 'package:photo_manager/photo_manager.dart';
 
 class AppSnackbar {
   static void vaildTextFeildSnackBar({

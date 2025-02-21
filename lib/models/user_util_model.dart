@@ -30,6 +30,9 @@ class UserUtilModel {
   @HiveField(9)
   bool expandedPainLevelGraph;
 
+  @HiveField(10)
+  bool expandedPoopCondition;
+
   UserUtilModel({
     this.expandedTemperature = true,
     this.expandedPulse = true,
@@ -41,6 +44,7 @@ class UserUtilModel {
     this.expandedPulseGraph = true,
     this.expandedBloodPressureGraph = true,
     this.expandedPainLevelGraph = true,
+    this.expandedPoopCondition = true,
   });
 
   @override

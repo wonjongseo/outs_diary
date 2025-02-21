@@ -5,128 +5,91 @@ import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
+import 'package:ours_log/models/day_period_type.dart';
 
-class Onboarding7 extends StatefulWidget {
+class Onboarding7 extends StatelessWidget {
   const Onboarding7({super.key});
 
   @override
-  State<Onboarding7> createState() => _Onboarding7State();
-}
-
-class _Onboarding7State extends State<Onboarding7> {
-  @override
   Widget build(BuildContext context) {
-    OnboardingController userController = Get.find<OnboardingController>();
-
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: RS.w10 * 2,
-        vertical: RS.h10,
-      ),
-      child: Column(
-        children: [
-          Text(AppString.doYouAlarmWhenDrinkPill.tr),
-          SizedBox(height: RS.h10 * 1.5),
-          ToggleButtons(
-            onPressed: (v) {
-              setState(() {
-                v == 0
-                    ? userController.isAlermEnable = true
-                    : userController.isAlermEnable = false;
-              });
-            },
-            borderRadius: BorderRadius.circular(20),
-            isSelected: [
-              userController.isAlermEnable,
-              !userController.isAlermEnable
-            ],
-            children: [
-              Text(
-                'ON',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: userController.isAlermEnable
-                      ? AppColors.primaryColor
-                      : null,
+    return GetBuilder<OnboardingController>(builder: (userController) {
+      return Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: RS.w10 * 2,
+          vertical: RS.h10,
+        ),
+        child: Column(
+          children: [
+            Text(AppString.doYouAlarmWhenDrinkPill.tr),
+            SizedBox(height: RS.h10 * 1.5),
+            ToggleButtons(
+              onPressed: userController.togglePillAlarm,
+              borderRadius: BorderRadius.circular(20),
+              isSelected: [
+                userController.isAlermEnable,
+                !userController.isAlermEnable
+              ],
+              children: [
+                Text(
+                  'ON',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: userController.isAlermEnable
+                        ? AppColors.primaryColor
+                        : null,
+                  ),
+                ),
+                Text(
+                  'OFF',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: !userController.isAlermEnable
+                          ? AppColors.primaryColor
+                          : null),
+                )
+              ],
+            ),
+            SizedBox(height: RS.h10 * 3),
+            if (userController.selectedMorningLunchEvening.contains(0))
+              GestureDetector(
+                onTap: !userController.isAlermEnable
+                    ? null
+                    : () => userController.changePillTime(
+                        DayPeriodType.morning, context),
+                child: AppointPillTime(
+                  title: AppString.morning.tr,
+                  time: userController.morningTime,
+                  isAlermEnable: userController.isAlermEnable,
                 ),
               ),
-              Text(
-                'OFF',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: !userController.isAlermEnable
-                        ? AppColors.primaryColor
-                        : null),
-              )
-            ],
-          ),
-          SizedBox(height: RS.h10 * 3),
-          if (userController.selectedMorningLunchEvening.contains(0))
-            GestureDetector(
-              onTap: !userController.isAlermEnable
-                  ? null
-                  : () async {
-                      TimeOfDay? timeOfDay = await AppFunction.pickTime(context,
-                          helpText: AppString.plzAlarmTime.tr,
-                          errorInvalidText: AppString.plzInputCollectTime.tr);
-                      if (timeOfDay == null) {
-                        return;
-                      }
-                      userController.morningTime =
-                          '${timeOfDay.hour}:${timeOfDay.minute}';
-                      setState(() {});
-                    },
-              child: AppointPillTime(
-                title: AppString.morning.tr,
-                time: userController.morningTime,
-                isAlermEnable: userController.isAlermEnable,
+            if (userController.selectedMorningLunchEvening.contains(1))
+              GestureDetector(
+                onTap: !userController.isAlermEnable
+                    ? null
+                    : () => userController.changePillTime(
+                        DayPeriodType.afternoon, context),
+                child: AppointPillTime(
+                  isAlermEnable: userController.isAlermEnable,
+                  title: AppString.lunch.tr,
+                  time: userController.lunchTime,
+                ),
               ),
-            ),
-          if (userController.selectedMorningLunchEvening.contains(1))
-            GestureDetector(
-              onTap: !userController.isAlermEnable
-                  ? null
-                  : () async {
-                      TimeOfDay? timeOfDay = await AppFunction.pickTime(context,
-                          helpText: AppString.plzAlarmTime.tr,
-                          errorInvalidText: AppString.plzInputCollectTime.tr);
-                      if (timeOfDay == null) {
-                        return;
-                      }
-                      userController.lunchTime =
-                          '${timeOfDay.hour}:${timeOfDay.minute}';
-                      setState(() {});
-                    },
-              child: AppointPillTime(
-                isAlermEnable: userController.isAlermEnable,
-                title: AppString.lunch.tr,
-                time: userController.lunchTime,
+            if (userController.selectedMorningLunchEvening.contains(2))
+              GestureDetector(
+                onTap: !userController.isAlermEnable
+                    ? null
+                    : () => userController.changePillTime(
+                        DayPeriodType.evening, context),
+                child: AppointPillTime(
+                  isAlermEnable: userController.isAlermEnable,
+                  title: AppString.evening.tr,
+                  time: userController.eveningTime,
+                ),
               ),
-            ),
-          if (userController.selectedMorningLunchEvening.contains(2))
-            GestureDetector(
-              onTap: !userController.isAlermEnable
-                  ? null
-                  : () async {
-                      TimeOfDay? timeOfDay = await AppFunction.pickTime(context,
-                          helpText: AppString.plzAlarmTime.tr,
-                          errorInvalidText: AppString.plzInputCollectTime.tr);
-                      if (timeOfDay == null) {
-                        return;
-                      }
-                      userController.eveningTime =
-                          '${timeOfDay.hour}:${timeOfDay.minute}';
-                      setState(() {});
-                    },
-              child: AppointPillTime(
-                isAlermEnable: userController.isAlermEnable,
-                title: AppString.evening.tr,
-                time: userController.eveningTime,
-              ),
-            ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }
 

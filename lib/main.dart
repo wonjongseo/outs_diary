@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -37,7 +39,7 @@ void main() async {
 Future<void> _initializeTimeZone() async {
   tz.initializeTimeZones();
   final String currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
-  print("📌 현재 타임존: $currentTimeZone");
+  log("📌 Timezone: $currentTimeZone");
   tz.setLocalLocation(tz.getLocation(currentTimeZone));
 }
 

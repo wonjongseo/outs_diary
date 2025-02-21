@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ours_log/controller/notification_controller.dart';
+import 'package:ours_log/services/notification_service.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/respository/dairy_respository.dart';

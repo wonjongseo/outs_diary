@@ -44,13 +44,6 @@ class AppFunction {
     return day1.weekday == day2.weekday;
   }
 
-  static void requestPermisson() async {
-    final permission = await PhotoManager.requestPermissionExtend();
-    if (!permission.isAuth) {
-      // return PhotoManager.openSetting(); TODO
-    }
-  }
-
   static Future<DateTime?> pickDate(BuildContext context,
       {DateTime? firstDate}) async {
     return await showDatePicker(

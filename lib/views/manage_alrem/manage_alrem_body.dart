@@ -9,7 +9,7 @@ import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
-import 'package:ours_log/controller/notification_controller.dart';
+import 'package:ours_log/services/notification_service.dart';
 
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/task_model.dart';

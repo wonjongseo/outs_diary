@@ -6,7 +6,6 @@ import 'package:get/state_manager.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
-import 'package:ours_log/controller/user_controller.dart';
 
 class Onboarding5 extends StatelessWidget {
   const Onboarding5({super.key});

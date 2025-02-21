@@ -12,10 +12,11 @@ import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
 import 'package:ours_log/models/week_day_type.dart';
+import 'package:ours_log/services/permission_service.dart';
 import 'package:ours_log/views/onBoarding/widgets/onBoarding8.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:ours_log/controller/notification_controller.dart';
+import 'package:ours_log/services/notification_service.dart';
 import 'package:ours_log/views/home/main_screen.dart';
 import 'package:ours_log/views/onBoarding/widgets/onBoarding1/onBoarding1.dart';
 import 'package:ours_log/views/onBoarding/widgets/onBoarding2/onBoarding2.dart';
@@ -78,13 +79,6 @@ class OnboardingController extends GetxController {
   String lunchTime = '12:30';
   String eveningTime = '18:30';
   NotificationService notificationService = NotificationService();
-// if Check
-  void _permissionWithNotification() async {
-    if (await Permission.notification.isDenied &&
-        !await Permission.notification.isPermanentlyDenied) {
-      await [Permission.notification].request();
-    }
-  }
 
   // For OnBoarding8
   int selectedColorIndex = 0;
@@ -131,6 +125,41 @@ class OnboardingController extends GetxController {
     update();
   }
 
+  void togglePillAlarm(int v) {
+    print('togglePillAlarm');
+    if (v == 0) {
+      isAlermEnable = true;
+      PermissionService().permissionWithNotification();
+    } else {
+      isAlermEnable = false;
+    }
+
+    update();
+  }
+
+  void changePillTime(DayPeriodType dayPeriodType, BuildContext context) async {
+    TimeOfDay? timeOfDay = await AppFunction.pickTime(context,
+        helpText: AppString.plzAlarmTime.tr,
+        errorInvalidText: AppString.plzInputCollectTime.tr);
+
+    if (timeOfDay == null) {
+      return;
+    }
+    switch (dayPeriodType) {
+      case DayPeriodType.morning:
+        morningTime = '${timeOfDay.hour}:${timeOfDay.minute}';
+        break;
+      case DayPeriodType.afternoon:
+        lunchTime = '${timeOfDay.hour}:${timeOfDay.minute}';
+        break;
+      case DayPeriodType.evening:
+        eveningTime = '${timeOfDay.hour}:${timeOfDay.minute}';
+        break;
+    }
+
+    update();
+  }
+
   void goToMainScreenAndSaveUserData() async {
     List<TaskModel> tasks = [];
     List<String> times = [];
@@ -164,7 +193,7 @@ class OnboardingController extends GetxController {
             title:
                 '💊 (${AppString.morning.tr}) ${AppString.drinkPillAlram.tr}',
             message:
-                '${intDayToString(day)}/${morningTime} ${AppString.timeToDrink.tr}',
+                '(${intDayToString(day)}) $morningTime ${AppString.timeToDrink.tr}',
             channelDescription: AppString.pillcCannelDescription.tr,
             id: id,
             weekday: day,
@@ -196,7 +225,7 @@ class OnboardingController extends GetxController {
               await notificationService.scheduleWeeklyNotification(
             title: '💊 (${AppString.lunch.tr}) ${AppString.drinkPillAlram.tr}',
             message:
-                '${intDayToString(day)}/${lunchTime} ${AppString.timeToDrink.tr}',
+                '(${intDayToString(day)}) $lunchTime ${AppString.timeToDrink.tr}',
             channelDescription: AppString.pillcCannelDescription.tr,
             id: id,
             weekday: day,
@@ -228,7 +257,7 @@ class OnboardingController extends GetxController {
             title:
                 '💊 (${AppString.evening.tr}) ${AppString.drinkPillAlram.tr}',
             message:
-                '${intDayToString(day)}/${eveningTime} ${AppString.timeToDrink.tr}',
+                '(${intDayToString(day)}) $eveningTime ${AppString.timeToDrink.tr}',
             channelDescription: AppString.pillcCannelDescription.tr,
             id: id,
             weekday: day,
@@ -272,7 +301,6 @@ class OnboardingController extends GetxController {
 
   @override
   void onInit() {
-    _permissionWithNotification();
     pageController = PageController(initialPage: pageIndex);
     setBodys();
     super.onInit();
