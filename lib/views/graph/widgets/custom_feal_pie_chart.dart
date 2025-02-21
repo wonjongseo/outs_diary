@@ -100,8 +100,8 @@ class PieChart2State extends State<CustomFealPieChart> {
                 text: AppString.veryBad.tr,
                 color: veryBadColor,
               ),
-              const PieChartIndicator(
-                text: '기록 없음',
+              PieChartIndicator(
+                text: AppString.noRecord.tr,
                 color: Colors.grey,
               ),
             ],

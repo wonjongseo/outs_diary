@@ -1,8 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -36,6 +37,7 @@ import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   initializeDateFormatting();
   await _initializeTimeZone();
   await initHive();
@@ -179,3 +181,5 @@ Future<void> initHive() async {
   //   }
   // }
 }
+
+//flutter pub run build_runner build

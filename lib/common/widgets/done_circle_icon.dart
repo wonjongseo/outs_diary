@@ -17,7 +17,7 @@ class DoneCircleIcon extends StatelessWidget {
     return Container(
       width: width ?? RS.w10 * 9,
       height: RS.h10 * 4,
-      margin: EdgeInsets.symmetric(horizontal: RS.w10 * .5),
+      margin: EdgeInsets.symmetric(horizontal: RS.w10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade300),
         borderRadius: BorderRadius.circular(RS.w10),

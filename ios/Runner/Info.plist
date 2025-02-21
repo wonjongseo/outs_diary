@@ -3,6 +3,10 @@
 <plist version="1.0">
 <dict>
 
+ 	<!-- Google AD MOB -->
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-9712392194582442~4142227897</string>
+	<!-- Google AD MOB -->
 
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>In order to access your photo library</string>

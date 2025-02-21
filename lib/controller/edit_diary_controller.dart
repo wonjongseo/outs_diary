@@ -15,9 +15,9 @@ import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/done_pill_day_modal.dart';
 import 'package:ours_log/models/health_model.dart';
-import 'package:ours_log/models/poop_condition.dart';
 import 'package:ours_log/models/poop_condition_type.dart';
 import 'package:ours_log/models/week_day_type.dart';
+import 'package:ours_log/services/app_review_service.dart';
 
 class EditDiaryController extends GetxController {
   final DiaryModel? diaryModel;
@@ -35,7 +35,6 @@ class EditDiaryController extends GetxController {
   List<PoopConditionType?> poopConditionTypes =
       List.generate(DayPeriodType.values.length, (_) => null);
 
-  List<PoopConditionModel> poopConditionModels = [];
   EditDiaryController({this.diaryModel, required this.selectedDay});
 
   void selectPoopCondition(PoopConditionType? poopCondition, int index) {
@@ -70,6 +69,16 @@ class EditDiaryController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onReady() async {
+    await setAppReviewRequest();
+    super.onReady();
+  }
+
+  Future<void> setAppReviewRequest() async {
+    AppReviewService.checkReviewRequest();
+  }
+
   onTapFealIcon(int index) {
     selectedFealIndex = index;
 
@@ -100,6 +109,14 @@ class EditDiaryController extends GetxController {
       imagePhats.add(fileName);
     }
 
+    List<PoopConditionType> poopConditions = [];
+
+    for (var poopConditionType in poopConditionTypes) {
+      if (poopConditionType != null) {
+        poopConditions.add(poopConditionType);
+      }
+    }
+
     HealthModel healthModel = createHealthModel();
     DiaryModel newDiaryModel = DiaryModel(
       dateTime: selectedDay,
@@ -109,6 +126,7 @@ class EditDiaryController extends GetxController {
       donePillDayModels: donePillDayModels,
       painfulIndex: painFulIndex.isEmpty ? null : painFulIndex[0],
       health: healthModel,
+      poopConditions: poopConditions,
     );
 
     if (diaryModel != null) {
@@ -169,6 +187,15 @@ class EditDiaryController extends GetxController {
   }
 
   void loadDiaryModel() {
+    print('diaryModel!.poopConditions : ${diaryModel!.poopConditions}');
+
+    if (diaryModel!.poopConditions != null) {
+      poopConditionTypes = diaryModel!.poopConditions!;
+    }
+
+    if (diaryModel!.painfulIndex != null) {
+      painFulIndex.add(diaryModel!.painfulIndex!);
+    }
     whatToDoController.text = diaryModel!.whatTodo ?? '';
     donePillDayModels = diaryModel!.donePillDayModels ?? [];
     if (diaryModel!.imagePath != null) {

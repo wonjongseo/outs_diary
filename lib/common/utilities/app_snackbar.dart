@@ -8,6 +8,15 @@ import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 
 class AppSnackbar {
+  static showNoPermissionSnackBar({required String message}) {
+    AppSnackbar.showSnackBar(
+      title: AppString.permission.tr,
+      message: message,
+      icon: Icons.warning_amber_rounded,
+      color: AppColors.priPinkClr,
+    );
+  }
+
   static void vaildTextFeildSnackBar({
     required String title,
     required String message,

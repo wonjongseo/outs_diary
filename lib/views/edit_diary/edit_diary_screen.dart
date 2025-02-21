@@ -146,7 +146,7 @@ class EditDiaryScreen extends StatelessWidget {
                       ),
                       SizedBox(height: RS.h10),
                       CustomExpansionCard(
-                        title: AppString.stool.tr,
+                        title: AppString.poop.tr,
                         initiallyExpanded: userController
                                     .userModel!.userUtilModel.expandedFields[
                                 IsExpandtionType.poopCondition] ??

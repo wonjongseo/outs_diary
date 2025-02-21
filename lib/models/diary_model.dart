@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:ours_log/models/done_pill_day_modal.dart';
 import 'package:ours_log/models/poop_condition.dart';
+import 'package:ours_log/models/poop_condition_type.dart';
 import 'package:uuid/uuid.dart';
 
 import 'package:ours_log/common/utilities/app_constant.dart';
@@ -32,7 +33,8 @@ class DiaryModel {
   final int? painfulIndex;
 
   @HiveField(9)
-  late List<PoopConditionModel>? poopConditionModels;
+  List<PoopConditionType>? poopConditions;
+  List<PoopConditionModel>? aa;
 
   DiaryModel({
     required this.dateTime,
@@ -41,7 +43,7 @@ class DiaryModel {
     this.imagePath,
     this.painfulIndex,
     this.donePillDayModels,
-    this.poopConditionModels,
+    this.poopConditions,
     this.health,
   }) {
     id = const Uuid().v4();

@@ -22,7 +22,7 @@ class HealthModel {
   @HiveField(4)
   List<int>? pulses;
   @HiveField(5)
-  late List<PoopConditionModel> checkedpPoopCondition;
+  List<PoopConditionModel>? checkedpPoopCondition;
 
   HealthModel({
     this.temperatures,
@@ -30,13 +30,8 @@ class HealthModel {
     this.bloodPressures,
     this.weights,
     this.pulses,
-  }) {
-    checkedpPoopCondition = List.generate(
-      PoopConditionType.values.length,
-      (index) => PoopConditionModel(
-          poopConditionType: PoopConditionType.values[index], isChecked: false),
-    );
-  }
+    this.checkedpPoopCondition,
+  });
 
   double get avgTemperature {
     if (temperatures == null) {

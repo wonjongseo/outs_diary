@@ -34,8 +34,6 @@ class DiaryController extends GetxController {
   }
 
   void onPageChanged(DateTime focusedDay) {
-    print('focusedDay : ${focusedDay}');
-
     this.focusedDay = focusedDay;
     selectedDiary = null;
     getAllData();
@@ -49,9 +47,11 @@ class DiaryController extends GetxController {
       return;
     }
     selectedDiary = null;
-    Duration diff = cSelectedDay.difference(now);
+    // bool isNextDay = now.day - cSelectedDay.day < 0;
 
-    if (diff.inDays <= 0) {
+    bool isNextDay = AppFunction.isNextDay(now, cSelectedDay);
+
+    if (!isNextDay) {
       Get.to(() => EditDiaryScreen(
             selectedDay: selectedDay,
           ));

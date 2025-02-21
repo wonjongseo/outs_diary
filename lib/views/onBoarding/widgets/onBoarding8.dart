@@ -11,14 +11,15 @@ class Onboarding8 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OnboardingController>(builder: (controller) {
-      print('controller.backgroundIndex : ${controller.backgroundIndex}');
-
-      return Column(children: [
-        Text(AppString.plzInputAppColor.tr),
-        SizedBox(height: RS.h10 * 3),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Row(
+      return Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: RS.w10 * 2,
+          vertical: RS.h10,
+        ),
+        child: Column(children: [
+          Text(AppString.plzInputAppColor.tr),
+          SizedBox(height: RS.h10 * 1.5),
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
@@ -92,9 +93,9 @@ class Onboarding8 extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-        )
-      ]);
+          )
+        ]),
+      );
     });
   }
 }

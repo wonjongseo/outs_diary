@@ -24,7 +24,7 @@ class OnBoarding3 extends StatelessWidget {
           ),
           TextSpan(text: AppString.plzSelectFealIcon.tr),
         ),
-        SizedBox(height: RS.h10),
+        SizedBox(height: RS.h10 * 1.5),
         GetBuilder<OnboardingController>(builder: (controller) {
           return Container(
             margin: EdgeInsets.symmetric(horizontal: RS.w10),

@@ -14,6 +14,8 @@ import 'package:ours_log/controller/image_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/day_period_type.dart';
+import 'package:ours_log/models/diary_model.dart';
+import 'package:ours_log/models/poop_condition_type.dart';
 import 'package:ours_log/views/edit_diary/edit_diary_screen.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/full_Image_screen.dart';
@@ -26,145 +28,172 @@ class SelectedDiary extends StatelessWidget {
   Widget build(BuildContext context) {
     UserController userController = Get.find<UserController>();
     DiaryController diaryController = Get.find<DiaryController>();
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: RS.w10 / 2),
-      child: Container(
-        padding: const EdgeInsets.all(10.0),
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Get.isDarkMode ? AppColors.black : AppColors.white,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      userController
-                          .feals[diaryController.selectedDiary!.fealIndex],
-                      width: RS.w10 * 6,
-                    ),
-                    SizedBox(width: RS.w10),
-                    Text(
-                      DateFormat.MMMEd(Get.locale.toString())
-                          .format(diaryController.selectedDiary!.dateTime),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Get.to(
-                        () => EditDiaryScreen(
-                          selectedDay: diaryController.selectedDiary!.dateTime,
-                          diaryModel: diaryController.selectedDiary,
-                        ),
-                      ),
-                      icon: FaIcon(
-                        FontAwesomeIcons.pen,
-                        size: RS.width20,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () => diaryController.delete(),
-                      icon: FaIcon(
-                        FontAwesomeIcons.trashCan,
-                        size: RS.width20,
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            const Divider(),
-            SizedBox(height: RS.h10),
+
+    DiaryModel diaryModel = diaryController.selectedDiary!;
+    print('diaryModel.poopConditions : ${diaryModel.poopConditions}');
+
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Get.isDarkMode ? AppColors.black : AppColors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _FealIconAndDay(userController, diaryController),
+          const Divider(),
+          SizedBox(height: RS.h10),
+          if (diaryModel.donePillDayModels!.isNotEmpty) ...[
             ColTextAndWidget(
               vertical: RS.h10 / 2,
               label: AppString.healthMemo,
-              widget: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: List.generate(
-                    diaryController.selectedDiary!.donePillDayModels!.length,
-                    (index) => DoneCircleIcon(
-                      backgroundColor: diaryController
-                              .selectedDiary!.donePillDayModels![index].isDone
-                          ? AppColors.primaryColor
-                          : Colors.grey,
-                      label: diaryController.selectedDiary!
-                          .donePillDayModels![index].dayPeriod.label,
-                    ),
+              widget: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  diaryModel.donePillDayModels!.length,
+                  (index) => DoneCircleIcon(
+                    backgroundColor: diaryController
+                            .selectedDiary!.donePillDayModels![index].isDone
+                        ? AppColors.primaryColor
+                        : Colors.grey,
+                    label: diaryModel.donePillDayModels![index].dayPeriod.label,
                   ),
                 ),
               ),
             ),
-            if (diaryController.selectedDiary!.health != null &&
-                diaryController.selectedDiary!.health!.argIsNotZero) ...[
-              ColTextAndWidget(
-                vertical: RS.h10 / 2,
-                label: AppString.average.tr,
-                widget: const AverHealthValue(),
+            SizedBox(height: RS.h10 * 1.5),
+          ],
+          if (diaryModel.health != null && diaryModel.health!.argIsNotZero) ...[
+            ColTextAndWidget(
+              vertical: RS.h10 / 2,
+              label: AppString.averageHealthValue.tr,
+              widget: const AverHealthValue(),
+            ),
+            SizedBox(height: RS.h10 * 1.5),
+          ],
+          if (diaryModel.poopConditions != null &&
+              diaryModel.poopConditions!.isNotEmpty)
+            ColTextAndWidget(
+              vertical: RS.h10 / 2,
+              label: AppString.poop.tr,
+              widget: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: List.generate(
+                    diaryModel.poopConditions!.length,
+                    (index) => Container(
+                      padding: EdgeInsets.all(RS.w10),
+                      margin: EdgeInsets.symmetric(horizontal: RS.w10),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Text(diaryController
+                          .selectedDiary!.poopConditions![index].label),
+                    ),
+                  )),
+            ),
+          if (diaryModel.whatTodo != null &&
+              diaryModel.whatTodo!.isNotEmpty) ...[
+            ColTextAndWidget(
+              vertical: RS.h10 / 2,
+              label: AppString.healthMemo,
+              widget: CustomTextFormField(
+                readOnly: true,
+                hintStyle: const TextStyle(),
+                hintText: diaryModel.whatTodo,
+                maxLines: (diaryModel.whatTodo ?? '').split('\n').length,
               ),
-            ],
-            if (diaryController.selectedDiary!.donePillDayModels != null &&
-                diaryController
-                    .selectedDiary!.donePillDayModels!.isNotEmpty) ...[
-              ColTextAndWidget(
-                vertical: RS.h10 / 2,
-                label: AppString.healthMemo,
-                widget: CustomTextFormField(
-                  hintText: diaryController.selectedDiary!.whatTodo,
-                  maxLines: (diaryController.selectedDiary!.whatTodo ?? '')
-                      .split('\n')
-                      .length,
-                ),
-              ),
-            ],
-            if (diaryController.selectedDiary!.imagePath != null &&
-                diaryController.selectedDiary!.imagePath!.isNotEmpty)
-              ColTextAndWidget(
-                vertical: RS.h10 / 2,
-                label: AppString.photo.tr,
-                widget: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(
-                      diaryController.selectedDiary!.imagePath!.length,
-                      (index) {
-                        String imageUrl =
-                            '${ImageController.instance.path}/${diaryController.selectedDiary!.imagePath![index]}';
-                        return GestureDetector(
-                          onTap: () =>
-                              Get.to(() => FullmageScreen(fileImage: imageUrl)),
-                          child: Container(
-                            width: RS.w10 * 12,
-                            height: RS.w10 * 14,
-                            margin: EdgeInsets.only(right: RS.w10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(RS.w10 * 2),
-                              border: Border.all(color: Colors.grey),
-                              image: DecorationImage(
-                                image: FileImage(
-                                  File(imageUrl),
-                                ),
-                                fit: BoxFit.cover,
+            ),
+            SizedBox(height: RS.h10 * 1.5),
+          ],
+          if (diaryModel.imagePath != null &&
+              diaryModel.imagePath!.isNotEmpty) ...[
+            ColTextAndWidget(
+              vertical: RS.h10 / 2,
+              label: AppString.photo.tr,
+              widget: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(
+                    diaryModel.imagePath!.length,
+                    (index) {
+                      String imageUrl =
+                          '${ImageController.instance.path}/${diaryModel.imagePath![index]}';
+                      return GestureDetector(
+                        onTap: () =>
+                            Get.to(() => FullmageScreen(fileImage: imageUrl)),
+                        child: Container(
+                          width: RS.w10 * 12,
+                          height: RS.w10 * 14,
+                          margin: EdgeInsets.only(right: RS.w10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(RS.w10 * 2),
+                            border: Border.all(color: Colors.grey),
+                            image: DecorationImage(
+                              image: FileImage(
+                                File(imageUrl),
                               ),
+                              fit: BoxFit.cover,
                             ),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 ),
-              )
+              ),
+            ),
+            SizedBox(height: RS.h10 * 1.5),
+          ]
+        ],
+      ),
+    );
+  }
+
+  Row _FealIconAndDay(
+      UserController userController, DiaryController diaryController) {
+    DiaryModel diaryModel = diaryController.selectedDiary!;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Image.asset(
+              userController.feals[diaryModel.fealIndex],
+              width: RS.w10 * 6,
+            ),
+            SizedBox(width: RS.w10),
+            Text(
+              DateFormat.MMMEd(Get.locale.toString())
+                  .format(diaryModel.dateTime),
+            ),
           ],
         ),
-      ),
+        Row(
+          children: [
+            IconButton(
+              onPressed: () => Get.to(
+                () => EditDiaryScreen(
+                  selectedDay: diaryModel.dateTime,
+                  diaryModel: diaryController.selectedDiary,
+                ),
+              ),
+              icon: FaIcon(
+                FontAwesomeIcons.pen,
+                size: RS.width20,
+              ),
+            ),
+            IconButton(
+              onPressed: () => diaryController.delete(),
+              icon: FaIcon(
+                FontAwesomeIcons.trashCan,
+                size: RS.width20,
+              ),
+            ),
+          ],
+        )
+      ],
     );
   }
 }

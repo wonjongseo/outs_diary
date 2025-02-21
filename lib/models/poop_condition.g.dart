@@ -18,7 +18,7 @@ class PoopConditionModelAdapter extends TypeAdapter<PoopConditionModel> {
     };
     return PoopConditionModel(
       poopConditionType: fields[0] as PoopConditionType,
-      isChecked: fields[1] as bool,
+      dayPeriodType: fields[1] as DayPeriodType,
     );
   }
 
@@ -29,7 +29,7 @@ class PoopConditionModelAdapter extends TypeAdapter<PoopConditionModel> {
       ..writeByte(0)
       ..write(obj.poopConditionType)
       ..writeByte(1)
-      ..write(obj.isChecked);
+      ..write(obj.dayPeriodType);
   }
 
   @override

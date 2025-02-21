@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ours_log/services/notification_service.dart';
+import 'package:ours_log/common/admob/global_banner_admob.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
-import 'package:ours_log/respository/dairy_respository.dart';
-import 'package:ours_log/respository/user_respository.dart';
 import 'package:ours_log/views/Hospital_Log/hospital_log_body.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
@@ -30,9 +28,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    Get.put(UserController());
-    Get.put(DiaryController());
-    Get.put(HospitalLogController());
+    // Get.put(UserController());
+    // Get.put(DiaryController());
+    // Get.put(HospitalLogController());
     setBodys();
     super.initState();
   }
@@ -51,25 +49,27 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [bottomNavigtionBar()],
+        children: [const GlobalBannerAdmob(), bottomNavigtionBar()],
       ),
-      floatingActionButton: FloatingActionButton.small(onPressed: () async {
-        NotificationService notification = NotificationService();
-        notification.cancelAllNotifications();
-        UserModelRepository().deleteAll();
-        DiaryRepository().deleteAll();
-      }),
+
       body: SafeArea(
         child: BackgroundWidget(
           widget: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: RS.h10 * 3,
-              horizontal: RS.w10 * 1.2,
+            padding: EdgeInsets.only(
+              top: RS.h10 * 3,
+              right: RS.w10 * 1.2,
+              left: RS.w10 * 1.2,
             ),
             child: bodys[bodyIndex],
           ),
         ),
       ),
+      //  floatingActionButton: FloatingActionButton.small(onPressed: () async {
+      //   NotificationService notification = NotificationService();
+      //   notification.cancelAllNotifications();
+      //   UserModelRepository().deleteAll();
+      //   DiaryRepository().deleteAll();
+      // }),
     );
   }
 

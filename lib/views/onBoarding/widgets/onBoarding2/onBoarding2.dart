@@ -10,9 +10,7 @@ import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/views/setting/widgets/background1_sample.dart';
 
 class OnBoarding2 extends StatelessWidget {
-  const OnBoarding2({
-    Key? key,
-  }) : super(key: key);
+  const OnBoarding2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +27,7 @@ class OnBoarding2 extends StatelessWidget {
             text: AppString.selectBackgroundMsg.tr,
           ),
         ),
-        SizedBox(height: RS.h10),
+        SizedBox(height: RS.h10 * 1.5),
         GetBuilder<OnboardingController>(builder: (backgroundController) {
           return Stack(
             children: [

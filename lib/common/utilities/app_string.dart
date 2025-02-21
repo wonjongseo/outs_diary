@@ -4,8 +4,11 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.averageHealthValue: AppString.averageHealthValueJp,
+          AppString.permission: AppString.permissionJp,
+          AppString.noRecord: AppString.noRecordJp,
           AppString.color: AppString.colorJp,
-          AppString.stool: AppString.stoolJp,
+          AppString.poop: AppString.stoolJp,
           AppString.maxBloodPressure: AppString.maxBloodPressureJp,
           AppString.minBloodPressure: AppString.minBloodPressureJp,
           AppString.poopCondition1: AppString.poopCondition1Jp,
@@ -217,8 +220,11 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.averageHealthValue: AppString.averageHealthValueKr,
+          AppString.permission: AppString.permissionKr,
+          AppString.noRecord: AppString.noRecordKr,
           AppString.color: AppString.colorKr,
-          AppString.stool: AppString.stoolKr,
+          AppString.poop: AppString.stoolKr,
           AppString.maxBloodPressure: AppString.maxBloodPressureKr,
           AppString.minBloodPressure: AppString.minBloodPressureKr,
           AppString.poopCondition1: AppString.poopCondition1Kr,
@@ -430,8 +436,11 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.averageHealthValue: AppString.averageHealthValueEn,
+          AppString.permission: AppString.permissionEn,
+          AppString.noRecord: AppString.noRecordEn,
           AppString.color: AppString.colorEn,
-          AppString.stool: AppString.stoolEn,
+          AppString.poop: AppString.stoolEn,
           AppString.maxBloodPressure: AppString.maxBloodPressureEn,
           AppString.minBloodPressure: AppString.minBloodPressureEn,
           AppString.poopCondition1: AppString.poopCondition1En,
@@ -819,7 +828,7 @@ class AppString {
   static String appName = "appNameTr";
   static String appNameKr = "내 진료 기록";
   static String appNameJp = "私のカルテ";
-  static String appNameEn = "karute";
+  static String appNameEn = "My Medical Logs";
 
   static String period = "periodTr";
   static String periodKr = "생리기간";
@@ -1734,7 +1743,7 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String minBloodPressureJp = '最低血圧';
   static String minBloodPressureEn = "diastolic number";
 
-  static String stool = 'stooltr';
+  static String poop = 'poopTr';
   static String stoolKr = '대변';
   static String stoolJp = '大便';
   static String stoolEn = "Stool";
@@ -1743,4 +1752,19 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String colorKr = '색상';
   static String colorJp = '色相';
   static String colorEn = "Color";
+
+  static String permission = 'permissionTr';
+  static String permissionKr = '권한';
+  static String permissionJp = '権限';
+  static String permissionEn = "Permission";
+
+  static String noRecord = 'noRecordTr';
+  static String noRecordKr = '기록 없음';
+  static String noRecordJp = '記録無し';
+  static String noRecordEn = "No Record";
+
+  static String averageHealthValue = 'averageHealthValueTr';
+  static String averageHealthValueKr = '평균 건강 수치';
+  static String averageHealthValueJp = '平均健康数値';
+  static String averageHealthValueEn = "Average Health Figure ";
 }

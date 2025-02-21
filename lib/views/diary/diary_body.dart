@@ -8,7 +8,6 @@ import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
@@ -26,59 +25,68 @@ class DiaryBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     log('DiaryBody');
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: RS.w10 * 1.5),
-      child: GetBuilder<DiaryController>(builder: (controller) {
-        return SingleChildScrollView(
-          controller: controller.scrollController,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                DateFormat.yMMM(Get.locale.toString())
-                    .format(controller.focusedDay),
-                style: boldStyle,
+    return GetBuilder<DiaryController>(builder: (controller) {
+      return SingleChildScrollView(
+        controller: controller.scrollController,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: RS.w10 * 1.5),
+              child: Column(
+                children: [
+                  Text(
+                    DateFormat.yMMM(Get.locale.toString())
+                        .format(controller.focusedDay),
+                    style: boldStyle,
+                  ),
+                  SizedBox(height: RS.h10 * 1.2),
+                  TableCalendar(
+                    availableGestures: AvailableGestures.horizontalSwipe,
+                    daysOfWeekStyle: DaysOfWeekStyle(
+                      weekdayStyle: weekdayStyle,
+                      weekendStyle: weekdayStyle,
+                    ),
+                    locale: Get.locale.toString(),
+                    daysOfWeekHeight: RS.h10 * 3,
+                    headerVisible: false,
+                    onPageChanged: diaryController.onPageChanged,
+                    calendarStyle: CalendarStyle(
+                      rangeHighlightColor:
+                          Colors.redAccent.withValues(alpha: .5),
+                      outsideDaysVisible: false,
+                      markersAutoAligned: false,
+                      cellAlignment: Alignment.center,
+                    ),
+                    calendarBuilders: CalendarBuilders(
+                      singleMarkerBuilder: singleMarkerBuilder,
+                      prioritizedBuilder: prioritizedBuilder,
+                    ),
+                    firstDay: diaryController.now
+                        .subtract(const Duration(days: 365 * 5)),
+                    lastDay: diaryController.now.add(const Duration(days: 30)),
+                    focusedDay: diaryController.focusedDay,
+                    eventLoader: diaryController.getEventsForDay,
+                    rowHeight: RS.h10 * 10.4,
+                    onDaySelected: controller.onDatSelected,
+                  ),
+                ],
               ),
-              SizedBox(height: RS.h10 * 1.2),
-              TableCalendar(
-                availableGestures: AvailableGestures.horizontalSwipe,
-                daysOfWeekStyle: DaysOfWeekStyle(
-                  weekdayStyle: weekdayStyle,
-                  weekendStyle: weekdayStyle,
-                ),
-                locale: Get.locale.toString(),
-                daysOfWeekHeight: RS.h10 * 3,
-                headerVisible: false,
-                onPageChanged: diaryController.onPageChanged,
-                calendarStyle: CalendarStyle(
-                  rangeHighlightColor: Colors.redAccent.withValues(alpha: .5),
-                  outsideDaysVisible: false,
-                  markersAutoAligned: false,
-                  cellAlignment: Alignment.center,
-                ),
-                calendarBuilders: CalendarBuilders(
-                  singleMarkerBuilder: singleMarkerBuilder,
-                  prioritizedBuilder: prioritizedBuilder,
-                ),
-                firstDay:
-                    diaryController.now.subtract(const Duration(days: 365 * 5)),
-                lastDay: diaryController.now.add(const Duration(days: 30)),
-                focusedDay: diaryController.focusedDay,
-                eventLoader: diaryController.getEventsForDay,
-                rowHeight: RS.h10 * 10.4,
-                onDaySelected: controller.onDatSelected,
-              ),
-              if (diaryController.selectedDiary != null)
-                SelectedDiary() // Dont' Const
-            ],
-          ),
-        );
-      }),
-    );
+            ),
+            if (diaryController.selectedDiary != null)
+              SelectedDiary() // Dont' Const
+            ,
+            SizedBox(height: RS.h10 * 2)
+          ],
+        ),
+      );
+    });
   }
 
   Widget? prioritizedBuilder(context, DateTime day, focusedDay) {
-    bool isNextDay = diaryController.now.day - day.day < 0;
+    // bool isNextDay = diaryController.now.day - day.day < 0;
+
+    bool isNextDay = AppFunction.isNextDay(diaryController.now, day);
     bool isToday = AppFunction.isSameDay(diaryController.now, day);
     bool isMustPill = false;
 
@@ -103,16 +111,24 @@ class DiaryBody extends StatelessWidget {
             color: isToday
                 ? AppColors.primaryColor.withValues(alpha: .5)
                 : isNextDay
-                    ? Colors.grey.withOpacity(.15)
-                    : Colors.grey.withOpacity(.4),
+                    ? Colors.grey.withValues(alpha: .15)
+                    : Colors.grey.withValues(alpha: .4),
           ),
           margin: EdgeInsets.only(bottom: RS.h10 / 2),
         ),
-        Text(
-          '${day.day}',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            color: isNextDay ? Colors.grey.withOpacity(.6) : null,
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: RS.w10 * .6),
+          margin: EdgeInsets.only(bottom: RS.h10 * .4),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: isToday ? AppColors.primaryColor : null,
+          ),
+          child: Text(
+            '${day.day}',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              color: isNextDay ? Colors.grey.withValues(alpha: .6) : null,
+            ),
           ),
         ),
         if (isMustPill) ...[

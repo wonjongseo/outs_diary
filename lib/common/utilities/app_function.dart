@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
@@ -14,6 +16,20 @@ bool get isJp => Get.locale.toString().contains('ja');
 bool get isEn => Get.locale.toString().contains('en');
 
 class AppFunction {
+  static bool isNextDay(DateTime now, DateTime compareDay) {
+    if (now.year < compareDay.year) return true;
+    if (now.year == compareDay.year && now.month < compareDay.month) {
+      return true;
+    }
+
+    if (now.year == compareDay.year &&
+        now.month == compareDay.month &&
+        now.day < compareDay.day) {
+      return true;
+    }
+    return false;
+  }
+
   static void copyWord(String text) {
     Clipboard.setData(ClipboardData(text: text));
 
@@ -92,6 +108,21 @@ class AppFunction {
   }
 
   static void showNoPermissionSnackBar({required message}) {}
+
+  static Future<File?> pickPhotosFromLibary() async {
+    try {
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      if (image == null) {
+        return null;
+      }
+      return File(image.path);
+    } catch (e) {
+      AppFunction.showNoPermissionSnackBar(
+          message: AppString.noLibaryPermssion.tr);
+    }
+    return null;
+  }
 }
 
 String intDayToString(int? day) {

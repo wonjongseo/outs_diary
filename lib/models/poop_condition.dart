@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
+import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/models/poop_condition_type.dart';
 
 part 'poop_condition.g.dart';
@@ -9,9 +10,9 @@ class PoopConditionModel {
   @HiveField(0)
   PoopConditionType poopConditionType;
   @HiveField(1)
-  bool isChecked;
+  DayPeriodType dayPeriodType;
   PoopConditionModel({
     required this.poopConditionType,
-    required this.isChecked,
+    required this.dayPeriodType,
   });
 }

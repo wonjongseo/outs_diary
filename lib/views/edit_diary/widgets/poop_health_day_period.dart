@@ -13,7 +13,6 @@ class PoopDayPeriod extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EditDiaryController>(builder: (editDiaryController) {
-      if (editDiaryController.poopConditionTypes[0] == null) {}
       return Container(
         padding: EdgeInsets.symmetric(horizontal: RS.w10 * 1.6).copyWith(
           top: RS.height14,
@@ -34,6 +33,8 @@ class PoopDayPeriod extends StatelessWidget {
                     SizedBox(width: RS.w10 * 2),
                     Expanded(
                       child: CustomTextFormField(
+                        hintStyle: const TextStyle(),
+                        readOnly: true,
                         hintText:
                             editDiaryController.poopConditionTypes[index] ==
                                     null

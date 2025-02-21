@@ -7,6 +7,7 @@ import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 
 import 'package:ours_log/controller/onboarding_controller.dart';
+import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/models/week_day_type.dart';
 
 class Onboarding6 extends StatelessWidget {
@@ -27,12 +28,13 @@ class Onboarding6 extends StatelessWidget {
               child: Column(
                 children: [
                   Text(AppString.whatTimeDoYouDrinkPill.tr, style: textStyle),
+                  SizedBox(height: RS.h10),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: RS.h10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children:
-                          List.generate(morningLunchEvening.length, (index) {
+                          List.generate(DayPeriodType.values.length, (index) {
                         return GestureDetector(
                           onTap: () => onboardingController
                               .onSelectMorningLunchEvening(index),
@@ -47,11 +49,11 @@ class Onboarding6 extends StatelessWidget {
                                         .contains(index)
                                     ? Border.all(
                                         color: AppColors.primaryColor, width: 2)
-                                    : Border.all(color: Colors.grey, width: 1),
+                                    : Border.all(color: Colors.grey),
                                 borderRadius:
                                     BorderRadius.circular(RS.w10 * 2.5)),
                             child: Center(
-                              child: Text(morningLunchEvening[index]),
+                              child: Text(DayPeriodType.values[index].label),
                             ),
                           ),
                         );
@@ -66,6 +68,7 @@ class Onboarding6 extends StatelessWidget {
               child: Column(
                 children: [
                   Text(AppString.whatWeekDayYouDrink.tr, style: textStyle),
+                  SizedBox(height: RS.h10),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: RS.h10),
                     child: SingleChildScrollView(
@@ -73,11 +76,12 @@ class Onboarding6 extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: List.generate(
-                          dayKo.length,
+                          WeekDayType.values.length,
                           (index) {
                             return GestureDetector(
-                              onTap: () => onboardingController
-                                  .onSelectDays(WeekDayType.values[index]),
+                              onTap: () => onboardingController.onSelectDays(
+                                WeekDayType.values[index],
+                              ),
                               child: Container(
                                 width: RS.w10 * 8,
                                 height: RS.w10 * 10,
@@ -89,12 +93,11 @@ class Onboarding6 extends StatelessWidget {
                                         ? Border.all(
                                             color: AppColors.primaryColor,
                                             width: 2)
-                                        : Border.all(
-                                            color: Colors.grey, width: 1),
+                                        : Border.all(color: Colors.grey),
                                     borderRadius:
                                         BorderRadius.circular(RS.w10 * 1.5)),
                                 child: Center(
-                                  child: Text(dayKo[index]),
+                                  child: Text(WeekDayType.values[index].label),
                                 ),
                               ),
                             );
@@ -111,20 +114,3 @@ class Onboarding6 extends StatelessWidget {
     });
   }
 }
-//월 수 금  일
-
-List<String> morningLunchEvening = [
-  AppString.morning.tr,
-  AppString.lunch.tr,
-  AppString.evening.tr
-];
-
-List<String> dayKo = [
-  AppString.monday.tr,
-  AppString.tuesday.tr,
-  AppString.wednesday.tr,
-  AppString.thursday.tr,
-  AppString.friday.tr,
-  AppString.saturday.tr,
-  AppString.sunday.tr,
-];

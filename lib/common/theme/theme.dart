@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ours_log/common/utilities/app_color.dart';
 
 ThemeData lightTheme(String systemLanguage) {
   final ThemeData base = ThemeData.light();
@@ -108,18 +104,19 @@ ThemeData darkTheme(String systemLanguage) {
   final ThemeData base = ThemeData.dark();
   return base.copyWith(
     textTheme: ThemeData.dark().textTheme.apply(
+        bodyColor: AppColors.darkTextColor,
         fontFamily:
             systemLanguage.contains('ja') ? "ZenMaruGothic" : "CookieRunFont"),
     iconTheme: IconThemeData(
       color: Colors.grey[400],
     ),
-    scaffoldBackgroundColor: AppColors.greyBackground,
+    scaffoldBackgroundColor: AppColors.darkBackground,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: AppColors.greyBackground,
+      backgroundColor: AppColors.darkBackground,
       elevation: 0,
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.greyBackground,
+      backgroundColor: AppColors.darkBackground,
       titleTextStyle: TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w600,
@@ -153,14 +150,14 @@ ThemeData darkTheme(String systemLanguage) {
       ),
     ),
     bottomSheetTheme: const BottomSheetThemeData(
-      backgroundColor: AppColors.greyBackground,
+      backgroundColor: AppColors.darkBackground,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(20),
         ),
       ),
     ),
-    dialogBackgroundColor: AppColors.greyBackground,
+    dialogBackgroundColor: AppColors.darkBackground,
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -190,11 +187,11 @@ ThemeData darkTheme(String systemLanguage) {
 }
 
 Color get textWhiteOrBlack {
-  return Get.isDarkMode ? AppColors.white : AppColors.greyBackground;
+  return Get.isDarkMode ? AppColors.white : AppColors.darkBackground;
 }
 
 Color get boxWhiteOrBlack {
-  return Get.isDarkMode ? AppColors.greyBackground : AppColors.white;
+  return Get.isDarkMode ? AppColors.black : AppColors.white;
 }
 
 TextStyle get subHeadingStyle {
@@ -246,7 +243,7 @@ TextStyle get boldStyle {
 
 TextStyle get weekdayStyle {
   return TextStyle(
-    color: Get.isDarkMode ? Colors.white : AppColors.greyBackground,
+    color: Get.isDarkMode ? Colors.white : AppColors.darkBackground,
   );
 }
 

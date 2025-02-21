@@ -153,10 +153,8 @@ class _GraphBodyState extends State<GraphBody> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
-              DateFormat('yyy${AppString.year.tr}').format(now),
-              style: boldStyle,
-            ),
+            Text(DateFormat('yyy${AppString.year.tr}').format(now),
+                style: boldStyle),
             Row(
               children: [
                 IconButton(

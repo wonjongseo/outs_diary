@@ -1,7 +1,6 @@
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
@@ -150,7 +149,6 @@ class AppointPillTime extends StatelessWidget {
                   time,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: RS.w10 * 1.8,
                     color: isAlermEnable ? null : Colors.grey,
                   ),
                 ),
