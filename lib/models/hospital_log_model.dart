@@ -29,7 +29,7 @@ class HospitalLogModel {
   @HiveField(9)
   List<String>? pills;
   @HiveField(10)
-  List<int>? notificationId;
+  List<NotificationModel>? notifications;
 
   HospitalLogModel({
     this.startTime,
@@ -40,7 +40,7 @@ class HospitalLogModel {
     this.diseaseName,
     this.diagnosis,
     this.pills,
-    this.notificationId,
+    this.notifications,
   }) {
     id = const Uuid().v4();
     createdAt = DateTime.now().microsecondsSinceEpoch;
@@ -48,6 +48,6 @@ class HospitalLogModel {
 
   @override
   String toString() {
-    return 'HospitalLogModel(id: $id, createdAt: $createdAt, startTime: $startTime, dateTime: $dateTime, hospitalName: $hospitalName, imagesPath: $imagesPath, officeName: $officeName, diseaseName: $diseaseName, diagnosis: $diagnosis, pills: $pills, notificationId: $notificationId)';
+    return 'HospitalLogModel(id: $id, createdAt: $createdAt, startTime: $startTime, dateTime: $dateTime, hospitalName: $hospitalName, imagesPath: $imagesPath, officeName: $officeName, diseaseName: $diseaseName, diagnosis: $diagnosis, pills: $pills, notificationId: $notifications)';
   }
 }

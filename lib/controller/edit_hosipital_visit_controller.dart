@@ -46,7 +46,6 @@ class EditHosipitalVisitController extends GetxController {
   bool isBeforeOneHourAlarm = false;
   bool isBeforeSizHourAlarm = false;
   bool isBeforeOneDayAlarm = false;
-
   String? selectedBeforeAlram;
   DateTime selectedDate;
   void onTapBeforeAlramTime(BuildContext context) async {
@@ -81,6 +80,33 @@ class EditHosipitalVisitController extends GetxController {
   void onInit() {
     if (hospitalLogModel != null) {
       startTime = hospitalLogModel!.startTime;
+      int hour = int.tryParse(startTime!.split(':')[0]) ?? 0;
+      int minute = int.tryParse(startTime!.split(':')[1]) ?? 0;
+
+      List<NotificationModel>? notifications = hospitalLogModel!.notifications;
+
+      if (notifications != null) {
+        isEnrollAlarm = true;
+        DateTime date = DateTime(selectedDate.year, selectedDate.month,
+            selectedDate.day, hour, minute);
+
+        for (NotificationModel notificationl in notifications) {
+          int day = date.day - notificationl.notiDateTime.day;
+          int hour = date.hour - notificationl.notiDateTime.hour;
+          int minute = date.minute - notificationl.notiDateTime.minute;
+
+          if (day == 1 && hour == 0 && minute == 0) {
+            isBeforeOneDayAlarm = true;
+          } else if (day == 0 && hour == 6 && minute == 0) {
+            isBeforeSizHourAlarm = true;
+          } else if (day == 0 && hour == 1 && minute == 0) {
+            isBeforeOneHourAlarm = true;
+          } else {
+            selectedBeforeAlram = '$hour:$minute';
+          }
+        }
+      }
+
       hospitalNameCtl =
           TextEditingController(text: hospitalLogModel!.hospitalName);
       officeNameCtl = TextEditingController(text: hospitalLogModel!.officeName);
@@ -211,6 +237,7 @@ class EditHosipitalVisitController extends GetxController {
       if (isBeforeOneDayAlarm) {
         DateTime subScheduledDate =
             scheduledDate.subtract(const Duration(days: 1));
+
         enrollSchedule(
           hospitalName,
           scheduledDate.month,
@@ -290,7 +317,7 @@ class EditHosipitalVisitController extends GetxController {
       diagnosis: diagnosis,
       imagesPath: imagesPath,
       pills: pills,
-      notificationId: notificationId,
+      notifications: notifications,
     );
 
     if (hospitalLogModel != null) {
@@ -307,8 +334,6 @@ class EditHosipitalVisitController extends GetxController {
           hospitalLogModel == null ? '병원 기록이 저장 되었습니다.' : '병원 기록이 변경 되었습니다.',
     );
   }
-
-  List<int> notificationId = [];
 
   List<NotificationModel> notifications = [];
 
@@ -333,7 +358,6 @@ class EditHosipitalVisitController extends GetxController {
       minute: scheduledDate.minute,
     );
 
-    notificationId.add(id);
     notifications
         .add(NotificationModel(notiDateTime: scheduledDate, alermId: id));
   }

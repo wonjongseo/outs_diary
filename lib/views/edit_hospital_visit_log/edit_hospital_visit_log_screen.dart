@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/c_dropdown_button.dart';
@@ -43,7 +44,7 @@ class _EditHospitalVisitLogScreenState
 
   @override
   Widget build(BuildContext context) {
-    Get.put(
+    EditHosipitalVisitController editHosipitalVisitController = Get.put(
       EditHosipitalVisitController(
           selectedDate: widget.selectedDate,
           hospitalLogModel: widget.hospitalLogModel),
@@ -57,7 +58,11 @@ class _EditHospitalVisitLogScreenState
           actions: [
             if (!isEdit) ...[
               IconButton(
-                  onPressed: () => setState(() => isEdit = true),
+                  onPressed: () {
+                    AppFunction.scrollGoToTop(
+                        editHosipitalVisitController.scrollController);
+                    setState(() => isEdit = true);
+                  },
                   icon: const Icon(FontAwesomeIcons.pen)),
             ],
             if (widget.hospitalLogModel != null) ...[

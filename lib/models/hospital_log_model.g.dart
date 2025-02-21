@@ -25,7 +25,7 @@ class HospitalLogModelAdapter extends TypeAdapter<HospitalLogModel> {
       diseaseName: fields[7] as String?,
       diagnosis: fields[8] as String?,
       pills: (fields[9] as List?)?.cast<String>(),
-      notificationId: (fields[10] as List?)?.cast<int>(),
+      notifications: (fields[10] as List?)?.cast<NotificationModel>(),
     )
       ..id = fields[0] as String
       ..createdAt = fields[1] as int;
@@ -56,7 +56,7 @@ class HospitalLogModelAdapter extends TypeAdapter<HospitalLogModel> {
       ..writeByte(9)
       ..write(obj.pills)
       ..writeByte(10)
-      ..write(obj.notificationId);
+      ..write(obj.notifications);
   }
 
   @override
