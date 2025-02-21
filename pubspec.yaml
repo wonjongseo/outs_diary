@@ -46,16 +46,15 @@ dependencies:
   carousel_slider: ^5.0.0
   expansion_tile_card: ^3.0.0
   date_picker_timeline: ^1.2.6
-  auto_size_text: ^3.0.0
   image_picker: ^1.0.8
   in_app_review: ^2.0.10
   flutter_email_sender: ^7.0.0
-  shared_preferences: ^2.5.2
   path_provider: ^2.1.5
   animate_do: ^4.0.1
   permission_handler: ^11.3.1
   flutter_local_notifications: ^18.0.1
   flutter_native_timezone: ^2.0.0
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -105,24 +104,44 @@ flutter:
   fonts:
     - family: ZenMaruGothic
       fonts:
-        - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Light.ttf
+        - asset: assets/fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-Thin.ttf
           weight: 100
-        - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Light.ttf
+        - asset: assets/fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-Light.ttf
           weight: 200
-        - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Regular.ttf
+        - asset: assets/fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-Medium.ttf
           weight: 300
-        - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Regular.ttf
+        - asset: assets/fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-Medium.ttf
           weight: 400
-        - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Medium.ttf
+        - asset: assets/fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Medium.ttf
+        - asset: assets/fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-Medium.ttf
           weight: 600
-        - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Bold.ttf
+        - asset: assets/fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Bold.ttf
+        - asset: assets/fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-ExtraBold.ttf
           weight: 800
-        - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Black.ttf
+        - asset: assets/fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-Black.ttf
           weight: 900
+    # - family: ZenMaruGothic
+    #   fonts:
+    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Light.ttf
+    #       weight: 100
+    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Light.ttf
+    #       weight: 200
+    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Regular.ttf
+    #       weight: 300
+    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Regular.ttf
+    #       weight: 400
+    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Medium.ttf
+    #       weight: 500
+    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Medium.ttf
+    #       weight: 600
+    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Bold.ttf
+    #       weight: 700
+    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Bold.ttf
+    #       weight: 800
+    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Black.ttf
+    #       weight: 900
     - family: CookieRunFont
       fonts:
         - asset: assets/fonts/CookieRunFont_TTF/CookieRun-Regular.ttf

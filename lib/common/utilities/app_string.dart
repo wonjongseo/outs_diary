@@ -4,6 +4,10 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.color: AppString.colorJp,
+          AppString.stool: AppString.stoolJp,
+          AppString.maxBloodPressure: AppString.maxBloodPressureJp,
+          AppString.minBloodPressure: AppString.minBloodPressureJp,
           AppString.poopCondition1: AppString.poopCondition1Jp,
           AppString.poopCondition2: AppString.poopCondition2Jp,
           AppString.poopCondition3: AppString.poopCondition3Jp,
@@ -213,6 +217,10 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.color: AppString.colorKr,
+          AppString.stool: AppString.stoolKr,
+          AppString.maxBloodPressure: AppString.maxBloodPressureKr,
+          AppString.minBloodPressure: AppString.minBloodPressureKr,
           AppString.poopCondition1: AppString.poopCondition1Kr,
           AppString.poopCondition2: AppString.poopCondition2Kr,
           AppString.poopCondition3: AppString.poopCondition3Kr,
@@ -422,6 +430,10 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.color: AppString.colorEn,
+          AppString.stool: AppString.stoolEn,
+          AppString.maxBloodPressure: AppString.maxBloodPressureEn,
+          AppString.minBloodPressure: AppString.minBloodPressureEn,
           AppString.poopCondition1: AppString.poopCondition1En,
           AppString.poopCondition2: AppString.poopCondition2En,
           AppString.poopCondition3: AppString.poopCondition3En,
@@ -1672,7 +1684,6 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String averageJp = '平均';
   static String averageEn = "Average ";
 
-  //
   static String feal = 'fealTr';
   static String fealKr = '감정';
   static String fealJp = '感情';
@@ -1712,4 +1723,24 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String poopCondition6Kr = '물 같음';
   static String poopCondition6Jp = '水っぽい';
   static String poopCondition6En = "poopCondition6";
+
+  static String maxBloodPressure = 'maxBloodPressureTr';
+  static String maxBloodPressureKr = '최고 혈압';
+  static String maxBloodPressureJp = '最高血圧';
+  static String maxBloodPressureEn = "MaxBloodPressure";
+
+  static String minBloodPressure = 'minBloodPressureTr';
+  static String minBloodPressureKr = '최저 혈압';
+  static String minBloodPressureJp = '最低血圧';
+  static String minBloodPressureEn = "diastolic number";
+
+  static String stool = 'stooltr';
+  static String stoolKr = '대변';
+  static String stoolJp = '大便';
+  static String stoolEn = "Stool";
+
+  static String color = 'colorTr';
+  static String colorKr = '색상';
+  static String colorJp = '色相';
+  static String colorEn = "Color";
 }

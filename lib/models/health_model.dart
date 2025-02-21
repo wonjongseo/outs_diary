@@ -193,7 +193,8 @@ class HealthModel {
     if (weights == null) return message;
 
     if (weights![0] != 0) {
-      message += '${AppString.morning.tr}: ${weights![0]}';
+      // message += '${AppString.morning.tr}: ${weights![0]}';
+      message += '${weights![0]}';
     }
 
     if (weights![1] != 0) {

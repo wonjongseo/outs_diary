@@ -7,7 +7,7 @@ import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/respository/user_respository.dart';
 
 class UserController extends GetxController {
-  late UserModel? userModel;
+  UserModel? userModel;
 
   void saveUser(UserModel userModel) {
     userModelRepository.saveUser(userModel);
@@ -90,7 +90,7 @@ class UserController extends GetxController {
     print('isDarkMode : ${isDarkMode}');
   }
 
-  void getUser() async {
+  Future<void> getUser() async {
     userModel = await userModelRepository.loadUser();
 
     update();

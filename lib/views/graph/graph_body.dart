@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -89,32 +91,12 @@ class _GraphBodyState extends State<GraphBody> {
       }
     }
 
-    /**
-     
-     35.6 + 
-     0 +
-     38.7
-
-     0+
-     100 +
-     110
-
-  
-    129 29
-     110 25
-     0+
-
-
-
-     */
     calculateMinMaxValueAndHeight(fealGraphData, isFeal: true);
     calculateMinMaxValueAndHeight(temperatureGraphData);
     calculateMinMaxValueAndHeight(weightGraphData);
     calculateMinMaxValueAndHeight(pulseGraphData);
     calculateMinMaxValueAndHeight(maxBloodPressureGraphData);
     calculateMinMaxValueAndHeight(minBloodPressureGraphData);
-
-    print('minBloodPressureGraphData : ${minBloodPressureGraphData}');
 
     setState(() {});
   }
@@ -151,6 +133,10 @@ class _GraphBodyState extends State<GraphBody> {
       minY = (minY - diff).round().toDouble();
       maxY = (maxY + diff).round().toDouble();
 
+      if (maxY == minY) {
+        maxY += 1;
+        minY -= 1;
+      }
       if (maxY < 0) maxY = 0;
       if (minY < 0) minY = 0;
       graphData.maxY = maxY;
@@ -160,6 +146,7 @@ class _GraphBodyState extends State<GraphBody> {
 
   @override
   Widget build(BuildContext context) {
+    log('GraphBody');
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [

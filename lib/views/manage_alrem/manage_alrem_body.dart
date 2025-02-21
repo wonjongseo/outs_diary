@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
@@ -8,21 +10,9 @@ import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
-import 'package:ours_log/controller/hospital_log_controller.dart';
-import 'package:ours_log/services/notification_service.dart';
 
 import 'package:ours_log/controller/user_controller.dart';
-import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/views/manage_alrem/widgets/task_tile.dart';
-
-class AlermData {
-  String day;
-  List<String> times;
-  AlermData({
-    required this.day,
-    required this.times,
-  });
-}
 
 class ManageAlermBody extends StatefulWidget {
   const ManageAlermBody({super.key});
@@ -35,6 +25,7 @@ class _ManageAlermBodyState extends State<ManageAlermBody> {
   DateTime now = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    log('ManageAlermBody');
     return GetBuilder<UserController>(builder: (uController) {
       return Column(
         children: [

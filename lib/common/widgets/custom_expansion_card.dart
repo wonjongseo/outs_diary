@@ -1,6 +1,7 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 
@@ -38,7 +39,7 @@ class CustomExpansionCard extends StatelessWidget {
           : subTitleWidget == null
               ? Text(subTitle!)
               : subTitleWidget!,
-      expandedColor: Get.isDarkMode ? AppColors.black : AppColors.white,
+      expandedColor: boxWhiteOrBlack,
       shadowColor: Colors.transparent,
       children: children == null ? [child] : children!,
     );

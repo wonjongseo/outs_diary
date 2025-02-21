@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
+import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/datas/graph_data.dart';
 import 'package:ours_log/views/graph/widgets/custom_feal_line_graph.dart';
 import 'package:ours_log/views/graph/widgets/custom_feal_pie_chart.dart';
 
 class FealGraph extends StatefulWidget {
-  const FealGraph(
-      {super.key, required this.graphData, required this.countOfDay});
+  const FealGraph({
+    super.key,
+    required this.graphData,
+    required this.countOfDay,
+  });
   final GraphData graphData;
   final int countOfDay;
   @override
@@ -19,8 +23,14 @@ class _FealGraphState extends State<FealGraph> {
   int pageIndex = 0;
   late PageController pageController;
 
+  UserController userController = Get.find<UserController>();
   @override
   void initState() {
+    if (userController.userModel!.userUtilModel!.isCricleGraph) {
+      pageIndex = 1;
+    } else {
+      pageIndex = 0;
+    }
     pageController = PageController(initialPage: pageIndex);
     super.initState();
   }

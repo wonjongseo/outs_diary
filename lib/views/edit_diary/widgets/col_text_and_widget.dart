@@ -11,21 +11,21 @@ class ColTextAndWidget extends StatelessWidget {
     // this.onTapIcon,
     this.labelWidget,
     required this.widget,
+    this.vertical,
   }) : super(key: key);
 
   final String label;
   // final Function()? onTapIcon;
   final Widget? labelWidget;
   final Widget widget;
+  final double? vertical;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: RS.width8,
-      ).copyWith(
-        top: RS.height14,
-        bottom: RS.h10,
+        vertical: vertical ?? RS.h10,
       ),
       decoration: BoxDecoration(
         color: Get.isDarkMode ? AppColors.black : AppColors.white,

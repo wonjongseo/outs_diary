@@ -11,6 +11,7 @@ import 'package:ours_log/controller/image_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/blood_pressure_model.dart';
+import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/done_pill_day_modal.dart';
 import 'package:ours_log/models/health_model.dart';
@@ -31,19 +32,14 @@ class EditDiaryController extends GetxController {
 
   List<DonePillDayModel> donePillDayModels = [];
 
-  List<PoopConditionType> poopConditionTypes = [];
+  List<PoopConditionType?> poopConditionTypes =
+      List.generate(DayPeriodType.values.length, (_) => null);
+
   List<PoopConditionModel> poopConditionModels = [];
   EditDiaryController({this.diaryModel, required this.selectedDay});
 
-  void selectPoopCondition(PoopConditionType poopCondition, {int? index}) {
-    if (index != null) {
-      if (poopConditionTypes.length < index) {
-        return;
-      }
-      poopConditionTypes[index] = poopCondition;
-    } else {
-      poopConditionTypes.add(poopCondition);
-    }
+  void selectPoopCondition(PoopConditionType? poopCondition, int index) {
+    poopConditionTypes[index] = poopCondition;
     update();
   }
 

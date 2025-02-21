@@ -16,10 +16,8 @@ import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/views/edit_diary/edit_diary_screen.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
-import 'package:ours_log/views/edit_diary/widgets/day_done_pill_row.dart';
 import 'package:ours_log/views/full_Image_screen.dart';
 import 'package:ours_log/views/home/widgets/aver_health_value.dart';
-import 'package:ours_log/views/home/widgets/circle_aver_health_widget.dart';
 
 class SelectedDiary extends StatelessWidget {
   const SelectedDiary({super.key});
@@ -29,7 +27,7 @@ class SelectedDiary extends StatelessWidget {
     UserController userController = Get.find<UserController>();
     DiaryController diaryController = Get.find<DiaryController>();
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: RS.w10),
+      padding: EdgeInsets.symmetric(horizontal: RS.w10 / 2),
       child: Container(
         padding: const EdgeInsets.all(10.0),
         width: double.infinity,
@@ -38,6 +36,7 @@ class SelectedDiary extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,16 +81,14 @@ class SelectedDiary extends StatelessWidget {
               ],
             ),
             const Divider(),
-            if (diaryController.selectedDiary!.health != null &&
-                diaryController.selectedDiary!.health!.argIsNotZero) ...[
-              const AverHealthValue(),
-            ],
-            if (diaryController.selectedDiary!.donePillDayModels != null &&
-                diaryController
-                    .selectedDiary!.donePillDayModels!.isNotEmpty) ...[
-              SingleChildScrollView(
+            SizedBox(height: RS.h10),
+            ColTextAndWidget(
+              vertical: RS.h10 / 2,
+              label: AppString.healthMemo,
+              widget: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: List.generate(
                     diaryController.selectedDiary!.donePillDayModels!.length,
                     (index) => DoneCircleIcon(
@@ -104,20 +101,34 @@ class SelectedDiary extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
-            ],
-            ColTextAndWidget(
-              label: AppString.healthMemo,
-              widget: CustomTextFormField(
-                hintText: diaryController.selectedDiary!.whatTodo,
-                maxLines: (diaryController.selectedDiary!.whatTodo ?? '')
-                    .split('\n')
-                    .length,
               ),
             ),
+            if (diaryController.selectedDiary!.health != null &&
+                diaryController.selectedDiary!.health!.argIsNotZero) ...[
+              ColTextAndWidget(
+                vertical: RS.h10 / 2,
+                label: AppString.average.tr,
+                widget: const AverHealthValue(),
+              ),
+            ],
+            if (diaryController.selectedDiary!.donePillDayModels != null &&
+                diaryController
+                    .selectedDiary!.donePillDayModels!.isNotEmpty) ...[
+              ColTextAndWidget(
+                vertical: RS.h10 / 2,
+                label: AppString.healthMemo,
+                widget: CustomTextFormField(
+                  hintText: diaryController.selectedDiary!.whatTodo,
+                  maxLines: (diaryController.selectedDiary!.whatTodo ?? '')
+                      .split('\n')
+                      .length,
+                ),
+              ),
+            ],
             if (diaryController.selectedDiary!.imagePath != null &&
                 diaryController.selectedDiary!.imagePath!.isNotEmpty)
               ColTextAndWidget(
+                vertical: RS.h10 / 2,
                 label: AppString.photo.tr,
                 widget: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,

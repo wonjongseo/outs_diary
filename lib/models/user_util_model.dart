@@ -10,6 +10,9 @@ class UserUtilModel {
   @HiveField(0)
   late Map<IsExpandtionType, bool> expandedFields;
 
+  @HiveField(1)
+  bool isCricleGraph = false;
+
   UserUtilModel()
       : expandedFields = {
           for (var field in IsExpandtionType.values) field: true,

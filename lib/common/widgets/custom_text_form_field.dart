@@ -47,6 +47,13 @@ class CustomTextFormField extends StatelessWidget {
               maxLines: maxLines ?? 1,
               controller: controller,
               decoration: InputDecoration(
+                hintStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: Theme.of(context)
+                          .textTheme
+                          .labelSmall
+                          ?.color
+                          ?.withOpacity(0.3),
+                    ),
                 counterText: "",
                 prefixIconConstraints:
                     const BoxConstraints(minHeight: 0, minWidth: 0),

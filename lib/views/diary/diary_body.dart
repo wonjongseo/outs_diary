@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -21,11 +23,11 @@ class DiaryBody extends StatelessWidget {
 
   final DiaryController diaryController = Get.find<DiaryController>();
   final UserController userController = Get.find<UserController>();
-
   @override
   Widget build(BuildContext context) {
+    log('DiaryBody');
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: RS.w10 * 2),
+      padding: EdgeInsets.symmetric(horizontal: RS.w10 * 1.5),
       child: GetBuilder<DiaryController>(builder: (controller) {
         return SingleChildScrollView(
           controller: controller.scrollController,
@@ -33,7 +35,7 @@ class DiaryBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                DateFormat('yyy${AppString.year.tr} M${AppString.month.tr}')
+                DateFormat.yMMM(Get.locale.toString())
                     .format(controller.focusedDay),
                 style: boldStyle,
               ),
@@ -58,16 +60,16 @@ class DiaryBody extends StatelessWidget {
                   singleMarkerBuilder: singleMarkerBuilder,
                   prioritizedBuilder: prioritizedBuilder,
                 ),
-                firstDay: diaryController.now.subtract(
-                  const Duration(days: 365 * 3),
-                ),
+                firstDay:
+                    diaryController.now.subtract(const Duration(days: 365 * 5)),
                 lastDay: diaryController.now.add(const Duration(days: 30)),
                 focusedDay: diaryController.focusedDay,
                 eventLoader: diaryController.getEventsForDay,
                 rowHeight: RS.h10 * 10.4,
                 onDaySelected: controller.onDatSelected,
               ),
-              if (diaryController.selectedDiary != null) SelectedDiary()
+              if (diaryController.selectedDiary != null)
+                SelectedDiary() // Dont' Const
             ],
           ),
         );
@@ -98,10 +100,6 @@ class DiaryBody extends StatelessWidget {
           width: RS.w10 * 4.5,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: isToday
-                ? Border.all(
-                    color: AppColors.primaryColor.withValues(alpha: .5))
-                : null,
             color: isToday
                 ? AppColors.primaryColor.withValues(alpha: .5)
                 : isNextDay
@@ -137,7 +135,11 @@ class DiaryBody extends StatelessWidget {
       return Column(
         children: [
           CircleAvatar(
-            backgroundColor: isToday ? AppColors.primaryColor : AppColors.white,
+            backgroundColor: isToday
+                ? AppColors.primaryColor
+                : Get.isDarkMode
+                    ? AppColors.black
+                    : AppColors.white,
             foregroundImage: AssetImage(
               AppConstant
                   .fealIconLists[

@@ -6,9 +6,7 @@ import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/edit_diary_controller.dart';
 
 class FealSelector extends StatelessWidget {
-  const FealSelector({
-    super.key,
-  });
+  const FealSelector({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +32,16 @@ class FealSelector extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () => addDiaryController.onTapFealIcon(index),
-                      child: Image.asset(
-                        addDiaryController.userController.feals[index],
-                        width: isSelected ? RS.w10 * 5.5 : RS.w10 * 4.8,
-                        colorBlendMode: BlendMode.modulate,
-                        color:
-                            isSelected ? null : AppColors.white.withOpacity(.7),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.grey.withOpacity(.2),
+                        radius: isSelected ? RS.w10 * 2.5 : RS.w10 * 2,
+                        child: Image.asset(
+                          addDiaryController.userController.feals[index],
+                          colorBlendMode: BlendMode.modulate,
+                          color: isSelected
+                              ? null
+                              : AppColors.white.withOpacity(.7),
+                        ),
                       ),
                     ),
                   );

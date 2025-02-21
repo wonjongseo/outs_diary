@@ -18,9 +18,8 @@ import 'package:ours_log/views/edit_diary/widgets/day_done_pill_row.dart';
 import 'package:ours_log/views/edit_diary/widgets/feal_selector.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/edit_diary/widgets/image_of_today.dart';
-import 'package:ours_log/views/edit_diary/widgets/morning_lunch_evening_blood_pressure_widget.dart';
-import 'package:ours_log/views/edit_diary/widgets/morning_lunch_evening_temp_and_pulse_widget.dart';
-import 'package:ours_log/views/edit_diary/widgets/poop_condition_selector.dart';
+import 'package:ours_log/views/edit_diary/widgets/input_health_day_period.dart';
+import 'package:ours_log/views/edit_diary/widgets/poop_health_day_period.dart';
 
 // ignore: must_be_immutable
 class EditDiaryScreen extends StatelessWidget {
@@ -89,7 +88,7 @@ class EditDiaryScreen extends StatelessWidget {
                           maxLength: 5,
                         ),
                       ),
-                      SizedBox(height: RS.h10 * 2),
+                      SizedBox(height: RS.h10),
                       CustomExpansionCard(
                         title: AppString.temperature.tr,
                         initiallyExpanded: userController
@@ -99,16 +98,13 @@ class EditDiaryScreen extends StatelessWidget {
                             false,
                         onExpansionChanged: (bool v) => userController
                             .toggleExpanded(IsExpandtionType.temperature),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: MorningLunchEveningTempAndPulseWidget(
-                            controllers: editDiaryController.temperatureCtls,
-                            sufficText: '°C',
-                            keyboardType: const TextInputType.numberWithOptions(
-                              decimal: true,
-                            ),
-                            maxLength: 5,
+                        child: InputHealthDayPeriod(
+                          controllers: editDiaryController.temperatureCtls,
+                          sufficText: '°C',
+                          keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true,
                           ),
+                          maxLength: 5,
                         ),
                       ),
                       SizedBox(height: RS.h10),
@@ -121,14 +117,11 @@ class EditDiaryScreen extends StatelessWidget {
                             false,
                         onExpansionChanged: (bool v) => userController
                             .toggleExpanded(IsExpandtionType.pulse),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: MorningLunchEveningTempAndPulseWidget(
-                            controllers: editDiaryController.pulseCtls,
-                            sufficText: '${AppString.count.tr}/min',
-                            keyboardType: TextInputType.number,
-                            maxLength: 3,
-                          ),
+                        child: InputHealthDayPeriod(
+                          controllers: editDiaryController.pulseCtls,
+                          sufficText: '${AppString.count.tr}/min',
+                          keyboardType: TextInputType.number,
+                          maxLength: 3,
                         ),
                       ),
                       SizedBox(height: RS.h10),
@@ -140,16 +133,27 @@ class EditDiaryScreen extends StatelessWidget {
                             false,
                         onExpansionChanged: (bool v) => userController
                             .toggleExpanded(IsExpandtionType.bloodPressure),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: MorningLunchEveningBloodPressureWidget(
-                            maxControllers:
-                                editDiaryController.maxBloodPressureCtls,
-                            minControllers:
-                                editDiaryController.minBloodPressureCtls,
-                            sufficText: 'mm Hg',
-                          ),
+                        child: InputHealthDayPeriod(
+                          controllers: editDiaryController.maxBloodPressureCtls,
+                          controllers2:
+                              editDiaryController.minBloodPressureCtls,
+                          hintText: AppString.maxBloodPressure.tr,
+                          hintText2: AppString.minBloodPressure.tr,
+                          sufficText: 'mm Hg',
+                          maxLength: 3,
+                          keyboardType: TextInputType.number,
                         ),
+                      ),
+                      SizedBox(height: RS.h10),
+                      CustomExpansionCard(
+                        title: AppString.stool.tr,
+                        initiallyExpanded: userController
+                                    .userModel!.userUtilModel.expandedFields[
+                                IsExpandtionType.poopCondition] ??
+                            false,
+                        onExpansionChanged: (bool v) => userController
+                            .toggleExpanded(IsExpandtionType.poopCondition),
+                        child: const PoopDayPeriod(),
                       ),
                       SizedBox(height: RS.h10),
                       ExpansionIconCard(
@@ -165,27 +169,37 @@ class EditDiaryScreen extends StatelessWidget {
                         isOnlyOne: true,
                         selectedIconIndexs: editDiaryController.painFulIndex,
                       ),
-                      SizedBox(height: RS.height20),
-                      PoopConditionSelector(),
-                      SizedBox(height: RS.height20),
-                      ColTextAndWidget(
-                        label: AppString.healthMemo,
-                        widget: CustomTextFormField(
-                          hintText: AppString.plzEnterTextMsg.tr,
-                          controller: editDiaryController.whatToDoController,
-                          maxLines: 7,
+                      SizedBox(height: RS.h10),
+                      CustomExpansionCard(
+                        title: AppString.memo.tr,
+                        child: Column(
+                          children: [
+                            ColTextAndWidget(
+                              label: AppString.healthMemo,
+                              widget: CustomTextFormField(
+                                hintText: AppString.plzEnterTextMsg.tr,
+                                controller:
+                                    editDiaryController.whatToDoController,
+                                maxLines: 7,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: RS.w10 * 2),
+                              child: const Divider(),
+                            ),
+                            ImageOfToday(
+                              carouselSliderController:
+                                  editDiaryController.carouselSliderController,
+                              label: AppString.photo.tr,
+                              uploadFiles: editDiaryController.uploadFiles,
+                              selectedPhotos:
+                                  editDiaryController.selectedPhotos,
+                              removePhoto: editDiaryController.removePhoto,
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(height: RS.height20),
-                      ImageOfToday(
-                        carouselSliderController:
-                            editDiaryController.carouselSliderController,
-                        label: AppString.photo.tr,
-                        uploadFiles: editDiaryController.uploadFiles,
-                        selectedPhotos: editDiaryController.selectedPhotos,
-                        removePhoto: editDiaryController.removePhoto,
-                      ),
-                      SizedBox(height: RS.height20),
                     ],
                   );
                 }),
@@ -193,106 +207,6 @@ class EditDiaryScreen extends StatelessWidget {
             ),
           );
         }),
-      ),
-    );
-  }
-
-  ColTextAndWidget mornEvenTempAndPulseWidget(
-      List<TextEditingController> controllers,
-      String label,
-      String sufficText) {
-    return ColTextAndWidget(
-      label: label,
-      widget: Row(
-        children: [
-          Expanded(
-            child: CustomTextFormField(
-              controller: controllers[0],
-              hintText: AppString.morning.tr,
-              sufficIcon: Text(
-                sufficText,
-                style: textFieldSufficStyle,
-              ),
-            ),
-          ),
-          SizedBox(width: RS.width20),
-          Expanded(
-            child: CustomTextFormField(
-              controller: controllers[2],
-              hintText: AppString.evening.tr,
-              sufficIcon: Text(
-                sufficText,
-                style: textFieldSufficStyle,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  ColTextAndWidget mornEvenBloodPressureWidget(
-      List<TextEditingController> controllers,
-      String label,
-      String sufficText) {
-    return ColTextAndWidget(
-      label: label,
-      widget: Column(
-        children: [
-          Row(
-            children: [
-              Text(AppString.morning.tr),
-              SizedBox(width: RS.w10),
-              Expanded(
-                child: CustomTextFormField(
-                  controller: controllers[0],
-                  hintText: '최고 혈압',
-                  sufficIcon: Text(
-                    sufficText,
-                    style: textFieldSufficStyle,
-                  ),
-                ),
-              ),
-              SizedBox(width: RS.w10 * 1.5),
-              Expanded(
-                child: CustomTextFormField(
-                  controller: controllers[2],
-                  hintText: '최저 혈압',
-                  sufficIcon: Text(
-                    sufficText,
-                    style: textFieldSufficStyle,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: RS.h10),
-          Row(
-            children: [
-              Expanded(
-                child: CustomTextFormField(
-                  controller: controllers[0],
-                  hintText: AppString.morning.tr,
-                  sufficIcon: Text(
-                    sufficText,
-                    style: textFieldSufficStyle,
-                  ),
-                ),
-              ),
-              SizedBox(width: RS.width20),
-              Expanded(
-                child: CustomTextFormField(
-                  controller: controllers[2],
-                  hintText: AppString.evening.tr,
-                  sufficIcon: Text(
-                    sufficText,
-                    style: textFieldSufficStyle,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }
@@ -305,19 +219,3 @@ class EditDiaryScreen extends StatelessWidget {
     );
   }
 }
-
-/**
- * 
- * 体温(基礎体温、体温)　// ok
-体重// ok 
-血圧 // ok 
-生理期間
-自覚症状
-
-日記
-
-薬とか採血結果はスキャンして画像で整理
-
-脈拍
-
- */

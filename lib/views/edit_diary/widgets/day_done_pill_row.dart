@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
+import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/widgets/done_circle_icon.dart';
 import 'package:ours_log/controller/edit_diary_controller.dart';
 import 'package:ours_log/models/day_period_type.dart';
@@ -13,7 +14,7 @@ class DayDonePillRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<EditDiaryController>(builder: (editDiaryController) {
       return ColTextAndWidget(
-        label: '약',
+        label: AppString.pillText.tr,
         widget: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(

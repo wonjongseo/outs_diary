@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,9 @@ ThemeData lightTheme(String systemLanguage) {
 
   return base.copyWith(
     textTheme: ThemeData.light().textTheme.apply(
-        fontFamily:
-            systemLanguage.contains('ja') ? "ZenMaruGothic" : "CookieRunFont"),
+          fontFamily:
+              systemLanguage.contains('ja') ? "ZenMaruGothic" : "CookieRunFont",
+        ),
     // scaffoldBackgroundColor: Colors.white.withOpacity(.95),
     scaffoldBackgroundColor: AppColors.white,
     cardTheme: const CardTheme(elevation: 2),
@@ -187,11 +189,19 @@ ThemeData darkTheme(String systemLanguage) {
   );
 }
 
+Color get textWhiteOrBlack {
+  return Get.isDarkMode ? AppColors.white : AppColors.greyBackground;
+}
+
+Color get boxWhiteOrBlack {
+  return Get.isDarkMode ? AppColors.greyBackground : AppColors.white;
+}
+
 TextStyle get subHeadingStyle {
   return TextStyle(
     fontSize: RS.w10 * 1.6,
     fontWeight: FontWeight.w400,
-    color: Get.isDarkMode ? AppColors.white : Colors.black,
+    color: textWhiteOrBlack,
   );
 }
 
@@ -199,7 +209,7 @@ TextStyle get headingStyle {
   return TextStyle(
     fontSize: RS.w10 * 2,
     fontWeight: FontWeight.w600,
-    color: Get.isDarkMode ? AppColors.white : Colors.black,
+    color: textWhiteOrBlack,
   );
 }
 
@@ -207,7 +217,7 @@ TextStyle get activeHintStyle {
   return TextStyle(
     fontSize: RS.width14,
     fontWeight: FontWeight.w100,
-    color: Get.isDarkMode ? AppColors.white : Colors.black,
+    color: textWhiteOrBlack,
   );
 }
 

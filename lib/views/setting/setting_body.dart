@@ -74,8 +74,7 @@ class _SettingBodyState extends State<SettingBody> {
 
   @override
   Widget build(BuildContext context) {
-    log("OPEN SettingBody");
-
+    log("SettingBody");
     return settingLanguage.isEmpty
         ? Container()
         : GetBuilder<UserController>(builder: (userController) {
@@ -110,7 +109,7 @@ class _SettingBodyState extends State<SettingBody> {
                   child: ExpansionTileCard(
                     borderRadius: BorderRadius.circular(15),
                     elevation: 0,
-                    title: const Text('앱 색상'),
+                    title: Text(AppString.color.tr),
                     leading: Image.asset(
                       AppImagePath.good2,
                       width: RS.w10 * 4,

@@ -1,3 +1,4 @@
+import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,7 @@ class BackGround1Sample extends StatelessWidget {
         width: 300,
         height: 500,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: boxWhiteOrBlack,
           borderRadius: BorderRadius.circular(RS.w10 / 2),
           border: Border.all(
             color: isSelected ? AppColors.primaryColor : Colors.grey,

@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,8 +19,9 @@ class HospitalLogBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('HospitalLogBody');
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: RS.w10 * 2),
+      padding: EdgeInsets.symmetric(horizontal: RS.w10 * 1.5),
       child:
           GetBuilder<HospitalLogController>(builder: (hospitalLogController) {
         return SingleChildScrollView(
@@ -28,7 +30,7 @@ class HospitalLogBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                DateFormat('yyy${AppString.year.tr} M${AppString.month.tr}')
+                DateFormat.yMMM(Get.locale.toString())
                     .format(hospitalLogController.focusedDay),
                 style: boldStyle,
               ),
