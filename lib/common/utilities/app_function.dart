@@ -135,8 +135,12 @@ class AppFunction {
     );
   }
 
-  static Future<TimeOfDay?> pickTime(BuildContext context,
-      {required String helpText, required String errorInvalidText}) async {
+  static Future<TimeOfDay?> pickTime(
+    BuildContext context, {
+    required String helpText,
+    required String errorInvalidText,
+    TimeOfDay? initialTime,
+  }) async {
     return await showTimePicker(
       cancelText: AppString.cancelBtnTextTr.tr,
       helpText: helpText,
@@ -144,7 +148,7 @@ class AppFunction {
       hourLabelText: AppString.hour.tr,
       minuteLabelText: AppString.minute.tr,
       context: context,
-      initialTime: TimeOfDay.now(),
+      initialTime: initialTime ?? TimeOfDay.now(),
     );
   }
 

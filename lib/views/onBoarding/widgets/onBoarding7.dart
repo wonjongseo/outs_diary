@@ -11,7 +11,7 @@ class Onboarding7 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<OnboardingController>(builder: (userController) {
+    return GetBuilder<OnboardingController>(builder: (cn) {
       return Padding(
         padding: EdgeInsets.symmetric(
           horizontal: RS.w10 * 2,
@@ -22,69 +22,82 @@ class Onboarding7 extends StatelessWidget {
             Text(AppString.doYouAlarmWhenDrinkPill.tr),
             SizedBox(height: RS.h10 * 1.5),
             ToggleButtons(
-              onPressed: userController.togglePillAlarm,
+              onPressed: cn.togglePillAlarm,
               borderRadius: BorderRadius.circular(20),
-              isSelected: [
-                userController.isAlermEnable,
-                !userController.isAlermEnable
-              ],
+              isSelected: [cn.isAlermEnable, !cn.isAlermEnable],
               children: [
                 Text(
                   'ON',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: userController.isAlermEnable
-                        ? AppColors.primaryColor
-                        : null,
+                    color: cn.isAlermEnable ? AppColors.primaryColor : null,
                   ),
                 ),
                 Text(
                   'OFF',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: !userController.isAlermEnable
-                          ? AppColors.primaryColor
-                          : null),
+                      color: !cn.isAlermEnable ? AppColors.primaryColor : null),
                 )
               ],
             ),
             SizedBox(height: RS.h10 * 3),
-            if (userController.selectedMorningLunchEvening.contains(0))
-              GestureDetector(
-                onTap: !userController.isAlermEnable
-                    ? null
-                    : () => userController.changePillTime(
-                        DayPeriodType.morning, context),
-                child: AppointPillTime(
-                  title: AppString.morning.tr,
-                  time: userController.morningTime,
-                  isAlermEnable: userController.isAlermEnable,
-                ),
-              ),
-            if (userController.selectedMorningLunchEvening.contains(1))
-              GestureDetector(
-                onTap: !userController.isAlermEnable
-                    ? null
-                    : () => userController.changePillTime(
-                        DayPeriodType.afternoon, context),
-                child: AppointPillTime(
-                  isAlermEnable: userController.isAlermEnable,
-                  title: AppString.lunch.tr,
-                  time: userController.lunchTime,
-                ),
-              ),
-            if (userController.selectedMorningLunchEvening.contains(2))
-              GestureDetector(
-                onTap: !userController.isAlermEnable
-                    ? null
-                    : () => userController.changePillTime(
-                        DayPeriodType.evening, context),
-                child: AppointPillTime(
-                  isAlermEnable: userController.isAlermEnable,
-                  title: AppString.evening.tr,
-                  time: userController.eveningTime,
-                ),
-              ),
+            Column(
+              children: List.generate(cn.pillTimeDayPeriod.length, (index) {
+                return GestureDetector(
+                  onTap: !cn.isAlermEnable
+                      ? null
+                      : () => cn.changePillTime(
+                          cn.pillTimeDayPeriod[index], context),
+                  child: AppointPillTime(
+                    title: cn.pillTimeDayPeriod[index].label,
+                    time: cn.getAlramTimeDayPeriod(cn.pillTimeDayPeriod[index]),
+                    isAlermEnable: cn.isAlermEnable,
+                  ),
+                );
+              }),
+            ),
+            if (1 == 2)
+              Column(
+                children: [
+                  if (cn.pillTimeDayPeriod.contains(DayPeriodType.morning))
+                    GestureDetector(
+                      onTap: !cn.isAlermEnable
+                          ? null
+                          : () =>
+                              cn.changePillTime(DayPeriodType.morning, context),
+                      child: AppointPillTime(
+                        title: AppString.morning.tr,
+                        time: cn.morningTime,
+                        isAlermEnable: cn.isAlermEnable,
+                      ),
+                    ),
+                  if (cn.pillTimeDayPeriod.contains(DayPeriodType.afternoon))
+                    GestureDetector(
+                      onTap: !cn.isAlermEnable
+                          ? null
+                          : () => cn.changePillTime(
+                              DayPeriodType.afternoon, context),
+                      child: AppointPillTime(
+                        isAlermEnable: cn.isAlermEnable,
+                        title: AppString.lunch.tr,
+                        time: cn.lunchTime,
+                      ),
+                    ),
+                  if (cn.pillTimeDayPeriod.contains(DayPeriodType.evening))
+                    GestureDetector(
+                      onTap: !cn.isAlermEnable
+                          ? null
+                          : () =>
+                              cn.changePillTime(DayPeriodType.evening, context),
+                      child: AppointPillTime(
+                        isAlermEnable: cn.isAlermEnable,
+                        title: AppString.evening.tr,
+                        time: cn.eveningTime,
+                      ),
+                    ),
+                ],
+              )
           ],
         ),
       );

@@ -101,7 +101,7 @@ class NotificationService {
           importance: Importance.high,
           priority: Priority.high,
         ),
-        iOS: DarwinNotificationDetails(),
+        iOS: const DarwinNotificationDetails(),
       ),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
@@ -120,10 +120,6 @@ class NotificationService {
       while (scheduledDate.weekday != weekday) {
         scheduledDate = scheduledDate.add(const Duration(days: 1));
       }
-
-      // if (scheduledDate.isBefore(now)) {
-      //   scheduledDate = scheduledDate.add(const Duration(days: 7));
-      // }
 
       return scheduledDate;
     } catch (e) {

@@ -1,5 +1,6 @@
 import 'dart:math';
-
+import 'package:intl/intl.dart';
+import 'package:timezone/timezone.dart' as tz;
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,25 +51,25 @@ class OnboardingController extends GetxController {
   // For OnBoarding6
   bool isShownMLE = true;
   bool isShownDays = false;
-  List<int> selectedMorningLunchEvening = []; // 0:아침, 1:점심, 2: 저녁
-  List<WeekDayType> selectedDays = []; // 0:월, 1: 화
+  List<DayPeriodType> pillTimeDayPeriod = []; // 0:아침, 1:점심, 2: 저녁
+  List<WeekDayType> selectedWeekDays = []; // 0:월, 1: 화
 
-  void onSelectMorningLunchEvening(int index) {
-    bool isSelected = selectedMorningLunchEvening.contains(index);
+  void onSelectMorningLunchEvening(DayPeriodType index) {
+    bool isSelected = pillTimeDayPeriod.contains(index);
     if (isSelected) {
-      selectedMorningLunchEvening.remove(index);
+      pillTimeDayPeriod.remove(index);
     } else {
-      selectedMorningLunchEvening.add(index);
+      pillTimeDayPeriod.add(index);
     }
     update();
   }
 
   void onSelectDays(WeekDayType index) {
-    bool isSelected = selectedDays.contains(index);
+    bool isSelected = selectedWeekDays.contains(index);
     if (isSelected) {
-      selectedDays.remove(index);
+      selectedWeekDays.remove(index);
     } else {
-      selectedDays.add(index);
+      selectedWeekDays.add(index);
     }
     update();
   }
@@ -126,7 +127,6 @@ class OnboardingController extends GetxController {
   }
 
   void togglePillAlarm(int v) {
-    print('togglePillAlarm');
     if (v == 0) {
       isAlermEnable = true;
       PermissionService().permissionWithNotification();
@@ -137,10 +137,28 @@ class OnboardingController extends GetxController {
     update();
   }
 
+  String getAlramTimeDayPeriod(DayPeriodType dayPeriodType) {
+    switch (dayPeriodType) {
+      case DayPeriodType.morning:
+        return morningTime;
+      case DayPeriodType.afternoon:
+        return lunchTime;
+      case DayPeriodType.evening:
+        return eveningTime;
+    }
+  }
+
   void changePillTime(DayPeriodType dayPeriodType, BuildContext context) async {
-    TimeOfDay? timeOfDay = await AppFunction.pickTime(context,
-        helpText: AppString.plzAlarmTime.tr,
-        errorInvalidText: AppString.plzInputCollectTime.tr);
+    String pillTime = getAlramTimeDayPeriod(dayPeriodType);
+    int hour = int.tryParse(pillTime.split(':')[0]) ?? 0;
+    int minute = int.tryParse(pillTime.split(':')[1]) ?? 0;
+
+    TimeOfDay? timeOfDay = await AppFunction.pickTime(
+      context,
+      helpText: AppString.plzAlarmTime.tr,
+      errorInvalidText: AppString.plzInputCollectTime.tr,
+      initialTime: TimeOfDay(hour: hour, minute: minute),
+    );
 
     if (timeOfDay == null) {
       return;
@@ -162,140 +180,71 @@ class OnboardingController extends GetxController {
 
   void goToMainScreenAndSaveUserData() async {
     List<TaskModel> tasks = [];
-    List<String> times = [];
-    List<DayPeriodType>? dayPeriodTypes = [];
 
-    selectedDays.sort((a, b) => a.index.compareTo(b.index));
+    selectedWeekDays.sort((a, b) => a.index.compareTo(b.index));
     List<int> days = List.generate(
-        selectedDays.length, (index) => selectedDays[index].index + 1);
+        selectedWeekDays.length, (index) => selectedWeekDays[index].index + 1);
 
-    if (selectedMorningLunchEvening.contains(0)) {
-      times.add(morningTime);
-      dayPeriodTypes.add(DayPeriodType.morning);
-    }
-    if (selectedMorningLunchEvening.contains(1)) {
-      times.add(lunchTime);
-      dayPeriodTypes.add(DayPeriodType.afternoon);
-    }
-    if (selectedMorningLunchEvening.contains(2)) {
-      times.add(eveningTime);
-      dayPeriodTypes.add(DayPeriodType.evening);
-    }
-    if (isAlermEnable) {
-      for (int day in days) {
-        if (selectedMorningLunchEvening.contains(0)) {
-          int hour = int.parse(morningTime.split(':')[0]);
-          int minute = int.parse(morningTime.split(':')[1]);
-          int id = AppFunction.createIdByDay(day, hour, minute);
+    for (int day in days) {
+      for (DayPeriodType pillTime in pillTimeDayPeriod) {
+        int hour = int.parse(getAlramTimeDayPeriod(pillTime).split(':')[0]);
+        int minute = int.parse(getAlramTimeDayPeriod(pillTime).split(':')[1]);
+        int id = AppFunction.createIdByDay(day, hour, minute);
 
-          DateTime? taskTime =
-              await notificationService.scheduleWeeklyNotification(
-            title:
-                '💊 (${AppString.morning.tr}) ${AppString.drinkPillAlram.tr}',
-            message:
-                '(${intDayToString(day)}) $morningTime ${AppString.timeToDrink.tr}',
+        DateTime now = tz.TZDateTime.now(tz.local);
+        DateTime? taskTime =
+            tz.TZDateTime(tz.local, now.year, now.month, day, hour, minute);
+
+        if (isAlermEnable) {
+          String message = isEn
+              ? '(${intDayToString(day)}) ${getAlramTimeDayPeriod(pillTime)} ${AppString.timeToDrink.tr}'
+              : '(${intDayToString(day)}) $hour${AppString.hour.tr} $minute${AppString.minute.tr} ${AppString.timeToDrink.tr}';
+
+          taskTime = await notificationService.scheduleWeeklyNotification(
+            title: '💊 (${pillTime.label}) ${AppString.drinkPillAlram.tr}',
+            message: message,
             channelDescription: AppString.pillcCannelDescription.tr,
             id: id,
             weekday: day,
             hour: hour,
             minute: minute,
           );
-
-          if (taskTime == null) {
-            break;
-          }
-          tasks.add(
-            TaskModel(
-              taskName: '${AppString.morning.tr}${AppString.pillText.tr}',
-              taskDate: taskTime,
-              notifications: [
-                NotificationModel(notiDateTime: taskTime, alermId: id)
-              ],
-              isRegular: true,
-            ),
-          );
         }
 
-        if (selectedMorningLunchEvening.contains(1)) {
-          int hour = int.parse(lunchTime.split(':')[0]);
-          int minute = int.parse(lunchTime.split(':')[1]);
-          int id = AppFunction.createIdByDay(day, hour, minute);
-
-          DateTime? taskTime =
-              await notificationService.scheduleWeeklyNotification(
-            title: '💊 (${AppString.lunch.tr}) ${AppString.drinkPillAlram.tr}',
-            message:
-                '(${intDayToString(day)}) $lunchTime ${AppString.timeToDrink.tr}',
-            channelDescription: AppString.pillcCannelDescription.tr,
-            id: id,
-            weekday: day,
-            hour: hour,
-            minute: minute,
-          );
-          if (taskTime == null) {
-            break;
-          }
-          tasks.add(
-            TaskModel(
-              taskName: '${AppString.lunch.tr}${AppString.pillText.tr}',
-              taskDate: taskTime,
-              notifications: [
-                NotificationModel(notiDateTime: taskTime, alermId: id)
-              ],
-              isRegular: true,
-            ),
-          );
+        if (taskTime == null) {
+          break;
         }
 
-        if (selectedMorningLunchEvening.contains(2)) {
-          int hour = int.parse(eveningTime.split(':')[0]);
-          int minute = int.parse(eveningTime.split(':')[1]);
-          int id = AppFunction.createIdByDay(day, hour, minute);
-
-          DateTime? taskTime =
-              await notificationService.scheduleWeeklyNotification(
-            title:
-                '💊 (${AppString.evening.tr}) ${AppString.drinkPillAlram.tr}',
-            message:
-                '(${intDayToString(day)}) $eveningTime ${AppString.timeToDrink.tr}',
-            channelDescription: AppString.pillcCannelDescription.tr,
-            id: id,
-            weekday: day,
-            hour: hour,
-            minute: minute,
-          );
-          if (taskTime == null) {
-            break;
-          }
-          tasks.add(
-            TaskModel(
-              taskName: '${AppString.evening.tr}${AppString.pillText.tr}',
-              taskDate: taskTime,
-              notifications: [
-                NotificationModel(notiDateTime: taskTime, alermId: id)
-              ],
-              isRegular: true,
-            ),
-          );
-        }
+        tasks.add(
+          TaskModel(
+            taskName: '${pillTime.label}${AppString.pillText.tr}',
+            taskDate: taskTime,
+            notifications: [
+              NotificationModel(notiDateTime: taskTime, alermId: id)
+            ],
+            isRegular: true,
+          ),
+        );
       }
     }
 
     UserModel userModel = UserModel(
-      selectedPillDays: selectedDays,
+      selectedPillDays: selectedWeekDays,
       backgroundIndex: backgroundIndex,
       fealIconIndex: fealIconIndex,
       colorIndex: selectedColorIndex,
       tasks: tasks,
-      dayPeriodTypes: dayPeriodTypes,
+      dayPeriodTypes: pillTimeDayPeriod,
     );
 
     userController.saveUser(userModel);
 
     Get.off(() => const MainScreen());
 
-    AppSnackbar.showSuccessMsgSnackBar(AppString.completeSetting.tr,
-        duration: const Duration(seconds: 1));
+    AppSnackbar.showSuccessMsgSnackBar(
+      AppString.completeSetting.tr,
+      duration: const Duration(minutes: 1),
+    );
   }
 
   UserController userController = Get.find<UserController>();

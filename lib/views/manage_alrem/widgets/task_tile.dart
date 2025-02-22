@@ -10,6 +10,7 @@ import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
+import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/services/notification_service.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/task_model.dart';
@@ -28,22 +29,25 @@ class TaskTile extends StatelessWidget {
         onTap: () async {
           int count = 0;
           String titleName = task.isRegular // MESSAGE TODO
-              ? '"${DateFormat.EEEE(Get.locale.toString()).format(task.taskDate)}의 정기 알림"'
-              : '(${DateFormat.yMMMEd(Get.locale.toString()).format(task.taskDate)}의 알림)\n"${task.taskName}"';
+              ? '${DateFormat.EEEE(Get.locale.toString()).format(task.taskDate)}의 정기 알림'
+              : '(${DateFormat.yMMMEd(Get.locale.toString()).format(task.taskDate)}의 일정)\n${task.taskName}';
           bool result = await AppDialog.selectionDialog(
-              title: Text('$titleName 을 끄시나요?'));
+              title: Text('$titleName 을 삭제하시나요?'));
 
           if (result) {
-            for (var notification in task.notifications) {
-              count++;
-              notificationService.cancellNotifications(notification.alermId);
-            }
-
-            userController.deleteTask(task);
-
-            AppSnackbar.showSuccessChangedMsgSnackBar(
-                '$count${AppString.cancledNotification.tr}');
+            userController.deleteTaskFromNotificationList(task.notifications);
           }
+          // if (result) {
+          //   for (var notification in task.notifications) {
+          //     count++;
+          //     notificationService.cancellNotifications(notification.alermId);
+          //   }
+
+          //   userController.deleteTask(task);
+
+          //   AppSnackbar.showSuccessChangedMsgSnackBar(
+          //       '$count${AppString.cancledNotification.tr}');
+          // }
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: RS.w10 * 2),

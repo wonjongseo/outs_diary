@@ -16,13 +16,13 @@ class UserModel {
   @HiveField(1)
   late int createdAt;
   @HiveField(2)
-  List<WeekDayType>? selectedPillDays; // 0:월, 1: 화
+  List<WeekDayType>? selectedPillDays; // 월 화 수 는 등록되어있고,
   @HiveField(3)
-  List<DayPeriodType>? dayPeriodTypes; //
+  List<DayPeriodType>? dayPeriodTypes; //아침, 점심,  저녁도 있고
   @HiveField(4)
   int? colorIndex;
   @HiveField(5)
-  List<TaskModel>? tasks;
+  List<TaskModel>? tasks; // 시간은 여기서 ?
   @HiveField(6)
   int? backgroundIndex;
   @HiveField(7)

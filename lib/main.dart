@@ -86,11 +86,7 @@ class _MyAppState extends State<MyApp> {
           systemLanguage = Get.deviceLocale.toString();
         }
         if (isDarkMode != null) {
-          if (isDarkMode) {
-            themeMode = ThemeMode.dark;
-          } else {
-            themeMode = ThemeMode.light;
-          }
+          themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
         }
       },
     );

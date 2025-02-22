@@ -6,6 +6,7 @@ import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
+import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/respository/hospital_log_repository.dart';
 import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/views/edit_hospital_visit_log/edit_hospital_visit_log_screen.dart';
@@ -86,6 +87,8 @@ class HospitalLogController extends GetxController {
     hospitalLogRepository.delete(hospitalLogModel);
     getAll();
   }
+
+  void deleteFromTask(TaskModel task) {}
 
   void getAll() async {
     hospitalLogs = await hospitalLogRepository.select();

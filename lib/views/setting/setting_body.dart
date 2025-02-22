@@ -334,6 +334,10 @@ class _SettingBodyState extends State<SettingBody> {
         border: Border.all(color: AppColors.primaryColor),
       ),
       child: ListTile(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: AppColors.primaryColor),
+          borderRadius: BorderRadius.circular(15),
+        ),
         titleTextStyle: TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: RS.width14,

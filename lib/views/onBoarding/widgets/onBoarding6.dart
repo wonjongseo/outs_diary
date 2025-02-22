@@ -36,17 +36,18 @@ class Onboarding6 extends StatelessWidget {
                       children:
                           List.generate(DayPeriodType.values.length, (index) {
                         return GestureDetector(
-                          onTap: () => onboardingController
-                              .onSelectMorningLunchEvening(index),
+                          onTap: () =>
+                              onboardingController.onSelectMorningLunchEvening(
+                            DayPeriodType.values[index],
+                          ),
                           child: Container(
                             width: RS.w10 * 10,
                             height: RS.w10 * 10,
                             margin:
                                 EdgeInsets.symmetric(horizontal: RS.w10 / 2),
                             decoration: BoxDecoration(
-                                border: onboardingController
-                                        .selectedMorningLunchEvening
-                                        .contains(index)
+                                border: onboardingController.pillTimeDayPeriod
+                                        .contains(DayPeriodType.values[index])
                                     ? Border.all(
                                         color: AppColors.primaryColor, width: 2)
                                     : Border.all(color: Colors.grey),
@@ -88,7 +89,8 @@ class Onboarding6 extends StatelessWidget {
                                 margin: EdgeInsets.symmetric(
                                     horizontal: RS.w10 / 2),
                                 decoration: BoxDecoration(
-                                    border: onboardingController.selectedDays
+                                    border: onboardingController
+                                            .selectedWeekDays
                                             .contains(WeekDayType.values[index])
                                         ? Border.all(
                                             color: AppColors.primaryColor,
