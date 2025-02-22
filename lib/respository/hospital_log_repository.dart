@@ -36,4 +36,12 @@ class HospitalLogRepository {
 
     return hospitalLogs;
   }
+
+  Future<void> deleteAll() async {
+    var box =
+        await Hive.openBox<HospitalLogModel>(AppConstant.hospitalLogModelBox);
+
+    box.deleteFromDisk();
+    print('HospitalLogModel All DELETE !!');
+  }
 }

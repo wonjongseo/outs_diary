@@ -57,16 +57,21 @@ class FealIconRow extends StatelessWidget {
                       width: RS.w10 * 5,
                       height: RS.w10 * 5,
                       decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.primaryColor,
+                            offset: const Offset(1, 1),
+                          )
+                        ],
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.grey[400]!),
                         color: AppColors.white,
                       ),
-                      child: Center(
-                          child: Image.asset(
+                      child: Image.asset(
                         fealIcon.iconPath[index2],
                         width: isSelected ? RS.w10 * 6 : RS.w10 * 5,
                         height: isSelected ? RS.w10 * 6 : RS.w10 * 5,
-                      )),
+                      ),
                     ),
                   ),
                 ),

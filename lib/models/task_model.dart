@@ -35,3 +35,5 @@ class TaskModel {
     return 'TaskModel(taskName: $taskName, taskDate: $taskDate, id: $id, createdAt: $createdAt, notifications: $notifications, isRegular: $isRegular)';
   }
 }
+
+//userController.userModel!.tasks![9].notifications

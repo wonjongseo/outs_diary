@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
 import 'package:ours_log/models/is_expandtion_type.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
+import 'package:collection/collection.dart';
+import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/user_model.dart';
 import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/respository/user_respository.dart';
+import 'package:ours_log/services/notification_service.dart';
 
 class UserController extends GetxController {
   UserModel? userModel;
@@ -43,6 +46,30 @@ class UserController extends GetxController {
     userModel!.colorIndex = index;
     userModelRepository.saveUser(userModel!);
     getUser();
+  }
+
+  NotificationService notificationService = NotificationService();
+
+  Future<void> deleteTaskFromNotificationList(
+    List<NotificationModel>? notifications,
+  ) async {
+    if (notifications == null) return;
+    if (userModel == null) return;
+    if (userModel!.tasks == null) return;
+
+    final listEquals = const ListEquality().equals;
+    int deleteTaskIndex = 0;
+    for (; deleteTaskIndex < userModel!.tasks!.length; deleteTaskIndex++) {
+      TaskModel task = userModel!.tasks![deleteTaskIndex];
+      if (listEquals(task.notifications, notifications)) {
+        for (NotificationModel notification in notifications) {
+          await notificationService.cancellNotifications(notification.alermId);
+        }
+        break;
+      }
+    }
+
+    deleteTask(userModel!.tasks![deleteTaskIndex]);
   }
 
   void deleteTask(TaskModel task) {
@@ -87,57 +114,15 @@ class UserController extends GetxController {
   void getThemeData() async {
     isDarkMode =
         await SettingRepository.getBool(AppConstant.isDarkModeKey) ?? false;
-    print('isDarkMode : ${isDarkMode}');
   }
 
   Future<void> getUser() async {
     userModel = await userModelRepository.loadUser();
+    print('userModel?.tasks?.length : ${userModel?.tasks?.length}');
 
+    // for (var task in userModel!.tasks ?? []) {
+    //   print('task : ${task}');
+    // }
     update();
   }
 }
-
-// class UserUtilController extends GetxController {
-//   bool expandedTemperature = true;
-//   bool expandedPulse = true;
-//   bool expandedBloodPressure = true;
-//   bool expandedPainLevel = true;
-//   bool expandedFealGraph = true;
-//   bool expandedTemperatureGraph = true;
-//   bool expandedPulseGraph = true;
-//   bool expandedBloodPressureGraph = true;
-//   bool expandedPainLevelGraph = true;
-
-//   UserController userController = Get.find<UserController>();
-
-//   @override
-//   void onInit() {
-//     expandedTemperature =
-//         userController.userModel!.userUtilModel.expandedTemperature;
-//     expandedPulse = userController.userModel!.userUtilModel.expandedPulse;
-//     expandedBloodPressure =
-//         userController.userModel!.userUtilModel.expandedBloodPressure;
-//     expandedPainLevel =
-//         userController.userModel!.userUtilModel.expandedPainLevel;
-//     expandedFealGraph =
-//         userController.userModel!.userUtilModel.expandedFealGraph;
-//     expandedTemperatureGraph =
-//         userController.userModel!.userUtilModel.expandedTemperatureGraph;
-//     expandedPulseGraph =
-//         userController.userModel!.userUtilModel.expandedPulseGraph;
-//     expandedBloodPressureGraph =
-//         userController.userModel!.userUtilModel.expandedBloodPressureGraph;
-//     expandedPainLevelGraph =
-//         userController.userModel!.userUtilModel.expandedPainLevelGraph;
-//     super.onInit();
-//   }
-
-//   void toggleExpandedPainLevel(bool v) {
-//     userController.userModel!.userUtilModel!.expandedPainLevel =
-//         !userController.userModel!.userUtilModel!.expandedPainLevel;
-
-//     userController.userModelRepository.saveUser(userController.userModel!);
-
-//     update();
-//   }
-// }

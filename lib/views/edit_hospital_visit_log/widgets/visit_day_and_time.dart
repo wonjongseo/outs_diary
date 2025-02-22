@@ -1,3 +1,4 @@
+import 'package:ours_log/common/enums/before_alram_time.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
@@ -19,23 +20,23 @@ class VisitDayAndTime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return GetBuilder<EditHosipitalVisitController>(builder: (controller) {
+    return GetBuilder<EditHosipitalVisitController>(builder: (cn) {
       return ColTextAndWidget(
         label: AppString.days.tr,
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            _DayAndTimeSelector(controller, context),
+            _DayAndTimeSelector(cn, context),
             SizedBox(height: RS.h10 * 3),
             GestureDetector(
-              onTap: controller.onTapEnrollAlarm,
+              onTap: isEdit ? cn.onTapEnrollAlarm : null,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
                     AppString.enrollAlarm.tr,
-                    style: controller.isEnrollAlarm
+                    style: cn.isEnrollAlarm
                         ? TextStyle(
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.w600,
@@ -44,20 +45,19 @@ class VisitDayAndTime extends StatelessWidget {
                   ),
                   SizedBox(width: RS.w10),
                   CircleAvatar(
-                    backgroundColor: controller.isEnrollAlarm
-                        ? AppColors.primaryColor
-                        : Colors.grey,
+                    backgroundColor:
+                        cn.isEnrollAlarm ? AppColors.primaryColor : Colors.grey,
                     radius: RS.w10 * 1.2,
                     child: Icon(
                       Icons.done,
                       size: RS.w10 * 1.5,
-                      color: controller.isEnrollAlarm ? Colors.white : null,
+                      color: cn.isEnrollAlarm ? Colors.white : null,
                     ),
                   )
                 ],
               ),
             ),
-            if (controller.isEnrollAlarm) ...[
+            if (cn.isEnrollAlarm) ...[
               SizedBox(height: RS.h10 * 2),
               Column(
                 children: [
@@ -66,53 +66,19 @@ class VisitDayAndTime extends StatelessWidget {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            controller.isBeforeOneDayAlarm =
-                                !controller.isBeforeOneDayAlarm;
-                            controller.update();
-                          },
+                      children: List.generate(BeforeAlarmTimeType.values.length,
+                          (index) {
+                        return GestureDetector(
+                          onTap: isEdit
+                              ? () => cn.selectAlram(context, index)
+                              : null,
                           child: SelectBeforeAlarmTime(
-                              width: size.width * .2,
-                              text: '1${AppString.beforeDay.tr}',
-                              isActive: controller.isBeforeOneDayAlarm),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            controller.isBeforeSizHourAlarm =
-                                !controller.isBeforeSizHourAlarm;
-                            controller.update();
-                          },
-                          child: SelectBeforeAlarmTime(
-                              width: size.width * .2,
-                              text: '6${AppString.beforeHour.tr}',
-                              isActive: controller.isBeforeSizHourAlarm),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            controller.isBeforeOneHourAlarm =
-                                !controller.isBeforeOneHourAlarm;
-                            controller.update();
-                          },
-                          child: SelectBeforeAlarmTime(
-                              width: size.width * .2,
-                              text: '1${AppString.beforeHour.tr}',
-                              isActive: controller.isBeforeOneHourAlarm),
-                        ),
-                        GestureDetector(
-                          onTap: () => controller.onTapBeforeAlramTime(context),
-                          child: SelectBeforeAlarmTime(
-                              width: size.width * .2,
-                              text: controller.selectedBeforeAlram == null
-                                  ? AppString.selectText.tr
-                                  : '${controller.selectedBeforeAlram!} 전',
-                              isActive: controller.selectedBeforeAlram == null
-                                  ? false
-                                  : true),
-                        ),
-                      ],
+                            width: size.width * .2,
+                            text: cn.getAlramText(index),
+                            isActive: cn.beforeAlarmTypes[index].isChecked,
+                          ),
+                        );
+                      }),
                     ),
                   )
                 ],
@@ -125,19 +91,18 @@ class VisitDayAndTime extends StatelessWidget {
   }
 
   Row _DayAndTimeSelector(
-      EditHosipitalVisitController controller, BuildContext context) {
+      EditHosipitalVisitController cn, BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: CustomTextFormField(
-            hintText: controller.selectedDate == null
+            hintText: cn.selectedDate == null
                 ? AppString.visitDay.tr
                 : DateFormat("MM${AppString.month.tr} d${AppString.day.tr}")
-                    .format(controller.selectedDate),
+                    .format(cn.selectedDate),
             readOnly: true,
             widget: IconButton(
-              onPressed:
-                  isEdit ? () => controller.onTapVisitDay(context) : null,
+              onPressed: isEdit ? () => cn.onTapVisitDay(context) : null,
               icon: const Icon(Icons.keyboard_arrow_down),
             ),
           ),
@@ -146,10 +111,9 @@ class VisitDayAndTime extends StatelessWidget {
         Expanded(
           child: CustomTextFormField(
             readOnly: true,
-            hintText: controller.startTime ?? AppString.visitTime.tr,
+            hintText: cn.startTime ?? AppString.visitTime.tr,
             widget: IconButton(
-              onPressed:
-                  isEdit ? () => controller.onTapVisitTime(context) : null,
+              onPressed: isEdit ? () => cn.onTapVisitTime(context) : null,
               icon: const Icon(Icons.keyboard_arrow_down),
             ),
           ),

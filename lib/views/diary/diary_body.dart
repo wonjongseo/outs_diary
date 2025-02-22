@@ -52,6 +52,7 @@ class DiaryBody extends StatelessWidget {
                     headerVisible: false,
                     onPageChanged: diaryController.onPageChanged,
                     calendarStyle: CalendarStyle(
+                      markersAnchor: 1,
                       rangeHighlightColor:
                           Colors.redAccent.withValues(alpha: .5),
                       outsideDaysVisible: false,
@@ -84,8 +85,6 @@ class DiaryBody extends StatelessWidget {
   }
 
   Widget? prioritizedBuilder(context, DateTime day, focusedDay) {
-    // bool isNextDay = diaryController.now.day - day.day < 0;
-
     bool isNextDay = AppFunction.isNextDay(diaryController.now, day);
     bool isToday = AppFunction.isSameDay(diaryController.now, day);
     bool isMustPill = false;
@@ -108,11 +107,9 @@ class DiaryBody extends StatelessWidget {
           width: RS.w10 * 4.5,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isToday
-                ? AppColors.primaryColor.withValues(alpha: .5)
-                : isNextDay
-                    ? Colors.grey.withValues(alpha: .15)
-                    : Colors.grey.withValues(alpha: .4),
+            color: isNextDay
+                ? Colors.grey.withValues(alpha: .15)
+                : Colors.grey.withValues(alpha: .4),
           ),
           margin: EdgeInsets.only(bottom: RS.h10 / 2),
         ),

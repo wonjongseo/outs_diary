@@ -23,6 +23,25 @@ class NotificationModel {
 
   @override
   String toString() {
-    return 'TaskModel(dateTime: $notiDateTime, alermId: $alermId, id: $id, createdAt: $createdAt)';
+    return 'NotificationModel(dateTime: $notiDateTime, alermId: $alermId, id: $id, createdAt: $createdAt)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is NotificationModel &&
+        other.notiDateTime == notiDateTime &&
+        other.alermId == alermId &&
+        other.id == id &&
+        other.createdAt == createdAt;
+  }
+
+  @override
+  int get hashCode {
+    return notiDateTime.hashCode ^
+        alermId.hashCode ^
+        id.hashCode ^
+        createdAt.hashCode;
   }
 }

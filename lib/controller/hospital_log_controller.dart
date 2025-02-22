@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
+import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
 import 'package:ours_log/respository/hospital_log_repository.dart';
@@ -48,21 +49,40 @@ class HospitalLogController extends GetxController {
 
     getAll();
 
-    List hospitalNames =
-        await SettingRepository.getList(AppConstant.hospitalNamesBox);
-
-    if (hospitalNames.contains(hospitalLogModel.hospitalName)) {
-      hospitalNames.remove(hospitalLogModel.hospitalName);
+    saveLastValue(
+      AppConstant.hospitalNamesBox,
+      hospitalLogModel.hospitalName,
+      5,
+    );
+    saveLastValue(AppConstant.officeNamesBox, hospitalLogModel.officeName, 5);
+    saveLastValue(AppConstant.diseaseNamesBox, hospitalLogModel.diagnosis, 5);
+    if (hospitalLogModel.pills != null && hospitalLogModel.pills!.isNotEmpty) {
+      for (var pillName in hospitalLogModel.pills!) {
+        saveLastValue(AppConstant.pillNamesBox, pillName, 8);
+      }
     }
-    hospitalNames.add(hospitalLogModel.hospitalName);
-    if (hospitalNames.length > 5) {
+  }
+
+  void saveLastValue(String boxKey, String? saveValue, int maxLength) async {
+    if (saveValue == null || saveValue.isEmpty) return;
+
+    List hospitalNames = await SettingRepository.getList(boxKey);
+
+    if (hospitalNames.contains(saveValue)) {
+      hospitalNames.remove(saveValue);
+    }
+    hospitalNames.add(saveValue);
+    if (hospitalNames.length > maxLength) {
       hospitalNames.removeAt(0);
     }
 
-    SettingRepository.setList(AppConstant.hospitalNamesBox, hospitalNames);
+    SettingRepository.setList(boxKey, hospitalNames);
   }
 
-  void delete(HospitalLogModel hospitalLogModel) {
+  delete(HospitalLogModel hospitalLogModel) async {
+    UserController userController = Get.find<UserController>();
+    await userController
+        .deleteTaskFromNotificationList(hospitalLogModel.notifications);
     hospitalLogRepository.delete(hospitalLogModel);
     getAll();
   }

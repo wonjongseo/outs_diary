@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/models/is_expandtion_type.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
@@ -72,6 +73,20 @@ class EditDiaryScreen extends StatelessWidget {
                       SizedBox(height: RS.h10),
                       if (editDiaryController.donePillDayModels.isNotEmpty)
                         const DayDonePillRow(),
+                      SizedBox(height: RS.h10),
+                      ExpansionIconCard(
+                        initiallyExpanded: userController
+                                .userModel!
+                                .userUtilModel
+                                .expandedFields[IsExpandtionType.painLevel] ??
+                            false,
+                        onExpansionChanged: (bool v) => userController
+                            .toggleExpanded(IsExpandtionType.painLevel),
+                        icons: AppConstant.zeroToNineIcons,
+                        label: AppString.painLevel.tr,
+                        isOnlyOne: true,
+                        selectedIconIndexs: editDiaryController.painFulIndex,
+                      ),
                       SizedBox(height: RS.h10),
                       ColTextAndWidget(
                         label: AppString.weight.tr,
@@ -155,20 +170,6 @@ class EditDiaryScreen extends StatelessWidget {
                         child: const PoopDayPeriod(),
                       ),
                       SizedBox(height: RS.h10),
-                      ExpansionIconCard(
-                        initiallyExpanded: userController
-                                .userModel!
-                                .userUtilModel
-                                .expandedFields[IsExpandtionType.painLevel] ??
-                            false,
-                        onExpansionChanged: (bool v) => userController
-                            .toggleExpanded(IsExpandtionType.painLevel),
-                        icons: AppConstant.zeroToNineIcons,
-                        label: AppString.painLevel.tr,
-                        isOnlyOne: true,
-                        selectedIconIndexs: editDiaryController.painFulIndex,
-                      ),
-                      SizedBox(height: RS.h10),
                       CustomExpansionCard(
                         title: AppString.memo.tr,
                         child: Column(
@@ -192,8 +193,18 @@ class EditDiaryScreen extends StatelessWidget {
                                   editDiaryController.carouselSliderController,
                               label: AppString.photo.tr,
                               uploadFiles: editDiaryController.uploadFiles,
-                              selectedPhotos:
-                                  editDiaryController.selectedPhotos,
+                              selectedPhotos: () =>
+                                  AppFunction.openCameraOrLibarySheet(
+                                context: context,
+                                takePictureFunc: () =>
+                                    editDiaryController.selectedPhotos(
+                                  isTakeAPhoto: true,
+                                ),
+                                openLibaryFunc: () =>
+                                    editDiaryController.selectedPhotos(
+                                  isTakeAPhoto: false,
+                                ),
+                              ),
                               removePhoto: editDiaryController.removePhoto,
                             ),
                           ],

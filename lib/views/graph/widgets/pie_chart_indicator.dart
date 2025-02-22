@@ -9,15 +9,18 @@ class PieChartIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CircleAvatar(
-          radius: RS.h10 * .8,
-          backgroundColor: color,
-        ),
-        SizedBox(width: RS.w10),
-        Text(text)
-      ],
+    return Padding(
+      padding: EdgeInsets.only(bottom: RS.h10),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: RS.h10 * .8,
+            backgroundColor: color,
+          ),
+          SizedBox(width: RS.w10),
+          Text(text)
+        ],
+      ),
     );
   }
 }

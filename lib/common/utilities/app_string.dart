@@ -4,6 +4,11 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.savedVisitLog: AppString.savedVisitLogJp,
+          AppString.editedVisitLog: AppString.editedVisitLogJp,
+          AppString.plzSelectVisitTme: AppString.plzSelectVisitTmeJp,
+          AppString.plzInputHospitalName: AppString.plzInputHospitalNameJp,
+          AppString.visit: AppString.visitJp,
           AppString.whatTimeBeforeScrhdule: AppString.whatTimeBeforeScrhduleJp,
           AppString.plzSelectAlarmTime: AppString.plzSelectAlarmTimeJp,
           AppString.averageHealthValue: AppString.averageHealthValueJp,
@@ -222,6 +227,11 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.savedVisitLog: AppString.savedVisitLogKr,
+          AppString.editedVisitLog: AppString.editedVisitLogKr,
+          AppString.plzSelectVisitTme: AppString.plzSelectVisitTmeKr,
+          AppString.plzInputHospitalName: AppString.plzInputHospitalNameKr,
+          AppString.visit: AppString.visitKr,
           AppString.whatTimeBeforeScrhdule: AppString.whatTimeBeforeScrhduleKr,
           AppString.plzSelectAlarmTime: AppString.plzSelectAlarmTimeKr,
           AppString.averageHealthValue: AppString.averageHealthValueKr,
@@ -440,6 +450,11 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.savedVisitLog: AppString.savedVisitLogEn,
+          AppString.editedVisitLog: AppString.editedVisitLogEn,
+          AppString.plzSelectVisitTme: AppString.plzSelectVisitTmeEn,
+          AppString.plzInputHospitalName: AppString.plzInputHospitalNameEn,
+          AppString.visit: AppString.visitEn,
           AppString.whatTimeBeforeScrhdule: AppString.whatTimeBeforeScrhduleEn,
           AppString.plzSelectAlarmTime: AppString.plzSelectAlarmTimeEn,
           AppString.averageHealthValue: AppString.averageHealthValueEn,
@@ -678,9 +693,14 @@ class AppString {
   static String visitTimeJp = '来院の時間';
   static String visitTimeEn = "visitTimeEn";
 
+  static String plzInputHospitalName = 'plzInputHospitalNametr';
+  static String plzInputHospitalNameKr = '병원 이름을 입력해주세요';
+  static String plzInputHospitalNameJp = '病院の名を入力してください';
+  static String plzInputHospitalNameEn = "plzInputHospitalName";
+
   static String plzInputvisitTime = 'plzInputvisitTimetr';
-  static String plzInputvisitTimeKr = '방문 시간을 입력해주세요.';
-  static String plzInputvisitTimeJp = '来院の時間を入力してください。';
+  static String plzInputvisitTimeKr = '방문 시간을 입력해주세요';
+  static String plzInputvisitTimeJp = '来院の時間を入力してください';
   static String plzInputvisitTimeEn = "plzInputvisitTime";
 
   static String enrollAlarm = 'enrollAlarmtr';
@@ -735,20 +755,20 @@ class AppString {
 
   static String dontSaveFuture = 'dontSaveFuturetr';
   static String dontSaveFutureKr = '미래는 저장할 수 없습니다.';
-  static String dontSaveFutureJp = '未来には保存できません。';
+  static String dontSaveFutureJp = '未来には保存できません';
   static String dontSaveFutureEn = "dontSaveFutureEn";
 
   static String changedSystemLanguageMsg = 'changedSystemLanguageMsgTr';
   static String changedSystemLanguageMsgKr =
       '시스템 언어가 변경되었습니다.\n폰트를 적용 시키려면 앱을 재기동 할 필요가 있습니다.';
   static String changedSystemLanguageMsgJp =
-      'システム言語が変更されました。\nフォントを適用させるにはアプリを再起動する必要があります。';
+      'システム言語が変更されました。\nフォントを適用させるにはアプリを再起動する必要があります';
   static String changedSystemLanguageMsgEn =
       "The System Language is changed.\nIf you want to change the app font, It is required to Restart";
 
   static String howFealToday = 'howFealTodaytr';
-  static String howFealTodayKr = '어떤 감정의 하루였나요.';
-  static String howFealTodayJp = 'どのような感情の1日でしたか。';
+  static String howFealTodayKr = '어떤 감정의 하루였나요';
+  static String howFealTodayJp = 'どのような感情の1日でしたか';
   static String howFealTodayEn = "howFealToday";
 
   static String painLevel = 'painLeveltr';
@@ -792,8 +812,8 @@ class AppString {
   static String pulseEn = "pulse";
 
   static String plzSelectFealIcon = 'plzSelectFealIconTr';
-  static String plzSelectFealIconKr = '감정 아이콘을 선택해주세요.';
-  static String plzSelectFealIconJp = '感情アイコンを選んでください。';
+  static String plzSelectFealIconKr = '감정 아이콘을 선택해주세요';
+  static String plzSelectFealIconJp = '感情アイコンを選んでください';
   static String plzSelectFealIconEn = "plzSelectFealIcon";
 
   static String koreanText = 'koreanTextTr';
@@ -803,7 +823,7 @@ class AppString {
 
   static String plzEnterTextMsg = 'plzEnterTextMsgTr';
   static String plzEnterTextMsgKr = '내용을 입력해주세요.';
-  static String plzEnterTextMsgJp = '内容を入力してください。';
+  static String plzEnterTextMsgJp = '内容を入力してください';
   static String plzEnterTextMsgEn = "Select Meal";
 
   static String health = 'healthTr';
@@ -827,8 +847,8 @@ class AppString {
   static String photoOfTodayEn = "photo of today";
 
   static String requiredMsg = 'requiredMsgTr';
-  static String requiredMsgKr = '을(를) 입력해주세요.';
-  static String requiredMsgJp = 'を入力してください。';
+  static String requiredMsgKr = '을(를) 입력해주세요';
+  static String requiredMsgJp = 'を入力してください';
   static String requiredMsgEn = " is Required";
 
   static String requiredText = "requiredTextTr";
@@ -848,7 +868,7 @@ class AppString {
 
   static String whatTimeDoYouDrinkPill = "whatTimeDoYouDrinkPillTr";
   static String whatTimeDoYouDrinkPillKr = "하루에 몇번 드시고 계신가요 ?";
-  static String whatTimeDoYouDrinkPillJp = "1日に何回お飲みですか。";
+  static String whatTimeDoYouDrinkPillJp = "1日に何回お飲みですか？";
   static String whatTimeDoYouDrinkPillEn = "whatTimeDoYouDrinkPill";
 
   static String englishText = 'englishTextTr';
@@ -944,7 +964,7 @@ class AppString {
   static String regularHospitalEn = "Regular Hospital";
 
   static String hasipitalCtrHintTr = "hasipitalCtrHintTr";
-  static String hasipitalCtrHintKr = "병원 명을 입력해주세요.";
+  static String hasipitalCtrHintKr = "병원 명을 입력해주세요";
   static String hasipitalCtrHintJp = "病院名を入力してください";
   static String hasipitalCtrHintEn = "Please Enter The name of Hasipital";
 
@@ -1065,14 +1085,14 @@ class AppString {
   static String todayEn = "Today";
 
   static String plzSelectFeal = "plzSelectFealTrTr";
-  static String plzSelectFealKr = '오늘의 감정을 선택해주세요.';
-  static String plzSelectFealJp = "今日の感情を選択してください。";
+  static String plzSelectFealKr = '오늘의 감정을 선택해주세요';
+  static String plzSelectFealJp = "今日の感情を選択してください";
   static String plzSelectFealEn = "plzSelectFealEn";
 
   static String previousDeletePetMsg2Tr = "previousDeletePetMsg2Tr";
   static String previousDeletePetMsg2Kr = '에 관한 데이터를 복구할 수 없습니다.';
   static String previousDeletePetMsg2Jp = "に関するデータを戻すことができません。";
-  static String previousDeletePetMsg2En = "cannot be recovered.";
+  static String previousDeletePetMsg2En = "cannot be recovered";
 
   static String previousDeletePetMsg3Tr = "previousDeletePetMsg3Tr";
   static String previousDeletePetMsg3Kr = '그래도 ';
@@ -1172,18 +1192,18 @@ class AppString {
   static String completeTextEn = "Complete";
 
   static String savedHealthRecord = "savedHealthRecordTr";
-  static String savedHealthRecordKr = '일의 건강이 기록되었습니다.';
-  static String savedHealthRecordJp = "日の健康が記録されました。";
+  static String savedHealthRecordKr = '일의 건강이 기록되었습니다';
+  static String savedHealthRecordJp = "日の健康が記録されました";
   static String savedHealthRecordEn = "savedHealthRecord";
 
   static String updateMsg = "updateMsgTr";
   static String updateMsgKr = '변경 되었습니다.';
-  static String updateMsgJp = "更新されました。";
+  static String updateMsgJp = "更新されました";
   static String updateMsgEn = "is Edited";
 
   static String notTextScheduleText = "notTextScheduleTextTr";
   static String notTextScheduleTextKr = '일정이 없습니다.';
-  static String notTextScheduleTextJp = "予定がありません。";
+  static String notTextScheduleTextJp = "予定がありません";
   static String notTextScheduleTextEn = "No schedule";
 
   static String addScheduleText = "addScheduleTextTr";
@@ -1347,13 +1367,13 @@ class AppString {
   static String beforeStartEn = "beforeStart\n";
 
   static String plzSetting = "plzSettingTr";
-  static String hospitalExpensesKr = "몇 가지 세팅을 해주세요.";
-  static String hospitalExpensesJp = '何個の設定を行なってください。';
+  static String hospitalExpensesKr = "몇 가지 세팅을 해주세요";
+  static String hospitalExpensesJp = '何個の設定を行なってください';
   static String hospitalExpensesEn = "Medical expenses";
 
   static String selectBackgroundMsg = "selectBackgroundMsgTr";
-  static String entertainmentExpensesKr = "배경을 선택해주세요.";
-  static String entertainmentExpensesJp = '背景を選んでください。';
+  static String entertainmentExpensesKr = "배경을 선택해주세요";
+  static String entertainmentExpensesJp = '背景を選んでください';
   static String entertainmentExpensesEn = "Entertainment expenses";
 
   static String noBackground = "noBackgroundTr";
@@ -1398,12 +1418,12 @@ class AppString {
 
   static String whatWeekDayYouDrink = "whatWeekDayYouDrinkTr";
   static String whatWeekDayYouDrinkKr = "어떤 요일에 복용하고 계신가요 ?";
-  static String whatWeekDayYouDrinkJp = 'どんな曜日にお飲みですか。';
+  static String whatWeekDayYouDrinkJp = 'どんな曜日にお飲みですか';
   static String whatWeekDayYouDrinkEn = "whatWeekDayYouDrink";
 
   static String doYouAlarmWhenDrinkPill = "doYouAlarmWhenDrinkPillTr";
   static String doYouAlarmWhenDrinkPillKr = "약 복용시간 알람을 받으시겠습니까 ?";
-  static String doYouAlarmWhenDrinkPillJp = '薬を飲む時間のアラムをお受けしますか。';
+  static String doYouAlarmWhenDrinkPillJp = '薬を飲む時間のアラムをお受けしますか';
   static String doYouAlarmWhenDrinkPillEn = "doYouAlarmWhenDrinkPill";
 
   static String moneySign = "moneySignTr";
@@ -1469,7 +1489,7 @@ class AppString {
   static String background5Desc = "background5DescTr";
   static String background5DescKr = "남기면 안돼";
   static String background5DescJp = 'お残し厳禁';
-  static String background5DescEn = "Do Dot ..";
+  static String background5DescEn = "Do Dot .";
 
   static String fealIcon1Name = "fealIcon1NameTr";
   static String fealIcon1NameKr = "심플이들";
@@ -1488,7 +1508,7 @@ class AppString {
 
   static String fealIcon2Des = "fealIcon2DesTr";
   static String fealIcon2DesKr = "나를 믿고 따라온 친구들";
-  static String fealIcon2DesJp = '私を信じてついてきた仲間達';
+  static String fealIcon2DesJp = '私を信じている仲間達';
   static String fealIcon2DesEn = "Cucumber";
 
   static String fealIcon3Name = "fealIcon3NameTr";
@@ -1522,18 +1542,18 @@ class AppString {
   static String fealIcon5DesEn = "Cucumber";
 
   static String doneDeletionMsg = "doneDeletionMsgTr";
-  static String doneDeletionMsgKr = "(이)가 삭제되었습니다.";
-  static String doneDeletionMsgJp = 'が削除されました。';
+  static String doneDeletionMsgKr = "(이)가 삭제되었습니다";
+  static String doneDeletionMsgJp = 'が削除されました';
   static String doneDeletionMsgEn = " is Deleted";
 
   static String doneAddtionMsg = "doneAddtionMsgTr";
-  static String doneAddtionMsgKr = "(이)가 저장되었습니다.";
-  static String doneAddtionMsgJp = 'が保存されました。';
+  static String doneAddtionMsgKr = "(이)가 저장되었습니다";
+  static String doneAddtionMsgJp = 'が保存されました';
   static String doneAddtionMsgEn = " is Saved";
 
   static String doneUpdatedMsg = "doneUpdatedMsgTr";
-  static String doneUpdatedMsgKr = "으로 변경되었습니다.";
-  static String doneUpdatedMsgJp = 'に変更されました。';
+  static String doneUpdatedMsgKr = "으로 변경되었습니다";
+  static String doneUpdatedMsgJp = 'に変更されました';
   static String doneUpdatedMsgEn = "";
 
   static String stampIsText = "stampIsTextTr";
@@ -1542,26 +1562,25 @@ class AppString {
   static String stampIsTextEn = "Stamp";
 
   static String changedVisiableMsg = "changedVisiableMsgTr";
-  static String changedVisiableMsgKr = "(이)가 표시로 변경되었습니다.";
-  static String changedVisiableMsgJp = 'が表示に変更されました。';
+  static String changedVisiableMsgKr = "(이)가 표시로 변경되었습니다";
+  static String changedVisiableMsgJp = 'が表示に変更されました';
   static String changedVisiableMsgEn = "has been changed visiblely";
 
   static String changedInVisiableMsg = "changedInVisiableMsgTr";
-  static String changedInVisiableMsgkr = "(이)가 표시안함으로 변경되었습니다.";
-  static String changedInVisiableMsgJp = 'が未表示に変更されました。';
+  static String changedInVisiableMsgkr = "(이)가 표시안함으로 변경되었습니다";
+  static String changedInVisiableMsgJp = 'が未表示に変更されました';
   static String changedInVisiableMsgEn = "has been changed invisiblely";
 
   static String noCameraPermssionMsg = 'noCameraPermssionMsgTr';
   static String noCameraPermssionMsgKr = '카메라 접근 권한이 없습니다.';
-  static String noCameraPermssionMsgJp = 'カメラのアクセス権限がないです。';
-  static String noCameraPermssionMsgEn =
-      "You do not have access to the camera.";
+  static String noCameraPermssionMsgJp = 'カメラのアクセス権限がないです';
+  static String noCameraPermssionMsgEn = "You do not have access to the camera";
 
   static String noLibaryPermssion = 'noLibaryPermssionMsgTr';
   static String noLibaryPermssionMsgKr = '라이브러리 접근 권한이 없습니다.';
-  static String noLibaryPermssionMsgJp = 'ライブラリのアクセス権限がないです。';
+  static String noLibaryPermssionMsgJp = 'ライブラリのアクセス権限がないです';
   static String requiredLibaryPermssionMsgEn =
-      "You do not have access to the library.";
+      "You do not have access to the library";
 
   static String errorCreateEmail1 = "errorCreateEmail1Tr";
   static String errorCreateEmail1Kr = '$appNameKr에서 이메일을 작성하는데 실패하였습니다.';
@@ -1606,7 +1625,7 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
 
   static String askShutDownMsg = 'askShutDownMsgTr';
   static String askShutDownMsgKr = '재기동 하시겠습니까?';
-  static String askShutDownMsgJp = '再起動しますか。';
+  static String askShutDownMsgJp = '再起動しますか';
   static String askShutDownMsgEn = "Would you like to restart the app?";
 
   static String reportMsgContect = "reportMsgContectTr";
@@ -1675,9 +1694,9 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
 
   static String completeSetting = 'completeSettingTr';
   static String completeSettingKr = '설정이 완료되었습니다.\n설정 페이지에서 변경하실 수 있습니다.';
-  static String completeSettingJp = '設定が完了しました。\n設定ページより変更できます。';
+  static String completeSettingJp = '設定が完了しました。\n設定ページより変更できます';
   static String completeSettingEn =
-      "Setup is complete.\nYou can change it on the settings page.";
+      "Setup is complete.\nYou can change it on the settings page";
 
   static String regularSchedule = 'regularScheduleTr';
   static String regularScheduleKr = '정기 일정';
@@ -1691,8 +1710,8 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
 
   static String cancledNotification = 'cancledNotificationTr';
   static String cancledNotificationKr = '개의 알람이 취소되었습니다.';
-  static String cancledNotificationJp = '個のアラームがキャンセルされました。';
-  static String cancledNotificationEn = "alarm(s) have been canceled.";
+  static String cancledNotificationJp = '個のアラームがキャンセルされました';
+  static String cancledNotificationEn = "alarm(s) have been canceled";
 
   static String photo = 'photoTr';
   static String photoKr = '사진';
@@ -1778,4 +1797,24 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String averageHealthValueKr = '평균 건강 수치';
   static String averageHealthValueJp = '平均健康数値';
   static String averageHealthValueEn = "Average Health Figure ";
+
+  static String visit = 'visittr';
+  static String visitKr = '방문';
+  static String visitJp = '来院';
+  static String visitEn = "visit";
+
+  static String plzSelectVisitTme = 'plzSelectVisitTmetr';
+  static String plzSelectVisitTmeKr = '알람을 등록하기 위해서 방문 시간을 선택해주세요';
+  static String plzSelectVisitTmeJp = 'アラムを登録するために\n来院時間を選択してください';
+  static String plzSelectVisitTmeEn = "plzSelectVisitTme";
+
+  static String savedVisitLog = 'savedVisitLogtr';
+  static String savedVisitLogKr = '병원 기록이 저장 되었습니다';
+  static String savedVisitLogJp = '来院記録が保存されました。';
+  static String savedVisitLogEn = "savedVisitLog";
+
+  static String editedVisitLog = 'editedVisitLogtr';
+  static String editedVisitLogKr = '병원 기록이 변경 되었습니다';
+  static String editedVisitLogJp = '来院記録が変更されました。';
+  static String editedVisitLogEn = "editedVisitLog";
 }

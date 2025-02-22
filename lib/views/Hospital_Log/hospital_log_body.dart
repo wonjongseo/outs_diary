@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/theme/theme.dart';
+import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
@@ -53,16 +54,15 @@ class HospitalLogBody extends StatelessWidget {
                     calendarBuilders: CalendarBuilders(
                       markerBuilder: (context, day, event) {
                         if (event.isEmpty) return null;
-                        return Text(
-                          '+${event.length}',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+
+                        return FaIcon(
+                          FontAwesomeIcons.hospital,
+                          color: AppColors.primaryColor,
+                          size: RS.w10 * 1.6,
                         );
                       },
                     ),
                     calendarStyle: CalendarStyle(
-                      markersAlignment: Alignment.bottomCenter,
                       markersAnchor: 1,
                       defaultTextStyle: weekdayStyle,
                       weekendTextStyle: weekdayStyle,
@@ -101,19 +101,17 @@ class HospitalLogBody extends StatelessWidget {
                             ),
                           ),
                         GestureDetector(
-                          onTap: () {
-                            Get.to(
-                              () => EditHospitalVisitLogScreen(
-                                selectedDate: value[index].dateTime,
-                                hospitalLogModel: value[index],
-                              ),
-                            );
-                          },
+                          onTap: () => Get.to(
+                            () => EditHospitalVisitLogScreen(
+                              selectedDate: value[index].dateTime,
+                              hospitalLogModel: value[index],
+                            ),
+                          ),
                           child: SelectedVisitHospital(
-                              hospitalLog: value[index],
-                              onTapDelete: () {
-                                hospitalLogController.delete(value[index]);
-                              }),
+                            hospitalLog: value[index],
+                            // onTapDelete: () =>
+                            //     hospitalLogController.delete(value[index]),
+                          ),
                         ),
                       ],
                     );
@@ -132,43 +130,49 @@ class SelectedVisitHospital extends StatelessWidget {
   const SelectedVisitHospital({
     super.key,
     required this.hospitalLog,
-    required this.onTapDelete,
+    // required this.onTapDelete,
   });
 
   final HospitalLogModel hospitalLog;
-  final Function() onTapDelete;
+  // final Function() onTapDelete;
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 12.0,
-        vertical: 4.0,
+      margin: EdgeInsets.symmetric(horizontal: RS.w10 * 1.2).copyWith(
+        bottom: RS.h10 * 1.5,
       ),
       padding: EdgeInsets.all(RS.w10 * 1.2),
       decoration: BoxDecoration(
-        border: Border.all(),
+        color: AppColors.primaryColor,
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(hospitalLog.hospitalName),
                   SizedBox(height: RS.h10 / 2),
-                  Text(hospitalLog.startTime ?? ''),
+                  Row(
+                    children: [
+                      const Icon(Icons.access_time_rounded),
+                      SizedBox(width: RS.w10 / 2),
+                      Text(hospitalLog.startTime ?? ''),
+                    ],
+                  ),
                 ],
               ),
-              IconButton(
-                onPressed: onTapDelete,
-                icon: const Icon(
-                  FontAwesomeIcons.trashCan,
-                ),
-              )
+              Icon(Icons.keyboard_arrow_right)
+              // IconButton(
+              //   onPressed: onTapDelete,
+              //   icon: const Icon(
+              //     FontAwesomeIcons.trashCan,
+              //   ),
+              // )
               // Row(
               //   mainAxisAlignment: MainAxisAlignment.end,
               //   children: [

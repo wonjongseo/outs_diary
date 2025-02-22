@@ -17,18 +17,15 @@ class UserUtilModelAdapter extends TypeAdapter<UserUtilModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return UserUtilModel()
-      ..expandedFields = (fields[0] as Map).cast<IsExpandtionType, bool>()
-      ..isCricleGraph = fields[1] as bool;
+      ..expandedFields = (fields[0] as Map).cast<IsExpandtionType, bool>();
   }
 
   @override
   void write(BinaryWriter writer, UserUtilModel obj) {
     writer
-      ..writeByte(2)
-      ..writeByte(0)
-      ..write(obj.expandedFields)
       ..writeByte(1)
-      ..write(obj.isCricleGraph);
+      ..writeByte(0)
+      ..write(obj.expandedFields);
   }
 
   @override

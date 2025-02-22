@@ -52,9 +52,7 @@ class DiaryController extends GetxController {
     bool isNextDay = AppFunction.isNextDay(now, cSelectedDay);
 
     if (!isNextDay) {
-      Get.to(() => EditDiaryScreen(
-            selectedDay: selectedDay,
-          ));
+      Get.to(() => EditDiaryScreen(selectedDay: selectedDay));
     } else {
       if (!Get.isSnackbarOpen) {
         Get.snackbar(

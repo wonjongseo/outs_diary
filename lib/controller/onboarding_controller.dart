@@ -165,23 +165,23 @@ class OnboardingController extends GetxController {
     List<String> times = [];
     List<DayPeriodType>? dayPeriodTypes = [];
 
-    if (isAlermEnable) {
-      selectedDays.sort((a, b) => a.index.compareTo(b.index));
-      List<int> days = List.generate(
-          selectedDays.length, (index) => selectedDays[index].index + 1);
+    selectedDays.sort((a, b) => a.index.compareTo(b.index));
+    List<int> days = List.generate(
+        selectedDays.length, (index) => selectedDays[index].index + 1);
 
-      if (selectedMorningLunchEvening.contains(0)) {
-        times.add(morningTime);
-        dayPeriodTypes.add(DayPeriodType.morning);
-      }
-      if (selectedMorningLunchEvening.contains(1)) {
-        times.add(lunchTime);
-        dayPeriodTypes.add(DayPeriodType.afternoon);
-      }
-      if (selectedMorningLunchEvening.contains(2)) {
-        times.add(eveningTime);
-        dayPeriodTypes.add(DayPeriodType.evening);
-      }
+    if (selectedMorningLunchEvening.contains(0)) {
+      times.add(morningTime);
+      dayPeriodTypes.add(DayPeriodType.morning);
+    }
+    if (selectedMorningLunchEvening.contains(1)) {
+      times.add(lunchTime);
+      dayPeriodTypes.add(DayPeriodType.afternoon);
+    }
+    if (selectedMorningLunchEvening.contains(2)) {
+      times.add(eveningTime);
+      dayPeriodTypes.add(DayPeriodType.evening);
+    }
+    if (isAlermEnable) {
       for (int day in days) {
         if (selectedMorningLunchEvening.contains(0)) {
           int hour = int.parse(morningTime.split(':')[0]);
@@ -294,7 +294,8 @@ class OnboardingController extends GetxController {
 
     Get.off(() => const MainScreen());
 
-    AppSnackbar.showSuccessMsgSnackBar(AppString.completeSetting.tr);
+    AppSnackbar.showSuccessMsgSnackBar(AppString.completeSetting.tr,
+        duration: const Duration(seconds: 1));
   }
 
   UserController userController = Get.find<UserController>();

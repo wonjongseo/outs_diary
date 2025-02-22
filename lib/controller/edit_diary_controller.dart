@@ -111,10 +111,7 @@ class EditDiaryController extends GetxController {
 
   void onTapSaveBtn() async {
     if (selectedFealIndex == -1) {
-      AppSnackbar.vaildTextFeildSnackBar(
-        title: AppString.requiredText.tr,
-        message: AppString.plzSelectFeal.tr,
-      );
+      AppSnackbar.vaildTextFeildSnackBar(message: AppString.plzSelectFeal.tr);
 
       AppFunction.scrollGoToTop(scrollController);
       return;
@@ -165,8 +162,7 @@ class EditDiaryController extends GetxController {
 
     AppSnackbar.vaildTextFeildSnackBar(
         title: AppString.completeText.tr,
-        message:
-            '${selectedDay.day}${AppString.savedHealthRecord.tr}'); //TODO EN
+        message: '${selectedDay.day}${AppString.savedHealthRecord.tr}');
   }
 
   HealthModel createHealthModel() {
@@ -304,8 +300,10 @@ class EditDiaryController extends GetxController {
     }
   }
 
-  void selectedPhotos() async {
-    File? file = await ImageController.getImageFromLibery();
+  void selectedPhotos({required bool isTakeAPhoto}) async {
+    File? file = isTakeAPhoto
+        ? await ImageController.pickImageFromCamera()
+        : await ImageController.getImageFromLibery();
     if (file == null) return;
 
     if (!uploadFiles.contains(file)) {
@@ -313,13 +311,19 @@ class EditDiaryController extends GetxController {
     }
     update();
     if (uploadFiles.length != 1) {
-      carouselSliderController.nextPage();
+      carouselSliderController.animateToPage(uploadFiles.length - 1);
     }
+    Get.back();
   }
 
+  bool isRemoving = false;
   void removePhoto(int index) {
+    if (isRemoving) return;
+    isRemoving = true;
     uploadFiles.removeAt(index);
+
     update();
+    isRemoving = false;
   }
 
   void forText() {

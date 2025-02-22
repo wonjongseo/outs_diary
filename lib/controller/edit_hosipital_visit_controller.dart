@@ -1,26 +1,25 @@
 import 'dart:io';
-
+import 'package:collection/collection.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ours_log/common/enums/before_alram_time.dart';
+
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
-import 'package:ours_log/services/notification_service.dart';
 import 'package:ours_log/controller/user_controller.dart';
+import 'package:ours_log/datas/check_before_alarm.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
 import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/respository/setting_repository.dart';
+import 'package:ours_log/services/notification_service.dart';
 
 class EditHosipitalVisitController extends GetxController {
-  String? startTime;
-
-  bool isEnrollAlarm = false;
-  List savedHospitalNames = [];
   UserController userController = Get.find<UserController>();
 
   CarouselSliderController carouselSliderController =
@@ -29,26 +28,71 @@ class EditHosipitalVisitController extends GetxController {
   HospitalLogController hospitalLogController =
       Get.find<HospitalLogController>();
 
+  ScrollController scrollController = ScrollController();
+
+  NotificationService notificationService = NotificationService();
+
   late TextEditingController hospitalNameCtl;
   late TextEditingController officeNameCtl;
   late TextEditingController diseaseNameCtl;
   late TextEditingController diagnosisCtl;
-
-  ScrollController scrollController = ScrollController();
-
   late List<TextEditingController> pillCtls = [];
-  List<File> uploadFiles = [];
-
-  NotificationService notificationService = NotificationService();
 
   PersistentBottomSheetController? bottomSheetController;
 
-  bool isBeforeOneHourAlarm = false;
-  bool isBeforeSizHourAlarm = false;
-  bool isBeforeOneDayAlarm = false;
+  List<File> uploadFiles = [];
+  List savedHospitalNames = [];
+  List savedOfficeNames = [];
+  List savedDiseaseNames = [];
+  List savedPillNames = [];
+
+  String? startTime;
   String? selectedBeforeAlram;
   DateTime selectedDate;
-  void onTapBeforeAlramTime(BuildContext context) async {
+
+  bool isEnrollAlarm = false;
+
+  void deleteSavedStringList(List stringList, int index) {
+    stringList.removeAt(index);
+    update();
+  }
+
+  List<CheckBeforeAlram> beforeAlarmTypes = List.generate(
+      BeforeAlarmTimeType.values.length,
+      (i) => CheckBeforeAlram(
+          beforeAlarmType: BeforeAlarmTimeType.values[i], isChecked: false));
+
+  List<CheckBeforeAlram>? savedBeforeAlarmTypes;
+
+  final HospitalLogModel? hospitalLogModel;
+
+  EditHosipitalVisitController({
+    required this.selectedDate,
+    this.hospitalLogModel,
+  });
+
+  void selectAlram(BuildContext context, int index) async {
+    if (beforeAlarmTypes[index].beforeAlarmType == BeforeAlarmTimeType.any) {
+      await onTapBeforeAlramTime(context);
+    }
+    beforeAlarmTypes[index].isChecked = !beforeAlarmTypes[index].isChecked;
+
+    update();
+  }
+
+  String getAlramText(int index) {
+    if (beforeAlarmTypes[index].beforeAlarmType == BeforeAlarmTimeType.any) {
+      if (selectedBeforeAlram == null) {
+        return AppString.selectText.tr;
+      } else {
+        return selectedBeforeAlram!;
+      }
+    } else {
+      return beforeAlarmTypes[index].beforeAlarmType.label!;
+    }
+  }
+
+  Future<void> onTapBeforeAlramTime(BuildContext context) async {
     if (selectedBeforeAlram != null) {
       selectedBeforeAlram = null;
     } else {
@@ -68,43 +112,43 @@ class EditHosipitalVisitController extends GetxController {
       String formatedTime = pickedTime.format(context);
       selectedBeforeAlram = formatedTime;
     }
-    update();
   }
 
-  final HospitalLogModel? hospitalLogModel;
-  EditHosipitalVisitController({
-    required this.selectedDate,
-    this.hospitalLogModel,
-  });
+  late DateTime visitDateTime;
   @override
   void onInit() {
     if (hospitalLogModel != null) {
       startTime = hospitalLogModel!.startTime;
-      int hour = int.tryParse(startTime!.split(':')[0]) ?? 0;
-      int minute = int.tryParse(startTime!.split(':')[1]) ?? 0;
 
       List<NotificationModel>? notifications = hospitalLogModel!.notifications;
 
-      if (notifications != null) {
+      if (notifications != null && notifications.isNotEmpty) {
+        int hour = int.tryParse(startTime!.split(':')[0]) ?? 0;
+        int minute = int.tryParse(startTime!.split(':')[1]) ?? 0;
+
+        this.notifications = notifications;
+
         isEnrollAlarm = true;
-        DateTime date = DateTime(selectedDate.year, selectedDate.month,
+        visitDateTime = DateTime(selectedDate.year, selectedDate.month,
             selectedDate.day, hour, minute);
 
         for (NotificationModel notificationl in notifications) {
-          int day = date.day - notificationl.notiDateTime.day;
-          int hour = date.hour - notificationl.notiDateTime.hour;
-          int minute = date.minute - notificationl.notiDateTime.minute;
+          Duration diff = visitDateTime.difference(notificationl.notiDateTime);
 
-          if (day == 1 && hour == 0 && minute == 0) {
-            isBeforeOneDayAlarm = true;
-          } else if (day == 0 && hour == 6 && minute == 0) {
-            isBeforeSizHourAlarm = true;
-          } else if (day == 0 && hour == 1 && minute == 0) {
-            isBeforeOneHourAlarm = true;
+          if (diff.inDays == 1) {
+            beforeAlarmTypes[BeforeAlarmTimeType.oneDay.index].isChecked = true;
+          } else if (diff.inHours == 6) {
+            beforeAlarmTypes[BeforeAlarmTimeType.sixHour.index].isChecked =
+                true;
+          } else if (diff.inHours == 1) {
+            beforeAlarmTypes[BeforeAlarmTimeType.oneHour.index].isChecked =
+                true;
           } else {
+            beforeAlarmTypes[BeforeAlarmTimeType.any.index].isChecked = true;
             selectedBeforeAlram = '$hour:$minute';
           }
         }
+        savedBeforeAlarmTypes = beforeAlarmTypes;
       }
 
       hospitalNameCtl =
@@ -148,6 +192,13 @@ class EditHosipitalVisitController extends GetxController {
   void getHospitalNams() async {
     savedHospitalNames =
         await SettingRepository.getList(AppConstant.hospitalNamesBox);
+
+    savedOfficeNames =
+        await SettingRepository.getList(AppConstant.officeNamesBox);
+    savedDiseaseNames =
+        await SettingRepository.getList(AppConstant.diseaseNamesBox);
+    savedPillNames = await SettingRepository.getList(AppConstant.pillNamesBox);
+
     update();
   }
 
@@ -181,7 +232,7 @@ class EditHosipitalVisitController extends GetxController {
 
     if (image == null) {
       return;
-    } //
+    }
     File file = File(image!.path);
 
     if (!uploadFiles.contains(file)) {
@@ -208,82 +259,26 @@ class EditHosipitalVisitController extends GetxController {
     update();
   }
 
-  void saveVisitLog() async {
-    if (Get.isSnackbarOpen) {
-      Get.closeAllSnackbars();
-      return;
-    }
-    if (isEnrollAlarm && startTime == null) {
-      AppSnackbar.invaildTextFeildSnackBar(
-          title: AppString.requiredText.tr,
-          message: '알람을 등록하기 위해서, 방문 시간을 선택해주세요.');
-      AppFunction.scrollGoToTop(scrollController);
-      return;
-    }
-    String hospitalName = hospitalNameCtl.text;
-    if (hospitalName.isEmpty) {
-      AppSnackbar.invaildTextFeildSnackBar(
-          title: AppString.requiredText.tr, message: '병원 이름을 입력해주세요');
-      AppFunction.scrollGoToTop(scrollController);
-      return;
-    }
-
-    int hour = int.parse(startTime!.split(':')[0]);
-    int minute = int.parse(startTime!.split(':')[1]);
-
-    DateTime scheduledDate = DateTime(
-        selectedDate.year, selectedDate.month, selectedDate.day, hour, minute);
-    if (isEnrollAlarm && startTime != null) {
-      if (isBeforeOneDayAlarm) {
-        DateTime subScheduledDate =
-            scheduledDate.subtract(const Duration(days: 1));
-
-        enrollSchedule(
-          hospitalName,
-          scheduledDate.month,
-          scheduledDate.day,
-          hour,
-          minute,
-          subScheduledDate,
-        );
-      }
-      if (isBeforeSizHourAlarm) {
-        DateTime subScheduledDate =
-            scheduledDate.subtract(const Duration(hours: 6));
-        enrollSchedule(
-          hospitalName,
-          scheduledDate.month,
-          scheduledDate.day,
-          hour,
-          minute,
-          subScheduledDate,
-        );
-      }
-      if (isBeforeOneHourAlarm) {
-        DateTime subScheduledDate =
-            scheduledDate.subtract(const Duration(hours: 1));
-        enrollSchedule(
-          hospitalName,
-          scheduledDate.month,
-          scheduledDate.day,
-          hour,
-          minute,
-          subScheduledDate,
-        );
-      }
-
-      if (selectedBeforeAlram != null) {
-        if (selectedBeforeAlram != '6:00' && selectedBeforeAlram != '01:00') {
-          int? hhour = int.tryParse(selectedBeforeAlram!.split(':')[0]);
-          int? mminute = int.tryParse(selectedBeforeAlram!.split(':')[1]);
-
-          if (hhour == null && mminute == null) {
-            return;
+  Future<void> setAlram(
+      DateTime scheduledDate, String hospitalName, int hour, int minute) async {
+    for (var beforeAlarmType in beforeAlarmTypes) {
+      if (beforeAlarmType.isChecked) {
+        DateTime? subScheduledDate;
+        if (beforeAlarmType.beforeAlarmType == BeforeAlarmTimeType.any) {
+          if (selectedBeforeAlram != '6:00' && selectedBeforeAlram != '01:00') {
+            int? hhour = int.tryParse(selectedBeforeAlram!.split(':')[0]);
+            int? mminute = int.tryParse(selectedBeforeAlram!.split(':')[1]);
+            if (hhour == null && mminute == null) {
+              break;
+            }
+            subScheduledDate = scheduledDate
+                .subtract(Duration(hours: hhour!, minutes: mminute!));
           }
-
-          DateTime subScheduledDate = scheduledDate
-              .subtract(Duration(hours: hhour!, minutes: mminute!));
-
+        } else {
+          subScheduledDate = scheduledDate
+              .subtract(Duration(hours: beforeAlarmType.beforeAlarmType.hour));
+        }
+        if (subScheduledDate != null) {
           enrollSchedule(
             hospitalName,
             scheduledDate.month,
@@ -294,11 +289,86 @@ class EditHosipitalVisitController extends GetxController {
           );
         }
       }
+
+      // // 이미 저장된 알람
+      // if (savedBeforeAlarmTypes != null) {
+      //   // prettier-ignore  // 저장을 해제한 알람
+      //   if (savedBeforeAlarmTypes!.contains(beforeAlarmType) &&
+      //       !beforeAlarmType.isChecked) {
+      //     // 삭제.
+
+      //     DateTime diff = DateTime(
+      //         visitDateTime.year,
+      //         visitDateTime.month,
+      //         visitDateTime.day,
+      //         visitDateTime.hour - beforeAlarmType.beforeAlarmType.hour,
+      //         visitDateTime.minute);
+
+      //     hospitalLogModel!.notifications!
+      //         .removeWhere((NotificationModel element) {
+      //       if (element.notiDateTime == diff) {
+      //         if (hospitalLogModel!.notifications!.contains(element)) {
+      //           notificationService.cancellNotifications(element.alermId);
+      //           return true;
+      //         }
+      //       }
+      //       return false;
+      //     });
+      //   }
+      // }
     }
-    userController.addTask(TaskModel(
-        taskName: '$hospitalName 방문',
-        taskDate: scheduledDate,
-        notifications: notifications));
+  }
+
+  bool validate() {
+    if (Get.isSnackbarOpen) {
+      Get.closeAllSnackbars();
+      return false;
+    }
+    if (isEnrollAlarm && startTime == null) {
+      AppSnackbar.invaildTextFeildSnackBar(
+          message: AppString.plzSelectVisitTme.tr);
+      AppFunction.scrollGoToTop(scrollController);
+      return false;
+    }
+    if (hospitalNameCtl.text.isEmpty) {
+      AppSnackbar.invaildTextFeildSnackBar(
+          message: AppString.plzInputHospitalName.tr);
+      AppFunction.scrollGoToTop(scrollController);
+      return false;
+    }
+    return true;
+  }
+
+  void saveVisitLog() async {
+    if (!validate()) return;
+
+    String hospitalName = hospitalNameCtl.text;
+    if (hospitalLogModel != null) {
+      // 수정, 알람 제거
+      await userController
+          .deleteTaskFromNotificationList(hospitalLogModel!.notifications);
+    }
+    int hour = 0;
+    int minute = 0;
+
+    if (startTime != null) {
+      hour = int.tryParse(startTime!.split(':')[0]) ?? 0;
+      minute = int.tryParse(startTime!.split(':')[1]) ?? 0;
+    }
+
+    DateTime scheduledDate = DateTime(
+        selectedDate.year, selectedDate.month, selectedDate.day, hour, minute);
+
+    if (isEnrollAlarm && startTime != null) {
+      await setAlram(scheduledDate, hospitalName, hour, minute);
+    }
+
+    userController.addTask(
+      TaskModel(
+          taskName: '$hospitalName ${AppString.visit.tr}',
+          taskDate: scheduledDate,
+          notifications: notifications),
+    );
 
     String officeName = officeNameCtl.text;
     String diseaseName = diseaseNameCtl.text;
@@ -329,10 +399,9 @@ class EditHosipitalVisitController extends GetxController {
     Get.back();
 
     AppSnackbar.vaildTextFeildSnackBar(
-      title: hospitalLogModel == null ? '저장' : '변경',
-      message:
-          hospitalLogModel == null ? '병원 기록이 저장 되었습니다.' : '병원 기록이 변경 되었습니다.',
-    );
+        message: hospitalLogModel == null
+            ? AppString.savedVisitLog.tr
+            : AppString.editedVisitLog.tr);
   }
 
   List<NotificationModel> notifications = [];

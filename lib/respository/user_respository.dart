@@ -37,7 +37,6 @@ class UserModelRepository {
     var box = await Hive.openBox<UserModel>(AppConstant.userModelBox);
 
     List<UserModel> user = box.values.toList();
-    print('user.length : ${user.length}');
 
     return user.isEmpty ? null : user.first;
   }

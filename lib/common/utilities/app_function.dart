@@ -8,14 +8,61 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
-
-import 'package:photo_manager/photo_manager.dart';
+import 'package:ours_log/common/utilities/responsive.dart';
 
 bool get isKo => Get.locale.toString().contains('ko');
 bool get isJp => Get.locale.toString().contains('ja');
 bool get isEn => Get.locale.toString().contains('en');
 
 class AppFunction {
+  static Future openCameraOrLibarySheet(
+      {required BuildContext context,
+      required Function() takePictureFunc,
+      required Function() openLibaryFunc}) async {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              width: 100,
+              height: 5,
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            SizedBox(height: RS.h10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: takePictureFunc,
+                  icon: Icon(
+                    Icons.camera_alt_outlined,
+                    size: 30,
+                  ),
+                ),
+                SizedBox(width: RS.w10),
+                IconButton(
+                  onPressed: openLibaryFunc,
+                  icon: Icon(
+                    Icons.folder_copy_outlined,
+                    size: RS.w10 * 3,
+                  ),
+                ),
+                SizedBox(width: RS.w10 * 2),
+              ],
+            ),
+            SizedBox(height: RS.h10 * 5),
+          ],
+        );
+      },
+    );
+  }
+
   static bool isNextDay(DateTime now, DateTime compareDay) {
     if (now.year < compareDay.year) return true;
     if (now.year == compareDay.year && now.month < compareDay.month) {

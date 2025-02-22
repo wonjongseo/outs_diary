@@ -29,6 +29,7 @@ class _GraphBodyState extends State<GraphBody> {
   DiaryRepository diaryController = DiaryRepository();
 
   late GraphData? fealGraphData;
+  late GraphData? painLevelGraphData;
   late GraphData? temperatureGraphData;
   late GraphData? weightGraphData;
   late GraphData? pulseGraphData;
@@ -50,6 +51,9 @@ class _GraphBodyState extends State<GraphBody> {
     countOfDay = getDaysInMonth(now.year, now.month);
 
     fealGraphData = GraphData(
+      xDatas: List.generate(countOfDay, (index) => 0),
+    );
+    painLevelGraphData = GraphData(
       xDatas: List.generate(countOfDay, (index) => 0),
     );
     temperatureGraphData = GraphData(
@@ -76,13 +80,15 @@ class _GraphBodyState extends State<GraphBody> {
       }
       if (diary.dateTime.year == now.year &&
           diary.dateTime.month == now.month) {
+        fealGraphData!.xDatas[diary.dateTime.day - 1] =
+            ((5 - diary.fealIndex)).toDouble();
+        painLevelGraphData!.xDatas[diary.dateTime.day - 1] =
+            diary.painfulIndex == null ? 0.0 : diary.painfulIndex!.toDouble();
         temperatureGraphData!.xDatas[diary.dateTime.day - 1] =
             diary.health!.avgTemperature;
         weightGraphData!.xDatas[diary.dateTime.day - 1] =
             diary.health!.avgWeight;
         pulseGraphData!.xDatas[diary.dateTime.day - 1] = diary.health!.avgPulse;
-        fealGraphData!.xDatas[diary.dateTime.day - 1] =
-            (diary.fealIndex + 1).toDouble();
 
         maxBloodPressureGraphData!.xDatas[diary.dateTime.day - 1] =
             diary.health!.avgMaxBloodPressure.toDouble();
@@ -91,20 +97,20 @@ class _GraphBodyState extends State<GraphBody> {
       }
     }
 
-    calculateMinMaxValueAndHeight(fealGraphData, isFeal: true);
+    calculateMinMaxValueAndHeight(fealGraphData, max: 6);
+    calculateMinMaxValueAndHeight(painLevelGraphData, max: 9);
     calculateMinMaxValueAndHeight(temperatureGraphData);
     calculateMinMaxValueAndHeight(weightGraphData);
     calculateMinMaxValueAndHeight(pulseGraphData);
     calculateMinMaxValueAndHeight(maxBloodPressureGraphData);
     calculateMinMaxValueAndHeight(minBloodPressureGraphData);
 
-    setState(() {});
+    setState(() {}); // dont' remove this
   }
 
-  void calculateMinMaxValueAndHeight(GraphData? graphData,
-      {bool isFeal = false}) {
-    if (isFeal) {
-      graphData!.maxY = 6;
+  void calculateMinMaxValueAndHeight(GraphData? graphData, {double? max}) {
+    if (max != null) {
+      graphData!.maxY = max;
       graphData.minY = 0;
     } else {
       double? maxY =
@@ -120,12 +126,9 @@ class _GraphBodyState extends State<GraphBody> {
       for (var value in graphData.xDatas) {
         if (value == 0) continue;
 
-        if (minY! > value) {
-          minY = value;
-        }
-        if (maxY! < value) {
-          maxY = value;
-        }
+        if (minY! > value) minY = value;
+
+        if (maxY! < value) maxY = value;
       }
 
       double diff = maxY! - minY!;
@@ -186,31 +189,14 @@ class _GraphBodyState extends State<GraphBody> {
                 padding: EdgeInsets.symmetric(horizontal: RS.w10),
                 child: Column(
                   children: [
-                    CustomExpansionCard(
-                      initiallyExpanded: userController.userModel!.userUtilModel
-                              .expandedFields[IsExpandtionType.fealGraph] ??
-                          false,
-                      onExpansionChanged: (bool v) => userController
-                          .toggleExpanded(IsExpandtionType.fealGraph),
-                      title: AppString.fealText.tr,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          right: RS.w10 * 2,
-                        ),
-                        child: fealGraphData == null
-                            ? Container()
-                            : FealGraph(
-                                graphData: fealGraphData!,
-                                countOfDay: countOfDay,
-                              ),
-                      ),
-                    ),
+                    _fealGraph(userController),
+                    SizedBox(height: RS.h10),
+                    _painLevel(userController),
                     SizedBox(height: RS.h10),
                     CustomExpansionCard(
                       title: AppString.weight.tr,
                       initiallyExpanded: userController.userModel!.userUtilModel
-                              .expandedFields[IsExpandtionType.weightGraph] ??
-                          false,
+                          .expandedFields[IsExpandtionType.weightGraph],
                       onExpansionChanged: (bool v) => userController
                           .toggleExpanded(IsExpandtionType.weightGraph),
                       child: Padding(
@@ -228,10 +214,8 @@ class _GraphBodyState extends State<GraphBody> {
                     ),
                     SizedBox(height: RS.h10),
                     CustomExpansionCard(
-                      initiallyExpanded: userController
-                                  .userModel!.userUtilModel.expandedFields[
-                              IsExpandtionType.temperatureGraph] ??
-                          false,
+                      initiallyExpanded: userController.userModel!.userUtilModel
+                          .expandedFields[IsExpandtionType.temperatureGraph],
                       onExpansionChanged: (bool v) => userController
                           .toggleExpanded(IsExpandtionType.temperatureGraph),
                       title: AppString.temperature.tr,
@@ -251,8 +235,7 @@ class _GraphBodyState extends State<GraphBody> {
                     SizedBox(height: RS.h10),
                     CustomExpansionCard(
                       initiallyExpanded: userController.userModel!.userUtilModel
-                              .expandedFields[IsExpandtionType.pulseGraph] ??
-                          false,
+                          .expandedFields[IsExpandtionType.pulseGraph],
                       onExpansionChanged: (bool v) => userController
                           .toggleExpanded(IsExpandtionType.pulseGraph),
                       title: AppString.pulse.tr,
@@ -271,10 +254,8 @@ class _GraphBodyState extends State<GraphBody> {
                     ),
                     SizedBox(height: RS.h10),
                     CustomExpansionCard(
-                      initiallyExpanded: userController
-                                  .userModel!.userUtilModel.expandedFields[
-                              IsExpandtionType.bloodPressureGraph] ??
-                          false,
+                      initiallyExpanded: userController.userModel!.userUtilModel
+                          .expandedFields[IsExpandtionType.bloodPressureGraph],
                       onExpansionChanged: (bool v) => userController
                           .toggleExpanded(IsExpandtionType.bloodPressureGraph),
                       title: AppString.bloodPressure.tr,
@@ -299,6 +280,47 @@ class _GraphBodyState extends State<GraphBody> {
           );
         }),
       ],
+    );
+  }
+
+  CustomExpansionCard _painLevel(UserController userController) {
+    return CustomExpansionCard(
+      title: AppString.painLevel.tr,
+      initiallyExpanded: userController.userModel!.userUtilModel
+          .expandedFields[IsExpandtionType.painLevelGraph],
+      onExpansionChanged: (bool v) =>
+          userController.toggleExpanded(IsExpandtionType.painLevelGraph),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: RS.h10,
+          horizontal: RS.w10 * 2,
+        ),
+        child: painLevelGraphData == null
+            ? Container()
+            : CustomLineGraph(
+                graphData: painLevelGraphData!,
+                countOfDay: countOfDay,
+              ),
+      ),
+    );
+  }
+
+  CustomExpansionCard _fealGraph(UserController userController) {
+    return CustomExpansionCard(
+      initiallyExpanded: userController
+          .userModel!.userUtilModel.expandedFields[IsExpandtionType.fealGraph],
+      onExpansionChanged: (bool v) =>
+          userController.toggleExpanded(IsExpandtionType.fealGraph),
+      title: AppString.fealText.tr,
+      child: Padding(
+        padding: EdgeInsets.only(right: RS.w10 * 2),
+        child: fealGraphData == null
+            ? Container()
+            : FealGraph(
+                graphData: fealGraphData!,
+                countOfDay: countOfDay,
+              ),
+      ),
     );
   }
 }
