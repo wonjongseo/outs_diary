@@ -24,25 +24,6 @@ enum WeekDayType {
 }
 
 extension WeekDayTypeExtenston on WeekDayType {
-  // int get dayIndex {
-  //   switch (this) {
-  //     case WeekDayType.monday:
-  //       return 0;
-  //     case WeekDayType.tuesday:
-  //       return 1;
-  //     case WeekDayType.wednesday:
-  //       return 2;
-  //     case WeekDayType.thursday:
-  //       return 3;
-  //     case WeekDayType.friday:
-  //       return 4;
-  //     case WeekDayType.saturday:
-  //       return 5;
-  //     case WeekDayType.sunday:
-  //       return 6;
-  //   }
-  // }
-
   String get label {
     switch (this) {
       case WeekDayType.monday:

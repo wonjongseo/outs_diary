@@ -15,8 +15,10 @@ class DoneCircleIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width ?? RS.w10 * 9,
+      constraints: BoxConstraints(minWidth: width ?? RS.w10 * 9),
+      // width: width ?? RS.w10 * 9,
       height: RS.h10 * 4,
+      padding: EdgeInsets.symmetric(horizontal: RS.w10),
       margin: EdgeInsets.symmetric(horizontal: RS.w10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade300),

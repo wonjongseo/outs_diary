@@ -46,7 +46,10 @@ class InputHealthDayPeriod extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: RS.h5),
                 child: Row(
                   children: [
-                    Text(DayPeriodType.values[index].label),
+                    Container(
+                      constraints: BoxConstraints(minWidth: RS.w10 * 7.5),
+                      child: Text(DayPeriodType.values[index].label),
+                    ),
                     SizedBox(width: RS.w10 * 2),
                     Expanded(
                       child: CustomTextFormField(

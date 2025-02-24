@@ -15,7 +15,6 @@ class CustomLineGraph extends StatelessWidget {
   });
 
   final int countOfDay;
-
   final GraphData graphData;
   final GraphData? graphData2;
 
@@ -97,6 +96,7 @@ class CustomLineGraph extends StatelessWidget {
               ),
             ),
           ),
+          lineTouchData: const LineTouchData(enabled: false),
           minX: 0,
           maxX: (countOfDay - 1).toDouble(),
           maxY: maxY,

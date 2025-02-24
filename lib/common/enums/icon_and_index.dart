@@ -25,6 +25,7 @@ enum IconAndIndex {
   eight(17, FontAwesomeIcons.eight),
   nine(18, FontAwesomeIcons.nine),
   zero(19, FontAwesomeIcons.zero),
+
   //
 
   tired(19, FontAwesomeIcons.faceTired),

@@ -57,6 +57,7 @@ class AppImagePath {
   static String rainny = 'assets/images/rainny.png';
   static String cloudy = 'assets/images/cloudy.png';
 //
+  static String poopCondition = 'assets/images/poop_condition.png';
   static String circleSetting = 'assets/images/circle_setting.png';
   static String circleSmale = 'assets/images/circle_smale.png';
   static String circleStamp = 'assets/images/circle_stamp.png';

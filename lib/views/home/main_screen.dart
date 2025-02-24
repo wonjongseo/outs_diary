@@ -14,7 +14,6 @@ import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/views/background/background_widget.dart';
 import 'package:ours_log/views/diary/diary_body.dart';
 import 'package:ours_log/views/graph/graph_body.dart';
-import 'package:ours_log/views/manage_alrem/manage_alrem_body.dart';
 import 'package:ours_log/views/setting/setting_body.dart';
 
 class MainScreen extends StatefulWidget {
@@ -31,9 +30,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    // Get.put(UserController());
-    // Get.put(DiaryController());
-    // Get.put(HospitalLogController());
     setBodys();
     super.initState();
   }
@@ -41,7 +37,6 @@ class _MainScreenState extends State<MainScreen> {
   void setBodys() {
     bodys.add(DiaryBody());
     bodys.add(HospitalLogBody());
-    // bodys.add(ManageAlermBody());
     bodys.add(GraphBody());
     bodys.add(SettingBody());
     setState(() {});
@@ -56,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: SafeArea(
         child: BackgroundWidget(
-          widget: Padding(
+          child: Padding(
             padding: EdgeInsets.only(
               top: RS.h10 * 3,
               right: RS.w10 * 1.2,
@@ -66,22 +61,15 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.small(onPressed: () async {
-        NotificationService notification = NotificationService();
-        notification.cancelAllNotifications();
-        UserModelRepository().deleteAll();
-        DiaryRepository().deleteAll();
-        HospitalLogRepository().deleteAll();
-      }),
+      // floatingActionButton: FloatingActionButton.small(onPressed: () async {
+      //   NotificationService notification = NotificationService();
+      //   notification.cancelAllNotifications();
+      //   UserModelRepository().deleteAll();
+      //   DiaryRepository().deleteAll();
+      //   HospitalLogRepository().deleteAll();
+      // }),
     );
   }
-
-  // 2월 23일 13시 20분.
-  // 처음에  1일 전
-  // 2월 22일 13시 25분에.
-
-  // 근데
-  // 2월 23일 13 21분으로 바꿈
 
   Widget bottomNavigtionBar() {
     return GetBuilder<UserController>(builder: (context) {
@@ -100,8 +88,6 @@ class _MainScreenState extends State<MainScreen> {
                 label: AppString.healthLog.tr, icon: Text('')),
             BottomNavigationBarItem(
                 label: AppString.hospitalVisitLog.tr, icon: Text('')),
-            // BottomNavigationBarItem(
-            //     label: AppString.scheduleManagement.tr, icon: Text('')),
             BottomNavigationBarItem(
                 label: AppString.healthGraph.tr, icon: Text('')),
             BottomNavigationBarItem(

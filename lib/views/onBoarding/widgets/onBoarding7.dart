@@ -43,47 +43,6 @@ class Onboarding7 extends StatelessWidget {
                 );
               }),
             ),
-            if (1 == 2)
-              Column(
-                children: [
-                  if (cn.pillTimeDayPeriod.contains(DayPeriodType.morning))
-                    GestureDetector(
-                      onTap: !cn.isAlermEnable
-                          ? null
-                          : () =>
-                              cn.changePillTime(DayPeriodType.morning, context),
-                      child: AppointPillTime(
-                        title: AppString.morning.tr,
-                        time: cn.morningTime,
-                        isAlermEnable: cn.isAlermEnable,
-                      ),
-                    ),
-                  if (cn.pillTimeDayPeriod.contains(DayPeriodType.afternoon))
-                    GestureDetector(
-                      onTap: !cn.isAlermEnable
-                          ? null
-                          : () => cn.changePillTime(
-                              DayPeriodType.afternoon, context),
-                      child: AppointPillTime(
-                        isAlermEnable: cn.isAlermEnable,
-                        title: AppString.lunch.tr,
-                        time: cn.lunchTime,
-                      ),
-                    ),
-                  if (cn.pillTimeDayPeriod.contains(DayPeriodType.evening))
-                    GestureDetector(
-                      onTap: !cn.isAlermEnable
-                          ? null
-                          : () =>
-                              cn.changePillTime(DayPeriodType.evening, context),
-                      child: AppointPillTime(
-                        isAlermEnable: cn.isAlermEnable,
-                        title: AppString.evening.tr,
-                        time: cn.eveningTime,
-                      ),
-                    ),
-                ],
-              )
           ],
         ),
       );

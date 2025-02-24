@@ -1,4 +1,7 @@
 import 'dart:math';
+import 'package:ours_log/controller/diary_controller.dart';
+import 'package:ours_log/controller/hospital_log_controller.dart';
+import 'package:ours_log/controller/image_controller.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
@@ -52,23 +55,26 @@ class OnboardingController extends GetxController {
   List<DayPeriodType> pillTimeDayPeriod = []; // 0:아침, 1:점심, 2: 저녁
   List<WeekDayType> selectedWeekDays = []; // 0:월, 1: 화
 
-  void onSelectMorningLunchEvening(DayPeriodType index) {
-    bool isSelected = pillTimeDayPeriod.contains(index);
+  void onSelectMorningLunchEvening(DayPeriodType dayPeriodType) {
+    bool isSelected = pillTimeDayPeriod.contains(dayPeriodType);
     if (isSelected) {
-      pillTimeDayPeriod.remove(index);
+      pillTimeDayPeriod.remove(dayPeriodType);
     } else {
-      pillTimeDayPeriod.add(index);
+      pillTimeDayPeriod.add(dayPeriodType);
     }
+    pillTimeDayPeriod.sort((a, b) => a.index.compareTo(b.index));
+
     update();
   }
 
-  void onSelectDays(WeekDayType index) {
-    bool isSelected = selectedWeekDays.contains(index);
+  void onSelectWeekdays(WeekDayType weekday) {
+    bool isSelected = selectedWeekDays.contains(weekday);
     if (isSelected) {
-      selectedWeekDays.remove(index);
+      selectedWeekDays.remove(weekday);
     } else {
-      selectedWeekDays.add(index);
+      selectedWeekDays.add(weekday);
     }
+
     update();
   }
 
@@ -77,7 +83,7 @@ class OnboardingController extends GetxController {
   String morningTime = '08:30';
   String lunchTime = '12:30';
   String eveningTime = '18:30';
-  NotificationService notificationService = NotificationService();
+  NotificationService? notificationService;
 
   // For OnBoarding8
   int selectedColorIndex = 0;
@@ -127,6 +133,7 @@ class OnboardingController extends GetxController {
   void togglePillAlarm(int v) {
     if (v == 0) {
       isAlermEnable = true;
+      notificationService = NotificationService();
       PermissionService().permissionWithNotification();
     } else {
       isAlermEnable = false;
@@ -175,6 +182,8 @@ class OnboardingController extends GetxController {
   }
 
   void goToMainScreenAndSaveUserData() async {
+    UserController userController = Get.put(UserController());
+
     List<TaskModel> tasks = [];
 
     selectedWeekDays.sort((a, b) => a.index.compareTo(b.index));
@@ -191,13 +200,13 @@ class OnboardingController extends GetxController {
         DateTime? taskTime =
             tz.TZDateTime(tz.local, now.year, now.month, day, hour, minute);
 
-        if (isAlermEnable) {
+        if (isAlermEnable && notificationService != null) {
           String message = isEn
-              ? '(${intDayToString(day)}) ${getAlramTimeDayPeriod(pillTime)} ${AppString.timeToDrink.tr}'
-              : '(${intDayToString(day)}) $hour${AppString.hour.tr} $minute${AppString.minute.tr} ${AppString.timeToDrink.tr}';
+              ? '${getAlramTimeDayPeriod(pillTime)} ${AppString.timeToDrink.tr}'
+              : '$hour${AppString.hour.tr} $minute${AppString.minute.tr} ${AppString.timeToDrink.tr}';
 
-          taskTime = await notificationService.scheduleWeeklyNotification(
-            title: '💊 (${pillTime.label}) ${AppString.drinkPillAlram.tr}',
+          taskTime = await notificationService!.scheduleWeeklyNotification(
+            title: '💊  ${AppString.drinkPillAlram.tr}',
             message: message,
             id: id,
             weekday: day,
@@ -235,14 +244,15 @@ class OnboardingController extends GetxController {
     userController.saveUser(userModel);
 
     Get.off(() => const MainScreen());
-
+    Get.put(UserController());
+    Get.put(DiaryController());
+    Get.put(HospitalLogController());
+    Get.put(ImageController());
     AppSnackbar.showSuccessMsgSnackBar(
       AppString.completeSetting.tr,
       duration: const Duration(seconds: 3),
     );
   }
-
-  UserController userController = Get.find<UserController>();
 
   @override
   void onInit() {

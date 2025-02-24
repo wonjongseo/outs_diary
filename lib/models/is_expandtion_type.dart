@@ -27,7 +27,9 @@ enum IsExpandtionType {
   painLevelGraph,
   @HiveField(10)
   poopCondition,
-
   @HiveField(11)
   isFealLineGraphFirst,
+
+  @HiveField(12)
+  poopConditionImage,
 }

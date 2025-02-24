@@ -12,8 +12,8 @@ Color sosoColor = const Color(0xFF00ff01);
 Color badColor = const Color(0xFFfedd50);
 Color veryBadColor = const Color(0xFFffb7cb);
 
-class CustomFealPieChart extends StatefulWidget {
-  const CustomFealPieChart(
+class CustomPainLevelPieChart extends StatefulWidget {
+  const CustomPainLevelPieChart(
       {super.key, required this.graphData, required this.countOfDay});
 
   final GraphData graphData;
@@ -22,18 +22,18 @@ class CustomFealPieChart extends StatefulWidget {
   State<StatefulWidget> createState() => PieChart2State();
 }
 
-class PieChart2State extends State<CustomFealPieChart> {
+class PieChart2State extends State<CustomPainLevelPieChart> {
   int touchedIndex = -1;
   List<double> fealIndexPercent = [];
 
   void ca() {
-    List<double> tempFealIndexCount = List.generate(6, (index) => 0.0);
+    List<double> tempFealIndexCount = List.generate(10, (index) => 0.0);
 
     for (var i = 0; i < widget.graphData.xDatas.length; i++) {
       tempFealIndexCount[widget.graphData.xDatas[i].toInt()]++;
     }
 
-    fealIndexPercent = List.generate(6, (index) => 0.0);
+    fealIndexPercent = List.generate(10, (index) => 0.0);
     for (var i = 0; i < tempFealIndexCount.length; i++) {
       fealIndexPercent[i] = (tempFealIndexCount[i] / widget.countOfDay) * 100;
     }
@@ -79,32 +79,13 @@ class PieChart2State extends State<CustomFealPieChart> {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              PieChartIndicator(
-                text: AppString.veryGood.tr,
+            children: List.generate(
+              10,
+              (index) => PieChartIndicator(
+                text: index.toString(),
                 color: veryGoodColor,
               ),
-              PieChartIndicator(
-                text: AppString.good.tr,
-                color: goodColor,
-              ),
-              PieChartIndicator(
-                text: AppString.soso.tr,
-                color: sosoColor,
-              ),
-              PieChartIndicator(
-                text: AppString.bad.tr,
-                color: badColor,
-              ),
-              PieChartIndicator(
-                text: AppString.veryBad.tr,
-                color: veryBadColor,
-              ),
-              PieChartIndicator(
-                text: AppString.noRecord.tr,
-                color: Colors.grey,
-              ),
-            ],
+            ),
           ),
         ],
       ),
@@ -112,7 +93,7 @@ class PieChart2State extends State<CustomFealPieChart> {
   }
 
   List<PieChartSectionData> showingSections() {
-    return List.generate(6, (i) {
+    return List.generate(10, (i) {
       final isTouched = i == touchedIndex;
       final fontSize = isTouched ? 25.0 : 16.0;
       final radius = isTouched ? 60.0 : 50.0;
@@ -131,11 +112,11 @@ class PieChart2State extends State<CustomFealPieChart> {
               shadows: shadows,
             ),
           );
-        case 5:
+        case 1:
           return PieChartSectionData(
             color: veryGoodColor,
-            value: fealIndexPercent[5],
-            title: '${fealIndexPercent[5].toStringAsFixed(0)}%',
+            value: fealIndexPercent[1],
+            title: '${fealIndexPercent[1].toStringAsFixed(0)}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -144,11 +125,11 @@ class PieChart2State extends State<CustomFealPieChart> {
               shadows: shadows,
             ),
           );
-        case 4:
+        case 2:
           return PieChartSectionData(
             color: goodColor,
-            value: fealIndexPercent[4],
-            title: '${fealIndexPercent[4].toStringAsFixed(0)}%',
+            value: fealIndexPercent[2],
+            title: '${fealIndexPercent[2].toStringAsFixed(0)}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -171,11 +152,11 @@ class PieChart2State extends State<CustomFealPieChart> {
               shadows: shadows,
             ),
           );
-        case 2:
+        case 4:
           return PieChartSectionData(
             color: badColor,
-            value: fealIndexPercent[2],
-            title: '${fealIndexPercent[2].toStringAsFixed(0)}%',
+            value: fealIndexPercent[4],
+            title: '${fealIndexPercent[4].toStringAsFixed(0)}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -184,11 +165,11 @@ class PieChart2State extends State<CustomFealPieChart> {
               shadows: shadows,
             ),
           );
-        case 1:
+        case 5:
           return PieChartSectionData(
             color: veryBadColor,
-            value: fealIndexPercent[1],
-            title: '${fealIndexPercent[1].toStringAsFixed(0)}%',
+            value: fealIndexPercent[5],
+            title: '${fealIndexPercent[5].toStringAsFixed(0)}%',
             radius: radius,
             titleStyle: TextStyle(
               fontSize: fontSize,
@@ -197,6 +178,59 @@ class PieChart2State extends State<CustomFealPieChart> {
               shadows: shadows,
             ),
           );
+        case 6:
+          return PieChartSectionData(
+            color: veryBadColor,
+            value: fealIndexPercent[5],
+            title: '${fealIndexPercent[5].toStringAsFixed(0)}%',
+            radius: radius,
+            titleStyle: TextStyle(
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              shadows: shadows,
+            ),
+          );
+        case 7:
+          return PieChartSectionData(
+            color: veryBadColor,
+            value: fealIndexPercent[5],
+            title: '${fealIndexPercent[5].toStringAsFixed(0)}%',
+            radius: radius,
+            titleStyle: TextStyle(
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              shadows: shadows,
+            ),
+          );
+        case 8:
+          return PieChartSectionData(
+            color: veryBadColor,
+            value: fealIndexPercent[5],
+            title: '${fealIndexPercent[5].toStringAsFixed(0)}%',
+            radius: radius,
+            titleStyle: TextStyle(
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              shadows: shadows,
+            ),
+          );
+        case 9:
+          return PieChartSectionData(
+            color: veryBadColor,
+            value: fealIndexPercent[5],
+            title: '${fealIndexPercent[5].toStringAsFixed(0)}%',
+            radius: radius,
+            titleStyle: TextStyle(
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              shadows: shadows,
+            ),
+          );
+
         default:
           throw Error();
       }

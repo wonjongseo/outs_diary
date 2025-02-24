@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app.dialog.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
+import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/notification_model.dart';
@@ -40,12 +42,26 @@ class AddRegularTaskController extends GetxController {
     isTapchangeWeekday = false;
   }
 
-  void deleteTask(int index, int index2) {
+  void deleteTask(int index, int index2) async {
     List<TaskModel> tasks = tasksPerWeekDay[index];
     TaskModel task = tasks[index2];
-    tasks.remove(task);
-    update();
-    userCon.deleteTask(task);
+    String taskName = task.taskName;
+    bool result = await AppDialog.selectionDialog(
+        title: isEn
+            ? Text(
+                '${AppString.previousDeletePetMsg4.tr} (${AppString.regularSchedule.tr}) $taskName?',
+              )
+            : Text(
+                '(${AppString.regularSchedule.tr}) $taskName${AppString.previousDeletePetMsg4.tr}',
+              ),
+        connent: Text(AppString.areYouDeleteMsg.tr));
+
+    if (result) {
+      tasks.remove(task);
+      update();
+      userCon.deleteTask(task);
+      AppSnackbar.showMessageSnackBar(message: '$taskName가 삭제되었습니다');
+    }
   }
 
   Future<void> changeAlarmTime(
@@ -76,8 +92,7 @@ class AddRegularTaskController extends GetxController {
     int id = AppFunction.createIdByDay(weekDay, hour, minute);
 
     // return;
-    String message =
-        '(${intDayToString(weekDay)}) $hour${AppString.hour.tr} $minute${AppString.minute.tr} ${AppString.timeToDrink.tr}';
+    String message = AppString.timeToDrink.tr;
 
     DateTime? taskTime = await notificationService.scheduleWeeklyNotification(
       title: '💊 ${AppString.drinkPillAlram.tr}',
@@ -99,5 +114,6 @@ class AddRegularTaskController extends GetxController {
     userCon.addTask(taskModel);
 
     update();
+    AppSnackbar.showMessageSnackBar(message: '알람 시간이 변경되었습니다');
   }
 }

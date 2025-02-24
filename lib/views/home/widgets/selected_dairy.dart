@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
+import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
@@ -46,7 +47,7 @@ class SelectedDiary extends StatelessWidget {
           const Divider(),
           SizedBox(height: RS.h10),
           if (diaryModel.donePillDayModels!.isNotEmpty) ...[
-            _DonePill(diaryModel, diaryController),
+            _donePill(diaryModel, diaryController),
             SizedBox(height: RS.h10 * 1.5),
           ],
           if (diaryModel.health != null && diaryModel.health!.argIsNotZero) ...[
@@ -66,23 +67,35 @@ class SelectedDiary extends StatelessWidget {
             ColTextAndWidget(
               vertical: RS.h5,
               label: AppString.poop.tr,
-              widget: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: List.generate(
-                      diaryModel.poopConditions!.length,
-                      (index) => Container(
+              widget: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: List.generate(
+                    diaryModel.poopConditions!.length,
+                    (index) => SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
                           padding: EdgeInsets.all(RS.w10),
-                          margin: EdgeInsets.only(right: RS.w10),
+                          margin: EdgeInsets.only(bottom: RS.w10),
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(10)),
                           child: Row(
                             children: [
-                              Text(
-                                diaryController.selectedDiary!
-                                    .poopConditions![index].dayPeriodType.label,
+                              Container(
+                                padding: EdgeInsets.all(RS.w10 * .6),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primaryColor,
+                                  borderRadius:
+                                      BorderRadius.circular(RS.w10 * .3),
+                                ),
+                                child: Text(
+                                  diaryController
+                                      .selectedDiary!
+                                      .poopConditions![index]
+                                      .dayPeriodType
+                                      .label,
+                                  style: TextStyle(color: textBlackOrWhite),
+                                ),
                               ),
                               SizedBox(width: RS.w10),
                               Text(
@@ -94,14 +107,14 @@ class SelectedDiary extends StatelessWidget {
                               ),
                             ],
                           )),
-                    )),
-              ),
+                    ),
+                  )),
             ),
             SizedBox(height: RS.h10 * 1.5),
           ],
           ColTextAndWidget(
             vertical: RS.h5,
-            label: AppString.healthMemo,
+            label: '${AppString.health.tr} ${AppString.memo.tr}',
             widget: CustomTextFormField(
               readOnly: true,
               hintStyle: const TextStyle(),
@@ -134,9 +147,7 @@ class SelectedDiary extends StatelessWidget {
                             borderRadius: BorderRadius.circular(RS.w10 * 2),
                             border: Border.all(color: Colors.grey),
                             image: DecorationImage(
-                              image: FileImage(
-                                File(imageUrl),
-                              ),
+                              image: FileImage(File(imageUrl)),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -154,12 +165,13 @@ class SelectedDiary extends StatelessWidget {
     );
   }
 
-  ColTextAndWidget _DonePill(
+  ColTextAndWidget _donePill(
       DiaryModel diaryModel, DiaryController diaryController) {
     return ColTextAndWidget(
       vertical: RS.h5,
-      label: AppString.healthMemo,
+      label: AppString.doDrinkPill.tr,
       widget: Row(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
           diaryModel.donePillDayModels!.length,

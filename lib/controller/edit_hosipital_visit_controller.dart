@@ -10,6 +10,7 @@ import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/app_validator.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/datas/check_before_alarm.dart';
@@ -318,22 +319,28 @@ class EditHosipitalVisitController extends GetxController {
       return false;
     }
     if (isEnrollAlarm && startTime == null) {
-      AppSnackbar.invaildTextFeildSnackBar(
-          message: AppString.plzSelectVisitTme.tr);
-      AppFunction.scrollGoToTop(scrollController);
+      if (!AppValidator.validateInputField(AppString.visitTime.tr, startTime)) {
+        return false;
+      }
+
+      if (!AppValidator.validateStringTime(startTime!)) {
+        return false;
+      }
+    }
+
+    if (!AppValidator.validateInputField(
+        AppString.hospitalName.tr, hospitalNameCtl.text)) {
       return false;
     }
-    if (hospitalNameCtl.text.isEmpty) {
-      AppSnackbar.invaildTextFeildSnackBar(
-          message: AppString.plzInputHospitalName.tr);
-      AppFunction.scrollGoToTop(scrollController);
-      return false;
-    }
+
     return true;
   }
 
   void saveVisitLog() async {
-    if (!validate()) return;
+    if (!validate()) {
+      AppFunction.scrollGoToTop(scrollController);
+      return;
+    }
 
     String hospitalName = hospitalNameCtl.text;
     if (hospitalLogModel != null) {

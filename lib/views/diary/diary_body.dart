@@ -75,8 +75,7 @@ class DiaryBody extends StatelessWidget {
               ),
             ),
             if (diaryController.selectedDiary != null)
-              SelectedDiary() // Dont' Const
-            ,
+              SelectedDiary(), // Dont' Const
             SizedBox(height: RS.h10 * 2)
           ],
         ),
@@ -154,12 +153,10 @@ class DiaryBody extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor: diaryController.selectedDay == day
-                ? Colors.red
-                : isToday
-                    ? AppColors.primaryColor
-                    : Get.isDarkMode
-                        ? AppColors.black
-                        : AppColors.white,
+                ? AppColors.primaryColor
+                : Get.isDarkMode
+                    ? AppColors.black
+                    : AppColors.white,
             foregroundImage: AssetImage(
               AppConstant
                   .fealIconLists[
@@ -168,7 +165,6 @@ class DiaryBody extends StatelessWidget {
             ),
             radius: RS.w10 * 2.5,
           ),
-          Text('${day.day}')
         ],
       );
     }

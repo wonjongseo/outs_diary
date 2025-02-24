@@ -9,34 +9,38 @@ part 'poop_condition_type.g.dart';
 @HiveType(typeId: AppConstant.poopConditionTypeHiveId)
 enum PoopConditionType {
   @HiveField(0)
-  korokoro,
+  severeConstipation,
   @HiveField(1)
-  hard,
+  mildConstipation,
   @HiveField(2)
   nomarl,
   @HiveField(3)
-  soft,
+  normal2,
   @HiveField(4)
-  likeMud,
+  lackingFibre,
   @HiveField(5)
-  likeWater,
+  mildDiarrhea,
+  @HiveField(6)
+  severeDiarrhea,
 }
 
 extension PoopConditionTypeExtension on PoopConditionType {
   String get label {
     switch (this) {
-      case PoopConditionType.korokoro:
+      case PoopConditionType.severeConstipation:
         return AppString.poopCondition1.tr;
-      case PoopConditionType.hard:
+      case PoopConditionType.mildConstipation:
         return AppString.poopCondition2.tr;
       case PoopConditionType.nomarl:
         return AppString.poopCondition3.tr;
-      case PoopConditionType.soft:
+      case PoopConditionType.normal2:
         return AppString.poopCondition4.tr;
-      case PoopConditionType.likeMud:
+      case PoopConditionType.lackingFibre:
         return AppString.poopCondition5.tr;
-      case PoopConditionType.likeWater:
+      case PoopConditionType.mildDiarrhea:
         return AppString.poopCondition6.tr;
+      case PoopConditionType.severeDiarrhea:
+        return AppString.poopCondition7.tr;
     }
   }
 }

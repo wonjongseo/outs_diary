@@ -41,10 +41,6 @@ void main() async {
   initializeDateFormatting();
   await _initializeTimeZone();
   await initHive();
-  Get.put(UserController());
-  Get.put(DiaryController());
-  Get.put(HospitalLogController());
-  Get.put(ImageController());
 
   runApp(const MyApp());
 }
@@ -169,17 +165,4 @@ Future<void> initHive() async {
   if (!Hive.isAdapterRegistered(AppConstant.hospitalLogModelHiveId)) {
     Hive.registerAdapter(HospitalLogModelAdapter());
   }
-
-  // if (kDebugMode) {
-  //   HospitalLogRepository hospitalLogRepository = HospitalLogRepository();
-
-  //   var hospitalLogModels = await hospitalLogRepository.select();
-  //   if (hospitalLogModels.isEmpty) {
-  //     for (var dummyHospitalLogModel in dummyHospitalLogModels) {
-  //       hospitalLogRepository.insert(dummyHospitalLogModel);
-  //     }
-  //   }
-  // }
 }
-
-//flutter pub run build_runner build

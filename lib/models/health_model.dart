@@ -180,25 +180,6 @@ class HealthModel {
   //   return message;
   // }
 
-  String get tooltipMsgWeight {
-    String message = '';
-    if (weights == null) return message;
-
-    if (weights![0] != 0) {
-      // message += '${AppString.morning.tr}: ${weights![0]}';
-      message += '${weights![0]}';
-    }
-
-    if (weights![1] != 0) {
-      message += ' ${AppString.lunch.tr}: ${weights![1]}';
-    }
-    if (weights![2] != 0) {
-      message += ' ${AppString.evening.tr}: ${weights![2]}';
-    }
-
-    return message;
-  }
-
   String get tooltipMsgPulse {
     String message = '';
     if (pulses == null) return message;

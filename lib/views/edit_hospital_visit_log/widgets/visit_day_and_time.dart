@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:ours_log/common/enums/before_alram_time.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
@@ -58,24 +59,26 @@ class VisitDayAndTime extends StatelessWidget {
               SizedBox(height: RS.h10 * 2),
               Column(
                 children: [
-                  Text(AppString.plzSelectAlarmTime.tr),
+                  FadeInRight(child: Text(AppString.plzSelectAlarmTime.tr)),
                   SizedBox(height: RS.h10 * 2),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: List.generate(BeforeAlarmTimeType.values.length,
-                          (index) {
-                        return GestureDetector(
-                          onTap: isEdit
-                              ? () => cn.selectAlram(context, index)
-                              : null,
-                          child: SelectBeforeAlarmTime(
-                            width: size.width * .2,
-                            text: cn.getAlramText(index),
-                            isActive: cn.beforeAlarmTypes[index].isChecked,
-                          ),
-                        );
-                      }),
+                  FadeInRight(
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(
+                            BeforeAlarmTimeType.values.length, (index) {
+                          return GestureDetector(
+                            onTap: isEdit
+                                ? () => cn.selectAlram(context, index)
+                                : null,
+                            child: SelectBeforeAlarmTime(
+                              width: size.width * .2,
+                              text: cn.getAlramText(index),
+                              isActive: cn.beforeAlarmTypes[index].isChecked,
+                            ),
+                          );
+                        }),
+                      ),
                     ),
                   )
                 ],
@@ -148,7 +151,7 @@ class SelectBeforeAlarmTime extends StatelessWidget {
           text,
           style: TextStyle(
             fontSize: RS.w10 * 1.2,
-            color: textWhiteOrBlack,
+            color: isActive ? textBlackOrWhite : textWhiteOrBlack,
           ),
         ),
       ),

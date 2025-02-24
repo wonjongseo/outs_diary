@@ -1,8 +1,8 @@
 import 'dart:collection';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/views/home/main_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -57,15 +57,7 @@ class DiaryController extends GetxController {
     if (!isNextDay) {
       Get.to(() => EditDiaryScreen(selectedDay: selectedDay));
     } else {
-      if (!Get.isSnackbarOpen) {
-        Get.snackbar(
-          '경고',
-          '미래는 저장할 수 없어요.',
-          icon: const Icon(Icons.done),
-          borderWidth: 1,
-          borderColor: Colors.redAccent,
-        );
-      }
+      AppSnackbar.invaildTextFeildSnackBar(message: '미래는 저장할 수 없습니다');
     }
   }
 

@@ -17,21 +17,26 @@ class CircleAverHealthWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(right: RS.w10),
       child: Container(
+        constraints: BoxConstraints(
+          minWidth: RS.w10 * 10,
+        ),
         padding: EdgeInsets.all(RS.w10 * .8),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: Colors.grey, width: 1)),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               title,
-              style: TextStyle(
-                fontSize: RS.w10 * 1.6,
-              ),
+              style: TextStyle(fontSize: RS.w10 * 1.4),
             ),
             SizedBox(width: RS.w10 * .8),
-            Text(averValue)
+            Text(
+              averValue,
+              style: TextStyle(fontSize: RS.w10 * 1.4),
+            )
           ],
         ),
       ),

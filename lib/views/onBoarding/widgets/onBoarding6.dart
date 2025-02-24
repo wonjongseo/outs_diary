@@ -79,7 +79,8 @@ class Onboarding6 extends StatelessWidget {
                           WeekDayType.values.length,
                           (index) {
                             return GestureDetector(
-                              onTap: () => onboardingController.onSelectDays(
+                              onTap: () =>
+                                  onboardingController.onSelectWeekdays(
                                 WeekDayType.values[index],
                               ),
                               child: Container(

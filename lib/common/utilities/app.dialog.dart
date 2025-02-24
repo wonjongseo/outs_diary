@@ -23,7 +23,7 @@ class AppDialog {
               connent,
               SizedBox(height: RS.height20),
             ],
-            const Align(alignment: Alignment.center, child: JonggackAvator()),
+            // const Align(alignment: Alignment.center, child: JonggackAvator()),
             if (action != null) ...[
               SizedBox(height: RS.height20),
               action,

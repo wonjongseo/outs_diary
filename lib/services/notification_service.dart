@@ -14,6 +14,8 @@ class NotificationService {
 
   /// 📌 알람 초기화
   Future<void> _initializeNotifications() async {
+    print('_initializeNotifications }');
+
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
@@ -25,8 +27,6 @@ class NotificationService {
 
     await flutterLocalNotificationsPlugin.initialize(settings);
   }
-
-  void aa() {}
 
   /// 📌 매주 특정 요일/시간에 반복되는 알람 설정
   Future<tz.TZDateTime?> scheduleWeeklyNotification({

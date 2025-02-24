@@ -14,42 +14,47 @@ class PoopConditionTypeAdapter extends TypeAdapter<PoopConditionType> {
   PoopConditionType read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return PoopConditionType.korokoro;
+        return PoopConditionType.severeConstipation;
       case 1:
-        return PoopConditionType.hard;
+        return PoopConditionType.mildConstipation;
       case 2:
         return PoopConditionType.nomarl;
       case 3:
-        return PoopConditionType.soft;
+        return PoopConditionType.normal2;
       case 4:
-        return PoopConditionType.likeMud;
+        return PoopConditionType.lackingFibre;
       case 5:
-        return PoopConditionType.likeWater;
+        return PoopConditionType.mildDiarrhea;
+      case 6:
+        return PoopConditionType.severeDiarrhea;
       default:
-        return PoopConditionType.korokoro;
+        return PoopConditionType.severeConstipation;
     }
   }
 
   @override
   void write(BinaryWriter writer, PoopConditionType obj) {
     switch (obj) {
-      case PoopConditionType.korokoro:
+      case PoopConditionType.severeConstipation:
         writer.writeByte(0);
         break;
-      case PoopConditionType.hard:
+      case PoopConditionType.mildConstipation:
         writer.writeByte(1);
         break;
       case PoopConditionType.nomarl:
         writer.writeByte(2);
         break;
-      case PoopConditionType.soft:
+      case PoopConditionType.normal2:
         writer.writeByte(3);
         break;
-      case PoopConditionType.likeMud:
+      case PoopConditionType.lackingFibre:
         writer.writeByte(4);
         break;
-      case PoopConditionType.likeWater:
+      case PoopConditionType.mildDiarrhea:
         writer.writeByte(5);
+        break;
+      case PoopConditionType.severeDiarrhea:
+        writer.writeByte(6);
         break;
     }
   }

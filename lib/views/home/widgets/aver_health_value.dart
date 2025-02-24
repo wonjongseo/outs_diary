@@ -22,16 +22,6 @@ class AverHealthValue extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              if (diaryModel.health!.weights != null &&
-                  diaryModel.health!.avgWeight != 0)
-                Tooltip(
-                  message: diaryModel.health!.tooltipMsgWeight,
-                  triggerMode: TooltipTriggerMode.tap,
-                  child: CircleAverHealthWidget(
-                    title: AppString.weight.tr,
-                    averValue: diaryModel.health!.avgWeight.toString(),
-                  ),
-                ),
               if (diaryModel.health!.temperatures != null &&
                   diaryModel.health!.avgTemperature != 0)
                 Tooltip(
@@ -54,6 +44,12 @@ class AverHealthValue extends StatelessWidget {
                     averValue: diaryModel.health!.avgPulse.toString(),
                   ),
                 ),
+              if (diaryModel.health!.weights != null &&
+                  diaryModel.health!.avgWeight != 0)
+                CircleAverHealthWidget(
+                  title: AppString.weight.tr,
+                  averValue: diaryModel.health!.avgWeight.toString(),
+                ),
             ],
           ),
         ),
@@ -71,7 +67,7 @@ class AverHealthValue extends StatelessWidget {
                   child: CircleAverHealthWidget(
                     title: AppString.maxBloodPressure.tr,
                     averValue: diaryController
-                        .selectedDiary!.health!.avgMinBloodPressure
+                        .selectedDiary!.health!.avgMaxBloodPressure
                         .toString(),
                   ),
                 ),

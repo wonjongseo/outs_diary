@@ -79,11 +79,13 @@ class EditDiaryController extends GetxController {
     }
 
     if (diaryModel != null) {
+      print('diaryModel : ${diaryModel}'); // ?
+
       loadDiaryModel();
       loadHealthModel();
       update();
     } else {
-      // forText();
+      forText();
     }
     super.onInit();
   }
@@ -161,8 +163,8 @@ class EditDiaryController extends GetxController {
     diaryController.insert(newDiaryModel);
 
     AppSnackbar.vaildTextFeildSnackBar(
-        title: AppString.completeText.tr,
-        message: '${selectedDay.day}${AppString.savedHealthRecord.tr}');
+      message: '${selectedDay.day}${AppString.savedHealthRecord.tr}',
+    );
   }
 
   HealthModel createHealthModel() {
@@ -210,8 +212,6 @@ class EditDiaryController extends GetxController {
   }
 
   void loadDiaryModel() {
-    print('diaryModel!.poopConditions : ${diaryModel!.poopConditions}');
-
     if (diaryModel!.poopConditions != null) {
       for (PoopConditionModel poop in diaryModel!.poopConditions!) {
         switch (poop.dayPeriodType) {
@@ -328,19 +328,26 @@ class EditDiaryController extends GetxController {
 
   void forText() {
     for (var temperatureCtl in temperatureCtls) {
-      temperatureCtl.text = (Random().nextInt(3) + 30).toString();
+      temperatureCtl.text =
+          ((Random().nextInt(10) * .1) + (Random().nextInt(1) + 0) + 36)
+              .toString();
     }
     for (var basicTemperatureCtl in basicTemperatureCtls) {
       basicTemperatureCtl.text = (Random().nextInt(3) + 30).toString();
     }
-    for (var bloodPressureCtl in maxBloodPressureCtls) {
-      bloodPressureCtl.text = (Random().nextInt(3) + 30).toString();
+    for (var pulseCtl in pulseCtls) {
+      pulseCtl.text = ((Random().nextInt(5) + 5) + 80).toString();
+    }
+    for (var maxBloodPressureCtl in maxBloodPressureCtls) {
+      maxBloodPressureCtl.text = ((Random().nextInt(10) + 10) + 100).toString();
+    }
+    for (var minBloodPressureCtl in minBloodPressureCtls) {
+      minBloodPressureCtl.text = ((Random().nextInt(5) + 5) + 70).toString();
     }
     for (var weightCtl in weightCtls) {
-      weightCtl.text = (Random().nextInt(3) + 60).toString();
-    }
-    for (var pulseCtl in pulseCtls) {
-      pulseCtl.text = (Random().nextInt(3) + 30).toString();
+      weightCtl.text =
+          ((Random().nextInt(10) * .1) + (Random().nextInt(1) + 1) + 60)
+              .toString();
     }
   }
 

@@ -8,8 +8,8 @@ import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/datas/background_data.dart';
 
 class BackgroundWidget extends StatelessWidget {
-  const BackgroundWidget({super.key, required this.widget});
-  final Widget widget;
+  const BackgroundWidget({super.key, required this.child});
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class BackgroundWidget extends StatelessWidget {
                 ),
               ),
             ),
-            widget,
+            child,
           ],
         );
       }),

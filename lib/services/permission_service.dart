@@ -3,9 +3,7 @@ import 'package:photo_manager/photo_manager.dart';
 
 class PermissionService {
   void requestPermisson() async {
-    // final permission = await PhotoManager.requestPermissionExtend();
-    // if (!permission.isAuth) {}
-
+    print('requestPermisson');
     if (await Permission.mediaLibrary.isDenied &&
         !await Permission.mediaLibrary.isPermanentlyDenied) {
       await [Permission.mediaLibrary].request();
@@ -13,6 +11,7 @@ class PermissionService {
   }
 
   void permissionWithNotification() async {
+    print('permissionWithNotification');
     if (await Permission.notification.isDenied &&
         !await Permission.notification.isPermanentlyDenied) {
       await [Permission.notification].request();

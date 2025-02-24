@@ -19,7 +19,7 @@ class SetBackgroundScreen extends StatelessWidget {
         backgroundColor: Colors.grey.withValues(alpha: .2),
       ),
       body: BackgroundWidget(
-        widget: SafeArea(
+        child: SafeArea(
           child: Stack(
             children: [
               Container(color: Colors.grey.withValues(alpha: .2)),

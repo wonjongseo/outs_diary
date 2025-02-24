@@ -41,6 +41,10 @@ class _SplashScreenState extends State<SplashScreen> {
     if (users == null) {
       Get.off(() => OnBoardingScreen());
     } else {
+      Get.put(UserController());
+      Get.put(DiaryController());
+      Get.put(HospitalLogController());
+      Get.put(ImageController());
       Get.off(() => const MainScreen());
     }
   }

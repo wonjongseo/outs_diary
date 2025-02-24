@@ -3,12 +3,12 @@ import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 
 class AppValidator {
-  static Duration defaultDuration = const Duration(milliseconds: 1700);
+  static Duration defaultDuration = const Duration(milliseconds: 2000);
   static bool validateInputField(String label, String? value) {
     if (value == null || value!.isEmpty) {
       AppSnackbar.invaildTextFeildSnackBar(
         duration: defaultDuration,
-        message: '$label 입력해주세요',
+        message: '$label${AppString.plzInput.tr}',
       );
       return false;
     }
@@ -34,7 +34,7 @@ class AppValidator {
     if (value == null || value.isEmpty) {
       AppSnackbar.invaildTextFeildSnackBar(
         duration: defaultDuration,
-        message: '$label을 선택해주세요',
+        message: '$label${AppString.plzSelect.tr}',
       );
       return false;
     }

@@ -83,7 +83,7 @@ class _GraphBodyState extends State<GraphBody> {
         fealGraphData!.xDatas[diary.dateTime.day - 1] =
             ((5 - diary.fealIndex)).toDouble();
         painLevelGraphData!.xDatas[diary.dateTime.day - 1] =
-            diary.painfulIndex == null ? 0.0 : diary.painfulIndex!.toDouble();
+            diary.painfulIndex == null ? 0.0 : (diary.painfulIndex!).toDouble();
         temperatureGraphData!.xDatas[diary.dateTime.day - 1] =
             diary.health!.avgTemperature;
         weightGraphData!.xDatas[diary.dateTime.day - 1] =
@@ -191,88 +191,15 @@ class _GraphBodyState extends State<GraphBody> {
                   children: [
                     _fealGraph(userController),
                     SizedBox(height: RS.h10),
-                    _painLevel(userController),
+                    // _painLevel(userController),
+                    // SizedBox(height: RS.h10),
+                    _weight(userController),
                     SizedBox(height: RS.h10),
-                    CustomExpansionCard(
-                      title: AppString.weight.tr,
-                      initiallyExpanded: userController.userModel!.userUtilModel
-                          .expandedFields[IsExpandtionType.weightGraph],
-                      onExpansionChanged: (bool v) => userController
-                          .toggleExpanded(IsExpandtionType.weightGraph),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: RS.h10,
-                          horizontal: RS.w10 * 2,
-                        ),
-                        child: weightGraphData == null
-                            ? Container()
-                            : CustomLineGraph(
-                                graphData: weightGraphData!,
-                                countOfDay: countOfDay,
-                              ),
-                      ),
-                    ),
+                    _temperature(userController),
                     SizedBox(height: RS.h10),
-                    CustomExpansionCard(
-                      initiallyExpanded: userController.userModel!.userUtilModel
-                          .expandedFields[IsExpandtionType.temperatureGraph],
-                      onExpansionChanged: (bool v) => userController
-                          .toggleExpanded(IsExpandtionType.temperatureGraph),
-                      title: AppString.temperature.tr,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: RS.h10,
-                          horizontal: RS.w10 * 2,
-                        ),
-                        child: temperatureGraphData == null
-                            ? Container()
-                            : CustomLineGraph(
-                                graphData: temperatureGraphData!,
-                                countOfDay: countOfDay,
-                              ),
-                      ),
-                    ),
+                    _pulse(userController),
                     SizedBox(height: RS.h10),
-                    CustomExpansionCard(
-                      initiallyExpanded: userController.userModel!.userUtilModel
-                          .expandedFields[IsExpandtionType.pulseGraph],
-                      onExpansionChanged: (bool v) => userController
-                          .toggleExpanded(IsExpandtionType.pulseGraph),
-                      title: AppString.pulse.tr,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: RS.h10,
-                          horizontal: RS.w10 * 2,
-                        ),
-                        child: pulseGraphData == null
-                            ? Container()
-                            : CustomLineGraph(
-                                graphData: pulseGraphData!,
-                                countOfDay: countOfDay,
-                              ),
-                      ),
-                    ),
-                    SizedBox(height: RS.h10),
-                    CustomExpansionCard(
-                      initiallyExpanded: userController.userModel!.userUtilModel
-                          .expandedFields[IsExpandtionType.bloodPressureGraph],
-                      onExpansionChanged: (bool v) => userController
-                          .toggleExpanded(IsExpandtionType.bloodPressureGraph),
-                      title: AppString.bloodPressure.tr,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: RS.h10,
-                          horizontal: RS.w10 * 2,
-                        ),
-                        child: maxBloodPressureGraphData == null
-                            ? Container()
-                            : CustomLineGraph(
-                                graphData: maxBloodPressureGraphData!,
-                                graphData2: minBloodPressureGraphData,
-                                countOfDay: countOfDay,
-                              ),
-                      ),
-                    ),
+                    _bloodPressure(userController),
                   ],
                 ),
               ),
@@ -280,6 +207,95 @@ class _GraphBodyState extends State<GraphBody> {
           );
         }),
       ],
+    );
+  }
+
+  CustomExpansionCard _bloodPressure(UserController userController) {
+    return CustomExpansionCard(
+      initiallyExpanded: userController.userModel!.userUtilModel
+          .expandedFields[IsExpandtionType.bloodPressureGraph],
+      onExpansionChanged: (bool v) =>
+          userController.toggleExpanded(IsExpandtionType.bloodPressureGraph),
+      title: AppString.bloodPressure.tr,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: RS.h10,
+          horizontal: RS.w10 * 2,
+        ),
+        child: maxBloodPressureGraphData == null
+            ? Container()
+            : CustomLineGraph(
+                graphData: maxBloodPressureGraphData!,
+                graphData2: minBloodPressureGraphData,
+                countOfDay: countOfDay,
+              ),
+      ),
+    );
+  }
+
+  CustomExpansionCard _pulse(UserController userController) {
+    return CustomExpansionCard(
+      initiallyExpanded: userController
+          .userModel!.userUtilModel.expandedFields[IsExpandtionType.pulseGraph],
+      onExpansionChanged: (bool v) =>
+          userController.toggleExpanded(IsExpandtionType.pulseGraph),
+      title: AppString.pulse.tr,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: RS.h10,
+          horizontal: RS.w10 * 2,
+        ),
+        child: pulseGraphData == null
+            ? Container()
+            : CustomLineGraph(
+                graphData: pulseGraphData!,
+                countOfDay: countOfDay,
+              ),
+      ),
+    );
+  }
+
+  CustomExpansionCard _temperature(UserController userController) {
+    return CustomExpansionCard(
+      initiallyExpanded: userController.userModel!.userUtilModel
+          .expandedFields[IsExpandtionType.temperatureGraph],
+      onExpansionChanged: (bool v) =>
+          userController.toggleExpanded(IsExpandtionType.temperatureGraph),
+      title: AppString.temperature.tr,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: RS.h10,
+          horizontal: RS.w10 * 2,
+        ),
+        child: temperatureGraphData == null
+            ? Container()
+            : CustomLineGraph(
+                graphData: temperatureGraphData!,
+                countOfDay: countOfDay,
+              ),
+      ),
+    );
+  }
+
+  CustomExpansionCard _weight(UserController userController) {
+    return CustomExpansionCard(
+      title: AppString.weight.tr,
+      initiallyExpanded: userController.userModel!.userUtilModel
+          .expandedFields[IsExpandtionType.weightGraph],
+      onExpansionChanged: (bool v) =>
+          userController.toggleExpanded(IsExpandtionType.weightGraph),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: RS.h10,
+          horizontal: RS.w10 * 2,
+        ),
+        child: weightGraphData == null
+            ? Container()
+            : CustomLineGraph(
+                graphData: weightGraphData!,
+                countOfDay: countOfDay,
+              ),
+      ),
     );
   }
 

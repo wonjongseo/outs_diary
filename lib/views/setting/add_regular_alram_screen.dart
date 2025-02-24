@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/admob/global_banner_admob.dart';
 
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
@@ -16,6 +17,7 @@ import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';
 import 'package:ours_log/models/week_day_type.dart';
 import 'package:ours_log/services/notification_service.dart';
+import 'package:ours_log/views/background/background_widget.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/setting/setting_alram_screen.dart';
 
@@ -54,16 +56,19 @@ class _AddRegularAlramScreenState extends State<AddRegularAlramScreen> {
   }
 
   bool validate() {
-    if (!AppValidator.validateInputField('일정 명', scheduleNameCnl.text)) {
+    if (!AppValidator.validateInputField(
+        AppString.taskName.tr, scheduleNameCnl.text)) {
       return false;
     }
-    if (!AppValidator.validateSelectStringField('일정 시간', startTime)) {
+    if (!AppValidator.validateSelectStringField(
+        AppString.taskTime.tr, startTime)) {
       return false;
     }
     if (!AppValidator.validateStringTime(startTime!)) {
       return false;
     }
-    if (!AppValidator.validateSelectListField('요일', selectedWeekdayIndexs)) {
+    if (!AppValidator.validateSelectListField(
+        AppString.weekday.tr, selectedWeekdayIndexs)) {
       return false;
     }
     return true;
@@ -136,9 +141,7 @@ class _AddRegularAlramScreenState extends State<AddRegularAlramScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('정기 알람 추가'),
-      ),
+      appBar: AppBar(title: Text(AppString.addRegularTask.tr)),
       bottomNavigationBar: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -146,59 +149,64 @@ class _AddRegularAlramScreenState extends State<AddRegularAlramScreen> {
             CustomButton(
               label: AppString.saveText.tr,
               onTap: onSaveBtn,
-            )
+            ),
+            const GlobalBannerAdmob()
           ],
         ),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              ColTextAndWidget(
-                label: '일정 명',
-                widget: CustomTextFormField(
-                  controller: scheduleNameCnl,
-                ),
-              ),
-              SizedBox(height: RS.h10),
-              ColTextAndWidget(
-                label: '일정 메세지',
-                widget: CustomTextFormField(
-                  controller: scheduleMessageCnl,
-                ),
-              ),
-              SizedBox(height: RS.h10),
-              ColTextAndWidget(
-                label: '알람 시간',
-                widget: CustomTextFormField(
-                  readOnly: true,
-                  hintText: startTime ?? '알람 시간',
-                  widget: IconButton(
-                    onPressed: onTapVisitTime,
-                    icon: const Icon(Icons.keyboard_arrow_down),
+      body: BackgroundWidget(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                ColTextAndWidget(
+                  label: AppString.taskName.tr,
+                  widget: CustomTextFormField(
+                    controller: scheduleNameCnl,
                   ),
                 ),
-              ),
-              SizedBox(height: RS.h10),
-              ColTextAndWidget(
-                label: '요일 선택',
-                widget: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(WeekDayType.values.length, (index) {
-                      return WeekdaySelector(
-                          height: RS.w10 * 8,
-                          width: RS.w10 * 8,
-                          onTap: () => selectWeekday(index),
-                          isSelected: selectedWeekdayIndexs
-                              .contains(WeekDayType.values[index]),
-                          weekDay: WeekDayType.values[index].label);
-                    }),
+                SizedBox(height: RS.h10),
+                ColTextAndWidget(
+                  label: AppString.taskMessage.tr,
+                  widget: CustomTextFormField(
+                    controller: scheduleMessageCnl,
                   ),
                 ),
-              ),
-            ],
+                SizedBox(height: RS.h10),
+                ColTextAndWidget(
+                  label: AppString.taskTime.tr,
+                  widget: CustomTextFormField(
+                    onTap: onTapVisitTime,
+                    readOnly: true,
+                    hintText: startTime ?? '',
+                    widget: IconButton(
+                      onPressed: onTapVisitTime,
+                      icon: const Icon(Icons.keyboard_arrow_down),
+                    ),
+                  ),
+                ),
+                SizedBox(height: RS.h10),
+                ColTextAndWidget(
+                  label: AppString.weekday.tr,
+                  widget: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children:
+                          List.generate(WeekDayType.values.length, (index) {
+                        return WeekdaySelector(
+                            height: RS.w10 * 8,
+                            width: RS.w10 * 8,
+                            onTap: () => selectWeekday(index),
+                            isSelected: selectedWeekdayIndexs
+                                .contains(WeekDayType.values[index]),
+                            weekDay: WeekDayType.values[index].label);
+                      }),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

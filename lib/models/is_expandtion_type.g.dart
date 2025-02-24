@@ -37,6 +37,8 @@ class IsExpandtionTypeAdapter extends TypeAdapter<IsExpandtionType> {
         return IsExpandtionType.poopCondition;
       case 11:
         return IsExpandtionType.isFealLineGraphFirst;
+      case 12:
+        return IsExpandtionType.poopConditionImage;
       default:
         return IsExpandtionType.temperature;
     }
@@ -80,6 +82,9 @@ class IsExpandtionTypeAdapter extends TypeAdapter<IsExpandtionType> {
         break;
       case IsExpandtionType.isFealLineGraphFirst:
         writer.writeByte(11);
+        break;
+      case IsExpandtionType.poopConditionImage:
+        writer.writeByte(12);
         break;
     }
   }

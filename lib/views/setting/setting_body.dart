@@ -84,18 +84,11 @@ class _SettingBodyState extends State<SettingBody> {
                 children: [
                   SizedBox(height: RS.height20),
                   _customListTIle(
-                    title: 'アラム設定',
-                    onTap: () {
-                      Get.to(() => const SettingAlramScreen());
-                    },
-                  ),
-                  SizedBox(height: RS.height20),
-                  _customListTIle(
                     title: AppString.theme.tr,
                     subTitle: isDarkMode
                         ? AppString.darkMode.tr
                         : AppString.lightMode.tr,
-                    imagePath: AppImagePath.good2,
+                    imagePath: AppImagePath.very_good2,
                     onTap: () => changeTheme(isDarkMode ? 0 : 1),
                     widget: ToggleButtons(
                       borderRadius: BorderRadius.circular(RS.w10 * 2),
@@ -120,7 +113,7 @@ class _SettingBodyState extends State<SettingBody> {
                       elevation: 0,
                       title: Text(AppString.color.tr),
                       leading: Image.asset(
-                        AppImagePath.good2,
+                        AppImagePath.very_good3,
                         width: RS.w10 * 4,
                         height: RS.w10 * 4,
                       ),
@@ -215,7 +208,7 @@ class _SettingBodyState extends State<SettingBody> {
                         .backgroundLists[
                             userController.userModel?.backgroundIndex ?? 0]
                         .description,
-                    imagePath: AppImagePath.very_good2,
+                    imagePath: AppImagePath.very_good4,
                     onTap: () => Get.to(() => const SetBackgroundScreen()),
                   ),
                   SizedBox(height: RS.height15),
@@ -225,14 +218,14 @@ class _SettingBodyState extends State<SettingBody> {
                         .fealIconLists[
                             userController.userModel?.fealIconIndex ?? 0]
                         .description,
-                    imagePath: AppImagePath.soso2,
+                    imagePath: AppImagePath.very_good5,
                     onTap: () => Get.to(() => const SetFealIconScreen()),
                   ),
                   SizedBox(height: RS.height15),
                   _customListTIle(
                     title: 'Change Language',
                     subTitle: AppString.setLanguage.tr,
-                    imagePath: AppImagePath.bad2,
+                    imagePath: AppImagePath.good1,
                     onTap: () {},
                     widget: DropdownButton(
                         // isDense: true,
@@ -274,6 +267,14 @@ class _SettingBodyState extends State<SettingBody> {
                           ],
                         ],
                         onChanged: changeSystemLanguage),
+                  ),
+                  SizedBox(height: RS.height20),
+                  _customListTIle(
+                    imagePath: AppImagePath.very_good1,
+                    title: AppString.regularSchedule.tr,
+                    onTap: () {
+                      Get.to(() => const SettingAlramScreen());
+                    },
                   ),
                   SizedBox(height: RS.height20),
                   _customListTIle(

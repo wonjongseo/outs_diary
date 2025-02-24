@@ -52,7 +52,6 @@ class HospitalLogBody extends StatelessWidget {
                     calendarBuilders: CalendarBuilders(
                       markerBuilder: (context, day, event) {
                         if (event.isEmpty) return null;
-
                         return FaIcon(
                           FontAwesomeIcons.hospital,
                           color: AppColors.primaryColor,
@@ -75,7 +74,6 @@ class HospitalLogBody extends StatelessWidget {
                     rowHeight: RS.h10 * 7,
                     onDaySelected: hospitalLogController.onDaySelected,
                   ),
-                  const SizedBox(height: 8.0),
                 ],
               ),
             ),
@@ -85,17 +83,29 @@ class HospitalLogBody extends StatelessWidget {
                 return Column(
                   children: List.generate(value.length, (index) {
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         if (index == 0)
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: IconButton(
-                              onPressed: () {
-                                Get.to(() => EditHospitalVisitLogScreen(
-                                    selectedDate:
-                                        hospitalLogController.selectedDay!));
-                              },
-                              icon: const FaIcon(FontAwesomeIcons.add),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(() => EditHospitalVisitLogScreen(
+                                  selectedDate:
+                                      hospitalLogController.selectedDay!));
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: RS.h10,
+                                horizontal: RS.w10,
+                              ),
+                              margin: EdgeInsets.only(
+                                right: RS.w10 * 2,
+                                bottom: RS.h10,
+                              ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColors.primaryColor,
+                              ),
+                              child: Icon(Icons.add, color: Colors.white),
                             ),
                           ),
                         GestureDetector(
@@ -105,11 +115,8 @@ class HospitalLogBody extends StatelessWidget {
                               hospitalLogModel: value[index],
                             ),
                           ),
-                          child: SelectedVisitHospital(
-                            hospitalLog: value[index],
-                            // onTapDelete: () =>
-                            //     hospitalLogController.delete(value[index]),
-                          ),
+                          child:
+                              SelectedVisitHospital(hospitalLog: value[index]),
                         ),
                       ],
                     );
@@ -128,11 +135,9 @@ class SelectedVisitHospital extends StatelessWidget {
   const SelectedVisitHospital({
     super.key,
     required this.hospitalLog,
-    // required this.onTapDelete,
   });
 
   final HospitalLogModel hospitalLog;
-  // final Function() onTapDelete;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -141,7 +146,8 @@ class SelectedVisitHospital extends StatelessWidget {
       ),
       padding: EdgeInsets.all(RS.w10 * 1.2),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
+        color: boxBlackOrWhite,
+        border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Column(
@@ -164,37 +170,7 @@ class SelectedVisitHospital extends StatelessWidget {
                   ),
                 ],
               ),
-              Icon(Icons.keyboard_arrow_right)
-              // IconButton(
-              //   onPressed: onTapDelete,
-              //   icon: const Icon(
-              //     FontAwesomeIcons.trashCan,
-              //   ),
-              // )
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.end,
-              //   children: [
-              //     IconButton(
-              //         onPressed: () {
-              //           Get.to(
-              //             () => EditHospitalVisitLogScreen(
-              //               selectedDate: hospitalLog.dateTime,
-              //               hospitalLogModel: hospitalLog,
-              //             ),
-              //           );
-              //         },
-              //         icon: Icon(FontAwesomeIcons.pen)),
-              //     SizedBox(width: RS.w5),
-              //     // IconButton(
-              //     //   onPressed: () => hospitalLogController.delete(
-              //     //     hospitalLog,
-              //     //   ),
-              //     //   icon: Icon(
-              //     //     FontAwesomeIcons.trashCan,
-              //     //   ),
-              //     // )
-              //   ],
-              // ),
+              const Icon(Icons.keyboard_arrow_right)
             ],
           ),
         ],
