@@ -42,6 +42,18 @@ class UserController extends GetxController {
     getUser();
   }
 
+  void addTaskList(List<TaskModel> tasks) {
+    if (userModel == null) return;
+    if (userModel!.tasks == null) {
+      userModel!.tasks = [];
+    }
+
+    userModel!.tasks!.addAll(tasks);
+    userModelRepository.saveUser(userModel!);
+
+    getUser();
+  }
+
   void changePrimaryColor(int index) {
     userModel!.colorIndex = index;
     userModelRepository.saveUser(userModel!);
@@ -72,10 +84,21 @@ class UserController extends GetxController {
     deleteTask(userModel!.tasks![deleteTaskIndex]);
   }
 
-  void deleteTask(TaskModel task) {
+  void updateTask(TaskModel task) async {
     if (userModel == null) return;
-    if (userModel!.tasks == null) {
-      return;
+    if (userModel!.tasks == null) return;
+
+    for (var notification in task.notifications) {
+      await notificationService.cancellNotifications(notification.alermId);
+    }
+  }
+
+  void deleteTask(TaskModel task) async {
+    if (userModel == null) return;
+    if (userModel!.tasks == null) return;
+
+    for (var notification in task.notifications) {
+      await notificationService.cancellNotifications(notification.alermId);
     }
     userModel!.tasks!.remove(task);
     userModelRepository.saveUser(userModel!);

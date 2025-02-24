@@ -38,7 +38,7 @@ class FealIconRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(fealIcon.title),
-                SizedBox(height: RS.h10 / 2),
+                SizedBox(height: RS.h5),
                 Text(
                   fealIcon.description,
                   style: TextStyle(fontSize: RS.w10 * 1.2),

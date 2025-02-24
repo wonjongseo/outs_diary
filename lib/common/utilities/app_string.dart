@@ -4,6 +4,9 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.deletedMsg: AppString.deletedMsgJp,
+          AppString.enrolledMsg: AppString.enrolledMsgJp,
+          AppString.before: AppString.beforeJp,
           AppString.savedVisitLog: AppString.savedVisitLogJp,
           AppString.editedVisitLog: AppString.editedVisitLogJp,
           AppString.plzSelectVisitTme: AppString.plzSelectVisitTmeJp,
@@ -227,6 +230,9 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.deletedMsg: AppString.deletedMsgKr,
+          AppString.enrolledMsg: AppString.enrolledMsgKr,
+          AppString.before: AppString.beforeKr,
           AppString.savedVisitLog: AppString.savedVisitLogKr,
           AppString.editedVisitLog: AppString.editedVisitLogKr,
           AppString.plzSelectVisitTme: AppString.plzSelectVisitTmeKr,
@@ -450,6 +456,9 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.deletedMsg: AppString.deletedMsgEn,
+          AppString.enrolledMsg: AppString.enrolledMsgEn,
+          AppString.before: AppString.beforeEn,
           AppString.savedVisitLog: AppString.savedVisitLogEn,
           AppString.editedVisitLog: AppString.editedVisitLogEn,
           AppString.plzSelectVisitTme: AppString.plzSelectVisitTmeEn,
@@ -717,6 +726,11 @@ class AppString {
   static String whatTimeBeforeScrhduleKr = '몇 시간 전에 알람을 받고 싶으세요?';
   static String whatTimeBeforeScrhduleJp = '何時間前にアラムを受けますか？';
   static String whatTimeBeforeScrhduleEn = "whatTimeBeforeScrhdule";
+
+  static String before = 'beforetr';
+  static String beforeKr = '전';
+  static String beforeJp = '前';
+  static String beforeEn = "before";
 
   static String beforeDay = 'beforeDaytr';
   static String beforeDayKr = '일 전';
@@ -1733,34 +1747,36 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String iconJp = 'アイコン';
   static String iconEn = "Icon";
 
-  static String poopCondition1 = 'poopCondition1Tr';
-  static String poopCondition1Kr = '코로코로';
+  static String poopCondition1 = 'poopCondition1Tr (변비)';
+  static String poopCondition1Kr = "분리된 딱딱한 덩어리 (심한 변비)"; //; '코로코로';
   static String poopCondition1Jp = 'コロコロ';
-  static String poopCondition1En = "poopCondition1";
+  static String poopCondition1En = "separate hard lumps";
 
   static String poopCondition2 = 'poopCondition2Tr';
-  static String poopCondition2Kr = '딱딱함';
+  static String poopCondition2Kr = '덩어리진 소시지 모양 (변비)';
   static String poopCondition2Jp = '硬い';
   static String poopCondition2En = "poopCondition2";
+//
 
   static String poopCondition3 = 'poopCondition3Tr';
-  static String poopCondition3Kr = '보통';
+  static String poopCondition3Kr = '갈라진 틈 있는 소시지 모양';
   static String poopCondition3Jp = '普通';
   static String poopCondition3En = "poopCondition3";
 
   static String poopCondition4 = 'poopCondition4Tr';
-  static String poopCondition4Kr = '부드러움';
+  static String poopCondition4Kr = '부드러운 소시지 모양';
   static String poopCondition4Jp = '柔らかい';
   static String poopCondition4En = "poopCondition4";
 
   static String poopCondition5 = 'poopCondition5Tr';
-  static String poopCondition5Kr = '진흙 같음';
-  static String poopCondition5Jp = '泥っぽい';
+  static String poopCondition5Kr = '진흙 같은 형태';
+  static String poopCondition5Jp = '泥状';
+
   static String poopCondition5En = "poopCondition5";
 
   static String poopCondition6 = 'poopCondition6Tr';
   static String poopCondition6Kr = '물 같음';
-  static String poopCondition6Jp = '水っぽい';
+  static String poopCondition6Jp = '水様';
   static String poopCondition6En = "poopCondition6";
 
   static String maxBloodPressure = 'maxBloodPressureTr';
@@ -1774,8 +1790,8 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String minBloodPressureEn = "diastolic number";
 
   static String poop = 'poopTr';
-  static String stoolKr = '대변';
-  static String stoolJp = '大便';
+  static String stoolKr = '변';
+  static String stoolJp = '便';
   static String stoolEn = "Stool";
 
   static String color = 'colorTr';
@@ -1817,4 +1833,20 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String editedVisitLogKr = '병원 기록이 변경 되었습니다';
   static String editedVisitLogJp = '来院記録が変更されました。';
   static String editedVisitLogEn = "editedVisitLog";
+
+  static String enrolledMsg = 'enrolledMsgtr';
+  static String enrolledMsgKr = '(이)가 등록되었습니다';
+  static String enrolledMsgJp = 'が登録されました';
+  static String enrolledMsgEn = "is Enrolled";
+
+  static String deletedMsg = 'deletedMsgtr';
+  static String deletedMsgKr = '(이)가 삭제되었습니다';
+  static String deletedMsgJp = 'が削除されました';
+  static String deletedMsgEn = "is Deleted";
+
+  //
+  static String addRegularTask = 'addRegularTasktr';
+  static String addRegularTaskKr = '정기 일정 추가';
+  static String addRegularTaskJp = '定期予定追加';
+  static String addRegularTaskEn = "Add Regular Schedule";
 }

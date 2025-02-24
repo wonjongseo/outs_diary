@@ -15,6 +15,15 @@ bool get isJp => Get.locale.toString().contains('ja');
 bool get isEn => Get.locale.toString().contains('en');
 
 class AppFunction {
+  static TimeOfDay? stringToTimeOfDay(String time) {
+    int? hour = int.tryParse(time.split(':')[0]);
+    int? minute = int.tryParse(time.split(':')[1]);
+
+    if (hour == null || minute == null) return null;
+
+    return TimeOfDay(hour: hour, minute: minute);
+  }
+
   static Future openCameraOrLibarySheet(
       {required BuildContext context,
       required Function() takePictureFunc,
@@ -137,17 +146,18 @@ class AppFunction {
 
   static Future<TimeOfDay?> pickTime(
     BuildContext context, {
-    required String helpText,
-    required String errorInvalidText,
+    String? helpText,
+    String? errorInvalidText,
     TimeOfDay? initialTime,
   }) async {
     return await showTimePicker(
       cancelText: AppString.cancelBtnTextTr.tr,
-      helpText: helpText,
-      errorInvalidText: errorInvalidText,
+      helpText: helpText ?? AppString.plzAlarmTime.tr,
+      errorInvalidText: errorInvalidText ?? AppString.plzInputCollectTime.tr,
       hourLabelText: AppString.hour.tr,
       minuteLabelText: AppString.minute.tr,
       context: context,
+      initialEntryMode: TimePickerEntryMode.input,
       initialTime: initialTime ?? TimeOfDay.now(),
     );
   }

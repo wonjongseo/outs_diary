@@ -51,7 +51,7 @@ class SelectedDiary extends StatelessWidget {
           ],
           if (diaryModel.health != null && diaryModel.health!.argIsNotZero) ...[
             ColTextAndWidget(
-              vertical: RS.h10 / 2,
+              vertical: RS.h5,
               label: AppString.averageHealthValue.tr,
               labelWidget: diaryModel.painfulIndex == null
                   ? null
@@ -64,7 +64,7 @@ class SelectedDiary extends StatelessWidget {
           if (diaryModel.poopConditions != null &&
               diaryModel.poopConditions!.isNotEmpty) ...[
             ColTextAndWidget(
-              vertical: RS.h10 / 2,
+              vertical: RS.h5,
               label: AppString.poop.tr,
               widget: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -99,24 +99,21 @@ class SelectedDiary extends StatelessWidget {
             ),
             SizedBox(height: RS.h10 * 1.5),
           ],
-          if (diaryModel.whatTodo != null &&
-              diaryModel.whatTodo!.isNotEmpty) ...[
-            ColTextAndWidget(
-              vertical: RS.h10 / 2,
-              label: AppString.healthMemo,
-              widget: CustomTextFormField(
-                readOnly: true,
-                hintStyle: const TextStyle(),
-                hintText: diaryModel.whatTodo,
-                maxLines: (diaryModel.whatTodo ?? '').split('\n').length,
-              ),
+          ColTextAndWidget(
+            vertical: RS.h5,
+            label: AppString.healthMemo,
+            widget: CustomTextFormField(
+              readOnly: true,
+              hintStyle: const TextStyle(),
+              hintText: diaryModel.whatTodo,
+              maxLines: (diaryModel.whatTodo ?? '').split('\n').length,
             ),
-            SizedBox(height: RS.h10),
-          ],
+          ),
+          SizedBox(height: RS.h10),
           if (diaryModel.imagePath != null &&
               diaryModel.imagePath!.isNotEmpty) ...[
             ColTextAndWidget(
-              vertical: RS.h10 / 2,
+              vertical: RS.h5,
               label: AppString.photo.tr,
               widget: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -160,7 +157,7 @@ class SelectedDiary extends StatelessWidget {
   ColTextAndWidget _DonePill(
       DiaryModel diaryModel, DiaryController diaryController) {
     return ColTextAndWidget(
-      vertical: RS.h10 / 2,
+      vertical: RS.h5,
       label: AppString.healthMemo,
       widget: Row(
         mainAxisAlignment: MainAxisAlignment.center,

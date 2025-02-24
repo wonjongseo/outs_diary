@@ -52,7 +52,7 @@ extension WeekDayTypeExtenston on WeekDayType {
       case WeekDayType.wednesday:
         return AppString.wednesday.tr;
       case WeekDayType.thursday:
-        return AppString.monday.tr;
+        return AppString.thursday.tr;
       case WeekDayType.friday:
         return AppString.friday.tr;
       case WeekDayType.saturday:

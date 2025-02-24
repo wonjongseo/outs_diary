@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 
 import 'package:ours_log/common/utilities/app_constant.dart';
+import 'package:ours_log/models/week_day_type.dart';
 
 part 'regular_task_model.g.dart';
 

@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
@@ -156,11 +154,11 @@ class SelectedVisitHospital extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(hospitalLog.hospitalName),
-                  SizedBox(height: RS.h10 / 2),
+                  SizedBox(height: RS.h5),
                   Row(
                     children: [
                       const Icon(Icons.access_time_rounded),
-                      SizedBox(width: RS.w10 / 2),
+                      SizedBox(width: RS.w5),
                       Text(hospitalLog.startTime ?? ''),
                     ],
                   ),
@@ -186,7 +184,7 @@ class SelectedVisitHospital extends StatelessWidget {
               //           );
               //         },
               //         icon: Icon(FontAwesomeIcons.pen)),
-              //     SizedBox(width: RS.w10 / 2),
+              //     SizedBox(width: RS.w5),
               //     // IconButton(
               //     //   onPressed: () => hospitalLogController.delete(
               //     //     hospitalLog,

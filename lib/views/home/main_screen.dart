@@ -41,7 +41,7 @@ class _MainScreenState extends State<MainScreen> {
   void setBodys() {
     bodys.add(DiaryBody());
     bodys.add(HospitalLogBody());
-    bodys.add(ManageAlermBody());
+    // bodys.add(ManageAlermBody());
     bodys.add(GraphBody());
     bodys.add(SettingBody());
     setState(() {});
@@ -100,8 +100,8 @@ class _MainScreenState extends State<MainScreen> {
                 label: AppString.healthLog.tr, icon: Text('')),
             BottomNavigationBarItem(
                 label: AppString.hospitalVisitLog.tr, icon: Text('')),
-            BottomNavigationBarItem(
-                label: AppString.scheduleManagement.tr, icon: Text('')),
+            // BottomNavigationBarItem(
+            //     label: AppString.scheduleManagement.tr, icon: Text('')),
             BottomNavigationBarItem(
                 label: AppString.healthGraph.tr, icon: Text('')),
             BottomNavigationBarItem(

@@ -43,7 +43,7 @@ class InputHealthDayPeriod extends StatelessWidget {
           children: [
             ...List.generate(DayPeriodType.values.length, (index) {
               return Padding(
-                padding: EdgeInsets.symmetric(vertical: RS.h10 / 2),
+                padding: EdgeInsets.symmetric(vertical: RS.h5),
                 child: Row(
                   children: [
                     Text(DayPeriodType.values[index].label),

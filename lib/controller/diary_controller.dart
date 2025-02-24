@@ -40,6 +40,10 @@ class DiaryController extends GetxController {
   }
 
   void onDatSelected(DateTime cSelectedDay, DateTime cFocusedDay) {
+    selectedDay = cSelectedDay;
+
+    focusedDay = cFocusedDay;
+
     if (kEvents[cSelectedDay] != null) {
       selectedDiary = kEvents[cSelectedDay]![0];
       AppFunction.scrollGoToBottom(scrollController);
@@ -47,7 +51,6 @@ class DiaryController extends GetxController {
       return;
     }
     selectedDiary = null;
-    // bool isNextDay = now.day - cSelectedDay.day < 0;
 
     bool isNextDay = AppFunction.isNextDay(now, cSelectedDay);
 
@@ -64,8 +67,6 @@ class DiaryController extends GetxController {
         );
       }
     }
-    selectedDay = cSelectedDay;
-    focusedDay = cFocusedDay;
   }
 
   void getAllData() async {

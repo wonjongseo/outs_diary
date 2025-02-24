@@ -5,6 +5,8 @@ class RS {
   static double sceenWidth = Get.context!.width;
   static double h10 = sceenHeight / 85.2;
   static double w10 = sceenWidth / 41.4;
+  static double h5 = h10 / 2;
+  static double w5 = w10 / 2;
   // static double sceenHeight = 852;
 
   // static double sceenWidth = 414;

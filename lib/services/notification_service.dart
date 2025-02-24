@@ -1,4 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
@@ -24,12 +26,14 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.initialize(settings);
   }
 
+  void aa() {}
+
   /// 📌 매주 특정 요일/시간에 반복되는 알람 설정
   Future<tz.TZDateTime?> scheduleWeeklyNotification({
     required int id,
     required String title,
     required String message,
-    required String channelDescription,
+    String? channelDescription,
     required int weekday,
     required int hour,
     required int minute,
@@ -52,7 +56,8 @@ class NotificationService {
         android: AndroidNotificationDetails(
           'weekly_notification_channel',
           'Weekly Notifications',
-          channelDescription: channelDescription,
+          channelDescription:
+              channelDescription ?? AppString.pillcCannelDescription.tr,
           importance: Importance.high,
           priority: Priority.high,
         ),
@@ -119,9 +124,22 @@ class NotificationService {
 
       while (scheduledDate.weekday != weekday) {
         scheduledDate = scheduledDate.add(const Duration(days: 1));
+        print('scheduledDate : ${scheduledDate}');
       }
 
       return scheduledDate;
+
+      /**
+           int daysUntilNext = (weekday - scheduledDate.weekday) % 7;
+    if (daysUntilNext <= 0) {
+      daysUntilNext += 7; // 항상 미래의 날짜를 찾도록 보정
+    }
+    
+    scheduledDate = scheduledDate.add(Duration(days: daysUntilNext));
+
+    print('✅ Next scheduledDate: $scheduledDate');
+    return scheduledDate;
+       */
     } catch (e) {
       print("🚨 _nextInstanceOfWeekday 오류: $e");
       return null;
@@ -157,4 +175,6 @@ class NotificationService {
     await flutterLocalNotificationsPlugin.cancel(id);
     print("🚫 $id 알람 취소 완료");
   }
+
+  //
 }

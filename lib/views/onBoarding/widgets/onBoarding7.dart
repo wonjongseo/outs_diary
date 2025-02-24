@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
+import 'package:ours_log/common/widgets/custom_toggle_btn.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
 import 'package:ours_log/models/day_period_type.dart';
 
@@ -21,25 +22,10 @@ class Onboarding7 extends StatelessWidget {
           children: [
             Text(AppString.doYouAlarmWhenDrinkPill.tr),
             SizedBox(height: RS.h10 * 1.5),
-            ToggleButtons(
-              onPressed: cn.togglePillAlarm,
-              borderRadius: BorderRadius.circular(20),
+            CustomToggleBtn(
+              onTap: cn.togglePillAlarm,
               isSelected: [cn.isAlermEnable, !cn.isAlermEnable],
-              children: [
-                Text(
-                  'ON',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: cn.isAlermEnable ? AppColors.primaryColor : null,
-                  ),
-                ),
-                Text(
-                  'OFF',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: !cn.isAlermEnable ? AppColors.primaryColor : null),
-                )
-              ],
+              isChecked: cn.isAlermEnable,
             ),
             SizedBox(height: RS.h10 * 3),
             Column(

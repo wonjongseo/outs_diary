@@ -87,6 +87,7 @@ class DiaryBody extends StatelessWidget {
   Widget? prioritizedBuilder(context, DateTime day, focusedDay) {
     bool isNextDay = AppFunction.isNextDay(diaryController.now, day);
     bool isToday = AppFunction.isSameDay(diaryController.now, day);
+
     bool isMustPill = false;
 
     List<WeekDayType>? selectedPillDays =
@@ -111,7 +112,7 @@ class DiaryBody extends StatelessWidget {
                 ? Colors.grey.withValues(alpha: .15)
                 : Colors.grey.withValues(alpha: .4),
           ),
-          margin: EdgeInsets.only(bottom: RS.h10 / 2),
+          margin: EdgeInsets.only(bottom: RS.h5),
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: RS.w10 * .6),
@@ -124,7 +125,11 @@ class DiaryBody extends StatelessWidget {
             '${day.day}',
             style: TextStyle(
               fontWeight: FontWeight.w500,
-              color: isNextDay ? Colors.grey.withValues(alpha: .6) : null,
+              color: isToday
+                  ? Colors.white
+                  : isNextDay
+                      ? Colors.grey.withValues(alpha: .6)
+                      : null,
             ),
           ),
         ),
@@ -148,11 +153,13 @@ class DiaryBody extends StatelessWidget {
       return Column(
         children: [
           CircleAvatar(
-            backgroundColor: isToday
-                ? AppColors.primaryColor
-                : Get.isDarkMode
-                    ? AppColors.black
-                    : AppColors.white,
+            backgroundColor: diaryController.selectedDay == day
+                ? Colors.red
+                : isToday
+                    ? AppColors.primaryColor
+                    : Get.isDarkMode
+                        ? AppColors.black
+                        : AppColors.white,
             foregroundImage: AssetImage(
               AppConstant
                   .fealIconLists[

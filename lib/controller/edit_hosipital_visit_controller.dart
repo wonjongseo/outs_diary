@@ -85,7 +85,7 @@ class EditHosipitalVisitController extends GetxController {
       if (selectedBeforeAlram == null) {
         return AppString.selectText.tr;
       } else {
-        return selectedBeforeAlram!;
+        return '${selectedBeforeAlram!}${AppString.before.tr}';
       }
     } else {
       return beforeAlarmTypes[index].beforeAlarmType.label!;
@@ -242,15 +242,8 @@ class EditHosipitalVisitController extends GetxController {
   }
 
   void onTapVisitTime(BuildContext context) async {
-    TimeOfDay? pickedTime = await showTimePicker(
-      cancelText: AppString.cancelBtnTextTr.tr,
-      helpText: AppString.plzInputvisitTime.tr,
-      errorInvalidText: AppString.plzInputCollectTime.tr,
-      hourLabelText: AppString.hour.tr,
-      minuteLabelText: AppString.minute.tr,
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
+    TimeOfDay? pickedTime = await AppFunction.pickTime(context);
+
     if (pickedTime == null) {
       return;
     }

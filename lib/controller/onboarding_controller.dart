@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:intl/intl.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,6 @@ import 'package:ours_log/models/user_model.dart';
 import 'package:ours_log/models/week_day_type.dart';
 import 'package:ours_log/services/permission_service.dart';
 import 'package:ours_log/views/onBoarding/widgets/onBoarding8.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import 'package:ours_log/services/notification_service.dart';
 import 'package:ours_log/views/home/main_screen.dart';
@@ -155,8 +153,6 @@ class OnboardingController extends GetxController {
 
     TimeOfDay? timeOfDay = await AppFunction.pickTime(
       context,
-      helpText: AppString.plzAlarmTime.tr,
-      errorInvalidText: AppString.plzInputCollectTime.tr,
       initialTime: TimeOfDay(hour: hour, minute: minute),
     );
 
@@ -203,7 +199,6 @@ class OnboardingController extends GetxController {
           taskTime = await notificationService.scheduleWeeklyNotification(
             title: '💊 (${pillTime.label}) ${AppString.drinkPillAlram.tr}',
             message: message,
-            channelDescription: AppString.pillcCannelDescription.tr,
             id: id,
             weekday: day,
             hour: hour,
@@ -243,7 +238,7 @@ class OnboardingController extends GetxController {
 
     AppSnackbar.showSuccessMsgSnackBar(
       AppString.completeSetting.tr,
-      duration: const Duration(minutes: 1),
+      duration: const Duration(seconds: 3),
     );
   }
 

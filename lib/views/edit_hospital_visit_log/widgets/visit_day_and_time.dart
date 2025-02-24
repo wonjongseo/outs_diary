@@ -11,10 +11,7 @@ import 'package:ours_log/controller/edit_hosipital_visit_controller.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
 
 class VisitDayAndTime extends StatelessWidget {
-  const VisitDayAndTime({
-    super.key,
-    required this.isEdit,
-  });
+  const VisitDayAndTime({super.key, required this.isEdit});
 
   final bool isEdit;
   @override
@@ -140,7 +137,7 @@ class SelectBeforeAlarmTime extends StatelessWidget {
     return Container(
       height: RS.w10 * 4,
       width: width,
-      margin: EdgeInsets.symmetric(horizontal: RS.w10 / 2),
+      margin: EdgeInsets.symmetric(horizontal: RS.w5),
       decoration: BoxDecoration(
         border: isActive ? null : Border.all(color: Colors.grey),
         color: isActive ? AppColors.primaryColor : null,

@@ -20,7 +20,7 @@ class FealSelector extends StatelessWidget {
         child: Column(
           children: [
             Text(AppString.howFealToday.tr),
-            SizedBox(height: RS.h10 / 2),
+            SizedBox(height: RS.h5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(

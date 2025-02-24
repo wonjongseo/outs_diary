@@ -72,7 +72,7 @@ class _ExpansionIconCardState extends State<ExpansionIconCard> {
                           ? AppColors.primaryColor
                           : null,
                     ),
-                    SizedBox(height: RS.h10 / 2),
+                    SizedBox(height: RS.h5),
                     Text(
                       widget.icons[index].title,
                       textAlign: TextAlign.center,

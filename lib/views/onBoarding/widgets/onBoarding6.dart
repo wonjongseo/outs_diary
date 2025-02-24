@@ -43,8 +43,7 @@ class Onboarding6 extends StatelessWidget {
                           child: Container(
                             width: RS.w10 * 10,
                             height: RS.w10 * 10,
-                            margin:
-                                EdgeInsets.symmetric(horizontal: RS.w10 / 2),
+                            margin: EdgeInsets.symmetric(horizontal: RS.w5),
                             decoration: BoxDecoration(
                                 border: onboardingController.pillTimeDayPeriod
                                         .contains(DayPeriodType.values[index])
@@ -86,8 +85,7 @@ class Onboarding6 extends StatelessWidget {
                               child: Container(
                                 width: RS.w10 * 8,
                                 height: RS.w10 * 10,
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: RS.w10 / 2),
+                                margin: EdgeInsets.symmetric(horizontal: RS.w5),
                                 decoration: BoxDecoration(
                                     border: onboardingController
                                             .selectedWeekDays

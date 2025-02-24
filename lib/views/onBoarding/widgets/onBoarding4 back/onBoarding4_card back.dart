@@ -36,7 +36,7 @@ class OnBoarding2Card extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(displayArticle.label),
-              SizedBox(height: RS.h10 / 2),
+              SizedBox(height: RS.h5),
               Text(displayArticle.description),
             ],
           ),

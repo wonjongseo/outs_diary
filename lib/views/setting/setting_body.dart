@@ -17,6 +17,7 @@ import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/views/setting/set_feal_icon_screen.dart';
 import 'package:ours_log/views/setting/set_background_widget.dart';
+import 'package:ours_log/views/setting/setting_alram_screen.dart';
 
 class SettingBody extends StatefulWidget {
   const SettingBody({super.key});
@@ -78,215 +79,228 @@ class _SettingBodyState extends State<SettingBody> {
     return settingLanguage.isEmpty
         ? Container()
         : GetBuilder<UserController>(builder: (userController) {
-            return Column(
-              children: [
-                SizedBox(height: RS.height20),
-                _customListTIle(
-                  title: AppString.theme.tr,
-                  subTitle: isDarkMode
-                      ? AppString.darkMode.tr
-                      : AppString.lightMode.tr,
-                  imagePath: AppImagePath.good2,
-                  onTap: () => changeTheme(isDarkMode ? 0 : 1),
-                  widget: ToggleButtons(
-                    borderRadius: BorderRadius.circular(RS.w10 * 2),
-                    onPressed: changeTheme,
-                    isSelected: [isDarkMode, !isDarkMode],
-                    children: const [
-                      Icon(Icons.dark_mode),
-                      Icon(Icons.light_mode),
-                    ],
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: RS.height20),
+                  _customListTIle(
+                    title: 'アラム設定',
+                    onTap: () {
+                      Get.to(() => const SettingAlramScreen());
+                    },
                   ),
-                ),
-                SizedBox(height: RS.height20),
-
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: RS.width15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: AppColors.primaryColor),
-                  ),
-                  child: ExpansionTileCard(
-                    borderRadius: BorderRadius.circular(15),
-                    elevation: 0,
-                    title: Text(AppString.color.tr),
-                    leading: Image.asset(
-                      AppImagePath.good2,
-                      width: RS.w10 * 4,
-                      height: RS.w10 * 4,
-                    ),
-                    trailing: CircleAvatar(
-                      backgroundColor: AppColors.primaryColor,
-                    ),
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () =>
-                                    userController.changePrimaryColor(0),
-                                child: CircleAvatar(
-                                  radius: RS.w10 * 2,
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: AppColors.priPinkClr,
-                                  child:
-                                      userController.userModel!.colorIndex == 0
-                                          ? Icon(Icons.done)
-                                          : null,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () =>
-                                    userController.changePrimaryColor(1),
-                                child: CircleAvatar(
-                                  radius: RS.w10 * 2,
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: AppColors.priYellowClr,
-                                  child:
-                                      userController.userModel!.colorIndex == 1
-                                          ? Icon(Icons.done)
-                                          : null,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () =>
-                                    userController.changePrimaryColor(2),
-                                child: CircleAvatar(
-                                  radius: RS.w10 * 2,
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: AppColors.priGreenClr,
-                                  child:
-                                      userController.userModel!.colorIndex == 2
-                                          ? Icon(Icons.done)
-                                          : null,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () =>
-                                    userController.changePrimaryColor(3),
-                                child: CircleAvatar(
-                                  radius: RS.w10 * 2,
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: AppColors.priBluishClr,
-                                  child:
-                                      userController.userModel!.colorIndex == 3
-                                          ? Icon(Icons.done)
-                                          : null,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () =>
-                                    userController.changePrimaryColor(4),
-                                child: CircleAvatar(
-                                  radius: RS.w10 * 2,
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: AppColors.priPubbleClr,
-                                  child:
-                                      userController.userModel!.colorIndex == 4
-                                          ? Icon(Icons.done)
-                                          : null,
-                                ),
-                              ),
-                            ]),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: RS.height20),
-                _customListTIle(
-                  title: AppString.background.tr,
-                  subTitle: AppConstant
-                      .backgroundLists[
-                          userController.userModel?.backgroundIndex ?? 0]
-                      .description,
-                  imagePath: AppImagePath.very_good2,
-                  onTap: () => Get.to(() => const SetBackgroundScreen()),
-                ),
-                SizedBox(height: RS.height15),
-
-                _customListTIle(
-                  title: '${AppString.feal.tr} ${AppString.icon.tr}',
-                  subTitle: AppConstant
-                      .fealIconLists[
-                          userController.userModel?.fealIconIndex ?? 0]
-                      .description,
-                  imagePath: AppImagePath.soso2,
-                  onTap: () => Get.to(() => const SetFealIconScreen()),
-                ),
-                // const SetBackgroundScreen(),
-                SizedBox(height: RS.height15),
-                _customListTIle(
-                  title: 'Change Language',
-                  subTitle: AppString.setLanguage.tr,
-                  imagePath: AppImagePath.bad2,
-                  onTap: () {},
-                  widget: DropdownButton(
-                      // isDense: true,
-                      underline: const SizedBox(),
-                      items: [
-                        if (isEn) ...[
-                          DropdownMenuItem(
-                            value: AppString.koreanText.tr,
-                            child: const Text('Korean'),
-                          ),
-                          DropdownMenuItem(
-                            value: AppString.japaneseText.tr,
-                            child: const Text('Japenese'),
-                          ),
-                        ],
-                        if (isKo) ...[
-                          DropdownMenuItem(
-                            value: AppString.japaneseText.tr,
-                            child:
-                                Text('Japenese (${AppString.japaneseText.tr})'),
-                          ),
-                          DropdownMenuItem(
-                            value: AppString.englishText.tr,
-                            child:
-                                Text('English (${AppString.englishText.tr})'),
-                          ),
-                        ],
-                        if (isJp) ...[
-                          DropdownMenuItem(
-                            value: AppString.koreanText.tr,
-                            child: Text('Korean (${AppString.koreanText.tr})'),
-                          ),
-                          DropdownMenuItem(
-                            value: AppString.englishText.tr,
-                            child:
-                                Text('English (${AppString.englishText.tr})'),
-                          ),
-                        ],
+                  SizedBox(height: RS.height20),
+                  _customListTIle(
+                    title: AppString.theme.tr,
+                    subTitle: isDarkMode
+                        ? AppString.darkMode.tr
+                        : AppString.lightMode.tr,
+                    imagePath: AppImagePath.good2,
+                    onTap: () => changeTheme(isDarkMode ? 0 : 1),
+                    widget: ToggleButtons(
+                      borderRadius: BorderRadius.circular(RS.w10 * 2),
+                      onPressed: changeTheme,
+                      isSelected: [isDarkMode, !isDarkMode],
+                      children: const [
+                        Icon(Icons.dark_mode),
+                        Icon(Icons.light_mode),
                       ],
-                      onChanged: changeSystemLanguage),
-                ),
-                const Spacer(flex: 1),
-                _customListTIle(
-                  title: AppString.fnOrErorreport.tr,
-                  subTitle: AppString.tipOffMessage.tr,
-                  iconData: Icons.mail,
-                  onTap: () async {
-                    final Email email = Email(
-                      body: AppString.reportMsgContect.tr,
-                      subject:
-                          '[${AppString.appName.tr}] ${AppString.fnOrErorreport.tr}',
-                      recipients: ['visionwill3322@gmail.com'],
-                      isHTML: false,
-                    );
-                    try {
-                      await FlutterEmailSender.send(email);
-                    } catch (e) {
-                      bool result = await AppDialog.errorNoEnrolledEmail();
-                      if (result) {
-                        AppFunction.copyWord('visionwill3322@gmail.com');
+                    ),
+                  ),
+                  SizedBox(height: RS.height20),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: RS.width15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border:
+                          Border.all(color: AppColors.primaryColor, width: 2),
+                    ),
+                    child: ExpansionTileCard(
+                      borderRadius: BorderRadius.circular(15),
+                      elevation: 0,
+                      title: Text(AppString.color.tr),
+                      leading: Image.asset(
+                        AppImagePath.good2,
+                        width: RS.w10 * 4,
+                        height: RS.w10 * 4,
+                      ),
+                      trailing: CircleAvatar(
+                        backgroundColor: AppColors.primaryColor,
+                      ),
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                  onTap: () =>
+                                      userController.changePrimaryColor(0),
+                                  child: CircleAvatar(
+                                    radius: RS.w10 * 2,
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: AppColors.priPinkClr,
+                                    child:
+                                        userController.userModel!.colorIndex ==
+                                                0
+                                            ? Icon(Icons.done)
+                                            : null,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () =>
+                                      userController.changePrimaryColor(1),
+                                  child: CircleAvatar(
+                                    radius: RS.w10 * 2,
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: AppColors.priYellowClr,
+                                    child:
+                                        userController.userModel!.colorIndex ==
+                                                1
+                                            ? Icon(Icons.done)
+                                            : null,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () =>
+                                      userController.changePrimaryColor(2),
+                                  child: CircleAvatar(
+                                    radius: RS.w10 * 2,
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: AppColors.priGreenClr,
+                                    child:
+                                        userController.userModel!.colorIndex ==
+                                                2
+                                            ? Icon(Icons.done)
+                                            : null,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () =>
+                                      userController.changePrimaryColor(3),
+                                  child: CircleAvatar(
+                                    radius: RS.w10 * 2,
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: AppColors.priBluishClr,
+                                    child:
+                                        userController.userModel!.colorIndex ==
+                                                3
+                                            ? Icon(Icons.done)
+                                            : null,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () =>
+                                      userController.changePrimaryColor(4),
+                                  child: CircleAvatar(
+                                    radius: RS.w10 * 2,
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: AppColors.priPubbleClr,
+                                    child:
+                                        userController.userModel!.colorIndex ==
+                                                4
+                                            ? Icon(Icons.done)
+                                            : null,
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: RS.height20),
+                  _customListTIle(
+                    title: AppString.background.tr,
+                    subTitle: AppConstant
+                        .backgroundLists[
+                            userController.userModel?.backgroundIndex ?? 0]
+                        .description,
+                    imagePath: AppImagePath.very_good2,
+                    onTap: () => Get.to(() => const SetBackgroundScreen()),
+                  ),
+                  SizedBox(height: RS.height15),
+                  _customListTIle(
+                    title: '${AppString.feal.tr} ${AppString.icon.tr}',
+                    subTitle: AppConstant
+                        .fealIconLists[
+                            userController.userModel?.fealIconIndex ?? 0]
+                        .description,
+                    imagePath: AppImagePath.soso2,
+                    onTap: () => Get.to(() => const SetFealIconScreen()),
+                  ),
+                  SizedBox(height: RS.height15),
+                  _customListTIle(
+                    title: 'Change Language',
+                    subTitle: AppString.setLanguage.tr,
+                    imagePath: AppImagePath.bad2,
+                    onTap: () {},
+                    widget: DropdownButton(
+                        // isDense: true,
+                        underline: const SizedBox(),
+                        items: [
+                          if (isEn) ...[
+                            DropdownMenuItem(
+                              value: AppString.koreanText.tr,
+                              child: const Text('Korean'),
+                            ),
+                            DropdownMenuItem(
+                              value: AppString.japaneseText.tr,
+                              child: const Text('Japenese'),
+                            ),
+                          ],
+                          if (isKo) ...[
+                            DropdownMenuItem(
+                              value: AppString.japaneseText.tr,
+                              child: Text(
+                                  'Japenese (${AppString.japaneseText.tr})'),
+                            ),
+                            DropdownMenuItem(
+                              value: AppString.englishText.tr,
+                              child:
+                                  Text('English (${AppString.englishText.tr})'),
+                            ),
+                          ],
+                          if (isJp) ...[
+                            DropdownMenuItem(
+                              value: AppString.koreanText.tr,
+                              child:
+                                  Text('Korean (${AppString.koreanText.tr})'),
+                            ),
+                            DropdownMenuItem(
+                              value: AppString.englishText.tr,
+                              child:
+                                  Text('English (${AppString.englishText.tr})'),
+                            ),
+                          ],
+                        ],
+                        onChanged: changeSystemLanguage),
+                  ),
+                  SizedBox(height: RS.height20),
+                  _customListTIle(
+                    title: AppString.fnOrErorreport.tr,
+                    subTitle: AppString.tipOffMessage.tr,
+                    iconData: Icons.mail,
+                    onTap: () async {
+                      final Email email = Email(
+                        body: AppString.reportMsgContect.tr,
+                        subject:
+                            '[${AppString.appName.tr}] ${AppString.fnOrErorreport.tr}',
+                        recipients: ['visionwill3322@gmail.com'],
+                        isHTML: false,
+                      );
+                      try {
+                        await FlutterEmailSender.send(email);
+                      } catch (e) {
+                        bool result = await AppDialog.errorNoEnrolledEmail();
+                        if (result) {
+                          AppFunction.copyWord('visionwill3322@gmail.com');
+                        }
                       }
-                    }
-                  },
-                ),
-                const Spacer(flex: 3),
-              ],
+                    },
+                  ),
+                  SizedBox(height: RS.height20),
+                ],
+              ),
             );
           });
   }
