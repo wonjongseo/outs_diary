@@ -23,14 +23,15 @@ class HospitalLogController extends GetxController {
     equals: isSameDay,
     hashCode: getHashCode,
   );
-
-  DateTime focusedDay = DateTime.now();
-  DateTime? selectedDay;
+  DateTime now = DateTime.now();
+  late DateTime focusedDay;
+  late DateTime selectedDay;
 
   @override
   void onInit() {
     getAll();
-    selectedDay = focusedDay;
+    focusedDay = now;
+    selectedDay = now;
 
     selectedEvents = ValueNotifier(getEventsForDay(selectedDay!));
     super.onInit();

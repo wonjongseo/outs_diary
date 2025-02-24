@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
+import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
+import 'package:ours_log/common/utilities/app_image_path.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
@@ -41,37 +43,51 @@ class HospitalLogBody extends StatelessWidget {
                       weekdayStyle: weekdayStyle,
                       weekendStyle: weekdayStyle,
                     ),
-                    pageJumpingEnabled: false,
-                    pageAnimationEnabled: false,
-                    locale: isKo ? 'ko' : 'ja',
+                    locale: Get.locale.toString(),
                     daysOfWeekHeight: RS.h10 * 3,
                     headerVisible: false,
-                    firstDay: kFirstDay,
-                    lastDay: kLastDay,
                     onPageChanged: hospitalLogController.onChageCalendar,
-                    calendarBuilders: CalendarBuilders(
-                      markerBuilder: (context, day, event) {
-                        if (event.isEmpty) return null;
-                        return FaIcon(
-                          FontAwesomeIcons.hospital,
-                          color: AppColors.primaryColor,
-                          size: RS.w10 * 1.6,
-                        );
-                      },
-                    ),
                     calendarStyle: CalendarStyle(
                       markersAnchor: 1,
                       defaultTextStyle: weekdayStyle,
+                      cellAlignment: Alignment.center,
+                      outsideDaysVisible: false,
+                      markersAutoAligned: false,
                       weekendTextStyle: weekdayStyle,
-                      withinRangeDecoration: BoxDecoration(
-                        border: Border.all(color: Colors.red),
-                      ),
+                    ),
+                    pageJumpingEnabled: false,
+                    pageAnimationEnabled: false,
+                    firstDay: kFirstDay,
+                    lastDay: kLastDay,
+                    calendarBuilders: CalendarBuilders(
+                      prioritizedBuilder: (context, day, focusedDay) =>
+                          prioritizedBuilder(
+                              context, day, focusedDay, hospitalLogController),
+                      markerBuilder: (context, day, event) {
+                        if (event.isEmpty) return null;
+                        return Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor:
+                                  hospitalLogController.selectedDay == day
+                                      ? AppColors.primaryColor
+                                      : Get.isDarkMode
+                                          ? AppColors.black
+                                          : AppColors.white,
+                              foregroundImage: AssetImage(
+                                AppImagePath.hospital,
+                              ),
+                              radius: RS.w10 * 2.5,
+                            ),
+                          ],
+                        );
+                      },
                     ),
                     focusedDay: hospitalLogController.focusedDay,
                     selectedDayPredicate: (day) =>
                         isSameDay(hospitalLogController.selectedDay, day),
                     eventLoader: hospitalLogController.getEventsForDay,
-                    rowHeight: RS.h10 * 7,
+                    rowHeight: RS.h10 * 9.4,
                     onDaySelected: hospitalLogController.onDaySelected,
                   ),
                 ],
@@ -128,6 +144,91 @@ class HospitalLogBody extends StatelessWidget {
         ),
       );
     });
+  }
+
+  Widget? prioritizedBuilder(context, DateTime day, focusedDay,
+      HospitalLogController hospitalLogController) {
+    bool isNextDay = AppFunction.isNextDay(hospitalLogController.now, day);
+    bool isToday = AppFunction.isSameDay(hospitalLogController.now, day);
+
+    bool isMustPill = false;
+
+    return Column(
+      children: [
+        Container(
+          height: RS.w10 * 4.5,
+          width: RS.w10 * 4.5,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: isNextDay
+                ? Colors.grey.withValues(alpha: .15)
+                : Colors.grey.withValues(alpha: .4),
+          ),
+          margin: EdgeInsets.only(bottom: RS.h5),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: RS.w10 * .6),
+          margin: EdgeInsets.only(bottom: RS.h10 * .4),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: isToday ? AppColors.primaryColor : null,
+          ),
+          child: Text(
+            '${day.day}',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              color: isToday
+                  ? Colors.white
+                  : isNextDay
+                      ? Colors.grey.withValues(alpha: .6)
+                      : null,
+            ),
+          ),
+        ),
+        if (isMustPill) ...[
+          Image.asset(
+            AppImagePath.medition1,
+            width: RS.w10 * 2.5,
+          ),
+        ]
+      ],
+    );
+  }
+
+  // Widget? singleMarkerBuilder(context, day, event) {
+  //   UserController backgroundController = Get.find<UserController>();
+  //   bool isToday = AppFunction.isSameDay(diaryController.now, day);
+
+  //   if (diaryController.kEvents[day] != null) {
+  //     DiaryModel diaryModel = diaryController.kEvents[day]![0];
+
+  //     return Column(
+  //       children: [
+  //         CircleAvatar(
+  //           backgroundColor: diaryController.selectedDay == day
+  //               ? AppColors.primaryColor
+  //               : Get.isDarkMode
+  //                   ? AppColors.black
+  //                   : AppColors.white,
+  //           foregroundImage: AssetImage(
+  //             AppConstant
+  //                 .fealIconLists[
+  //                     backgroundController.userModel?.fealIconIndex ?? 0]
+  //                 .iconPath[diaryModel.fealIndex],
+  //           ),
+  //           radius: RS.w10 * 2.5,
+  //         ),
+  //       ],
+  //     );
+  //   }
+  //   return null;
+  // }
+
+  BoxDecoration dayDecoration() {
+    return BoxDecoration(
+      color: Colors.grey.withOpacity(.3),
+      shape: BoxShape.circle,
+    );
   }
 }
 
