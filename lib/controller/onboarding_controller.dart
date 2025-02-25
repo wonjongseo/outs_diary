@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/models/notification_model.dart';
@@ -182,7 +182,7 @@ class OnboardingController extends GetxController {
   }
 
   void goToMainScreenAndSaveUserData() async {
-    UserController userController = Get.put(UserController());
+    UserController userController = Get.put(UserController(), permanent: true);
 
     List<TaskModel> tasks = [];
 
@@ -245,25 +245,10 @@ class OnboardingController extends GetxController {
 
     Get.off(() => const MainScreen());
 
-    if (Get.isRegistered<UserController>()) {
-      Get.delete<UserController>();
-    }
+    Get.put(DiaryController(), permanent: true);
+    Get.put(HospitalLogController(), permanent: true);
+    Get.put(ImageController(), permanent: true);
 
-    if (Get.isRegistered<DiaryController>()) {
-      Get.delete<DiaryController>();
-    }
-
-    if (Get.isRegistered<HospitalLogController>()) {
-      Get.delete<HospitalLogController>();
-    }
-
-    if (Get.isRegistered<ImageController>()) {
-      Get.delete<ImageController>();
-    }
-    Get.put(UserController());
-    Get.put(DiaryController());
-    Get.put(HospitalLogController());
-    Get.put(ImageController());
     AppSnackbar.showSuccessMsgSnackBar(
       AppString.completeSetting.tr,
       duration: const Duration(seconds: 3),

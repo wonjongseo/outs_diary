@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 
 class AppSnackbar {

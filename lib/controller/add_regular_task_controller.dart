@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app.dialog.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/notification_model.dart';
 import 'package:ours_log/models/task_model.dart';

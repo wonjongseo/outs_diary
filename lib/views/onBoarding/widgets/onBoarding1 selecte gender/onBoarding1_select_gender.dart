@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/enums/gender_type.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 
 class OnBoarding1 extends StatelessWidget {

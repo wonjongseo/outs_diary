@@ -1,23 +1,11 @@
-import 'dart:async';
-
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:ours_log/common/enums/gender_type.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/app_function.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';
-import 'package:ours_log/controller/user_controller.dart';
-import 'package:ours_log/views/home/main_screen.dart';
-import 'package:ours_log/views/onBoarding/widgets/onBoarding1/onBoarding1.dart';
-import 'package:ours_log/views/onBoarding/widgets/onBoarding3/onBoarding3.dart';
-import 'package:ours_log/views/onBoarding/widgets/onBoarding2/onBoarding2.dart';
-import 'package:ours_log/views/onBoarding/widgets/onBoarding5.dart';
-import 'package:ours_log/views/onBoarding/widgets/onBoarding6.dart';
-import 'package:ours_log/views/onBoarding/widgets/onBoarding7.dart';
 
 class DisplayArticle {
   final String label;

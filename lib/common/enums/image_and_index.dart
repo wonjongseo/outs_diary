@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 
 enum ImageAndIndex {
   veryGood(0, 'faceLaughBeam'),
@@ -52,14 +52,6 @@ extension IconAndIndexExtension on ImageAndIndex {
         return AppString.veryBad.tr;
       case 5:
         return '아주 나쁨';
-      case 6:
-        return AppString.cloud.tr;
-      case 7:
-        return AppString.wind.tr;
-      case 8:
-        return AppString.rain.tr;
-      case 9:
-        return AppString.snow.tr;
 
       default:
         return '';

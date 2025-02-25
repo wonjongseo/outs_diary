@@ -41,36 +41,7 @@ class DiaryBody extends StatelessWidget {
                     style: boldStyle,
                   ),
                   SizedBox(height: RS.h10 * 1.2),
-                  TableCalendar(
-                    availableGestures: AvailableGestures.horizontalSwipe,
-                    daysOfWeekStyle: DaysOfWeekStyle(
-                      weekdayStyle: weekdayStyle,
-                      weekendStyle: weekdayStyle,
-                    ),
-                    locale: Get.locale.toString(),
-                    daysOfWeekHeight: RS.h10 * 3,
-                    headerVisible: false,
-                    onPageChanged: diaryController.onPageChanged,
-                    calendarStyle: CalendarStyle(
-                      markersAnchor: 1,
-                      rangeHighlightColor:
-                          Colors.redAccent.withValues(alpha: .5),
-                      outsideDaysVisible: false,
-                      markersAutoAligned: false,
-                      cellAlignment: Alignment.center,
-                    ),
-                    calendarBuilders: CalendarBuilders(
-                      singleMarkerBuilder: singleMarkerBuilder,
-                      prioritizedBuilder: prioritizedBuilder,
-                    ),
-                    firstDay: diaryController.now
-                        .subtract(const Duration(days: 365 * 5)),
-                    lastDay: diaryController.now.add(const Duration(days: 30)),
-                    focusedDay: diaryController.focusedDay,
-                    eventLoader: diaryController.getEventsForDay,
-                    rowHeight: RS.h10 * 10.4,
-                    onDaySelected: controller.onDatSelected,
-                  ),
+                  _tableCalendar(controller),
                 ],
               ),
             ),
@@ -81,6 +52,37 @@ class DiaryBody extends StatelessWidget {
         ),
       );
     });
+  }
+
+  TableCalendar<dynamic> _tableCalendar(DiaryController controller) {
+    return TableCalendar(
+      availableGestures: AvailableGestures.horizontalSwipe,
+      daysOfWeekStyle: DaysOfWeekStyle(
+        weekdayStyle: weekdayStyle,
+        weekendStyle: weekdayStyle,
+      ),
+      locale: Get.locale.toString(),
+      daysOfWeekHeight: RS.h10 * 3,
+      headerVisible: false,
+      onPageChanged: diaryController.onPageChanged,
+      calendarStyle: CalendarStyle(
+        markersAnchor: 1,
+        rangeHighlightColor: Colors.redAccent.withValues(alpha: .5),
+        outsideDaysVisible: false,
+        markersAutoAligned: false,
+        cellAlignment: Alignment.center,
+      ),
+      calendarBuilders: CalendarBuilders(
+        singleMarkerBuilder: singleMarkerBuilder,
+        prioritizedBuilder: prioritizedBuilder,
+      ),
+      firstDay: diaryController.now.subtract(const Duration(days: 365 * 5)),
+      lastDay: diaryController.now.add(const Duration(days: 30)),
+      focusedDay: diaryController.focusedDay,
+      eventLoader: diaryController.getEventsForDay,
+      rowHeight: RS.h10 * 10.4,
+      onDaySelected: controller.onDatSelected,
+    );
   }
 
   Widget? prioritizedBuilder(context, DateTime day, focusedDay) {

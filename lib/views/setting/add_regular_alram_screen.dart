@@ -4,7 +4,7 @@ import 'package:ours_log/common/admob/global_banner_admob.dart';
 
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/app_validator.dart';
 
 import 'package:ours_log/common/utilities/responsive.dart';

@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 import 'package:ours_log/common/utilities/app_constant.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/models/blood_pressure_model.dart';
 import 'package:ours_log/models/poop_condition.dart';
 import 'package:ours_log/models/poop_condition_type.dart';
@@ -131,14 +131,14 @@ class HealthModel {
     if (temperatures == null) return message;
 
     if (temperatures![0] != 0) {
-      message += '${AppString.morning.tr}: ${temperatures![0]}';
+      message += '${AppString.morning.tr}: ${temperatures![0]}\n';
     }
 
     if (temperatures![1] != 0) {
-      message += ' ${AppString.lunch.tr}: ${temperatures![1]}';
+      message += '${AppString.lunch.tr}: ${temperatures![1]}\n';
     }
     if (temperatures![2] != 0) {
-      message += ' ${AppString.evening.tr}: ${temperatures![2]}';
+      message += '${AppString.evening.tr}: ${temperatures![2]}';
     }
 
     return message;
@@ -149,14 +149,14 @@ class HealthModel {
     if (basicTemperatures == null) return message;
 
     if (basicTemperatures![0] != 0) {
-      message += '${AppString.morning.tr}: ${basicTemperatures![0]}';
+      message += '${AppString.morning.tr}: ${basicTemperatures![0]}\n';
     }
 
     if (basicTemperatures![1] != 0) {
-      message += ' ${AppString.lunch.tr}: ${basicTemperatures![1]}';
+      message += '${AppString.lunch.tr}: ${basicTemperatures![1]}\n';
     }
     if (basicTemperatures![2] != 0) {
-      message += ' ${AppString.evening.tr}: ${basicTemperatures![2]}';
+      message += '${AppString.evening.tr}: ${basicTemperatures![2]}';
     }
 
     return message;
@@ -171,10 +171,10 @@ class HealthModel {
   //   }
 
   //   if (bloodPressures![1] != 0) {
-  //     message += ' ${AppString.lunch.tr}: ${bloodPressures![1]}';
+  //     message += '${AppString.lunch.tr}: ${bloodPressures![1]}';
   //   }
   //   if (bloodPressures![2] != 0) {
-  //     message += ' ${AppString.evening.tr}: ${bloodPressures![2]}';
+  //     message += '${AppString.evening.tr}: ${bloodPressures![2]}';
   //   }
 
   //   return message;
@@ -185,14 +185,14 @@ class HealthModel {
     if (pulses == null) return message;
 
     if (pulses![0] != 0) {
-      message += '${AppString.morning.tr}: ${pulses![0]}';
+      message += '${AppString.morning.tr}: ${pulses![0]}\n';
     }
 
     if (pulses![1] != 0) {
-      message += ' ${AppString.lunch.tr}: ${pulses![1]}';
+      message += '${AppString.lunch.tr}: ${pulses![1]}\n';
     }
     if (pulses![2] != 0) {
-      message += ' ${AppString.evening.tr}: ${pulses![2]}';
+      message += '${AppString.evening.tr}: ${pulses![2]}';
     }
 
     return message;

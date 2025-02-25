@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:photo_manager/photo_manager.dart';
 
@@ -127,7 +127,7 @@ class AppFunction {
       {DateTime? firstDate}) async {
     return await showDatePicker(
       context: context,
-      locale: Get.locale,
+      locale: isEn ? null : Get.locale,
       initialDate: DateTime.now(),
       firstDate:
           firstDate ?? DateTime.now().subtract(const Duration(days: 365 * 3)),

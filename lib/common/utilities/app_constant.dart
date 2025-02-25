@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ours_log/common/enums/icon_and_index.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/datas/background_data.dart';
 import 'package:ours_log/datas/feal_icon_data.dart';
 

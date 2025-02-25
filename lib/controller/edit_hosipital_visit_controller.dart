@@ -9,7 +9,7 @@ import 'package:ours_log/common/enums/before_alram_time.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/app_validator.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
@@ -243,7 +243,8 @@ class EditHosipitalVisitController extends GetxController {
   }
 
   void onTapVisitTime(BuildContext context) async {
-    TimeOfDay? pickedTime = await AppFunction.pickTime(context);
+    TimeOfDay? pickedTime = await AppFunction.pickTime(context,
+        helpText: AppString.plzSelectVisitTime.tr);
 
     if (pickedTime == null) {
       return;

@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/views/home/main_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -57,7 +58,8 @@ class DiaryController extends GetxController {
     if (!isNextDay) {
       Get.to(() => EditDiaryScreen(selectedDay: selectedDay));
     } else {
-      AppSnackbar.invaildTextFeildSnackBar(message: '미래는 저장할 수 없습니다');
+      AppSnackbar.invaildTextFeildSnackBar(
+          message: AppString.dontSaveFuture.tr);
     }
   }
 

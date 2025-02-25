@@ -2,7 +2,7 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:hive/hive.dart';
 
 import 'package:ours_log/common/utilities/app_constant.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 
 part 'poop_condition_type.g.dart';
 

@@ -14,7 +14,7 @@ import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/is_expandtion_type.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/models/blood_pressure_model.dart';
 import 'package:ours_log/models/day_period_type.dart';
 import 'package:ours_log/models/done_pill_day_modal.dart';

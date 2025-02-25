@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/admob/global_banner_admob.dart';
+import 'package:ours_log/controller/hospital_log_controller.dart';
+import 'package:ours_log/controller/image_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/respository/dairy_respository.dart';
 import 'package:ours_log/respository/hospital_log_repository.dart';
@@ -8,7 +10,7 @@ import 'package:ours_log/respository/user_respository.dart';
 import 'package:ours_log/services/notification_service.dart';
 import 'package:ours_log/views/Hospital_Log/hospital_log_body.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/views/background/background_widget.dart';

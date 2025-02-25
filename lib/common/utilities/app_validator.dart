@@ -1,6 +1,6 @@
 import 'package:get/get_utils/get_utils.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 
 class AppValidator {
   static Duration defaultDuration = const Duration(milliseconds: 2000);

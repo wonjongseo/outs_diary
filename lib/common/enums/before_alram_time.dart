@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 
 enum BeforeAlarmTimeType {
   oneDay(24),

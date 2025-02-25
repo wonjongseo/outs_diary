@@ -7,7 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/common/widgets/done_circle_icon.dart';
@@ -51,15 +51,7 @@ class SelectedDiary extends StatelessWidget {
             SizedBox(height: RS.h10 * 1.5),
           ],
           if (diaryModel.health != null && diaryModel.health!.argIsNotZero) ...[
-            ColTextAndWidget(
-              vertical: RS.h5,
-              label: AppString.averageHealthValue.tr,
-              labelWidget: diaryModel.painfulIndex == null
-                  ? null
-                  : Text(
-                      '${AppString.painLevel.tr}: ${diaryModel.painfulIndex!}'),
-              widget: const AverHealthValue(),
-            ),
+            _painLevel(diaryModel),
             SizedBox(height: RS.h10 * 1.5),
           ],
           if (diaryModel.poopConditions != null &&
@@ -120,6 +112,17 @@ class SelectedDiary extends StatelessWidget {
     );
   }
 
+  ColTextAndWidget _painLevel(DiaryModel diaryModel) {
+    return ColTextAndWidget(
+      vertical: RS.h5,
+      label: AppString.averageHealthValue.tr,
+      labelWidget: diaryModel.painfulIndex == null
+          ? null
+          : Text('${AppString.painLevel.tr}: ${diaryModel.painfulIndex!}'),
+      widget: const AverHealthValue(),
+    );
+  }
+
   ColTextAndWidget _poopCondition(
       DiaryModel diaryModel, DiaryController diaryController) {
     return ColTextAndWidget(
@@ -173,17 +176,20 @@ class SelectedDiary extends StatelessWidget {
     return ColTextAndWidget(
       vertical: RS.h5,
       label: AppString.doDrinkPill.tr,
-      widget: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(
-          diaryModel.donePillDayModels!.length,
-          (index) => DoneCircleIcon(
-            backgroundColor:
-                diaryController.selectedDiary!.donePillDayModels![index].isDone
-                    ? AppColors.primaryColor
-                    : Colors.grey,
-            label: diaryModel.donePillDayModels![index].dayPeriod.label,
+      widget: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+            diaryModel.donePillDayModels!.length,
+            (index) => DoneCircleIcon(
+              backgroundColor: diaryController
+                      .selectedDiary!.donePillDayModels![index].isDone
+                  ? AppColors.primaryColor
+                  : Colors.grey,
+              label: diaryModel.donePillDayModels![index].dayPeriod.label,
+            ),
           ),
         ),
       ),

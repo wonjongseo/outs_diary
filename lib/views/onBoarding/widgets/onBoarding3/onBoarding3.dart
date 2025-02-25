@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 
 import 'package:ours_log/common/utilities/app_function.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/feal_icon_row.dart';
 import 'package:ours_log/controller/onboarding_controller.dart';

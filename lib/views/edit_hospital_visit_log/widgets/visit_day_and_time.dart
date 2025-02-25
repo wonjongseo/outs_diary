@@ -5,7 +5,8 @@ import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:ours_log/common/utilities/app_string.dart';
+import 'package:ours_log/common/utilities/app_function.dart';
+import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/controller/edit_hosipital_visit_controller.dart';
@@ -98,8 +99,10 @@ class VisitDayAndTime extends StatelessWidget {
           child: CustomTextFormField(
             hintText: cn.selectedDate == null
                 ? AppString.visitDay.tr
-                : DateFormat("MM${AppString.month.tr} d${AppString.day.tr}")
-                    .format(cn.selectedDate),
+                : isEn
+                    ? DateFormat.MEd().format(cn.selectedDate)
+                    : DateFormat("MM${AppString.month.tr} d${AppString.day.tr}")
+                        .format(cn.selectedDate),
             readOnly: true,
             widget: IconButton(
               onPressed: isEdit ? () => cn.onTapVisitDay(context) : null,
