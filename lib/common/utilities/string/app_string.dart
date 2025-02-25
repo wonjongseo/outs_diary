@@ -4,6 +4,7 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.notification: AppString.notificationEn,
           AppString.dayText: AppString.dayTextEn,
           AppString.dontSaveFuture: AppString.dontSaveFutureJp,
           AppString.selectOneMoer: AppString.selectOneMoerJp,
@@ -192,6 +193,7 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.notification: AppString.notificationKr,
           AppString.dayText: AppString.dayTextKr,
           AppString.dontSaveFuture: AppString.dontSaveFutureKr,
           AppString.selectOneMoer: AppString.selectOneMoerKr,
@@ -381,6 +383,7 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.notification: AppString.notificationEn,
           AppString.dayText: AppString.dayTextEn,
           AppString.dontSaveFuture: AppString.dontSaveFutureEn,
           AppString.selectOneMoer: AppString.selectOneMoerEn,
@@ -1543,6 +1546,11 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String selectOneMoerKr = '을(를) 하나 이상 선택해주세요';
   static String selectOneMoerJp = 'を一つ以上選択してください';
   static String selectOneMoerEn = "Please choose at least one ";
+
+  static String notification = 'notificationtr';
+  static String notificationKr = '알림';
+  static String notificationJp = '通知';
+  static String notificationEn = "Notification";
 
 // Sakura Hospital Hospital appointment on February 25th at 14:54 PM!
   //

@@ -21,13 +21,13 @@ class SettingAlramScreen extends StatelessWidget {
     AddRegularTaskController addScheduleController =
         Get.put(AddRegularTaskController());
     return Scaffold(
-      appBar: AppBar(title: Text(AppString.regularSchedule.tr)),
+      appBar: AppBar(title: Text(AppString.notification.tr)),
       bottomNavigationBar: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             CustomButton(
-                label: AppString.addRegularTask.tr,
+                label: AppString.notification.tr,
                 onTap: () => Get.to(() => const AddRegularAlramScreen())),
             const GlobalBannerAdmob()
           ],
@@ -119,12 +119,8 @@ class SettingAlramScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
+          SizedBox(
             width: RS.w10 * 10,
-            // constraints: BoxConstraints(
-            //   minWidth: RS.w10 * 10,
-            //   maxWidth: RS.w10 * 13,
-            // ),
             child: Text(task.taskName),
           ),
           GestureDetector(
