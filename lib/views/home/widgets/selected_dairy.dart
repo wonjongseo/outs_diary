@@ -29,9 +29,6 @@ class SelectedDiary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserController userController = Get.find<UserController>();
-    DiaryController diaryController = Get.find<DiaryController>();
-
-    DiaryModel diaryModel = diaryController.selectedDiary!;
 
     return Container(
       padding: const EdgeInsets.all(10.0),
@@ -40,79 +37,83 @@ class SelectedDiary extends StatelessWidget {
         color: Get.isDarkMode ? AppColors.black : AppColors.white,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _FealIconAndDay(userController, diaryController),
-          const Divider(),
-          SizedBox(height: RS.h10),
-          if (diaryModel.donePillDayModels!.isNotEmpty) ...[
-            _donePill(diaryModel, diaryController),
-            SizedBox(height: RS.h10 * 1.5),
-          ],
-          if (diaryModel.health != null && diaryModel.health!.argIsNotZero) ...[
-            _painLevel(diaryModel),
-            SizedBox(height: RS.h10 * 1.5),
-          ],
-          if (diaryModel.poopConditions != null &&
-              diaryModel.poopConditions!.isNotEmpty) ...[
-            _poopCondition(diaryModel, diaryController),
-            SizedBox(height: RS.h10 * 1.5),
-          ],
-          ColTextAndWidget(
-            vertical: RS.h5,
-            label: '${AppString.health.tr} ${AppString.memo.tr}',
-            widget: CustomTextFormField(
-              readOnly: true,
-              hintStyle: const TextStyle(),
-              hintText: diaryModel.whatTodo,
-              maxLines: (diaryModel.whatTodo ?? '').split('\n').length,
-            ),
-          ),
-          SizedBox(height: RS.h10),
-          if (diaryModel.imagePath != null &&
-              diaryModel.imagePath!.isNotEmpty) ...[
+      child: GetBuilder<DiaryController>(builder: (diaryController) {
+        DiaryModel diaryModel = diaryController.selectedDiary!;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _FealIconAndDay(userController, diaryController),
+            const Divider(),
+            SizedBox(height: RS.h10),
+            if (diaryModel.donePillDayModels!.isNotEmpty) ...[
+              _donePill(diaryModel, diaryController),
+              SizedBox(height: RS.h10 * 1.5),
+            ],
+            if (diaryModel.health != null &&
+                diaryModel.health!.argIsNotZero) ...[
+              _healthFiguare(diaryModel),
+              SizedBox(height: RS.h10 * 1.5),
+            ],
+            if (diaryModel.poopConditions != null &&
+                diaryModel.poopConditions!.isNotEmpty) ...[
+              _poopCondition(diaryModel, diaryController),
+              SizedBox(height: RS.h10 * 1.5),
+            ],
             ColTextAndWidget(
               vertical: RS.h5,
-              label: AppString.photo.tr,
-              widget: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(
-                    diaryModel.imagePath!.length,
-                    (index) {
-                      String imageUrl =
-                          '${ImageController.instance.path}/${diaryModel.imagePath![index]}';
-                      return GestureDetector(
-                        onTap: () =>
-                            Get.to(() => FullmageScreen(fileImage: imageUrl)),
-                        child: Container(
-                          width: RS.w10 * 12,
-                          height: RS.w10 * 14,
-                          margin: EdgeInsets.only(right: RS.w10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(RS.w10 * 2),
-                            border: Border.all(color: Colors.grey),
-                            image: DecorationImage(
-                              image: FileImage(File(imageUrl)),
-                              fit: BoxFit.cover,
+              label: '${AppString.health.tr} ${AppString.memo.tr}',
+              widget: CustomTextFormField(
+                readOnly: true,
+                hintStyle: const TextStyle(),
+                hintText: diaryModel.whatTodo,
+                maxLines: (diaryModel.whatTodo ?? '').split('\n').length,
+              ),
+            ),
+            SizedBox(height: RS.h10),
+            if (diaryModel.imagePath != null &&
+                diaryModel.imagePath!.isNotEmpty) ...[
+              ColTextAndWidget(
+                vertical: RS.h5,
+                label: AppString.photo.tr,
+                widget: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(
+                      diaryModel.imagePath!.length,
+                      (index) {
+                        String imageUrl =
+                            '${ImageController.instance.path}/${diaryModel.imagePath![index]}';
+                        return GestureDetector(
+                          onTap: () =>
+                              Get.to(() => FullmageScreen(fileImage: imageUrl)),
+                          child: Container(
+                            width: RS.w10 * 12,
+                            height: RS.w10 * 14,
+                            margin: EdgeInsets.only(right: RS.w10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(RS.w10 * 2),
+                              border: Border.all(color: Colors.grey),
+                              image: DecorationImage(
+                                image: FileImage(File(imageUrl)),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: RS.h10 * 1.5),
-          ]
-        ],
-      ),
+              SizedBox(height: RS.h10 * 1.5),
+            ]
+          ],
+        );
+      }),
     );
   }
 
-  ColTextAndWidget _painLevel(DiaryModel diaryModel) {
+  ColTextAndWidget _healthFiguare(DiaryModel diaryModel) {
     return ColTextAndWidget(
       vertical: RS.h5,
       label: AppString.averageHealthValue.tr,

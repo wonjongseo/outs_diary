@@ -42,11 +42,12 @@ class DiaryController extends GetxController {
 
   void onDatSelected(DateTime cSelectedDay, DateTime cFocusedDay) {
     selectedDay = cSelectedDay;
-
     focusedDay = cFocusedDay;
 
     if (kEvents[cSelectedDay] != null) {
       selectedDiary = kEvents[cSelectedDay]![0];
+      print('selectedDiary : ${selectedDiary}');
+
       AppFunction.scrollGoToBottom(scrollController);
       update();
       return;

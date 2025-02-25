@@ -62,7 +62,10 @@ class EditDiaryScreen extends StatelessWidget {
           child:
               GetBuilder<EditDiaryController>(builder: (editDiaryController) {
             return GestureDetector(
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              onTap: () {
+                print('!!');
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
               child: SingleChildScrollView(
                 controller: editDiaryController.scrollController,
                 child: Padding(
@@ -218,7 +221,6 @@ class EditDiaryScreen extends StatelessWidget {
       label: AppString.weight.tr,
       widget: CustomTextFormField(
         controller: editDiaryController.weightCtls[0],
-        hintText: AppString.weight.tr,
         sufficIcon: Text(
           'kg',
           style: textFieldSufficStyle,

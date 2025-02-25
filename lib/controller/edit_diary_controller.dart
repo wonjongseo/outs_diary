@@ -85,7 +85,7 @@ class EditDiaryController extends GetxController {
       loadHealthModel();
       update();
     } else {
-      forText();
+      // forText();
     }
     super.onInit();
   }

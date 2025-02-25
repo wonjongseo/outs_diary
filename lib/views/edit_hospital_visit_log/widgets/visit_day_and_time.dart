@@ -101,7 +101,8 @@ class VisitDayAndTime extends StatelessWidget {
                 ? AppString.visitDay.tr
                 : isEn
                     ? DateFormat.MEd().format(cn.selectedDate)
-                    : DateFormat("MM${AppString.month.tr} d${AppString.day.tr}")
+                    : DateFormat(
+                            "MM${AppString.month.tr} d${AppString.dayText.tr}")
                         .format(cn.selectedDate),
             readOnly: true,
             widget: IconButton(

@@ -26,8 +26,6 @@ class ImageController extends GetxController {
   }
 
   static void requestPermisson() async {
-    print('requestPermisson : ${requestPermisson}');
-
     final permission = await PhotoManager.requestPermissionExtend();
     if (!permission.hasAccess) {
       return;

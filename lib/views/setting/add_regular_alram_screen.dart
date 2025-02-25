@@ -19,7 +19,6 @@ import 'package:ours_log/models/week_day_type.dart';
 import 'package:ours_log/services/notification_service.dart';
 import 'package:ours_log/views/background/background_widget.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
-import 'package:ours_log/views/setting/setting_alram_screen.dart';
 
 class AddRegularAlramScreen extends StatefulWidget {
   const AddRegularAlramScreen({super.key});

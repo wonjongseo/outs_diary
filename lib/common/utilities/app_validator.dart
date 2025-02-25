@@ -1,4 +1,5 @@
 import 'package:get/get_utils/get_utils.dart';
+import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
 
@@ -43,8 +44,11 @@ class AppValidator {
 
   static bool validateSelectListField(String label, List? value) {
     if (value == null || value.isEmpty) {
+      String message = isEn
+          ? '${AppString.selectOneMoer.tr}$label'
+          : '$label${AppString.selectOneMoer.tr}';
       AppSnackbar.invaildTextFeildSnackBar(
-        message: '$label을 하나 이상 선택해주세요',
+        message: message,
         duration: defaultDuration,
       );
       return false;

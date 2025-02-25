@@ -28,6 +28,10 @@ class AddRegularTaskController extends GetxController {
         tasksPerWeekDay[task.taskDate.weekday - 1].add(task);
       }
     }
+    for (var task in tasksPerWeekDay) {
+      task.sort((a, b) => a.taskDate.compareTo(b.taskDate));
+    }
+
     super.onInit();
   }
 
@@ -60,7 +64,9 @@ class AddRegularTaskController extends GetxController {
       tasks.remove(task);
       update();
       userCon.deleteTask(task);
-      AppSnackbar.showMessageSnackBar(message: '$taskName가 삭제되었습니다');
+      AppSnackbar.showMessageSnackBar(
+        message: '$taskName${AppString.deletedMsg.tr}',
+      );
     }
   }
 
@@ -114,6 +120,6 @@ class AddRegularTaskController extends GetxController {
     userCon.addTask(taskModel);
 
     update();
-    AppSnackbar.showMessageSnackBar(message: '알람 시간이 변경되었습니다');
+    AppSnackbar.showMessageSnackBar(message: AppString.editedAlramTime.tr);
   }
 }

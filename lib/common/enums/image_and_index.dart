@@ -51,7 +51,7 @@ extension IconAndIndexExtension on ImageAndIndex {
       case 4:
         return AppString.veryBad.tr;
       case 5:
-        return '아주 나쁨';
+        return AppString.veryBad.tr;
 
       default:
         return '';

@@ -84,7 +84,7 @@ class CustomFealLineGraph extends StatelessWidget {
                 interval: (countOfDay / (28 % 4 == 0 ? 4 : 5)).ceilToDouble(),
                 getTitlesWidget: (value, meta) {
                   return Text(
-                      '${(value + 1).toStringAsFixed(0)}${AppString.day.tr}');
+                      '${(value + 1).toStringAsFixed(0)}${AppString.dayText.tr}');
                 },
               ),
             ),

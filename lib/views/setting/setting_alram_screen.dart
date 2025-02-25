@@ -21,7 +21,7 @@ class SettingAlramScreen extends StatelessWidget {
     AddRegularTaskController addScheduleController =
         Get.put(AddRegularTaskController());
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: Text(AppString.regularSchedule.tr)),
       bottomNavigationBar: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -61,7 +61,7 @@ class SettingAlramScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: RS.w10),
-                child: Divider(),
+                child: const Divider(),
               ),
               SizedBox(height: RS.h10),
               Expanded(
@@ -119,7 +119,14 @@ class SettingAlramScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(task.taskName),
+          Container(
+            width: RS.w10 * 10,
+            // constraints: BoxConstraints(
+            //   minWidth: RS.w10 * 10,
+            //   maxWidth: RS.w10 * 13,
+            // ),
+            child: Text(task.taskName),
+          ),
           GestureDetector(
             onTap: () => addScheduleController.changeAlarmTime(context, task),
             child: Container(

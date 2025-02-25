@@ -11,82 +11,82 @@ class AverHealthValue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DiaryController diaryController = Get.find<DiaryController>();
-
-    DiaryModel diaryModel = diaryController.selectedDiary!;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              if (diaryModel.health!.temperatures != null &&
-                  diaryModel.health!.avgTemperature != 0)
-                Tooltip(
-                  message: diaryModel.health!.tooltipMsgTemperature,
-                  triggerMode: TooltipTriggerMode.tap,
-                  child: CircleAverHealthWidget(
-                    title: AppString.temperature.tr,
-                    averValue: diaryController
-                        .selectedDiary!.health!.avgTemperature
-                        .toString(),
+    return GetBuilder<DiaryController>(builder: (diaryController) {
+      DiaryModel diaryModel = diaryController.selectedDiary!;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if (diaryModel.health!.temperatures != null &&
+                    diaryModel.health!.avgTemperature != 0)
+                  Tooltip(
+                    message: diaryModel.health!.tooltipMsgTemperature,
+                    triggerMode: TooltipTriggerMode.tap,
+                    child: CircleAverHealthWidget(
+                      title: AppString.temperature.tr,
+                      averValue: diaryController
+                          .selectedDiary!.health!.avgTemperature
+                          .toString(),
+                    ),
                   ),
-                ),
-              if (diaryModel.health!.pulses != null &&
-                  diaryModel.health!.avgPulse != 0)
-                Tooltip(
-                  message: diaryModel.health!.tooltipMsgPulse,
-                  triggerMode: TooltipTriggerMode.tap,
-                  child: CircleAverHealthWidget(
-                    title: AppString.pulse.tr,
-                    averValue: diaryModel.health!.avgPulse.toString(),
+                if (diaryModel.health!.pulses != null &&
+                    diaryModel.health!.avgPulse != 0)
+                  Tooltip(
+                    message: diaryModel.health!.tooltipMsgPulse,
+                    triggerMode: TooltipTriggerMode.tap,
+                    child: CircleAverHealthWidget(
+                      title: AppString.pulse.tr,
+                      averValue: diaryModel.health!.avgPulse.toString(),
+                    ),
                   ),
-                ),
-              if (diaryModel.health!.weights != null &&
-                  diaryModel.health!.avgWeight != 0)
-                CircleAverHealthWidget(
-                  title: AppString.weight.tr,
-                  averValue: diaryModel.health!.avgWeight.toString(),
-                ),
-            ],
+                if (diaryModel.health!.weights != null &&
+                    diaryModel.health!.avgWeight != 0)
+                  CircleAverHealthWidget(
+                    title: AppString.weight.tr,
+                    averValue: diaryModel.health!.avgWeight.toString(),
+                  ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(height: RS.h10 * 1.5),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              if (diaryModel.health!.bloodPressures != null &&
-                  diaryModel.health!.avgMaxBloodPressure != 0)
-                Tooltip(
-                  message: diaryModel.health!.tooltipMsgTemperature,
-                  triggerMode: TooltipTriggerMode.tap,
-                  child: CircleAverHealthWidget(
-                    title: AppString.maxBloodPressure.tr,
-                    averValue: diaryController
-                        .selectedDiary!.health!.avgMaxBloodPressure
-                        .toString(),
+          SizedBox(height: RS.h10 * 1.5),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if (diaryModel.health!.bloodPressures != null &&
+                    diaryModel.health!.avgMaxBloodPressure != 0)
+                  Tooltip(
+                    message: diaryModel.health!.tooltipMsgMaxBloodPressure,
+                    triggerMode: TooltipTriggerMode.tap,
+                    child: CircleAverHealthWidget(
+                      title: AppString.maxBloodPressure.tr,
+                      averValue: diaryController
+                          .selectedDiary!.health!.avgMaxBloodPressure
+                          .toString(),
+                    ),
                   ),
-                ),
-              if (diaryModel.health!.bloodPressures != null &&
-                  diaryModel.health!.avgMaxBloodPressure != 0)
-                Tooltip(
-                  message: diaryModel.health!.tooltipMsgTemperature,
-                  triggerMode: TooltipTriggerMode.tap,
-                  child: CircleAverHealthWidget(
-                    title: AppString.minBloodPressure.tr,
-                    averValue: diaryController
-                        .selectedDiary!.health!.avgMinBloodPressure
-                        .toString(),
+                if (diaryModel.health!.bloodPressures != null &&
+                    diaryModel.health!.avgMaxBloodPressure != 0)
+                  Tooltip(
+                    message: diaryModel.health!.tooltipMsgMinBloodPressure,
+                    triggerMode: TooltipTriggerMode.tap,
+                    child: CircleAverHealthWidget(
+                      title: AppString.minBloodPressure.tr,
+                      averValue: diaryController
+                          .selectedDiary!.health!.avgMinBloodPressure
+                          .toString(),
+                    ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }

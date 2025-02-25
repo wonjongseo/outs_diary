@@ -21,7 +21,6 @@ class AppReviewService {
         await SettingRepository.getBool(AppConstant.hasReviewedKey) ?? false;
 
     if (!hasReviewed) {
-      // 등비수열 (10, 30, 60, 100, ...)
       if (_shouldRequestReview(usageCount)) {
         await _requestReview();
       }

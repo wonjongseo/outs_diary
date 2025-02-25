@@ -4,6 +4,12 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
+          AppString.dayText: AppString.dayTextEn,
+          AppString.dontSaveFuture: AppString.dontSaveFutureJp,
+          AppString.selectOneMoer: AppString.selectOneMoerJp,
+          AppString.appointed: AppString.appointedJp,
+          AppString.hospitaloNoti: AppString.hospitaloNotiJp,
+          AppString.editedAlramTime: AppString.editedAlramTimeJp,
           AppString.plzSelectVisitTime: AppString.plzSelectVisitTimeJp,
           AppString.doDrinkPill: AppString.doDrinkPillJp,
           AppString.plzInput: AppString.plzInputJp,
@@ -22,7 +28,6 @@ class AppTranslations extends Translations {
           AppString.before: AppString.beforeJp,
           AppString.savedVisitLog: AppString.savedVisitLogJp,
           AppString.editedVisitLog: AppString.editedVisitLogJp,
-          AppString.plzSelectVisitTme: AppString.plzSelectVisitTmeJp,
           AppString.visit: AppString.visitJp,
           AppString.whatTimeBeforeScrhdule: AppString.whatTimeBeforeScrhduleJp,
           AppString.plzSelectAlarmTime: AppString.plzSelectAlarmTimeJp,
@@ -136,7 +141,7 @@ class AppTranslations extends Translations {
           AppString.weight: AppString.weightTextJp,
           AppString.month: AppString.monthTextJp,
           AppString.year: AppString.yearTextJp,
-          AppString.day: AppString.dayTextJp,
+          AppString.dayText: AppString.dayTextJp,
           AppString.healthLog: AppString.healthLogJp,
           AppString.hospitalVisitLog: AppString.hospitalVisitLogJp,
           AppString.yesText: AppString.yesTextJp,
@@ -187,6 +192,12 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.dayText: AppString.dayTextKr,
+          AppString.dontSaveFuture: AppString.dontSaveFutureKr,
+          AppString.selectOneMoer: AppString.selectOneMoerKr,
+          AppString.appointed: AppString.appointedKr,
+          AppString.hospitaloNoti: AppString.hospitaloNotiKr,
+          AppString.editedAlramTime: AppString.editedAlramTimeKr,
           AppString.plzSelectVisitTime: AppString.plzSelectVisitTimeKr,
           AppString.doDrinkPill: AppString.doDrinkPillKr,
           AppString.plzInput: AppString.plzInputKr,
@@ -206,7 +217,6 @@ class AppTranslations extends Translations {
           AppString.before: AppString.beforeKr,
           AppString.savedVisitLog: AppString.savedVisitLogKr,
           AppString.editedVisitLog: AppString.editedVisitLogKr,
-          AppString.plzSelectVisitTme: AppString.plzSelectVisitTmeKr,
           AppString.visit: AppString.visitKr,
           AppString.whatTimeBeforeScrhdule: AppString.whatTimeBeforeScrhduleKr,
           AppString.plzSelectAlarmTime: AppString.plzSelectAlarmTimeKr,
@@ -317,7 +327,7 @@ class AppTranslations extends Translations {
           AppString.weight: AppString.weightTextKr,
           AppString.month: AppString.monthTextKr,
           AppString.year: AppString.yearTextKr,
-          AppString.day: AppString.dayTextKr,
+          AppString.dayText: AppString.dayTextKr,
           AppString.healthLog: AppString.healthLogKr,
           AppString.hospitalVisitLog: AppString.hospitalVisitLogKr,
           AppString.yesText: AppString.yesTextKr,
@@ -371,6 +381,12 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.dayText: AppString.dayTextEn,
+          AppString.dontSaveFuture: AppString.dontSaveFutureEn,
+          AppString.selectOneMoer: AppString.selectOneMoerEn,
+          AppString.appointed: AppString.appointedEn,
+          AppString.hospitaloNoti: AppString.hospitaloNotiEn,
+          AppString.editedAlramTime: AppString.editedAlramTimeEn,
           AppString.plzSelectVisitTime: AppString.plzSelectVisitTimeEn,
           AppString.doDrinkPill: AppString.doDrinkPillEn,
           AppString.plzInput: AppString.plzInputEn,
@@ -390,7 +406,6 @@ class AppTranslations extends Translations {
           AppString.before: AppString.beforeEn,
           AppString.savedVisitLog: AppString.savedVisitLogEn,
           AppString.editedVisitLog: AppString.editedVisitLogEn,
-          AppString.plzSelectVisitTme: AppString.plzSelectVisitTmeEn,
           AppString.visit: AppString.visitEn,
           AppString.whatTimeBeforeScrhdule: AppString.whatTimeBeforeScrhduleEn,
           AppString.plzSelectAlarmTime: AppString.plzSelectAlarmTimeEn,
@@ -501,7 +516,7 @@ class AppTranslations extends Translations {
           AppString.weight: AppString.weightTextEn,
           AppString.month: AppString.monthTextEn,
           AppString.year: AppString.yearTextEn,
-          AppString.day: AppString.dayTextEn,
+          AppString.dayText: AppString.dayTextEn,
           AppString.healthLog: AppString.healthLogEn,
           AppString.hospitalVisitLog: AppString.hospitalVisitLogEn,
           AppString.yesText: AppString.yesTextEn,
@@ -803,7 +818,7 @@ class AppString {
   static String monthTextJp = "月";
   static String monthTextEn = "Month";
 
-  static String day = "dayTextTr";
+  static String dayText = "dayTextTr";
   static String dayTextKr = '일';
   static String dayTextJp = "日";
   static String dayTextEn = "Day";
@@ -924,7 +939,7 @@ class AppString {
   static String updateMsg = "updateMsgTr";
   static String updateMsgKr = '변경 되었습니다.';
   static String updateMsgJp = "更新されました";
-  static String updateMsgEn = "is Edited";
+  static String updateMsgEn = " is Edited";
 
   static String healthGraph = "healthGraphTr";
   static String healthGraphKr = '건강 그래프';
@@ -1294,11 +1309,6 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String visitJp = '来院';
   static String visitEn = "visit";
 
-  static String plzSelectVisitTme = 'plzSelectVisitTmetr';
-  static String plzSelectVisitTmeKr = '알람을 등록하기 위해서 방문 시간을 선택해주세요';
-  static String plzSelectVisitTmeJp = 'アラームを登録するために\n来院時間を選択してください';
-  static String plzSelectVisitTmeEn = "plzSelectVisitTme";
-
   static String editedVisitLog = 'editedVisitLogtr';
   static String editedVisitLogKr = '병원 기록이 변경 되었습니다';
   static String editedVisitLogJp = '来院記録が変更されました。';
@@ -1307,17 +1317,12 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String enrolledMsg = 'enrolledMsgtr';
   static String enrolledMsgKr = '(이)가 등록되었습니다';
   static String enrolledMsgJp = 'が登録されました';
-  static String enrolledMsgEn = "is Enrolled";
+  static String enrolledMsgEn = " is Enrolled";
 
   static String deletedMsg = 'deletedMsgtr';
   static String deletedMsgKr = '(이)가 삭제되었습니다';
   static String deletedMsgJp = 'が削除されました';
-  static String deletedMsgEn = "is Deleted";
-
-  static String addRegularTask = 'addRegularTasktr';
-  static String addRegularTaskKr = '정기 일정 추가';
-  static String addRegularTaskJp = '定期予定追加';
-  static String addRegularTaskEn = "Add Regular Schedule";
+  static String deletedMsgEn = " is Deleted";
 
   static String taskName = 'taskNametr';
   static String taskNameKr = '일정 명';
@@ -1398,13 +1403,13 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String minBloodPressureEn = "diastolic blood pressure";
 
   static String poopCondition1 = 'poopCondition1Tr';
-  static String poopCondition1Kr = "1. 분리된 딱딱한 덩어리\n(심한 변비)"; //; '코로코로';
+  static String poopCondition1Kr = "1. 분리된 딱딱한 덩어리 (심한 변비)"; //; '코로코로';
   static String poopCondition1Jp = '1. コロコロ（ひどい便秘）';
   static String poopCondition1En =
       "1. separate hard lumps\n(severe constipation)";
 
   static String poopCondition2 = 'poopCondition2Tr';
-  static String poopCondition2Kr = '2. 덩어리가 많고 소시지 같은 모양\n(변비)';
+  static String poopCondition2Kr = '2. 덩어리가 많고 소시지 같은 모양 (변비)';
   static String poopCondition2Jp = '2. 硬い（便秘）';
   static String poopCondition2En =
       "2. lumpy and sausage like\n(mild constipation)";
@@ -1464,17 +1469,22 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String beforeDay = 'beforeDaytr';
   static String beforeDayKr = '일 전';
   static String beforeDayJp = '日前';
-  static String beforeDayEn = "days ago";
+  static String beforeDayEn = " days ago";
 
   static String beforeHour = 'beforeHourtr';
   static String beforeHourKr = '시간 전';
   static String beforeHourJp = '時間前';
-  static String beforeHourEn = "hours ago";
+  static String beforeHourEn = " hours ago";
+
+  static String addRegularTask = 'addRegularTasktr';
+  static String addRegularTaskKr = '정기 일정 추가';
+  static String addRegularTaskJp = '定期予定追加';
+  static String addRegularTaskEn = "Add Regular Schedule";
 
   static String pillText = 'pillTexttr';
-  static String pillTextKr = '약';
+  static String pillTextKr = ' 약';
   static String pillTextJp = '薬';
-  static String pillTextEn = "Medicine";
+  static String pillTextEn = " Medicine";
 
   static String hospitalName = "hospitalNameTr";
   static String hospitalNameKr = "병원 이름";
@@ -1512,4 +1522,30 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String savedVisitLogKr = '병원 기록이 저장 되었습니다';
   static String savedVisitLogJp = '来院記録が保存されました。';
   static String savedVisitLogEn = "The hospital visit record has been saved.";
+
+  static String editedAlramTime = 'editedAlramTimetr';
+  static String editedAlramTimeKr = '알람 시간이 변경되었습니다';
+  static String editedAlramTimeJp = 'アラーム時間が変更されました';
+  static String editedAlramTimeEn = "The Alram Time is Changed";
+//
+
+  static String hospitaloNoti = 'hospitaloNotitr';
+  static String hospitaloNotiKr = '병원 진료 알림';
+  static String hospitaloNotiJp = '病院診療通知';
+  static String hospitaloNotiEn = "Hospital notification";
+
+  static String appointed = 'appointedtr';
+  static String appointedKr = '의 진료가 예약되어있습니다';
+  static String appointedJp = 'の診療が予約されています';
+  static String appointedEn = "";
+
+  static String selectOneMoer = 'selectOneMoertr';
+  static String selectOneMoerKr = '을(를) 하나 이상 선택해주세요';
+  static String selectOneMoerJp = 'を一つ以上選択してください';
+  static String selectOneMoerEn = "Please choose at least one ";
+
+// Sakura Hospital Hospital appointment on February 25th at 14:54 PM!
+  //
+
+  //Please choose at least one person
 }

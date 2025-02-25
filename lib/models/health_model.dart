@@ -162,24 +162,6 @@ class HealthModel {
     return message;
   }
 
-  // String get tooltipMsgBloodPressure {
-  //   String message = '';
-  //   if (bloodPressures == null) return message;
-
-  //   if (bloodPressures![0] != 0) {
-  //     message += '${AppString.morning.tr}: ${bloodPressures![0]}';
-  //   }
-
-  //   if (bloodPressures![1] != 0) {
-  //     message += '${AppString.lunch.tr}: ${bloodPressures![1]}';
-  //   }
-  //   if (bloodPressures![2] != 0) {
-  //     message += '${AppString.evening.tr}: ${bloodPressures![2]}';
-  //   }
-
-  //   return message;
-  // }
-
   String get tooltipMsgPulse {
     String message = '';
     if (pulses == null) return message;
@@ -193,6 +175,48 @@ class HealthModel {
     }
     if (pulses![2] != 0) {
       message += '${AppString.evening.tr}: ${pulses![2]}';
+    }
+
+    return message;
+  }
+
+  String get tooltipMsgMaxBloodPressure {
+    String message = '';
+    if (bloodPressures == null) return message;
+    if (bloodPressures!.max == null && bloodPressures!.max!.isEmpty) {
+      return message;
+    }
+
+    if (bloodPressures!.max![0] != 0) {
+      message += '${AppString.morning.tr}: ${bloodPressures!.max![0]}\n';
+    }
+
+    if (bloodPressures!.max![1] != 0) {
+      message += '${AppString.lunch.tr}: ${bloodPressures!.max![1]}\n';
+    }
+    if (bloodPressures!.max![2] != 0) {
+      message += '${AppString.evening.tr}: ${bloodPressures!.max![2]}';
+    }
+
+    return message;
+  }
+
+  String get tooltipMsgMinBloodPressure {
+    String message = '';
+    if (bloodPressures == null) return message;
+    if (bloodPressures!.min == null && bloodPressures!.min!.isEmpty) {
+      return message;
+    }
+
+    if (bloodPressures!.min![0] != 0) {
+      message += '${AppString.morning.tr}: ${bloodPressures!.min![0]}\n';
+    }
+
+    if (bloodPressures!.min![1] != 0) {
+      message += '${AppString.lunch.tr}: ${bloodPressures!.min![1]}\n';
+    }
+    if (bloodPressures!.min![2] != 0) {
+      message += '${AppString.evening.tr}: ${bloodPressures!.min![2]}';
     }
 
     return message;

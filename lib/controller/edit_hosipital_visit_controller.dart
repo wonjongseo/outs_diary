@@ -86,7 +86,9 @@ class EditHosipitalVisitController extends GetxController {
       if (selectedBeforeAlram == null) {
         return AppString.selectText.tr;
       } else {
-        return '${selectedBeforeAlram!}${AppString.before.tr}';
+        return isEn
+            ? '${AppString.before.tr} ${selectedBeforeAlram!}'
+            : '${selectedBeforeAlram!}${AppString.before.tr}';
       }
     } else {
       return beforeAlarmTypes[index].beforeAlarmType.label!;
@@ -284,33 +286,6 @@ class EditHosipitalVisitController extends GetxController {
           );
         }
       }
-
-      // // 이미 저장된 알람
-      // if (savedBeforeAlarmTypes != null) {
-      //   // prettier-ignore  // 저장을 해제한 알람
-      //   if (savedBeforeAlarmTypes!.contains(beforeAlarmType) &&
-      //       !beforeAlarmType.isChecked) {
-      //     // 삭제.
-
-      //     DateTime diff = DateTime(
-      //         visitDateTime.year,
-      //         visitDateTime.month,
-      //         visitDateTime.day,
-      //         visitDateTime.hour - beforeAlarmType.beforeAlarmType.hour,
-      //         visitDateTime.minute);
-
-      //     hospitalLogModel!.notifications!
-      //         .removeWhere((NotificationModel element) {
-      //       if (element.notiDateTime == diff) {
-      //         if (hospitalLogModel!.notifications!.contains(element)) {
-      //           notificationService.cancellNotifications(element.alermId);
-      //           return true;
-      //         }
-      //       }
-      //       return false;
-      //     });
-      //   }
-      // }
     }
   }
 
@@ -412,14 +387,16 @@ class EditHosipitalVisitController extends GetxController {
     int id = AppFunction.createIdByDay(
         selectedDate.day, scheduledDate.hour, scheduledDate.minute);
 
-    String message =
-        '$appointMonth월 $appointDay일 $appointHour시$appointMinute분에 $hospitalName 병원 진료가 예약되어있습니다!';
+    String message = isEn
+        ? '$hospitalName appointment on $appointMonth/$appointDay $appointHour:$appointMinute !'
+        : '($appointMonth${AppString.month.tr}$appointDay${AppString.dayText.tr} $appointHour${AppString.hour.tr}$appointMinute${AppString.minute.tr}) $hospitalName${AppString.appointed.tr} !';
+
     print('message : ${message}');
 
     notificationService.scheduleSpecificDateNotification(
-      title: '🏥 병원 진료 알림',
+      title: '🏥 ${AppString.hospitaloNoti.tr}',
       message: message,
-      channelDescription: '병원 진료 예약 알람',
+      channelDescription: AppString.hospitaloNoti.tr,
       id: id,
       year: scheduledDate.year,
       month: scheduledDate.month,

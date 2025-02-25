@@ -55,38 +55,7 @@ class _EditHospitalVisitLogScreenState
 
     return GetBuilder<EditHosipitalVisitController>(builder: (controller) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(AppString.enrollVisitHospitalLog.tr),
-          centerTitle: true,
-          actions: [
-            if (!isEdit) ...[
-              IconButton(
-                  onPressed: () {
-                    AppFunction.scrollGoToTop(
-                        editHosipitalVisitController.scrollController);
-                    setState(() => isEdit = true);
-                  },
-                  icon: const Icon(FontAwesomeIcons.pen)),
-            ],
-            if (widget.hospitalLogModel != null) ...[
-              if (isEdit)
-                IconButton(
-                  onPressed: () => setState(() => isEdit = false),
-                  icon: const Icon(FontAwesomeIcons.remove),
-                ),
-              IconButton(
-                  onPressed: () async {
-                    await Get.find<UserController>()
-                        .deleteTaskFromNotificationList(
-                            widget.hospitalLogModel!.notifications);
-                    Get.find<HospitalLogController>()
-                        .delete(widget.hospitalLogModel!);
-                    Get.back();
-                  },
-                  icon: const Icon(FontAwesomeIcons.trashCan))
-            ]
-          ],
-        ),
+        appBar: _appBar(editHosipitalVisitController),
         bottomNavigationBar: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -102,133 +71,86 @@ class _EditHospitalVisitLogScreenState
         ),
         body: BackgroundWidget(
           child: SafeArea(
-            child: GestureDetector(
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-              child: SingleChildScrollView(
-                controller: controller.scrollController,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: RS.h10,
-                    horizontal: RS.width20,
-                  ),
-                  child: GestureDetector(
-                    onTap: isEdit
-                        ? () {
-                            controller.bottomSheetController?.close();
-                            controller.bottomSheetController = null;
-                          }
-                        : null,
-                    child: Column(
-                      children: [
-                        VisitDayAndTime(isEdit: isEdit),
-                        SizedBox(height: RS.h10),
-                        _hospitalName(controller),
-                        SizedBox(height: RS.h10),
-                        _officeName(controller),
-                        SizedBox(height: RS.h10),
-                        _diseaseName(controller),
-                        SizedBox(height: RS.h10),
-                        ColTextAndWidget(
-                          label: AppString.diagnosis.tr,
-                          widget: CustomTextFormField(
-                            readOnly: !isEdit,
-                            maxLines: 4,
-                            controller: controller.diagnosisCtl,
-                          ),
+            child: SingleChildScrollView(
+              controller: controller.scrollController,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: RS.h10,
+                  horizontal: RS.width20,
+                ),
+                child: GestureDetector(
+                  onTap: isEdit
+                      ? () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          controller.bottomSheetController?.close();
+                          controller.bottomSheetController = null;
+                        }
+                      : null,
+                  child: Column(
+                    children: [
+                      VisitDayAndTime(isEdit: isEdit),
+                      SizedBox(height: RS.h10),
+                      _hospitalName(controller),
+                      SizedBox(height: RS.h10),
+                      _officeName(controller),
+                      SizedBox(height: RS.h10),
+                      _diseaseName(controller),
+                      SizedBox(height: RS.h10),
+                      ColTextAndWidget(
+                        label: AppString.diagnosis.tr,
+                        widget: CustomTextFormField(
+                          readOnly: !isEdit,
+                          maxLines: 4,
+                          controller: controller.diagnosisCtl,
                         ),
-                        SizedBox(height: RS.h10),
-                        ColTextAndWidget(
-                          label: AppString.prescribedMedicine.tr,
-                          labelWidget: IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: isEdit ? controller.addPillCtl : null,
-                          ),
-                          widget: Column(
-                            children: List.generate(
-                              controller.pillCtls.length,
-                              (index) => Padding(
-                                padding: EdgeInsets.only(bottom: RS.h10),
-                                child: CustomTextFormField(
-                                  readOnly: !isEdit,
-                                  controller: controller.pillCtls[index],
-                                  widget: controller.savedPillNames.isEmpty
-                                      ? null
-                                      : CDropdownButton(
-                                          items: controller.savedPillNames,
-                                          onChanged: isEdit
-                                              ? (v) => controller
-                                                  .pillCtls[index].text = v
-                                              : null,
-                                        ),
-                                ),
+                      ),
+                      SizedBox(height: RS.h10),
+                      ColTextAndWidget(
+                        label: AppString.prescribedMedicine.tr,
+                        labelWidget: IconButton(
+                          icon: const Icon(Icons.add),
+                          onPressed: isEdit ? controller.addPillCtl : null,
+                        ),
+                        widget: Column(
+                          children: List.generate(
+                            controller.pillCtls.length,
+                            (index) => Padding(
+                              padding: EdgeInsets.only(bottom: RS.h10),
+                              child: CustomTextFormField(
+                                readOnly: !isEdit,
+                                controller: controller.pillCtls[index],
+                                widget: controller.savedPillNames.isEmpty
+                                    ? null
+                                    : CDropdownButton(
+                                        items: controller.savedPillNames,
+                                        onChanged: isEdit
+                                            ? (v) => controller
+                                                .pillCtls[index].text = v
+                                            : null,
+                                      ),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(height: RS.h10),
-                        ImageOfToday(
-                            carouselSliderController:
-                                controller.carouselSliderController,
-                            label:
-                                AppString.medicalCertificateOrPrescription.tr,
-                            uploadFiles: controller.uploadFiles,
-                            selectedPhotos: isEdit
-                                ? () async {
-                                    AppFunction.openCameraOrLibarySheet(
-                                        context: context,
-                                        takePictureFunc: () {},
-                                        openLibaryFunc: controller.addPhotos);
-                                    // showModalBottomSheet(
-                                    //   context: context,
-                                    //   builder: (context) {
-                                    //     return Column(
-                                    //       mainAxisSize: MainAxisSize.min,
-                                    //       children: [
-                                    //         Container(
-                                    //           margin: EdgeInsets.only(top: 10),
-                                    //           width: 100,
-                                    //           height: 5,
-                                    //           decoration: BoxDecoration(
-                                    //             color: Colors.grey,
-                                    //             borderRadius:
-                                    //                 BorderRadius.circular(10),
-                                    //           ),
-                                    //         ),
-                                    //         SizedBox(height: RS.h10),
-                                    //         Row(
-                                    //           mainAxisAlignment:
-                                    //               MainAxisAlignment.end,
-                                    //           children: [
-                                    //             IconButton(
-                                    //               onPressed: () {},
-                                    //               icon: Icon(
-                                    //                 Icons.camera_alt_outlined,
-                                    //                 size: 30,
-                                    //               ),
-                                    //             ),
-                                    //             SizedBox(width: RS.w10),
-                                    //             IconButton(
-                                    //               onPressed: controller.addPhotos,
-                                    //               icon: Icon(
-                                    //                 Icons.folder_copy_outlined,
-                                    //                 size: RS.w10 * 3,
-                                    //               ),
-                                    //             ),
-                                    //             SizedBox(width: RS.w10 * 2),
-                                    //           ],
-                                    //         ),
-                                    //         SizedBox(height: RS.h10 * 5),
-                                    //       ],
-                                    //     );
-                                    //   },
-                                    // );
-                                  }
-                                : null,
-                            removePhoto: (index) =>
-                                controller.removePhoto(index)),
-                        SizedBox(height: RS.h10 * 2),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: RS.h10),
+                      ImageOfToday(
+                          carouselSliderController:
+                              controller.carouselSliderController,
+                          label: AppString.medicalCertificateOrPrescription.tr,
+                          uploadFiles: controller.uploadFiles,
+                          selectedPhotos: isEdit
+                              ? () async {
+                                  AppFunction.openCameraOrLibarySheet(
+                                      context: context,
+                                      takePictureFunc: () {},
+                                      openLibaryFunc: controller.addPhotos);
+                                }
+                              : null,
+                          removePhoto: (index) =>
+                              controller.removePhoto(index)),
+                      SizedBox(height: RS.h10 * 2),
+                    ],
                   ),
                 ),
               ),
@@ -237,6 +159,40 @@ class _EditHospitalVisitLogScreenState
         ),
       );
     });
+  }
+
+  AppBar _appBar(EditHosipitalVisitController editHosipitalVisitController) {
+    return AppBar(
+      title: Text(AppString.enrollVisitHospitalLog.tr),
+      centerTitle: true,
+      actions: [
+        if (!isEdit) ...[
+          IconButton(
+              onPressed: () {
+                AppFunction.scrollGoToTop(
+                    editHosipitalVisitController.scrollController);
+                setState(() => isEdit = true);
+              },
+              icon: const Icon(FontAwesomeIcons.pen)),
+        ],
+        if (widget.hospitalLogModel != null) ...[
+          if (isEdit)
+            IconButton(
+              onPressed: () => setState(() => isEdit = false),
+              icon: const Icon(FontAwesomeIcons.remove),
+            ),
+          IconButton(
+              onPressed: () async {
+                await Get.find<UserController>().deleteTaskFromNotificationList(
+                    widget.hospitalLogModel!.notifications);
+                Get.find<HospitalLogController>()
+                    .delete(widget.hospitalLogModel!);
+                Get.back();
+              },
+              icon: const Icon(FontAwesomeIcons.trashCan))
+        ]
+      ],
+    );
   }
 
   ColTextAndWidget _hospitalName(EditHosipitalVisitController controller) {
