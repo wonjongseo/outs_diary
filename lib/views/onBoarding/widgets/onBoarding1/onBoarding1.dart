@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 
@@ -20,7 +21,9 @@ class OnBoarding1 extends StatelessWidget {
             fontSize: RS.width18,
           ),
           TextSpan(
-            text: '${AppString.appName.tr}${AppString.beforeStart.tr}',
+            text: isEn
+                ? '${AppString.beforeStart.tr} ${AppString.appName.tr}\n'
+                : '${AppString.appName.tr}${AppString.beforeStart.tr}',
             children: [
               TextSpan(
                 text: AppString.plzSetting.tr,

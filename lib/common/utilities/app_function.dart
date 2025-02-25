@@ -9,6 +9,7 @@ import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 bool get isKo => Get.locale.toString().contains('ko');
 bool get isJp => Get.locale.toString().contains('ja');
@@ -48,7 +49,13 @@ class AppFunction {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                  onPressed: takePictureFunc,
+                  onPressed: () async {
+                    try {
+                      takePictureFunc();
+                    } catch (e) {
+                      print('e.toString : ${e.toString}');
+                    }
+                  },
                   icon: Icon(
                     Icons.camera_alt_outlined,
                     size: 30,
@@ -169,8 +176,6 @@ class AppFunction {
         Random().nextInt(10);
   }
 
-  static void showNoPermissionSnackBar({required message}) {}
-
   static Future<File?> pickPhotosFromLibary() async {
     try {
       final ImagePicker picker = ImagePicker();
@@ -180,7 +185,7 @@ class AppFunction {
       }
       return File(image.path);
     } catch (e) {
-      AppFunction.showNoPermissionSnackBar(
+      AppSnackbar.showNoPermissionSnackBar(
           message: AppString.noLibaryPermssion.tr);
     }
     return null;

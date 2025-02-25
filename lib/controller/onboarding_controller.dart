@@ -244,6 +244,22 @@ class OnboardingController extends GetxController {
     userController.saveUser(userModel);
 
     Get.off(() => const MainScreen());
+
+    if (Get.isRegistered<UserController>()) {
+      Get.delete<UserController>();
+    }
+
+    if (Get.isRegistered<DiaryController>()) {
+      Get.delete<DiaryController>();
+    }
+
+    if (Get.isRegistered<HospitalLogController>()) {
+      Get.delete<HospitalLogController>();
+    }
+
+    if (Get.isRegistered<ImageController>()) {
+      Get.delete<ImageController>();
+    }
     Get.put(UserController());
     Get.put(DiaryController());
     Get.put(HospitalLogController());

@@ -1,12 +1,19 @@
 import 'package:permission_handler/permission_handler.dart';
-import 'package:photo_manager/photo_manager.dart';
 
 class PermissionService {
-  void requestPermisson() async {
+  void requestLiberyPermisson() async {
     print('requestPermisson');
     if (await Permission.mediaLibrary.isDenied &&
         !await Permission.mediaLibrary.isPermanentlyDenied) {
       await [Permission.mediaLibrary].request();
+    }
+  }
+
+  void requestCameraPermisson() async {
+    print('requestPermisson');
+    if (await Permission.camera.isDenied &&
+        !await Permission.camera.isPermanentlyDenied) {
+      await [Permission.camera].request();
     }
   }
 

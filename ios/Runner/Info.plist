@@ -8,10 +8,10 @@
 	<string>ca-app-pub-9712392194582442~4142227897</string>
 	<!-- Google AD MOB -->
 
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>In order to access your photo library</string>
 	<key>NSCameraUsageDescription</key>
-	<string>カメラを使用する理由を記述</string>
+	<string>My Medical Logs app required NSCameraUsageDescription permission</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>My Medical Logs app required NSPhotoLibraryUsageDescription permission</string>
 	
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>

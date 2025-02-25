@@ -150,9 +150,14 @@ class SelectBeforeAlarmTime extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: RS.w10 * 1.2,
-            color: isActive ? textBlackOrWhite : textWhiteOrBlack,
-          ),
+              fontSize: RS.w10 * 1.2,
+              color: Get.isDarkMode
+                  ? textWhiteOrBlack
+                  : isActive
+                      ? textBlackOrWhite
+                      : textWhiteOrBlack
+              // color: isActive ? textBlackOrWhite : textWhiteOrBlack,
+              ),
         ),
       ),
     );

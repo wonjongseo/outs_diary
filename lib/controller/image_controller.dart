@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
+import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/app_string.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -25,9 +26,11 @@ class ImageController extends GetxController {
   }
 
   static void requestPermisson() async {
+    print('requestPermisson : ${requestPermisson}');
+
     final permission = await PhotoManager.requestPermissionExtend();
-    if (!permission.isAuth) {
-      return PhotoManager.openSetting();
+    if (!permission.hasAccess) {
+      return;
     }
   }
 
@@ -50,7 +53,9 @@ class ImageController extends GetxController {
       if (image == null) return null;
       return File(image.path);
     } catch (e) {
-      AppFunction.showNoPermissionSnackBar(
+      print('e.toString : ${e.toString}');
+
+      AppSnackbar.showNoPermissionSnackBar(
           message: AppString.noCameraPermssionMsg.tr);
     }
     return null;
@@ -65,7 +70,7 @@ class ImageController extends GetxController {
       }
       return File(image.path);
     } catch (e) {
-      AppFunction.showNoPermissionSnackBar(
+      AppSnackbar.showNoPermissionSnackBar(
           message: AppString.noLibaryPermssion.tr);
     }
     return null;

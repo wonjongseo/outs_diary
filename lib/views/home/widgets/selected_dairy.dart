@@ -64,52 +64,7 @@ class SelectedDiary extends StatelessWidget {
           ],
           if (diaryModel.poopConditions != null &&
               diaryModel.poopConditions!.isNotEmpty) ...[
-            ColTextAndWidget(
-              vertical: RS.h5,
-              label: AppString.poop.tr,
-              widget: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: List.generate(
-                    diaryModel.poopConditions!.length,
-                    (index) => SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Container(
-                          padding: EdgeInsets.all(RS.w10),
-                          margin: EdgeInsets.only(bottom: RS.w10),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(RS.w10 * .6),
-                                decoration: BoxDecoration(
-                                  color: AppColors.primaryColor,
-                                  borderRadius:
-                                      BorderRadius.circular(RS.w10 * .3),
-                                ),
-                                child: Text(
-                                  diaryController
-                                      .selectedDiary!
-                                      .poopConditions![index]
-                                      .dayPeriodType
-                                      .label,
-                                  style: TextStyle(color: textBlackOrWhite),
-                                ),
-                              ),
-                              SizedBox(width: RS.w10),
-                              Text(
-                                diaryController
-                                    .selectedDiary!
-                                    .poopConditions![index]
-                                    .poopConditionType
-                                    .label,
-                              ),
-                            ],
-                          )),
-                    ),
-                  )),
-            ),
+            _poopCondition(diaryModel, diaryController),
             SizedBox(height: RS.h10 * 1.5),
           ],
           ColTextAndWidget(
@@ -162,6 +117,54 @@ class SelectedDiary extends StatelessWidget {
           ]
         ],
       ),
+    );
+  }
+
+  ColTextAndWidget _poopCondition(
+      DiaryModel diaryModel, DiaryController diaryController) {
+    return ColTextAndWidget(
+      vertical: RS.h5,
+      label: AppString.poop.tr,
+      widget: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: List.generate(
+            diaryModel.poopConditions!.length,
+            (index) => SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                  padding: EdgeInsets.all(RS.w10),
+                  margin: EdgeInsets.only(bottom: RS.w10),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(RS.w10 * .6),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(RS.w10 * .3),
+                        ),
+                        child: Text(
+                          diaryController.selectedDiary!.poopConditions![index]
+                              .dayPeriodType.label,
+                          style: TextStyle(
+                            color: Get.isDarkMode
+                                ? textWhiteOrBlack
+                                : textBlackOrWhite,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: RS.w10),
+                      Text(
+                        diaryController.selectedDiary!.poopConditions![index]
+                            .poopConditionType.label,
+                      ),
+                    ],
+                  )),
+            ),
+          )),
     );
   }
 

@@ -787,7 +787,7 @@ class AppString {
   static String plzSelectFealIcon = 'plzSelectFealIconTr';
   static String plzSelectFealIconKr = '감정 아이콘을 선택해주세요';
   static String plzSelectFealIconJp = '感情アイコンを選んでください';
-  static String plzSelectFealIconEn = "Choose an Fealing Icon";
+  static String plzSelectFealIconEn = "Choose a Fealing Icon";
 
   static String koreanText = 'koreanTextTr';
   static String koreanTextKr = '한국어';
@@ -997,11 +997,6 @@ class AppString {
   static String dayTextKr = '일';
   static String dayTextJp = "日";
   static String dayTextEn = "Day";
-
-  static String doYouDrinkPill = "doYouDrinkPillTextTr";
-  static String doYouDrinkPillTextKr = '약을 복용중이신가요 ?';
-  static String doYouDrinkPillTextJp = "薬を服用していますか";
-  static String doYouDrinkPillTextEn = "doYouDrinkPill";
 
   static String healthLog = "healthLogTr";
   static String healthLogKr = '건강 기록';
@@ -1252,21 +1247,6 @@ class AppString {
   static String noDataEn = "noData";
 //chickenbreastText
 
-  static String beforeStart = "beforeStart";
-  static String beforeStartKr = "를 시작하기 전에\n";
-  static String beforeStartJp = 'を始める前に\n';
-  static String beforeStartEn = "beforeStart\n";
-
-  static String plzSetting = "plzSettingTr";
-  static String hospitalExpensesKr = "몇 가지 세팅을 해주세요";
-  static String hospitalExpensesJp = 'いくつか設定を行なってください';
-  static String hospitalExpensesEn = "Medical expenses";
-
-  static String selectBackgroundMsg = "selectBackgroundMsgTr";
-  static String entertainmentExpensesKr = "배경을 선택해주세요";
-  static String entertainmentExpensesJp = '背景を選んでください';
-  static String entertainmentExpensesEn = "Entertainment expenses";
-
   static String noBackground = "noBackgroundTr";
   static String noBackgroundKr = "배경 없음";
   static String noBackgroundJp = '背景なし';
@@ -1306,16 +1286,6 @@ class AppString {
   static String sundayKr = "일";
   static String sundayJp = '日';
   static String sundayEn = "sun";
-
-  static String whatWeekDayYouDrink = "whatWeekDayYouDrinkTr";
-  static String whatWeekDayYouDrinkKr = "어떤 요일에 복용하고 계신가요 ?";
-  static String whatWeekDayYouDrinkJp = 'どんな曜日に服用していますか';
-  static String whatWeekDayYouDrinkEn = "whatWeekDayYouDrink";
-
-  static String doYouAlarmWhenDrinkPill = "doYouAlarmWhenDrinkPillTr";
-  static String doYouAlarmWhenDrinkPillKr = "약 복용시간 알람을 받으시겠습니까 ?";
-  static String doYouAlarmWhenDrinkPillJp = '薬を飲む時間のアラームをお受けしますか';
-  static String doYouAlarmWhenDrinkPillEn = "doYouAlarmWhenDrinkPill";
 
   static String moneySign = "moneySignTr";
   static String moneySignKr = "₩";
@@ -1400,7 +1370,7 @@ class AppString {
   static String fealIcon2Des = "fealIcon2DesTr";
   static String fealIcon2DesKr = "나를 믿고 따라온 친구들";
   static String fealIcon2DesJp = '私を信じている仲間達';
-  static String fealIcon2DesEn = "Cute Animal Companions";
+  static String fealIcon2DesEn = "Cute Animals ";
 
   static String fealIcon3Name = "fealIcon3NameTr";
   static String fealIcon3NameKr = "꽃 친구들";
@@ -1430,7 +1400,7 @@ class AppString {
   static String fealIcon5Des = "fealIcon5DesTr";
   static String fealIcon5DesKr = "귀여운 야체 친구들";
   static String fealIcon5DesJp = '可愛い野菜の友達';
-  static String fealIcon5DesEn = "Cute Vegetable Friends";
+  static String fealIcon5DesEn = "Cute Vegetables";
 
   static String doneDeletionMsg = "doneDeletionMsgTr";
   static String doneDeletionMsgKr = "(이)가 삭제되었습니다";
@@ -1746,4 +1716,38 @@ Would you like to copy the email [visionwill3322@gmail.com]?"
   static String checkPoopConditionByImageKr = '변 상태 사진으로 확인';
   static String checkPoopConditionByImageJp = '便の状態を写真で確認';
   static String checkPoopConditionByImageEn = "checkPoopConditionByImage";
+
+  // Check
+
+  static String beforeStart = "beforeStart";
+  static String beforeStartKr = "를 시작하기 전에\n";
+  static String beforeStartJp = 'を始める前に\n';
+  static String beforeStartEn = "Before Starting";
+
+  static String plzSetting = "plzSettingTr";
+  static String hospitalExpensesKr = "몇 가지 세팅을 해주세요.";
+  static String hospitalExpensesJp = 'いくつか設定を行なってください。';
+  static String hospitalExpensesEn = "Please set up some settings.";
+
+  static String selectBackgroundMsg = "selectBackgroundMsgTr";
+  static String entertainmentExpensesKr = "배경을 선택해주세요";
+  static String entertainmentExpensesJp = '背景を選んでください';
+  static String entertainmentExpensesEn = "Choose the background";
+
+  static String doYouDrinkPill = "doYouDrinkPillTextTr";
+  static String doYouDrinkPillTextKr = '약을 복용중이신가요 ?';
+  static String doYouDrinkPillTextJp = "薬を服用していますか";
+  static String doYouDrinkPillTextEn = "Are you on medication?";
+
+  static String whatWeekDayYouDrink = "whatWeekDayYouDrinkTr";
+  static String whatWeekDayYouDrinkKr = "어떤 요일에 복용하고 계신가요 ?";
+  static String whatWeekDayYouDrinkJp = 'どんな曜日に服用していますか';
+  static String whatWeekDayYouDrinkEn =
+      "What day of the week are you taking it?";
+
+  static String doYouAlarmWhenDrinkPill = "doYouAlarmWhenDrinkPillTr";
+  static String doYouAlarmWhenDrinkPillKr = "약 복용시간 알람을 받으시겠습니까 ?";
+  static String doYouAlarmWhenDrinkPillJp = '薬を飲む時間のアラームをお受けしますか';
+  static String doYouAlarmWhenDrinkPillEn =
+      "Would you like to get an alarm for medication time?";
 }
