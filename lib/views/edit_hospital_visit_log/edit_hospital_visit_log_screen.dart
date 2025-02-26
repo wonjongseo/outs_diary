@@ -56,19 +56,7 @@ class _EditHospitalVisitLogScreenState
     return GetBuilder<EditHosipitalVisitController>(builder: (controller) {
       return Scaffold(
         appBar: _appBar(editHosipitalVisitController),
-        bottomNavigationBar: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (isEdit)
-                CustomButton(
-                  label: AppString.saveText.tr,
-                  onTap: controller.saveVisitLog,
-                ),
-              const GlobalBannerAdmob()
-            ],
-          ),
-        ),
+        bottomNavigationBar: _bottomNavigationBar(controller),
         body: BackgroundWidget(
           child: SafeArea(
             child: SingleChildScrollView(
@@ -159,6 +147,23 @@ class _EditHospitalVisitLogScreenState
         ),
       );
     });
+  }
+
+  SafeArea _bottomNavigationBar(EditHosipitalVisitController controller) {
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (isEdit)
+            CustomButton(
+              label: AppString.saveText.tr,
+              onTap: controller.saveVisitLog,
+            ),
+          SizedBox(height: RS.h10),
+          const GlobalBannerAdmob()
+        ],
+      ),
+    );
   }
 
   AppBar _appBar(EditHosipitalVisitController editHosipitalVisitController) {

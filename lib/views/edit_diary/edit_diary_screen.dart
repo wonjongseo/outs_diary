@@ -45,18 +45,7 @@ class EditDiaryScreen extends StatelessWidget {
     );
     return Scaffold(
       appBar: _appBar(),
-      bottomNavigationBar: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            CustomButton(
-              label: AppString.saveText.tr,
-              onTap: editDiaryController.onTapSaveBtn,
-            ),
-            const GlobalBannerAdmob()
-          ],
-        ),
-      ),
+      bottomNavigationBar: _bottomNavigationBar(),
       body: BackgroundWidget(
         child: SafeArea(
           child:
@@ -100,6 +89,22 @@ class EditDiaryScreen extends StatelessWidget {
             );
           }),
         ),
+      ),
+    );
+  }
+
+  SafeArea _bottomNavigationBar() {
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CustomButton(
+            label: AppString.saveText.tr,
+            onTap: editDiaryController.onTapSaveBtn,
+          ),
+          SizedBox(height: RS.h10),
+          const GlobalBannerAdmob(),
+        ],
       ),
     );
   }

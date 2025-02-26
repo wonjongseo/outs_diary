@@ -1,0 +1,2 @@
+/Users/jongseowon/Desktop/MY/project/ours_log/android/app/.cxx/Debug/5bk4e4kj/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+/Users/jongseowon/Desktop/MY/project/ours_log/android/app/.cxx/Debug/5bk4e4kj/armeabi-v7a/CMakeFiles/edit_cache.dir

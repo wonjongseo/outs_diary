@@ -32,13 +32,25 @@ class FullmageScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              IconButton(
-                onPressed: Get.back,
-                icon: FaIcon(
-                  FontAwesomeIcons.x,
-                  color: AppColors.white,
+              if (Platform.isAndroid)
+                GestureDetector(
+                  onTap: Get.back,
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.primaryColor,
+                    child: FaIcon(
+                      FontAwesomeIcons.x,
+                      color: AppColors.white,
+                    ),
+                  ),
+                )
+              else
+                IconButton(
+                  onPressed: Get.back,
+                  icon: FaIcon(
+                    FontAwesomeIcons.x,
+                    color: AppColors.white,
+                  ),
                 ),
-              ),
             ],
           ),
         ),

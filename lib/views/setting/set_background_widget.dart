@@ -1,3 +1,4 @@
+import 'package:ours_log/common/admob/global_banner_admob.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,11 @@ class SetBackgroundScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.grey.withValues(alpha: .2),
       ),
+      bottomNavigationBar: const SafeArea(
+          child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [GlobalBannerAdmob()],
+      )),
       body: BackgroundWidget(
         child: SafeArea(
           child: Stack(

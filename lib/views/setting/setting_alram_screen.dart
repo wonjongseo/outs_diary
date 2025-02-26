@@ -22,17 +22,7 @@ class SettingAlramScreen extends StatelessWidget {
         Get.put(AddRegularTaskController());
     return Scaffold(
       appBar: AppBar(title: Text(AppString.notification.tr)),
-      bottomNavigationBar: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            CustomButton(
-                label: AppString.notification.tr,
-                onTap: () => Get.to(() => const AddRegularAlramScreen())),
-            const GlobalBannerAdmob()
-          ],
-        ),
-      ),
+      bottomNavigationBar: _bottomNavigationBar(),
       body: BackgroundWidget(
         child: SafeArea(
             child: GetBuilder<AddRegularTaskController>(builder: (con) {
@@ -155,6 +145,31 @@ class SettingAlramScreen extends StatelessWidget {
             onPressed: () => addScheduleController.deleteTask(index, index2),
             icon: const FaIcon(FontAwesomeIcons.trashCan),
           )
+        ],
+      ),
+    );
+  }
+}
+
+class _bottomNavigationBar extends StatelessWidget {
+  const _bottomNavigationBar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CustomButton(
+            label: AppString.addRegularTask.tr,
+            onTap: () => Get.to(
+              () => const AddRegularAlramScreen(),
+            ),
+          ),
+          SizedBox(height: RS.h10),
+          const GlobalBannerAdmob()
         ],
       ),
     );

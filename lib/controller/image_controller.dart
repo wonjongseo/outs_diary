@@ -22,7 +22,7 @@ class ImageController extends GetxController {
   }
 
   static getDirectory() async {
-    directory = await getLibraryDirectory();
+    directory = await getApplicationDocumentsDirectory();
   }
 
   static void requestPermisson() async {
@@ -46,7 +46,6 @@ class ImageController extends GetxController {
         source: ImageSource.camera,
         imageQuality: 100,
       );
-      print('image : ${image}');
 
       if (image == null) return null;
       return File(image.path);

@@ -87,13 +87,14 @@ class _MainScreenState extends State<MainScreen> {
           selectedItemColor: AppColors.primaryColor,
           items: [
             BottomNavigationBarItem(
-                label: AppString.healthLog.tr, icon: Text('')),
+                label: AppString.healthLog.tr, icon: const SizedBox.shrink()),
             BottomNavigationBarItem(
-                label: AppString.hospitalVisitLog.tr, icon: Text('')),
+                label: AppString.hospitalVisitLog.tr,
+                icon: const SizedBox.shrink()),
             BottomNavigationBarItem(
-                label: AppString.healthGraph.tr, icon: Text('')),
+                label: AppString.healthGraph.tr, icon: const SizedBox.shrink()),
             BottomNavigationBarItem(
-                label: AppString.settingTr.tr, icon: Text('')),
+                label: AppString.settingTr.tr, icon: const SizedBox.shrink()),
           ],
         ),
       );

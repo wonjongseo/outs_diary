@@ -17,8 +17,21 @@ bool get isEn => Get.locale.toString().contains('en');
 
 class AppFunction {
   static TimeOfDay? stringToTimeOfDay(String time) {
-    int? hour = int.tryParse(time.split(':')[0]);
-    int? minute = int.tryParse(time.split(':')[1]);
+    int? hour;
+    int? minute;
+    if (Platform.isIOS) {
+      hour = int.tryParse(time.split(':')[0]);
+      minute = int.tryParse(time.split(':')[1]);
+    } else {
+      List<String> temp = time.split(':');
+      hour = int.tryParse(temp[0]);
+      if (time.toUpperCase().contains('PM')) {
+        hour = hour! + 12;
+        minute = int.tryParse(temp[1].split('PM')[0]);
+      } else {
+        minute = int.tryParse(temp[1].split('AM')[0]);
+      }
+    }
 
     if (hour == null || minute == null) return null;
 

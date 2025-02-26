@@ -8,7 +8,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Ours Log"
+            "value" : "My Medical Logs"
           }
         }
       }
@@ -51,11 +51,11 @@
     "NSPhotoLibraryUsageDescription" : {
       "extractionState" : "manual",
       "localizations" : {
-       "en" : {
-           "stringUnit" : {
-             "state" : "translated",
-             "value" : "To use the feature for taking health record photos and prescription photos, permission to access the camera is required. You can change this in the settings."
-           }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To use the feature for taking health record photos and prescription photos, permission to access the camera is required. You can change this in the settings."
+          }
         },
         "ja" : {
           "stringUnit" : {

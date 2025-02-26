@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -33,7 +34,6 @@ import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/views/splash_screen.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +47,7 @@ void main() async {
 
 Future<void> _initializeTimeZone() async {
   tz.initializeTimeZones();
-  final String currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
+  final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
   log("📌 Timezone: $currentTimeZone");
   tz.setLocalLocation(tz.getLocation(currentTimeZone));
 }
@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
         ? Container()
         : GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Ours Log',
+            title: 'My Medical Logs',
             theme: lightTheme(systemLanguage!),
             darkTheme: darkTheme(systemLanguage!),
             themeMode: themeMode!,
@@ -109,6 +109,8 @@ class _MyAppState extends State<MyApp> {
           );
   }
 }
+
+//flutter pub run change_app_package_name:main com.wonjongseo.my_medical_logs
 
 Future<void> initHive() async {
   await Hive.initFlutter();

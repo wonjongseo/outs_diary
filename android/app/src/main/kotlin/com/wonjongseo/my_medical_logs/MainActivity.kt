@@ -1,4 +1,4 @@
-package com.example.ours_log
+package com.wonjongseo.my_medical_logs
 
 import io.flutter.embedding.android.FlutterActivity
 

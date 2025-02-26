@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
     <!-- For Local Notification -->
     <application
-        android:label="ours_log"
+        android:label="My medical logs"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true"

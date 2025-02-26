@@ -74,11 +74,12 @@ class _AddRegularAlramScreenState extends State<AddRegularAlramScreen> {
   }
 
   void onSaveBtn() async {
-    if (!validate()) return;
+    if (!validate()) {
+      return;
+    }
 
     TimeOfDay? timeOfDay = AppFunction.stringToTimeOfDay(startTime!);
     if (timeOfDay == null) return;
-
     selectedWeekdayIndexs.sort((a, b) => a.index.compareTo(b.index));
     List<TaskModel> tasks = [];
     String title = scheduleNameCnl.text;
@@ -114,6 +115,7 @@ class _AddRegularAlramScreenState extends State<AddRegularAlramScreen> {
     addScheduleController.update();
     Get.find<UserController>().addTaskList(tasks);
 
+    print('object');
     Get.back();
     AppSnackbar.showMessageSnackBar(
       message: '$title${AppString.enrolledMsg.tr}',
@@ -149,62 +151,68 @@ class _AddRegularAlramScreenState extends State<AddRegularAlramScreen> {
               label: AppString.saveText.tr,
               onTap: onSaveBtn,
             ),
+            SizedBox(height: RS.h10),
             const GlobalBannerAdmob()
           ],
         ),
       ),
       body: BackgroundWidget(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                ColTextAndWidget(
-                  label: AppString.taskName.tr,
-                  widget: CustomTextFormField(
-                    controller: scheduleNameCnl,
-                  ),
-                ),
-                SizedBox(height: RS.h10),
-                ColTextAndWidget(
-                  label: AppString.taskMessage.tr,
-                  widget: CustomTextFormField(
-                    controller: scheduleMessageCnl,
-                  ),
-                ),
-                SizedBox(height: RS.h10),
-                ColTextAndWidget(
-                  label: AppString.taskTime.tr,
-                  widget: CustomTextFormField(
-                    onTap: onTapVisitTime,
-                    readOnly: true,
-                    hintText: startTime ?? '',
-                    widget: IconButton(
-                      onPressed: onTapVisitTime,
-                      icon: const Icon(Icons.keyboard_arrow_down),
+        child: GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ColTextAndWidget(
+                      label: AppString.taskName.tr,
+                      widget: CustomTextFormField(
+                        controller: scheduleNameCnl,
+                      ),
                     ),
-                  ),
-                ),
-                SizedBox(height: RS.h10),
-                ColTextAndWidget(
-                  label: AppString.weekday.tr,
-                  widget: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children:
-                          List.generate(WeekDayType.values.length, (index) {
-                        return WeekdaySelector(
-                            height: RS.w10 * 8,
-                            width: RS.w10 * 8,
-                            onTap: () => selectWeekday(index),
-                            isSelected: selectedWeekdayIndexs
-                                .contains(WeekDayType.values[index]),
-                            weekDay: WeekDayType.values[index].label);
-                      }),
+                    SizedBox(height: RS.h10),
+                    ColTextAndWidget(
+                      label: AppString.taskMessage.tr,
+                      widget: CustomTextFormField(
+                        controller: scheduleMessageCnl,
+                      ),
                     ),
-                  ),
+                    SizedBox(height: RS.h10),
+                    ColTextAndWidget(
+                      label: AppString.taskTime.tr,
+                      widget: CustomTextFormField(
+                        onTap: onTapVisitTime,
+                        readOnly: true,
+                        hintText: startTime ?? '',
+                        widget: IconButton(
+                          onPressed: onTapVisitTime,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: RS.h10),
+                    ColTextAndWidget(
+                      label: AppString.weekday.tr,
+                      widget: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children:
+                              List.generate(WeekDayType.values.length, (index) {
+                            return WeekdaySelector(
+                                height: RS.w10 * 8,
+                                width: RS.w10 * 8,
+                                onTap: () => selectWeekday(index),
+                                isSelected: selectedWeekdayIndexs
+                                    .contains(WeekDayType.values[index]),
+                                weekDay: WeekDayType.values[index].label);
+                          }),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
