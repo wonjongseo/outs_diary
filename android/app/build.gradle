@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.wonjongseo.my_medical_logs"
-    compileSdkVersion 35
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -59,7 +59,7 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 }
