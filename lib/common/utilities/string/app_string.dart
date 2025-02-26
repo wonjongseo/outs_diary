@@ -4,8 +4,10 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'ja_JP': {
-          AppString.notification: AppString.notificationEn,
-          AppString.dayText: AppString.dayTextEn,
+          AppString.fotTaste: AppString.fotTasteJp,
+          AppString.systemSetting: AppString.systemSettingJp,
+          AppString.notification: AppString.notificationJp,
+          AppString.dayText: AppString.dayTextJp,
           AppString.dontSaveFuture: AppString.dontSaveFutureJp,
           AppString.selectOneMoer: AppString.selectOneMoerJp,
           AppString.appointed: AppString.appointedJp,
@@ -193,6 +195,8 @@ class AppTranslations extends Translations {
           AppString.reportMsgContect: AppString.reportMsgContectJp,
         },
         'ko_KR': {
+          AppString.fotTaste: AppString.fotTasteKr,
+          AppString.systemSetting: AppString.systemSettingKr,
           AppString.notification: AppString.notificationKr,
           AppString.dayText: AppString.dayTextKr,
           AppString.dontSaveFuture: AppString.dontSaveFutureKr,
@@ -383,6 +387,8 @@ class AppTranslations extends Translations {
           AppString.setLanguage: AppString.setLanguageKr,
         },
         'en_US': {
+          AppString.fotTaste: AppString.fotTasteEn,
+          AppString.systemSetting: AppString.systemSettingEn,
           AppString.notification: AppString.notificationEn,
           AppString.dayText: AppString.dayTextEn,
           AppString.dontSaveFuture: AppString.dontSaveFutureEn,
@@ -661,7 +667,7 @@ class AppString {
   static String howFealToday = 'howFealTodaytr';
   static String howFealTodayKr = '어떤 감정의 하루였나요';
   static String howFealTodayJp = 'どのような感情の1日でしたか';
-  static String howFealTodayEn = "What kind of Fealing day was it";
+  static String howFealTodayEn = "What kind of emotion did you have";
 
   static String painLevel = 'painLeveltr';
   static String painLevelKr = '통증 강도';
@@ -671,7 +677,7 @@ class AppString {
   static String fealText = 'fealTextTr';
   static String fealTextKr = '감정';
   static String fealTextJp = '感情';
-  static String fealTextEn = "Feeling";
+  static String fealTextEn = "Emotion";
 
   static String bloodPressure = 'bloodPressureTr';
   static String bloodPressureKr = '혈압';
@@ -691,7 +697,7 @@ class AppString {
   static String plzSelectFealIcon = 'plzSelectFealIconTr';
   static String plzSelectFealIconKr = '감정 아이콘을 선택해주세요';
   static String plzSelectFealIconJp = '感情アイコンを選んでください';
-  static String plzSelectFealIconEn = "Choose a Fealing Icon";
+  static String plzSelectFealIconEn = "Choose a Emotional Icon";
 
   static String koreanText = 'koreanTextTr';
   static String koreanTextKr = '한국어';
@@ -833,8 +839,8 @@ class AppString {
 
   static String hospitalVisitLog = "hospitalVisitLogTr";
   static String hospitalVisitLogKr = '진료 기록';
-  static String hospitalVisitLogJp = "通院記録";
-  static String hospitalVisitLogEn = "Hospital";
+  static String hospitalVisitLogJp = "診療記録";
+  static String hospitalVisitLogEn = "Medical";
 
   static String yesText = "yesTextTr";
   static String yesTextKr = '네';
@@ -967,7 +973,7 @@ class AppString {
   static String lunch = "lunchTr";
   static String lunchKr = '점심';
   static String lunchJp = "昼";
-  static String lunchEn = "Afternoon";
+  static String lunchEn = "Noon";
 
   static String evening = "eveningTr";
   static String eveningKr = '저녁';
@@ -1275,7 +1281,7 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String feal = 'fealTr';
   static String fealKr = '감정';
   static String fealJp = '感情';
-  static String fealEn = "Feal";
+  static String fealEn = "Emotional";
 
   static String icon = 'iconTr';
   static String iconKr = '아이콘';
@@ -1283,14 +1289,14 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String iconEn = "Icon";
 
   static String poop = 'poopTr';
-  static String stoolKr = '변';
-  static String stoolJp = '便';
-  static String stoolEn = "Stool";
+  static String stoolKr = '변 상태';
+  static String stoolJp = '便の状態';
+  static String stoolEn = "Stool Condition";
 
   static String color = 'colorTr';
-  static String colorKr = '색상';
-  static String colorJp = '色相';
-  static String colorEn = "Color";
+  static String colorKr = '앱 테마 색상';
+  static String colorJp = 'アプリテーマカラー';
+  static String colorEn = "App Theme Color";
 
   static String permission = 'permissionTr';
   static String permissionKr = '권한';
@@ -1308,14 +1314,14 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String averageHealthValueEn = "Average Health Figure ";
 
   static String visit = 'visittr';
-  static String visitKr = '방문';
-  static String visitJp = '来院';
-  static String visitEn = "visit";
+  static String visitKr = '진료';
+  static String visitJp = '診療';
+  static String visitEn = "Medical";
 
   static String editedVisitLog = 'editedVisitLogtr';
-  static String editedVisitLogKr = '병원 기록이 변경 되었습니다';
-  static String editedVisitLogJp = '来院記録が変更されました。';
-  static String editedVisitLogEn = "editedVisitLog";
+  static String editedVisitLogKr = '진료 기록이 변경 되었습니다';
+  static String editedVisitLogJp = '診療記録が変更されました。';
+  static String editedVisitLogEn = "The medical record was changed";
 
   static String enrolledMsg = 'enrolledMsgtr';
   static String enrolledMsgKr = '(이)가 등록되었습니다';
@@ -1358,7 +1364,7 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String beforeStartEn = "Before Starting";
 
   static String plzSetting = "plzSettingTr";
-  static String hospitalExpensesKr = "몇 가지 세팅을 해주세요.";
+  static String hospitalExpensesKr = "몇 가지 설정을 진행해주세요.";
   static String hospitalExpensesJp = 'いくつか設定を行なってください。';
   static String hospitalExpensesEn = "Please set up some settings.";
 
@@ -1388,7 +1394,7 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String plzSelectFeal = "plzSelectFealTrTr";
   static String plzSelectFealKr = '오늘의 감정을 선택해주세요';
   static String plzSelectFealJp = "今日の感情を選択してください";
-  static String plzSelectFealEn = "Please choose your Fealing today";
+  static String plzSelectFealEn = "Please select today's Emotion";
 
   static String weight = "weightTextTr";
   static String weightTextKr = '체중';
@@ -1522,9 +1528,9 @@ Would you like to copy the email [visionwill3322@gmail.com]?
       "Medical certificates or prescriptions";
 
   static String savedVisitLog = 'savedVisitLogtr';
-  static String savedVisitLogKr = '병원 기록이 저장 되었습니다';
-  static String savedVisitLogJp = '来院記録が保存されました。';
-  static String savedVisitLogEn = "The hospital visit record has been saved.";
+  static String savedVisitLogKr = '진료 기록이 저장 되었습니다';
+  static String savedVisitLogJp = '診療記録が保存されました。';
+  static String savedVisitLogEn = "Medical records have been saved.";
 
   static String editedAlramTime = 'editedAlramTimetr';
   static String editedAlramTimeKr = '알람 시간이 변경되었습니다';
@@ -1552,8 +1558,13 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String notificationJp = '通知';
   static String notificationEn = "Notification";
 
-// Sakura Hospital Hospital appointment on February 25th at 14:54 PM!
-  //
+  static String fotTaste = 'fotTastetr';
+  static String fotTasteKr = '취향에 맞게 설정';
+  static String fotTasteJp = '好みに合う設定';
+  static String fotTasteEn = "fotTaste";
 
-  //Please choose at least one person
+  static String systemSetting = 'systemSettingtr';
+  static String systemSettingKr = '시스템 설정';
+  static String systemSettingJp = 'システム設定';
+  static String systemSettingEn = "System Setting";
 }

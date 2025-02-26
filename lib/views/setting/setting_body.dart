@@ -11,7 +11,6 @@ import 'package:ours_log/common/utilities/app.dialog.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
-import 'package:ours_log/common/utilities/app_image_path.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/controller/user_controller.dart';
@@ -31,7 +30,7 @@ class _SettingBodyState extends State<SettingBody> {
   String settingLanguage = '';
   String displayLanguage = '';
   bool isDarkMode = Get.isDarkMode;
-
+  bool isColorPickerOpen = false;
   @override
   void initState() {
     super.initState();
@@ -78,7 +77,7 @@ class _SettingBodyState extends State<SettingBody> {
     return TextStyle(
       fontSize: RS.w10 * 1.8,
       fontWeight: FontWeight.w600,
-      color: textWhiteOrBlack,
+      color: isDarkMode ? AppColors.white : AppColors.black,
     );
   }
 
@@ -98,7 +97,7 @@ class _SettingBodyState extends State<SettingBody> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          '취향에 맞게 설정',
+                          AppString.fotTaste.tr,
                           style: headingstyle(),
                         ),
                       ),
@@ -114,7 +113,7 @@ class _SettingBodyState extends State<SettingBody> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          '시스템 설정',
+                          AppString.systemSetting.tr,
                           style: headingstyle(),
                         ),
                       ),
@@ -130,7 +129,7 @@ class _SettingBodyState extends State<SettingBody> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          '그 외',
+                          AppString.another.tr,
                           style: headingstyle(),
                         ),
                       ),
@@ -141,6 +140,116 @@ class _SettingBodyState extends State<SettingBody> {
               ),
             );
           });
+  }
+
+  ListTile _color(UserController userController) {
+    return ListTile(
+      titleTextStyle: TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: RS.width14,
+      ),
+      subtitleTextStyle: TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: RS.width12,
+      ),
+      title: Text(AppString.color.tr),
+      onTap: () {
+        isColorPickerOpen = !isColorPickerOpen;
+        setState(() {});
+      },
+      trailing: CircleAvatar(
+        backgroundColor: AppColors.primaryColor,
+        radius: RS.w10 * 1.8,
+      ),
+      isThreeLine: true,
+      subtitle: AnimatedContainer(
+        padding: EdgeInsets.only(top: RS.h10 * 2),
+        height: isColorPickerOpen ? RS.h10 * 9 : RS.h10 * 2,
+        duration: const Duration(milliseconds: 300),
+        child: !isColorPickerOpen
+            ? null
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    borderRadius: BorderRadius.circular(50),
+                    onTap: () => userController.changePrimaryColor(0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        radius: RS.w10 * 2,
+                        foregroundColor: Colors.white,
+                        backgroundColor: AppColors.priPinkClr,
+                        child: userController.userModel!.colorIndex == 0
+                            ? const Icon(Icons.done)
+                            : null,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(50),
+                    onTap: () => userController.changePrimaryColor(1),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        radius: RS.w10 * 2,
+                        foregroundColor: Colors.white,
+                        backgroundColor: AppColors.priYellowClr,
+                        child: userController.userModel!.colorIndex == 1
+                            ? Icon(Icons.done)
+                            : null,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(50),
+                    onTap: () => userController.changePrimaryColor(2),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        radius: RS.w10 * 2,
+                        foregroundColor: Colors.white,
+                        backgroundColor: AppColors.priGreenClr,
+                        child: userController.userModel!.colorIndex == 2
+                            ? Icon(Icons.done)
+                            : null,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(50),
+                    onTap: () => userController.changePrimaryColor(3),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        radius: RS.w10 * 2,
+                        foregroundColor: Colors.white,
+                        backgroundColor: AppColors.priBluishClr,
+                        child: userController.userModel!.colorIndex == 3
+                            ? Icon(Icons.done)
+                            : null,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(50),
+                    onTap: () => userController.changePrimaryColor(4),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        radius: RS.w10 * 2,
+                        foregroundColor: Colors.white,
+                        backgroundColor: AppColors.priPubbleClr,
+                        child: userController.userModel!.colorIndex == 4
+                            ? Icon(Icons.done)
+                            : null,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+      ),
+    );
   }
 
   Widget _feadbackAndError() {
@@ -213,51 +322,7 @@ class _SettingBodyState extends State<SettingBody> {
     );
   }
 
-  Widget _language() {
-    return _customListTIle(
-      title: 'Change Language',
-      subTitle: AppString.setLanguage.tr,
-      onTap: () {},
-      widget: DropdownButton(
-          underline: const SizedBox(),
-          icon: const Icon(Icons.keyboard_arrow_down),
-          items: [
-            if (isEn) ...[
-              DropdownMenuItem(
-                value: AppString.koreanText.tr,
-                child: const Text('Korean'),
-              ),
-              DropdownMenuItem(
-                value: AppString.japaneseText.tr,
-                child: const Text('Japenese'),
-              ),
-            ],
-            if (isKo) ...[
-              DropdownMenuItem(
-                value: AppString.japaneseText.tr,
-                child: Text('Japenese (${AppString.japaneseText.tr})'),
-              ),
-              DropdownMenuItem(
-                value: AppString.englishText.tr,
-                child: Text('English (${AppString.englishText.tr})'),
-              ),
-            ],
-            if (isJp) ...[
-              DropdownMenuItem(
-                value: AppString.koreanText.tr,
-                child: Text('Korean (${AppString.koreanText.tr})'),
-              ),
-              DropdownMenuItem(
-                value: AppString.englishText.tr,
-                child: Text('English (${AppString.englishText.tr})'),
-              ),
-            ],
-          ],
-          onChanged: changeSystemLanguage),
-    );
-  }
-
-  ExpansionTileCard _color(UserController userController) {
+  ExpansionTileCard _color2(UserController userController) {
     return ExpansionTileCard(
       contentPadding: EdgeInsets.symmetric(horizontal: RS.w10 * 1.3),
       elevation: 0,
@@ -271,7 +336,7 @@ class _SettingBodyState extends State<SettingBody> {
       trailing: CircleAvatar(
         backgroundColor: AppColors.primaryColor,
       ),
-      expandedColor: Colors.white,
+      expandedColor: boxWhiteOrBlack,
       children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
@@ -387,9 +452,9 @@ class _SettingBodyState extends State<SettingBody> {
         maxLines: 1,
       ),
       trailing: widget ??
-          const Icon(
+          Icon(
             Icons.keyboard_arrow_right,
-            color: Colors.black,
+            color: isDarkMode ? AppColors.white : AppColors.black,
           ),
       subtitle: subTitle == null
           ? null
@@ -398,6 +463,69 @@ class _SettingBodyState extends State<SettingBody> {
               maxLines: isEn ? 2 : 1,
             ),
       onTap: onTap,
+    );
+  }
+
+  Widget _language() {
+    return _customListTIle(
+      title: 'Change Language',
+      subTitle: AppString.setLanguage.tr,
+      onTap: () {},
+      widget: DropdownButton(
+          underline: const SizedBox(),
+          icon: Icon(
+            Icons.keyboard_arrow_down,
+            color: isDarkMode ? AppColors.white : AppColors.black,
+          ),
+          items: [
+            if (isEn) ...[
+              DropdownMenuItem(
+                value: AppString.koreanText.tr,
+                child: const Text('Korean'),
+              ),
+              DropdownMenuItem(
+                value: AppString.japaneseText.tr,
+                child: const Text('Japenese'),
+              ),
+            ],
+            if (isKo) ...[
+              DropdownMenuItem(
+                value: AppString.japaneseText.tr,
+                child: Text('Japenese (${AppString.japaneseText.tr})'),
+              ),
+              DropdownMenuItem(
+                value: AppString.englishText.tr,
+                child: Text('English (${AppString.englishText.tr})'),
+              ),
+            ],
+            if (isJp) ...[
+              DropdownMenuItem(
+                value: AppString.koreanText.tr,
+                child: Text('Korean (${AppString.koreanText.tr})'),
+              ),
+              DropdownMenuItem(
+                value: AppString.englishText.tr,
+                child: Text('English (${AppString.englishText.tr})'),
+              ),
+            ],
+          ],
+          onChanged: changeSystemLanguage),
+    );
+  }
+}
+
+class ColorPickScreen extends StatefulWidget {
+  const ColorPickScreen({super.key});
+
+  @override
+  State<ColorPickScreen> createState() => _ColorPickScreenState();
+}
+
+class _ColorPickScreenState extends State<ColorPickScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
     );
   }
 }

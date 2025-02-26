@@ -62,10 +62,7 @@ class EditDiaryScreen extends StatelessWidget {
           child:
               GetBuilder<EditDiaryController>(builder: (editDiaryController) {
             return GestureDetector(
-              onTap: () {
-                print('!!');
-                FocusManager.instance.primaryFocus?.unfocus();
-              },
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
               child: SingleChildScrollView(
                 controller: editDiaryController.scrollController,
                 child: Padding(

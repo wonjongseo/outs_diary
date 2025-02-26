@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/models/is_expandtion_type.dart';
 import 'package:ours_log/common/theme/theme.dart';
 
@@ -168,7 +169,9 @@ class _GraphBodyState extends State<GraphBody> {
                     },
                     icon: const Icon(Icons.arrow_back_ios)),
                 Text(
-                  DateFormat('M${AppString.month.tr}').format(now),
+                  isEn
+                      ? DateFormat.MMM().format(now)
+                      : DateFormat('M${AppString.month.tr}').format(now),
                   style: boldStyle,
                 ),
                 IconButton(

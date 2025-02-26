@@ -21,7 +21,6 @@ import 'package:ours_log/views/edit_diary/edit_diary_screen.dart';
 import 'package:ours_log/views/edit_diary/widgets/col_text_and_widget.dart';
 import 'package:ours_log/views/full_Image_screen.dart';
 import 'package:ours_log/views/home/widgets/aver_health_value.dart';
-import 'package:ours_log/views/home/widgets/circle_aver_health_widget.dart';
 
 class SelectedDiary extends StatelessWidget {
   const SelectedDiary({super.key});
@@ -29,7 +28,6 @@ class SelectedDiary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserController userController = Get.find<UserController>();
-
     return Container(
       padding: const EdgeInsets.all(10.0),
       width: double.infinity,
@@ -146,17 +144,20 @@ class SelectedDiary extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.all(RS.w10 * .6),
+                        constraints: BoxConstraints(minWidth: RS.w10 * 7.5),
                         decoration: BoxDecoration(
                           color: AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(RS.w10 * .3),
                         ),
-                        child: Text(
-                          diaryController.selectedDiary!.poopConditions![index]
-                              .dayPeriodType.label,
-                          style: TextStyle(
-                            color: Get.isDarkMode
-                                ? textWhiteOrBlack
-                                : textBlackOrWhite,
+                        child: Center(
+                          child: Text(
+                            diaryController.selectedDiary!
+                                .poopConditions![index].dayPeriodType.label,
+                            style: TextStyle(
+                              color: Get.isDarkMode
+                                  ? textWhiteOrBlack
+                                  : textBlackOrWhite,
+                            ),
                           ),
                         ),
                       ),
