@@ -168,3 +168,4 @@ Future<void> initHive() async {
     Hive.registerAdapter(HospitalLogModelAdapter());
   }
 }
+// Android Command - flutter build appbundle
