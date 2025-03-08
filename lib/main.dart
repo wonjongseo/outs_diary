@@ -8,10 +8,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:ours_log/controller/diary_controller.dart';
-import 'package:ours_log/controller/hospital_log_controller.dart';
-import 'package:ours_log/controller/image_controller.dart';
-import 'package:ours_log/controller/user_controller.dart';
+
 import 'package:ours_log/models/is_expandtion_type.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
@@ -169,3 +166,4 @@ Future<void> initHive() async {
   }
 }
 // Android Command - flutter build appbundle
+//flutter pub run build_runner build

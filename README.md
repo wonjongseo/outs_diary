@@ -1,5 +1,7 @@
 # 내 진료 기록
 
+![alt text](grapic_image_figma_en.jpg)
+
 <details><summary>Promotional Text<strong></strong></summary>
 하루하루의 건강을 꼼꼼히 기록하고, 월간 건강 그래프를 통해 나만의 건강 상태를 한눈에 파악하세요. 약 복용 알림 기능과 병원 진료 기록을 지원해 건강 관리가 쉬워집니다. 5가지 다양한 배경, 아이콘, 테마 색상을 자유롭게 설정할 수 있으며, 다크/라이트 모드로 나만의 맞춤형 환경을 제공받을 수 있습니다. 건강 관리가 더 똑똑하고 편리해집니다!
 </details>
@@ -76,6 +78,8 @@
 
 # 私のカルテ
 
+![alt text](grapic_image_figma_ja.jpg)
+
 <details><summary>Promotional Text<strong></strong></summary>
 毎日の健康記録をしっかり管理し、月ごとの健康グラフで自分の健康状態を簡単に把握できます。薬の服用リマインダー機能と病院の診療記録で、健康管理がさらに便利になります。5 つの背景、アイコン、テーマカラーを自由にカスタマイズでき、ダーク/ライトモードで自分だけの使いやすい環境を提供します。健康管理がもっとスマートに、もっと便利に！
 </details>
@@ -148,6 +152,8 @@
 <br/>
 
 # My Medical Logs
+
+![alt text](agrapic_image_figma_ko.jpg)
 
 <details><summary>Promotional Text<strong></strong></summary>
 Track your health daily, view monthly health graphs, set medication reminders, and record hospital visits! Customize with 5 backgrounds, icons, theme colors, and enjoy dark/light mode support.
@@ -224,6 +230,10 @@ emotion,medicine,medication,pain,body weight,temperature,pulse,blood pressure,st
 emotion,Medical,pain,weight,pulse,blood pressure,stool,memo,record,hospital,care,notification,graph
 
 </details>
+
+<br/>
+<br/>
+<br/>
 
 # Release
 
