@@ -4,7 +4,7 @@ import 'package:get/route_manager.dart';
 
 import 'package:ours_log/common/enums/icon_and_index.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/common/widgets/custom_expansion_card.dart';
 
 class ExpansionIconCard extends StatefulWidget {

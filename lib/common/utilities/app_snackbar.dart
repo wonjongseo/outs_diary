@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
 
 class AppSnackbar {
   static showNoPermissionSnackBar({required String message}) {

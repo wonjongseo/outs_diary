@@ -1,6 +1,5 @@
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
 
 class CircleDone extends StatelessWidget {
   const CircleDone({super.key, required this.isSelected});

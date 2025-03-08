@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
 
 class PieChartIndicator extends StatelessWidget {
   const PieChartIndicator({super.key, required this.text, required this.color});

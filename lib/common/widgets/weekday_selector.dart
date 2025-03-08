@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
 
 class WeekdaySelector extends StatelessWidget {
   const WeekdaySelector({

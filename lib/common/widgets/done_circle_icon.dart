@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
 
 class DoneCircleIcon extends StatelessWidget {
   const DoneCircleIcon({

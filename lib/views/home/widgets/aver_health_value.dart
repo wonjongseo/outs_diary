@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/views/home/widgets/circle_aver_health_widget.dart';

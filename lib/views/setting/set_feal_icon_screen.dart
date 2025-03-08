@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/admob/global_banner_admob.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/common/widgets/feal_icon_row.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/views/background/background_widget.dart';

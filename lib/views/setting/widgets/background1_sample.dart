@@ -3,7 +3,6 @@ import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
 
 class BackGround1Sample extends StatelessWidget {
   const BackGround1Sample(

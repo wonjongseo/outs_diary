@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/controller/onboarding_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/views/setting/widgets/background1_sample.dart';

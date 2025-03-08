@@ -4,7 +4,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
 
 import 'package:ours_log/controller/onboarding_controller.dart';
 import 'package:ours_log/models/day_period_type.dart';

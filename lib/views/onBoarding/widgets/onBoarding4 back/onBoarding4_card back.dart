@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/views/onBoarding/onBoarding_screen.dart';
 import 'package:ours_log/views/onBoarding/widgets/circle_done.dart';
 

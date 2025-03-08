@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/common/widgets/custom_expansion_card.dart';
 import 'package:ours_log/controller/edit_diary_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';

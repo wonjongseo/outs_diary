@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 
-import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/datas/feal_icon_data.dart';
 import 'package:ours_log/views/onBoarding/widgets/circle_done.dart';
 
