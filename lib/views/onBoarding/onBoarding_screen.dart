@@ -31,8 +31,8 @@ class OnBoardingScreen extends StatelessWidget {
           child: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical: RS.h10,
-                horizontal: RS.w10,
+                vertical: 10,
+                horizontal: 10,
               ),
               child: Column(
                 children: [
@@ -78,7 +78,7 @@ class OnBoardingScreen extends StatelessWidget {
               color: AppColors.primaryColor,
             ),
           ),
-          if (onboardingController.pageIndex == 0) SizedBox(width: RS.w10 * 3),
+          if (onboardingController.pageIndex == 0) SizedBox(width: 10 * 3),
         ],
       ),
     );
@@ -90,8 +90,8 @@ class OnBoardingScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         onTap: onboardingController.goToNextPage,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: RS.w10),
-          height: RS.h10 * 6,
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          height: 10 * 6,
           decoration: BoxDecoration(
             color: AppColors.primaryColor,
             borderRadius: BorderRadius.circular(15),
@@ -104,7 +104,7 @@ class OnBoardingScreen extends StatelessWidget {
                   : AppString.next.tr,
               style: TextStyle(
                 fontWeight: FontWeight.w700,
-                fontSize: RS.width20,
+                fontSize: 20,
                 color: AppColors.white,
               ),
             ),

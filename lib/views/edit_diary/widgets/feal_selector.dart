@@ -12,15 +12,15 @@ class FealSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<EditDiaryController>(builder: (addDiaryController) {
       return Container(
-        padding: EdgeInsets.all(RS.width8),
+        padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Get.isDarkMode ? AppColors.black : AppColors.white,
-          borderRadius: BorderRadius.circular(RS.h10),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           children: [
             Text(AppString.howFealToday.tr),
-            SizedBox(height: RS.h5),
+            SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
@@ -34,7 +34,7 @@ class FealSelector extends StatelessWidget {
                       onTap: () => addDiaryController.onTapFealIcon(index),
                       child: CircleAvatar(
                         backgroundColor: Colors.grey.withOpacity(.2),
-                        radius: isSelected ? RS.w10 * 2.5 : RS.w10 * 2,
+                        radius: isSelected ? 10 * 2.5 : 10 * 2,
                         child: Image.asset(
                           addDiaryController.userController.feals[index],
                           colorBlendMode: BlendMode.modulate,

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:ours_log/common/admob/global_banner_admob.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/common/widgets/c_dropdown_button.dart';
 import 'package:ours_log/common/widgets/custom_button.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
@@ -63,8 +63,8 @@ class _EditHospitalVisitLogScreenState
               controller: controller.scrollController,
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                  vertical: RS.h10,
-                  horizontal: RS.width20,
+                  vertical: 10,
+                  horizontal: 20,
                 ),
                 child: GestureDetector(
                   onTap: isEdit
@@ -77,13 +77,13 @@ class _EditHospitalVisitLogScreenState
                   child: Column(
                     children: [
                       VisitDayAndTime(isEdit: isEdit),
-                      SizedBox(height: RS.h10),
+                      SizedBox(height: 10),
                       _hospitalName(controller),
-                      SizedBox(height: RS.h10),
+                      SizedBox(height: 10),
                       _officeName(controller),
-                      SizedBox(height: RS.h10),
+                      SizedBox(height: 10),
                       _diseaseName(controller),
-                      SizedBox(height: RS.h10),
+                      SizedBox(height: 10),
                       ColTextAndWidget(
                         label: AppString.diagnosis.tr,
                         widget: CustomTextFormField(
@@ -92,7 +92,7 @@ class _EditHospitalVisitLogScreenState
                           controller: controller.diagnosisCtl,
                         ),
                       ),
-                      SizedBox(height: RS.h10),
+                      SizedBox(height: 10),
                       ColTextAndWidget(
                         label: AppString.prescribedMedicine.tr,
                         labelWidget: IconButton(
@@ -103,7 +103,7 @@ class _EditHospitalVisitLogScreenState
                           children: List.generate(
                             controller.pillCtls.length,
                             (index) => Padding(
-                              padding: EdgeInsets.only(bottom: RS.h10),
+                              padding: EdgeInsets.only(bottom: 10),
                               child: CustomTextFormField(
                                 readOnly: !isEdit,
                                 controller: controller.pillCtls[index],
@@ -121,7 +121,7 @@ class _EditHospitalVisitLogScreenState
                           ),
                         ),
                       ),
-                      SizedBox(height: RS.h10),
+                      SizedBox(height: 10),
                       ImageOfToday(
                           carouselSliderController:
                               controller.carouselSliderController,
@@ -137,7 +137,7 @@ class _EditHospitalVisitLogScreenState
                               : null,
                           removePhoto: (index) =>
                               controller.removePhoto(index)),
-                      SizedBox(height: RS.h10 * 2),
+                      SizedBox(height: 10 * 2),
                     ],
                   ),
                 ),
@@ -159,7 +159,7 @@ class _EditHospitalVisitLogScreenState
               label: AppString.saveText.tr,
               onTap: controller.saveVisitLog,
             ),
-          SizedBox(height: RS.h10),
+          SizedBox(height: 10),
           const GlobalBannerAdmob()
         ],
       ),

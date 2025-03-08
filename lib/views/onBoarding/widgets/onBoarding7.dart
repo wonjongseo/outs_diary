@@ -15,19 +15,19 @@ class Onboarding7 extends StatelessWidget {
     return GetBuilder<OnboardingController>(builder: (cn) {
       return Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: RS.w10 * 2,
-          vertical: RS.h10,
+          horizontal: 10 * 2,
+          vertical: 10,
         ),
         child: Column(
           children: [
             Text(AppString.doYouAlarmWhenDrinkPill.tr),
-            SizedBox(height: RS.h10 * 1.5),
+            SizedBox(height: 10 * 1.5),
             CustomToggleBtn(
               onTap: cn.togglePillAlarm,
               isSelected: [cn.isAlermEnable, !cn.isAlermEnable],
               isChecked: cn.isAlermEnable,
             ),
-            SizedBox(height: RS.h10 * 3),
+            SizedBox(height: 10 * 3),
             Column(
               children: List.generate(cn.pillTimeDayPeriod.length, (index) {
                 return GestureDetector(
@@ -64,11 +64,11 @@ class AppointPillTime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: RS.h10),
-      padding: EdgeInsets.only(left: RS.w10 * 3, right: RS.w10 * 2),
-      height: RS.h10 * 7.5,
+      margin: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.only(left: 10 * 3, right: 10 * 2),
+      height: 10 * 7.5,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(RS.w10 * 2),
+        borderRadius: BorderRadius.circular(10 * 2),
         border: Border.all(color: Colors.grey, width: 1),
       ),
       child: Row(
@@ -80,25 +80,25 @@ class AppointPillTime extends StatelessWidget {
                 Icons.timer,
                 color: isAlermEnable ? null : Colors.grey,
               ),
-              SizedBox(width: RS.w10),
+              SizedBox(width: 10),
               Text(
                 title,
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
-                  fontSize: RS.w10 * 2,
+                  fontSize: 10 * 2,
                   color: isAlermEnable ? null : Colors.grey,
                 ),
               ),
             ],
           ),
           Container(
-            height: RS.h10 * 4,
-            padding: EdgeInsets.symmetric(horizontal: RS.w10),
+            height: 10 * 4,
+            padding: EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               color: isAlermEnable
                   ? AppColors.primaryColor.withValues(alpha: .8)
                   : Colors.grey,
-              borderRadius: BorderRadius.circular(RS.w10 * 1.5),
+              borderRadius: BorderRadius.circular(10 * 1.5),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -110,7 +110,7 @@ class AppointPillTime extends StatelessWidget {
                     color: isAlermEnable ? null : Colors.grey,
                   ),
                 ),
-                SizedBox(width: RS.w10),
+                SizedBox(width: 10),
                 const Icon(Icons.keyboard_arrow_down)
               ],
             ),

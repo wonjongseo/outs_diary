@@ -1,15 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/controller/hospital_log_controller.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
 import 'package:ours_log/views/edit_hospital_visit_log/edit_hospital_visit_log_screen.dart';
@@ -28,7 +26,7 @@ class HospitalLogBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: RS.w10 * 1.5),
+              padding: EdgeInsets.symmetric(horizontal: 10 * 1.5),
               child: Column(
                 children: [
                   Text(
@@ -36,60 +34,8 @@ class HospitalLogBody extends StatelessWidget {
                         .format(hospitalLogController.focusedDay),
                     style: boldStyle,
                   ),
-                  SizedBox(height: RS.h10 * 1.2),
-                  TableCalendar(
-                    availableGestures: AvailableGestures.horizontalSwipe,
-                    daysOfWeekStyle: DaysOfWeekStyle(
-                      weekdayStyle: weekdayStyle,
-                      weekendStyle: weekdayStyle,
-                    ),
-                    locale: Get.locale.toString(),
-                    daysOfWeekHeight: RS.h10 * 3,
-                    headerVisible: false,
-                    onPageChanged: hospitalLogController.onChageCalendar,
-                    calendarStyle: CalendarStyle(
-                      markersAnchor: 1,
-                      defaultTextStyle: weekdayStyle,
-                      cellAlignment: Alignment.center,
-                      outsideDaysVisible: false,
-                      markersAutoAligned: false,
-                      weekendTextStyle: weekdayStyle,
-                    ),
-                    pageJumpingEnabled: false,
-                    pageAnimationEnabled: false,
-                    firstDay: kFirstDay,
-                    lastDay: kLastDay,
-                    calendarBuilders: CalendarBuilders(
-                      prioritizedBuilder: (context, day, focusedDay) =>
-                          prioritizedBuilder(
-                              context, day, focusedDay, hospitalLogController),
-                      markerBuilder: (context, day, event) {
-                        if (event.isEmpty) return null;
-                        return Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor:
-                                  hospitalLogController.selectedDay == day
-                                      ? AppColors.primaryColor
-                                      : Get.isDarkMode
-                                          ? AppColors.black
-                                          : AppColors.white,
-                              foregroundImage: AssetImage(
-                                AppImagePath.hospital,
-                              ),
-                              radius: RS.w10 * 2.5,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                    focusedDay: hospitalLogController.focusedDay,
-                    selectedDayPredicate: (day) =>
-                        isSameDay(hospitalLogController.selectedDay, day),
-                    eventLoader: hospitalLogController.getEventsForDay,
-                    rowHeight: RS.h10 * 9.4,
-                    onDaySelected: hospitalLogController.onDaySelected,
-                  ),
+                  SizedBox(height: 10 * 1.2),
+                  _tableCalendar(hospitalLogController),
                 ],
               ),
             ),
@@ -110,12 +56,12 @@ class HospitalLogBody extends StatelessWidget {
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                vertical: RS.h10,
-                                horizontal: RS.w10,
+                                vertical: 10,
+                                horizontal: 10,
                               ),
                               margin: EdgeInsets.only(
-                                right: RS.w10 * 2,
-                                bottom: RS.h10,
+                                right: 10 * 2,
+                                bottom: 10,
                               ),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
@@ -146,6 +92,61 @@ class HospitalLogBody extends StatelessWidget {
     });
   }
 
+  TableCalendar<Object?> _tableCalendar(
+      HospitalLogController hospitalLogController) {
+    return TableCalendar(
+      availableGestures: AvailableGestures.horizontalSwipe,
+      daysOfWeekStyle: DaysOfWeekStyle(
+        weekdayStyle: weekdayStyle,
+        weekendStyle: weekdayStyle,
+      ),
+      locale: Get.locale.toString(),
+      daysOfWeekHeight: 10 * 3,
+      headerVisible: false,
+      onPageChanged: hospitalLogController.onChageCalendar,
+      calendarStyle: CalendarStyle(
+        markersAnchor: 1,
+        defaultTextStyle: weekdayStyle,
+        cellAlignment: Alignment.center,
+        outsideDaysVisible: false,
+        markersAutoAligned: false,
+        weekendTextStyle: weekdayStyle,
+      ),
+      pageJumpingEnabled: false,
+      pageAnimationEnabled: false,
+      firstDay: kFirstDay,
+      lastDay: kLastDay,
+      calendarBuilders: CalendarBuilders(
+        prioritizedBuilder: (context, day, focusedDay) =>
+            prioritizedBuilder(context, day, focusedDay, hospitalLogController),
+        markerBuilder: (context, day, event) {
+          if (event.isEmpty) return null;
+          return Column(
+            children: [
+              CircleAvatar(
+                backgroundColor: hospitalLogController.selectedDay == day
+                    ? AppColors.primaryColor
+                    : Get.isDarkMode
+                        ? AppColors.black
+                        : AppColors.white,
+                foregroundImage: AssetImage(
+                  AppImagePath.hospital,
+                ),
+                radius: 10 * 2.5,
+              ),
+            ],
+          );
+        },
+      ),
+      focusedDay: hospitalLogController.focusedDay,
+      selectedDayPredicate: (day) =>
+          isSameDay(hospitalLogController.selectedDay, day),
+      eventLoader: hospitalLogController.getEventsForDay,
+      rowHeight: 10 * 9.4,
+      onDaySelected: hospitalLogController.onDaySelected,
+    );
+  }
+
   Widget? prioritizedBuilder(context, DateTime day, focusedDay,
       HospitalLogController hospitalLogController) {
     bool isNextDay = AppFunction.isNextDay(hospitalLogController.now, day);
@@ -156,19 +157,19 @@ class HospitalLogBody extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: RS.w10 * 4.5,
-          width: RS.w10 * 4.5,
+          height: 10 * 4.5,
+          width: 10 * 4.5,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: isNextDay
                 ? Colors.grey.withValues(alpha: .15)
                 : Colors.grey.withValues(alpha: .4),
           ),
-          margin: EdgeInsets.only(bottom: RS.h5),
+          margin: EdgeInsets.only(bottom: 5),
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: RS.w10 * .6),
-          margin: EdgeInsets.only(bottom: RS.h10 * .4),
+          padding: EdgeInsets.symmetric(horizontal: 10 * .6),
+          margin: EdgeInsets.only(bottom: 10 * .4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
             color: isToday ? AppColors.primaryColor : null,
@@ -188,7 +189,7 @@ class HospitalLogBody extends StatelessWidget {
         if (isMustPill) ...[
           Image.asset(
             AppImagePath.medition1,
-            width: RS.w10 * 2.5,
+            width: 10 * 2.5,
           ),
         ]
       ],
@@ -216,7 +217,7 @@ class HospitalLogBody extends StatelessWidget {
   //                     backgroundController.userModel?.fealIconIndex ?? 0]
   //                 .iconPath[diaryModel.fealIndex],
   //           ),
-  //           radius: RS.w10 * 2.5,
+  //           radius: 10 * 2.5,
   //         ),
   //       ],
   //     );
@@ -242,10 +243,10 @@ class SelectedVisitHospital extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: RS.w10 * 1.2).copyWith(
-        bottom: RS.h10 * 1.5,
+      margin: EdgeInsets.symmetric(horizontal: 10 * 1.2).copyWith(
+        bottom: 10 * 1.5,
       ),
-      padding: EdgeInsets.all(RS.w10 * 1.2),
+      padding: EdgeInsets.all(10 * 1.2),
       decoration: BoxDecoration(
         color: boxBlackOrWhite,
         border: Border.all(color: Colors.grey, width: 2),
@@ -261,11 +262,11 @@ class SelectedVisitHospital extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(hospitalLog.hospitalName),
-                  SizedBox(height: RS.h5),
+                  SizedBox(height: 5),
                   Row(
                     children: [
                       const Icon(Icons.access_time_rounded),
-                      SizedBox(width: RS.w5),
+                      SizedBox(width: 5),
                       Text(hospitalLog.startTime ?? ''),
                     ],
                   ),

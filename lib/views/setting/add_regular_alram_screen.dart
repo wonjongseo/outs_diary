@@ -7,7 +7,6 @@ import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/app_validator.dart';
 
-import 'package:ours_log/common/utilities/responsive.dart';
 import 'package:ours_log/common/widgets/custom_button.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/common/widgets/weekday_selector.dart';
@@ -151,7 +150,7 @@ class _AddRegularAlramScreenState extends State<AddRegularAlramScreen> {
               label: AppString.saveText.tr,
               onTap: onSaveBtn,
             ),
-            SizedBox(height: RS.h10),
+            SizedBox(height: 10),
             const GlobalBannerAdmob()
           ],
         ),
@@ -171,14 +170,14 @@ class _AddRegularAlramScreenState extends State<AddRegularAlramScreen> {
                         controller: scheduleNameCnl,
                       ),
                     ),
-                    SizedBox(height: RS.h10),
+                    SizedBox(height: 10),
                     ColTextAndWidget(
                       label: AppString.taskMessage.tr,
                       widget: CustomTextFormField(
                         controller: scheduleMessageCnl,
                       ),
                     ),
-                    SizedBox(height: RS.h10),
+                    SizedBox(height: 10),
                     ColTextAndWidget(
                       label: AppString.taskTime.tr,
                       widget: CustomTextFormField(
@@ -191,7 +190,7 @@ class _AddRegularAlramScreenState extends State<AddRegularAlramScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: RS.h10),
+                    SizedBox(height: 10),
                     ColTextAndWidget(
                       label: AppString.weekday.tr,
                       widget: SingleChildScrollView(
@@ -200,8 +199,8 @@ class _AddRegularAlramScreenState extends State<AddRegularAlramScreen> {
                           children:
                               List.generate(WeekDayType.values.length, (index) {
                             return WeekdaySelector(
-                                height: RS.w10 * 8,
-                                width: RS.w10 * 8,
+                                height: 10 * 8,
+                                width: 10 * 8,
                                 onTap: () => selectWeekday(index),
                                 isSelected: selectedWeekdayIndexs
                                     .contains(WeekDayType.values[index]),

@@ -52,7 +52,7 @@ class AverHealthValue extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: RS.h10 * 1.5),
+          SizedBox(height: 10 * 1.5),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(

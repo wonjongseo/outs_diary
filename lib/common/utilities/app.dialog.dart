@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
 
 class AppDialog {
   static Future<bool> jonggackDialog(
@@ -17,17 +16,17 @@ class AppDialog {
           children: [
             if (title != null) ...[
               title,
-              SizedBox(height: RS.height20),
+              SizedBox(height: 20),
             ],
             if (connent != null) ...[
               connent,
-              SizedBox(height: RS.height20),
+              SizedBox(height: 20),
             ],
             // const Align(alignment: Alignment.center, child: JonggackAvator()),
             if (action != null) ...[
-              SizedBox(height: RS.height20),
+              SizedBox(height: 20),
               action,
-              SizedBox(height: RS.h10),
+              SizedBox(height: 10),
             ],
           ],
         ),
@@ -75,11 +74,11 @@ class AppDialog {
             child: InkWell(
               onTap: () => Get.back(result: true),
               child: Padding(
-                padding: EdgeInsets.all(RS.width15),
+                padding: EdgeInsets.all(15),
                 child: Text(
                   AppString.yesText.tr,
                   style: TextStyle(
-                    fontSize: RS.height14,
+                    fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: Colors.cyan.shade600,
                   ),
@@ -87,17 +86,17 @@ class AppDialog {
               ),
             ),
           ),
-          SizedBox(width: RS.h10),
+          SizedBox(width: 10),
           Card(
             shape: const CircleBorder(),
             child: InkWell(
               onTap: () => Get.back(result: false),
               child: Padding(
-                padding: EdgeInsets.all(RS.width15),
+                padding: EdgeInsets.all(15),
                 child: Text(
                   AppString.noText.tr,
                   style: TextStyle(
-                    fontSize: RS.height14,
+                    fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: Colors.cyan.shade600,
                   ),
@@ -117,8 +116,8 @@ class JonggackAvator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: RS.w10 * 15,
-      height: RS.w10 * 15,
+      width: 10 * 15,
+      height: 10 * 15,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         image: DecorationImage(

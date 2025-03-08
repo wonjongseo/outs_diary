@@ -20,9 +20,9 @@ class PoopDayPeriod extends StatelessWidget {
     return GetBuilder<EditDiaryController>(
       builder: (editDiaryController) {
         return Container(
-          padding: EdgeInsets.symmetric(horizontal: RS.w10 * 1.6).copyWith(
-            top: RS.height14,
-            bottom: RS.h10,
+          padding: EdgeInsets.symmetric(horizontal: 10 * 1.6).copyWith(
+            top: 14,
+            bottom: 10,
           ),
           decoration: BoxDecoration(
             color: Get.isDarkMode ? AppColors.black : AppColors.white,
@@ -34,17 +34,17 @@ class PoopDayPeriod extends StatelessWidget {
                 DayPeriodType.values.length,
                 (index) {
                   return Padding(
-                    padding: EdgeInsets.symmetric(vertical: RS.h5),
+                    padding: EdgeInsets.symmetric(vertical: 5),
                     child: Row(
                       children: [
                         Container(
-                          constraints: BoxConstraints(minWidth: RS.w10 * 7.5),
+                          constraints: BoxConstraints(minWidth: 10 * 7.5),
                           child: Text(DayPeriodType.values[index].label),
                         ),
-                        SizedBox(width: RS.w10 * 2),
+                        SizedBox(width: 10 * 2),
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: RS.w10),
+                            padding: EdgeInsets.only(left: 10),
                             decoration: BoxDecoration(
                               border:
                                   Border.all(color: Colors.grey, width: 1.0),
@@ -59,8 +59,8 @@ class PoopDayPeriod extends StatelessWidget {
                                     isExpanded: true,
                                     value: editDiaryController
                                         .getDayPeriodPoopCondition(index),
-                                    padding: EdgeInsets.only(right: RS.w10),
-                                    iconSize: RS.w10 * 2.5,
+                                    padding: EdgeInsets.only(right: 10),
+                                    iconSize: 10 * 2.5,
                                     icon: const Icon(Icons.keyboard_arrow_down),
                                     underline: const SizedBox(),
                                     items: List.generate(
@@ -73,7 +73,7 @@ class PoopDayPeriod extends StatelessWidget {
                                         child: Text(
                                           poopCondition.label,
                                           style: TextStyle(
-                                            fontSize: RS.width12,
+                                            fontSize: 12,
                                           ),
                                         ),
                                       );
@@ -102,7 +102,7 @@ class PoopDayPeriod extends StatelessWidget {
                 },
               ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: RS.h10),
+                padding: EdgeInsets.symmetric(vertical: 10),
                 child: const Divider(),
               ),
               CustomExpansionCard(

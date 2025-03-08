@@ -26,7 +26,7 @@ class BackGround1Sample extends StatelessWidget {
         height: 500,
         decoration: BoxDecoration(
           color: boxBlackOrWhite,
-          borderRadius: BorderRadius.circular(RS.w5),
+          borderRadius: BorderRadius.circular(5),
           border: Border.all(
             color: isSelected ? AppColors.primaryColor : Colors.grey,
             width: isSelected ? 3 : 2,

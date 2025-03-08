@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/controller/image_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: Image.asset(
           AppImagePath.appIcon,
-          width: RS.w10 * 30,
+          width: 10 * 30,
         ),
       ),
     );

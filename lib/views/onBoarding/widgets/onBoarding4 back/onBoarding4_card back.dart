@@ -18,8 +18,8 @@ class OnBoarding2Card extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: RS.width15,
-        vertical: RS.height15,
+        horizontal: 15,
+        vertical: 15,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -31,16 +31,16 @@ class OnBoarding2Card extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CircleDone(isSelected: isSelected),
-          SizedBox(width: RS.width15),
+          SizedBox(width: 15),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(displayArticle.label),
-              SizedBox(height: RS.h5),
+              SizedBox(height: 5),
               Text(displayArticle.description),
             ],
           ),
-          SizedBox(width: RS.width20),
+          SizedBox(width: 20),
           Expanded(
             child: Stack(
               alignment: AlignmentDirectional.topEnd,
@@ -50,8 +50,8 @@ class OnBoarding2Card extends StatelessWidget {
                   return Positioned(
                     right: index == 0 ? null : index * 40,
                     child: Container(
-                      width: RS.w10 * 5,
-                      height: RS.w10 * 5,
+                      width: 10 * 5,
+                      height: 10 * 5,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.grey[400]!),

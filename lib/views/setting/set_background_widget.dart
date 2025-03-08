@@ -4,7 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/views/background/background_widget.dart';
 import 'package:ours_log/views/setting/widgets/background1_sample.dart';
@@ -47,9 +47,9 @@ class SetBackgroundScreen extends StatelessWidget {
                                   index,
                             ),
                             Container(
-                              margin: EdgeInsets.all(RS.w10 * 1.5),
-                              width: RS.w10 * 3,
-                              height: RS.w10 * 3,
+                              margin: EdgeInsets.all(10 * 1.5),
+                              width: 10 * 3,
+                              height: 10 * 3,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: backgroundController
@@ -63,7 +63,7 @@ class SetBackgroundScreen extends StatelessWidget {
                                       index
                                   ? Icon(
                                       Icons.check,
-                                      size: RS.w10 * 2,
+                                      size: 10 * 2,
                                       color: Colors.white,
                                     )
                                   : null,
@@ -80,7 +80,7 @@ class SetBackgroundScreen extends StatelessWidget {
                                           .backgroundLists[index].description,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: RS.w10 * 2.2,
+                                        fontSize: 10 * 2.2,
                                         color: Get.isDarkMode
                                             ? Colors.black
                                             : Colors.white,
@@ -92,7 +92,7 @@ class SetBackgroundScreen extends StatelessWidget {
                                         .backgroundLists[index].description,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: RS.w10 * 2.2,
+                                      fontSize: 10 * 2.2,
                                     ),
                                   )
                                 ],

@@ -204,7 +204,7 @@ Color get boxWhiteOrBlack {
 
 TextStyle get subHeadingStyle {
   return TextStyle(
-    fontSize: RS.w10 * 1.6,
+    fontSize: 10 * 1.6,
     fontWeight: FontWeight.w400,
     color: textWhiteOrBlack,
   );
@@ -212,7 +212,7 @@ TextStyle get subHeadingStyle {
 
 TextStyle get headingStyle {
   return TextStyle(
-    fontSize: RS.w10 * 2,
+    fontSize: 10 * 2,
     fontWeight: FontWeight.w600,
     color: textWhiteOrBlack,
   );
@@ -220,7 +220,7 @@ TextStyle get headingStyle {
 
 TextStyle get activeHintStyle {
   return TextStyle(
-    fontSize: RS.width14,
+    fontSize: 14,
     fontWeight: FontWeight.w100,
     color: textWhiteOrBlack,
   );
@@ -230,7 +230,7 @@ TextStyle get contentStyle {
   return TextStyle(
     color: Colors.grey[800],
     fontWeight: FontWeight.w500,
-    fontSize: RS.width15,
+    fontSize: 15,
   );
 }
 
@@ -245,7 +245,7 @@ TextStyle get subTitleStyle {
 TextStyle get boldStyle {
   return TextStyle(
     fontWeight: FontWeight.w700,
-    fontSize: RS.width20,
+    fontSize: 20,
   );
 }
 

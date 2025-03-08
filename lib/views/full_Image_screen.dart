@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
 
 class FullmageScreen extends StatelessWidget {
   const FullmageScreen({super.key, required this.fileImage});
@@ -26,9 +25,8 @@ class FullmageScreen extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                margin: Platform.isAndroid
-                    ? EdgeInsets.only(top: RS.h10 * 5)
-                    : null,
+                margin:
+                    Platform.isAndroid ? EdgeInsets.only(top: 10 * 5) : null,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: FileImage(File(fileImage)),

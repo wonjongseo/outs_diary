@@ -17,11 +17,11 @@ class FealIconRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: RS.height15),
+      padding: EdgeInsets.only(bottom: 15),
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: RS.width15,
-          vertical: RS.height15,
+          horizontal: 15,
+          vertical: 15,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -33,29 +33,29 @@ class FealIconRow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleDone(isSelected: isSelected),
-            SizedBox(width: RS.width15),
+            SizedBox(width: 15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(fealIcon.title),
-                SizedBox(height: RS.h5),
+                SizedBox(height: 5),
                 Text(
                   fealIcon.description,
-                  style: TextStyle(fontSize: RS.w10 * 1.2),
+                  style: TextStyle(fontSize: 10 * 1.2),
                 ),
               ],
             ),
-            SizedBox(width: RS.width20),
+            SizedBox(width: 20),
             Expanded(
               child: Stack(
                 alignment: AlignmentDirectional.topEnd,
                 children: List.generate(
                   fealIcon.iconPath.length,
                   (index2) => Positioned(
-                    right: index2 == 0 ? null : index2 * RS.w10 * 2.7,
+                    right: index2 == 0 ? null : index2 * 10 * 2.7,
                     child: Container(
-                      width: RS.w10 * 5,
-                      height: RS.w10 * 5,
+                      width: 10 * 5,
+                      height: 10 * 5,
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -69,8 +69,8 @@ class FealIconRow extends StatelessWidget {
                       ),
                       child: Image.asset(
                         fealIcon.iconPath[index2],
-                        width: isSelected ? RS.w10 * 6 : RS.w10 * 5,
-                        height: isSelected ? RS.w10 * 6 : RS.w10 * 5,
+                        width: isSelected ? 10 * 6 : 10 * 5,
+                        height: isSelected ? 10 * 6 : 10 * 5,
                       ),
                     ),
                   ),

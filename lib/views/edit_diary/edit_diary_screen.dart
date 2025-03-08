@@ -7,7 +7,7 @@ import 'package:ours_log/models/is_expandtion_type.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/common/widgets/custom_button.dart';
 import 'package:ours_log/common/widgets/custom_expansion_card.dart';
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
@@ -56,30 +56,30 @@ class EditDiaryScreen extends StatelessWidget {
                 controller: editDiaryController.scrollController,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                    vertical: RS.h10,
-                    horizontal: RS.width20,
+                    vertical: 10,
+                    horizontal: 20,
                   ),
                   child: GetBuilder<UserController>(builder: (userController) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         const FealSelector(),
-                        SizedBox(height: RS.h10),
+                        SizedBox(height: 10),
                         if (editDiaryController.donePillDayModels.isNotEmpty)
                           const DayDonePillRow(),
-                        SizedBox(height: RS.h10),
+                        SizedBox(height: 10),
                         _painLevel(userController, editDiaryController),
-                        SizedBox(height: RS.h10),
+                        SizedBox(height: 10),
                         _weight(editDiaryController),
-                        SizedBox(height: RS.h10),
+                        SizedBox(height: 10),
                         _temperature(userController, editDiaryController),
-                        SizedBox(height: RS.h10),
+                        SizedBox(height: 10),
                         _pulse(userController, editDiaryController),
-                        SizedBox(height: RS.h10),
+                        SizedBox(height: 10),
                         _bloodPressure(userController, editDiaryController),
-                        SizedBox(height: RS.h10),
+                        SizedBox(height: 10),
                         _poopCondition(userController),
-                        SizedBox(height: RS.h10),
+                        SizedBox(height: 10),
                         _memoAndPhotos(editDiaryController, context),
                       ],
                     );
@@ -102,7 +102,7 @@ class EditDiaryScreen extends StatelessWidget {
             label: AppString.saveText.tr,
             onTap: editDiaryController.onTapSaveBtn,
           ),
-          SizedBox(height: RS.h10),
+          SizedBox(height: 10),
           const GlobalBannerAdmob(),
         ],
       ),
@@ -124,7 +124,7 @@ class EditDiaryScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: RS.w10 * 2),
+            padding: EdgeInsets.symmetric(horizontal: 10 * 2),
             child: const Divider(),
           ),
           ImageOfToday(

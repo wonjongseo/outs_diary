@@ -11,7 +11,7 @@ import 'package:ours_log/services/notification_service.dart';
 import 'package:ours_log/views/Hospital_Log/hospital_log_body.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/views/background/background_widget.dart';
 import 'package:ours_log/views/diary/diary_body.dart';
@@ -55,9 +55,9 @@ class _MainScreenState extends State<MainScreen> {
         child: BackgroundWidget(
           child: Padding(
             padding: EdgeInsets.only(
-              top: RS.h10 * 3,
-              right: RS.w10 * 1.2,
-              left: RS.w10 * 1.2,
+              top: 10 * 3,
+              right: 10 * 1.2,
+              left: 10 * 1.2,
             ),
             child: bodys[bodyIndex],
           ),

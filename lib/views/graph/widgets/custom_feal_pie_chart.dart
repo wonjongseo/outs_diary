@@ -46,7 +46,7 @@ class PieChart2State extends State<CustomFealPieChart> {
       aspectRatio: 1.3,
       child: Row(
         children: <Widget>[
-          SizedBox(width: RS.w10 * 2),
+          SizedBox(width: 10 * 2),
           Expanded(
             child: AspectRatio(
               aspectRatio: 1,

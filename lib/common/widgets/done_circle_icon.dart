@@ -15,28 +15,28 @@ class DoneCircleIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(minWidth: width ?? RS.w10 * 9),
-      // width: width ?? RS.w10 * 9,
-      height: RS.h10 * 4,
-      padding: EdgeInsets.symmetric(horizontal: RS.w10),
-      margin: EdgeInsets.symmetric(horizontal: RS.w10),
+      constraints: BoxConstraints(minWidth: width ?? 10 * 9),
+      // width: width ?? 10 * 9,
+      height: 10 * 4,
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(RS.w10),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(
             backgroundColor: backgroundColor,
-            radius: RS.w10 * 1.2,
+            radius: 10 * 1.2,
             child: Icon(
               Icons.done,
               color: Colors.white,
-              size: RS.w10 * 2,
+              size: 10 * 2,
             ),
           ),
-          SizedBox(width: RS.w10),
+          SizedBox(width: 10),
           Text(label)
         ],
       ),

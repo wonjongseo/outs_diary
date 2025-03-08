@@ -87,8 +87,8 @@ class AppSnackbar {
   }) {
     if (Get.isSnackbarOpen) return;
     Get.rawSnackbar(
-      margin: EdgeInsets.symmetric(horizontal: RS.w10 * 1.5),
-      borderRadius: RS.w10,
+      margin: EdgeInsets.symmetric(horizontal: 10 * 1.5),
+      borderRadius: 10,
       borderColor: boxWhiteOrBlack,
       backgroundColor: boxBlackOrWhite,
       titleText: title == null
@@ -98,7 +98,7 @@ class AppSnackbar {
               style: TextStyle(
                 color: color,
                 fontWeight: FontWeight.bold,
-                fontSize: RS.width18,
+                fontSize: 18,
               ),
             ),
       messageText: Text(
@@ -106,7 +106,7 @@ class AppSnackbar {
         style: TextStyle(
           color: color,
           fontWeight: FontWeight.w600,
-          fontSize: RS.width14,
+          fontSize: 14,
         ),
       ),
       duration: duration ?? const Duration(milliseconds: 1500),
@@ -124,7 +124,7 @@ class AppSnackbar {
     //     style: TextStyle(
     //       color: color,
     //       fontWeight: FontWeight.bold,
-    //       fontSize: RS.width18,
+    //       fontSize: 18,
     //     ),
     //   ),
     //   messageText: Text(
@@ -132,7 +132,7 @@ class AppSnackbar {
     //     style: TextStyle(
     //       color: color,
     //       fontWeight: FontWeight.w600,
-    //       fontSize: RS.width14,
+    //       fontSize: 14,
     //     ),
     //   ),
     //   duration: duration ?? const Duration(milliseconds: 1500),

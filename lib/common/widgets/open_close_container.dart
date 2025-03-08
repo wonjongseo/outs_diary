@@ -60,19 +60,19 @@ class _ExpansionIconCardState extends State<ExpansionIconCard> {
                 setState(() {});
               },
               child: SizedBox(
-                width: widget.width ?? RS.w10 * 6.5,
+                width: widget.width ?? 10 * 6.5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(
                       widget.icons[index].iconData,
-                      size: RS.w10 * 4,
+                      size: 10 * 4,
                       color: widget.selectedIconIndexs.contains(index) ||
                               selectedIndex == index
                           ? AppColors.primaryColor
                           : null,
                     ),
-                    SizedBox(height: RS.h5),
+                    SizedBox(height: 5),
                     Text(
                       widget.icons[index].title,
                       textAlign: TextAlign.center,

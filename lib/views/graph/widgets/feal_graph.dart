@@ -69,7 +69,7 @@ class _FealGraphState extends State<FealGraph> {
           GestureDetector(
             onTap: onToggleGraph,
             child: Padding(
-              padding: EdgeInsets.only(left: RS.w10),
+              padding: EdgeInsets.only(left: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -82,7 +82,7 @@ class _FealGraphState extends State<FealGraph> {
               ),
             ),
           ),
-          SizedBox(height: RS.h10),
+          SizedBox(height: 10),
           Expanded(
             child: PageView.builder(
               physics: const NeverScrollableScrollPhysics(),

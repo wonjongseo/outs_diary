@@ -24,9 +24,9 @@ class WeekdaySelector extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: width ?? RS.w10 * 8,
-        height: height ?? RS.w10 * 10,
-        margin: EdgeInsets.all(RS.w10),
+        width: width ?? 10 * 8,
+        height: height ?? 10 * 10,
+        margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
           border: isSelected
               ? Border.all(color: AppColors.primaryColor, width: 2)

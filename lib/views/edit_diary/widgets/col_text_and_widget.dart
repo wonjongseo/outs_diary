@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
 
 class ColTextAndWidget extends StatelessWidget {
   const ColTextAndWidget({
@@ -24,8 +23,8 @@ class ColTextAndWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: RS.width8,
-        vertical: vertical ?? RS.h10,
+        horizontal: 8,
+        vertical: vertical ?? 10,
       ),
       decoration: BoxDecoration(
         color: Get.isDarkMode ? AppColors.black : AppColors.white,
@@ -35,7 +34,7 @@ class ColTextAndWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: RS.w10),
+            padding: EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [Text(label), if (labelWidget != null) labelWidget!],
@@ -43,10 +42,10 @@ class ColTextAndWidget extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(
-              top: RS.height20,
-              bottom: RS.height15,
-              right: RS.w10,
-              left: RS.w10,
+              top: 20,
+              bottom: 15,
+              right: 10,
+              left: 10,
             ),
             child: widget,
           ),

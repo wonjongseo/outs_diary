@@ -8,7 +8,7 @@ import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/app_image_path.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/controller/diary_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
@@ -32,7 +32,7 @@ class DiaryBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: RS.w10 * 1.5),
+              padding: EdgeInsets.symmetric(horizontal: 10 * 1.5),
               child: Column(
                 children: [
                   Text(
@@ -40,14 +40,14 @@ class DiaryBody extends StatelessWidget {
                         .format(controller.focusedDay),
                     style: boldStyle,
                   ),
-                  SizedBox(height: RS.h10 * 1.2),
+                  SizedBox(height: 10 * 1.2),
                   _tableCalendar(controller),
                 ],
               ),
             ),
             if (diaryController.selectedDiary != null)
               SelectedDiary(), // Dont' Const
-            SizedBox(height: RS.h10 * 2)
+            SizedBox(height: 10 * 2)
           ],
         ),
       );
@@ -62,7 +62,7 @@ class DiaryBody extends StatelessWidget {
         weekendStyle: weekdayStyle,
       ),
       locale: Get.locale.toString(),
-      daysOfWeekHeight: RS.h10 * 3,
+      daysOfWeekHeight: 10 * 3,
       headerVisible: false,
       onPageChanged: diaryController.onPageChanged,
       calendarStyle: CalendarStyle(
@@ -80,7 +80,7 @@ class DiaryBody extends StatelessWidget {
       lastDay: diaryController.now.add(const Duration(days: 30)),
       focusedDay: diaryController.focusedDay,
       eventLoader: diaryController.getEventsForDay,
-      rowHeight: RS.h10 * 10.4,
+      rowHeight: 10 * 10.4,
       onDaySelected: controller.onDatSelected,
     );
   }
@@ -105,19 +105,19 @@ class DiaryBody extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: RS.w10 * 4.5,
-          width: RS.w10 * 4.5,
+          height: 10 * 4.5,
+          width: 10 * 4.5,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: isNextDay
                 ? Colors.grey.withValues(alpha: .15)
                 : Colors.grey.withValues(alpha: .4),
           ),
-          margin: EdgeInsets.only(bottom: RS.h5),
+          margin: EdgeInsets.only(bottom: 5),
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: RS.w10 * .6),
-          margin: EdgeInsets.only(bottom: RS.h10 * .4),
+          padding: EdgeInsets.symmetric(horizontal: 10 * .6),
+          margin: EdgeInsets.only(bottom: 10 * .4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
             color: isToday ? AppColors.primaryColor : null,
@@ -137,7 +137,7 @@ class DiaryBody extends StatelessWidget {
         if (isMustPill) ...[
           Image.asset(
             AppImagePath.medition1,
-            width: RS.w10 * 2.5,
+            width: 10 * 2.5,
           ),
         ]
       ],
@@ -165,7 +165,7 @@ class DiaryBody extends StatelessWidget {
                       backgroundController.userModel?.fealIconIndex ?? 0]
                   .iconPath[diaryModel.fealIndex],
             ),
-            radius: RS.w10 * 2.5,
+            radius: 10 * 2.5,
           ),
         ],
       );

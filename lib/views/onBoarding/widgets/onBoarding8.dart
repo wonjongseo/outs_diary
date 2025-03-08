@@ -13,12 +13,12 @@ class Onboarding8 extends StatelessWidget {
     return GetBuilder<OnboardingController>(builder: (controller) {
       return Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: RS.w10 * 2,
-          vertical: RS.h10,
+          horizontal: 10 * 2,
+          vertical: 10,
         ),
         child: Column(children: [
           Text(AppString.plzInputAppColor.tr),
-          SizedBox(height: RS.h10 * 1.5),
+          SizedBox(height: 10 * 1.5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -28,7 +28,7 @@ class Onboarding8 extends StatelessWidget {
                   controller.update();
                 },
                 child: CircleAvatar(
-                  radius: RS.w10 * 3,
+                  radius: 10 * 3,
                   foregroundColor: Colors.white,
                   backgroundColor: AppColors.priPinkClr,
                   child: controller.selectedColorIndex == 0
@@ -45,7 +45,7 @@ class Onboarding8 extends StatelessWidget {
                   child: controller.selectedColorIndex == 1
                       ? Icon(Icons.done)
                       : null,
-                  radius: RS.w10 * 3,
+                  radius: 10 * 3,
                   foregroundColor: Colors.white,
                   backgroundColor: AppColors.priYellowClr,
                 ),
@@ -56,7 +56,7 @@ class Onboarding8 extends StatelessWidget {
                   controller.update();
                 },
                 child: CircleAvatar(
-                  radius: RS.w10 * 3,
+                  radius: 10 * 3,
                   foregroundColor: Colors.white,
                   backgroundColor: AppColors.priGreenClr,
                   child: controller.selectedColorIndex == 2
@@ -70,7 +70,7 @@ class Onboarding8 extends StatelessWidget {
                   controller.update();
                 },
                 child: CircleAvatar(
-                  radius: RS.w10 * 3,
+                  radius: 10 * 3,
                   foregroundColor: Colors.white,
                   backgroundColor: AppColors.priBluishClr,
                   child: controller.selectedColorIndex == 3
@@ -84,7 +84,7 @@ class Onboarding8 extends StatelessWidget {
                   controller.update();
                 },
                 child: CircleAvatar(
-                  radius: RS.w10 * 3,
+                  radius: 10 * 3,
                   foregroundColor: Colors.white,
                   backgroundColor: AppColors.priPubbleClr,
                   child: controller.selectedColorIndex == 4

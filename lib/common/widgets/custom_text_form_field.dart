@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:ours_log/common/utilities/responsive.dart';
-
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     Key? key,
@@ -45,7 +43,7 @@ class CustomTextFormField extends StatelessWidget {
               onFieldSubmitted: onFieldSubmitted,
               onTap: onTap,
               readOnly: readOnly ?? false,
-              style: TextStyle(fontSize: RS.width12),
+              style: TextStyle(fontSize: 12),
               maxLines: maxLines ?? 1,
               controller: controller,
               decoration: InputDecoration(
@@ -57,13 +55,13 @@ class CustomTextFormField extends StatelessWidget {
                     const BoxConstraints(minHeight: 0, minWidth: 0),
                 suffixIcon: sufficIcon != null
                     ? Padding(
-                        padding: EdgeInsets.only(right: RS.w10),
+                        padding: EdgeInsets.only(right: 10),
                         child: sufficIcon,
                       )
                     : null,
                 contentPadding: maxLines != null
-                    ? EdgeInsets.all(RS.width15)
-                    : EdgeInsets.symmetric(horizontal: RS.width15),
+                    ? EdgeInsets.all(15)
+                    : EdgeInsets.symmetric(horizontal: 15),
                 hintText: hintText,
                 focusedBorder:
                     const OutlineInputBorder(borderSide: BorderSide.none),

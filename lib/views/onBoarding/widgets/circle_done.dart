@@ -9,8 +9,8 @@ class CircleDone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: RS.w10 * 3,
-      height: RS.w10 * 3,
+      width: 10 * 3,
+      height: 10 * 3,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: isSelected ? AppColors.primaryColor : Colors.grey,

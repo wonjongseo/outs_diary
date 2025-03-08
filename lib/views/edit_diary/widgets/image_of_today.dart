@@ -47,10 +47,10 @@ class ImageOfToday extends StatelessWidget {
             alignment: AlignmentDirectional.center,
             children: [
               Container(
-                height: RS.w10 * 25,
-                width: RS.w10 * 25,
+                height: 10 * 25,
+                width: 10 * 25,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(RS.w10 * 4),
+                  borderRadius: BorderRadius.circular(10 * 4),
                   border: Border.all(
                     color: Colors.grey,
                   ),
@@ -79,7 +79,7 @@ class ImageOfToday extends StatelessWidget {
         ),
       ),
       options: CarouselOptions(
-        height: RS.w10 * 25,
+        height: 10 * 25,
         aspectRatio: 1,
         viewportFraction: 1,
         enableInfiniteScroll: false,
@@ -93,10 +93,10 @@ class ImageOfToday extends StatelessWidget {
       child: Align(
         alignment: Alignment.center,
         child: Container(
-          height: RS.w10 * 25,
-          width: RS.w10 * 25,
+          height: 10 * 25,
+          width: 10 * 25,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(RS.w10 * 4),
+            borderRadius: BorderRadius.circular(10 * 4),
             border: Border.all(color: Colors.grey),
           ),
           child: Column(
@@ -104,7 +104,7 @@ class ImageOfToday extends StatelessWidget {
             children: [
               Icon(
                 Icons.camera_alt_outlined,
-                size: RS.w10 * 5,
+                size: 10 * 5,
                 color: Colors.grey,
               ),
               Text(AppString.addPhoto.tr)

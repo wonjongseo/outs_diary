@@ -20,14 +20,14 @@ class OnBoarding3 extends StatelessWidget {
           style: TextStyle(
             height: 1.8,
             fontWeight: FontWeight.bold,
-            fontSize: RS.width18,
+            fontSize: 18,
           ),
           TextSpan(text: AppString.plzSelectFealIcon.tr),
         ),
-        SizedBox(height: RS.h10 * 1.5),
+        SizedBox(height: 10 * 1.5),
         GetBuilder<OnboardingController>(builder: (controller) {
           return Container(
-            margin: EdgeInsets.symmetric(horizontal: RS.w10),
+            margin: EdgeInsets.symmetric(horizontal: 10),
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

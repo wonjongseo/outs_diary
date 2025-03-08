@@ -18,7 +18,7 @@ class OnBoarding1 extends StatelessWidget {
           style: TextStyle(
             height: 1.8,
             fontWeight: FontWeight.bold,
-            fontSize: RS.width18,
+            fontSize: 18,
           ),
           TextSpan(
             text: isEn
@@ -29,13 +29,13 @@ class OnBoarding1 extends StatelessWidget {
                 text: AppString.plzSetting.tr,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: RS.width16,
+                  fontSize: 16,
                 ),
               )
             ],
           ),
         ),
-        SizedBox(height: RS.height20),
+        SizedBox(height: 20),
       ],
     );
   }

@@ -122,7 +122,7 @@ class CustomFealLineGraph extends StatelessWidget {
                       return Container();
                   }
                   return CircleAvatar(
-                    radius: RS.h10 * .8,
+                    radius: 10 * .8,
                     backgroundColor: color,
                   );
                 },

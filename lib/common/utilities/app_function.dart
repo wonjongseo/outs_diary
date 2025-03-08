@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:photo_manager/photo_manager.dart';
 
 bool get isKo => Get.locale.toString().contains('ko');
@@ -57,7 +57,7 @@ class AppFunction {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            SizedBox(height: RS.h10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -74,18 +74,18 @@ class AppFunction {
                     size: 30,
                   ),
                 ),
-                SizedBox(width: RS.w10),
+                SizedBox(width: 10),
                 IconButton(
                   onPressed: openLibaryFunc,
                   icon: Icon(
                     Icons.folder_copy_outlined,
-                    size: RS.w10 * 3,
+                    size: 10 * 3,
                   ),
                 ),
-                SizedBox(width: RS.w10 * 2),
+                SizedBox(width: 10 * 2),
               ],
             ),
-            SizedBox(height: RS.h10 * 5),
+            SizedBox(height: 10 * 5),
           ],
         );
       },

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ours_log/common/admob/global_banner_admob.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/common/widgets/custom_button.dart';
 import 'package:ours_log/common/widgets/weekday_selector.dart';
 import 'package:ours_log/controller/add_regular_task_controller.dart';
@@ -32,13 +32,13 @@ class SettingAlramScreen extends StatelessWidget {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: RS.w10),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     children: List.generate(
                       WeekDayType.values.length,
                       (index) {
                         return WeekdaySelector(
-                            fontSize: RS.w10 * 1.8,
+                            fontSize: 10 * 1.8,
                             onTap: () =>
                                 addScheduleController.onTapchangeWeekday(index),
                             isSelected:
@@ -50,10 +50,10 @@ class SettingAlramScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: RS.w10),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: const Divider(),
               ),
-              SizedBox(height: RS.h10),
+              SizedBox(height: 10),
               Expanded(
                 child: PageView.builder(
                   controller: addScheduleController.pageController,
@@ -62,7 +62,7 @@ class SettingAlramScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.symmetric(
-                          vertical: RS.h10, horizontal: RS.w10 * 2),
+                          vertical: 10, horizontal: 10 * 2),
                       child: SingleChildScrollView(
                         child: Column(
                           children: List.generate(
@@ -95,47 +95,47 @@ class SettingAlramScreen extends StatelessWidget {
     TaskModel task = tasks[index2];
     return Container(
       padding: EdgeInsets.only(
-        top: RS.h10 * 1.2,
-        bottom: RS.h10 * 1.2,
-        left: RS.h10 * 2,
-        right: RS.h5,
+        top: 10 * 1.2,
+        bottom: 10 * 1.2,
+        left: 10 * 2,
+        right: 5,
       ),
-      margin: EdgeInsets.all(RS.w10),
+      margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(RS.w10 * 2),
+        borderRadius: BorderRadius.circular(10 * 2),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            width: RS.w10 * 10,
+            width: 10 * 10,
             child: Text(task.taskName),
           ),
           GestureDetector(
             onTap: () => addScheduleController.changeAlarmTime(context, task),
             child: Container(
               padding: EdgeInsets.symmetric(
-                vertical: RS.h10,
-                horizontal: RS.w10,
+                vertical: 10,
+                horizontal: 10,
               ),
               margin: EdgeInsets.symmetric(
-                vertical: RS.w5,
+                vertical: 5,
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(RS.w10 * 2),
+                borderRadius: BorderRadius.circular(10 * 2),
                 border: Border.all(color: Colors.grey, width: 1),
               ),
               child: Row(
                 children: [
                   const Icon(Icons.timer),
-                  SizedBox(width: RS.w10),
+                  SizedBox(width: 10),
                   Text(
                     DateFormat('HH:mm', Get.locale.toString())
                         .format(task.taskDate),
                   ),
-                  SizedBox(width: RS.w10),
+                  SizedBox(width: 10),
                   const Icon(Icons.keyboard_arrow_down)
                 ],
               ),
@@ -168,7 +168,7 @@ class _bottomNavigationBar extends StatelessWidget {
               () => const AddRegularAlramScreen(),
             ),
           ),
-          SizedBox(height: RS.h10),
+          SizedBox(height: 10),
           const GlobalBannerAdmob()
         ],
       ),

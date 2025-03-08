@@ -12,7 +12,7 @@ import 'package:ours_log/common/utilities/app_color.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
 import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
+
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/respository/setting_repository.dart';
 import 'package:ours_log/views/setting/set_feal_icon_screen.dart';
@@ -75,7 +75,7 @@ class _SettingBodyState extends State<SettingBody> {
 
   TextStyle headingstyle() {
     return TextStyle(
-      fontSize: RS.w10 * 1.8,
+      fontSize: 10 * 1.8,
       fontWeight: FontWeight.w600,
       color: isDarkMode ? AppColors.white : AppColors.black,
     );
@@ -90,7 +90,7 @@ class _SettingBodyState extends State<SettingBody> {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: RS.h10),
+                  SizedBox(height: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -106,7 +106,7 @@ class _SettingBodyState extends State<SettingBody> {
                       _color(userController),
                     ],
                   ),
-                  SizedBox(height: RS.h10),
+                  SizedBox(height: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -122,7 +122,7 @@ class _SettingBodyState extends State<SettingBody> {
                       _notification(),
                     ],
                   ),
-                  SizedBox(height: RS.h10),
+                  SizedBox(height: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -146,11 +146,11 @@ class _SettingBodyState extends State<SettingBody> {
     return ListTile(
       titleTextStyle: TextStyle(
         fontWeight: FontWeight.w500,
-        fontSize: RS.width14,
+        fontSize: 14,
       ),
       subtitleTextStyle: TextStyle(
         fontWeight: FontWeight.w400,
-        fontSize: RS.width12,
+        fontSize: 12,
       ),
       title: Text(AppString.color.tr),
       onTap: () {
@@ -159,12 +159,12 @@ class _SettingBodyState extends State<SettingBody> {
       },
       trailing: CircleAvatar(
         backgroundColor: AppColors.primaryColor,
-        radius: RS.w10 * 1.8,
+        radius: 10 * 1.8,
       ),
       isThreeLine: true,
       subtitle: AnimatedContainer(
-        padding: EdgeInsets.only(top: RS.h10 * 2),
-        height: isColorPickerOpen ? RS.h10 * 9 : RS.h10 * 2,
+        padding: EdgeInsets.only(top: 10 * 2),
+        height: isColorPickerOpen ? 10 * 9 : 10 * 2,
         duration: const Duration(milliseconds: 300),
         child: !isColorPickerOpen
             ? null
@@ -177,7 +177,7 @@ class _SettingBodyState extends State<SettingBody> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CircleAvatar(
-                        radius: RS.w10 * 2,
+                        radius: 10 * 2,
                         foregroundColor: Colors.white,
                         backgroundColor: AppColors.priPinkClr,
                         child: userController.userModel!.colorIndex == 0
@@ -192,7 +192,7 @@ class _SettingBodyState extends State<SettingBody> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CircleAvatar(
-                        radius: RS.w10 * 2,
+                        radius: 10 * 2,
                         foregroundColor: Colors.white,
                         backgroundColor: AppColors.priYellowClr,
                         child: userController.userModel!.colorIndex == 1
@@ -207,7 +207,7 @@ class _SettingBodyState extends State<SettingBody> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CircleAvatar(
-                        radius: RS.w10 * 2,
+                        radius: 10 * 2,
                         foregroundColor: Colors.white,
                         backgroundColor: AppColors.priGreenClr,
                         child: userController.userModel!.colorIndex == 2
@@ -222,7 +222,7 @@ class _SettingBodyState extends State<SettingBody> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CircleAvatar(
-                        radius: RS.w10 * 2,
+                        radius: 10 * 2,
                         foregroundColor: Colors.white,
                         backgroundColor: AppColors.priBluishClr,
                         child: userController.userModel!.colorIndex == 3
@@ -237,7 +237,7 @@ class _SettingBodyState extends State<SettingBody> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CircleAvatar(
-                        radius: RS.w10 * 2,
+                        radius: 10 * 2,
                         foregroundColor: Colors.white,
                         backgroundColor: AppColors.priPubbleClr,
                         child: userController.userModel!.colorIndex == 4
@@ -291,7 +291,7 @@ class _SettingBodyState extends State<SettingBody> {
       subTitle: isDarkMode ? AppString.darkMode.tr : AppString.lightMode.tr,
       onTap: () => changeTheme(isDarkMode ? 0 : 1),
       widget: ToggleButtons(
-        borderRadius: BorderRadius.circular(RS.w10 * 2),
+        borderRadius: BorderRadius.circular(10 * 2),
         onPressed: changeTheme,
         isSelected: [isDarkMode, !isDarkMode],
         children: const [
@@ -324,13 +324,13 @@ class _SettingBodyState extends State<SettingBody> {
 
   ExpansionTileCard _color2(UserController userController) {
     return ExpansionTileCard(
-      contentPadding: EdgeInsets.symmetric(horizontal: RS.w10 * 1.3),
+      contentPadding: EdgeInsets.symmetric(horizontal: 10 * 1.3),
       elevation: 0,
       title: Text(
         AppString.color.tr,
         style: TextStyle(
           fontWeight: FontWeight.w100,
-          fontSize: RS.width14,
+          fontSize: 14,
         ),
       ),
       trailing: CircleAvatar(
@@ -345,7 +345,7 @@ class _SettingBodyState extends State<SettingBody> {
             GestureDetector(
               onTap: () => userController.changePrimaryColor(0),
               child: CircleAvatar(
-                radius: RS.w10 * 2,
+                radius: 10 * 2,
                 foregroundColor: Colors.white,
                 backgroundColor: AppColors.priPinkClr,
                 child: userController.userModel!.colorIndex == 0
@@ -356,7 +356,7 @@ class _SettingBodyState extends State<SettingBody> {
             GestureDetector(
               onTap: () => userController.changePrimaryColor(1),
               child: CircleAvatar(
-                radius: RS.w10 * 2,
+                radius: 10 * 2,
                 foregroundColor: Colors.white,
                 backgroundColor: AppColors.priYellowClr,
                 child: userController.userModel!.colorIndex == 1
@@ -367,7 +367,7 @@ class _SettingBodyState extends State<SettingBody> {
             GestureDetector(
               onTap: () => userController.changePrimaryColor(2),
               child: CircleAvatar(
-                radius: RS.w10 * 2,
+                radius: 10 * 2,
                 foregroundColor: Colors.white,
                 backgroundColor: AppColors.priGreenClr,
                 child: userController.userModel!.colorIndex == 2
@@ -378,7 +378,7 @@ class _SettingBodyState extends State<SettingBody> {
             GestureDetector(
               onTap: () => userController.changePrimaryColor(3),
               child: CircleAvatar(
-                radius: RS.w10 * 2,
+                radius: 10 * 2,
                 foregroundColor: Colors.white,
                 backgroundColor: AppColors.priBluishClr,
                 child: userController.userModel!.colorIndex == 3
@@ -389,7 +389,7 @@ class _SettingBodyState extends State<SettingBody> {
             GestureDetector(
               onTap: () => userController.changePrimaryColor(4),
               child: CircleAvatar(
-                radius: RS.w10 * 2,
+                radius: 10 * 2,
                 foregroundColor: Colors.white,
                 backgroundColor: AppColors.priPubbleClr,
                 child: userController.userModel!.colorIndex == 4
@@ -441,11 +441,11 @@ class _SettingBodyState extends State<SettingBody> {
     return ListTile(
       titleTextStyle: TextStyle(
         fontWeight: FontWeight.w500,
-        fontSize: RS.width14,
+        fontSize: 14,
       ),
       subtitleTextStyle: TextStyle(
         fontWeight: FontWeight.w400,
-        fontSize: RS.width12,
+        fontSize: 12,
       ),
       title: Text(
         title,

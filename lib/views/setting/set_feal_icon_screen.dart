@@ -24,7 +24,7 @@ class SetFealIconScreen extends StatelessWidget {
         child: SafeArea(
           child: GetBuilder<UserController>(builder: (controller) {
             return Container(
-              margin: EdgeInsets.symmetric(horizontal: RS.w10),
+              margin: EdgeInsets.symmetric(horizontal: 10),
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -17,7 +17,7 @@ class Onboarding6 extends StatelessWidget {
   Widget build(BuildContext context) {
     var textStyle = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: RS.w10 * 1.8,
+      fontSize: 10 * 1.8,
     );
     return GetBuilder<OnboardingController>(builder: (onboardingController) {
       return Column(
@@ -28,9 +28,9 @@ class Onboarding6 extends StatelessWidget {
               child: Column(
                 children: [
                   Text(AppString.whatTimeDoYouDrinkPill.tr, style: textStyle),
-                  SizedBox(height: RS.h10),
+                  SizedBox(height: 10),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: RS.h10),
+                    padding: EdgeInsets.symmetric(vertical: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children:
@@ -41,17 +41,16 @@ class Onboarding6 extends StatelessWidget {
                             DayPeriodType.values[index],
                           ),
                           child: Container(
-                            width: RS.w10 * 10,
-                            height: RS.w10 * 10,
-                            margin: EdgeInsets.symmetric(horizontal: RS.w5),
+                            width: 10 * 10,
+                            height: 10 * 10,
+                            margin: EdgeInsets.symmetric(horizontal: 5),
                             decoration: BoxDecoration(
                                 border: onboardingController.pillTimeDayPeriod
                                         .contains(DayPeriodType.values[index])
                                     ? Border.all(
                                         color: AppColors.primaryColor, width: 2)
                                     : Border.all(color: Colors.grey),
-                                borderRadius:
-                                    BorderRadius.circular(RS.w10 * 2.5)),
+                                borderRadius: BorderRadius.circular(10 * 2.5)),
                             child: Center(
                               child: Text(DayPeriodType.values[index].label),
                             ),
@@ -68,9 +67,9 @@ class Onboarding6 extends StatelessWidget {
               child: Column(
                 children: [
                   Text(AppString.whatWeekDayYouDrink.tr, style: textStyle),
-                  SizedBox(height: RS.h10),
+                  SizedBox(height: 10),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: RS.h10),
+                    padding: EdgeInsets.symmetric(vertical: 10),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -84,9 +83,9 @@ class Onboarding6 extends StatelessWidget {
                                 WeekDayType.values[index],
                               ),
                               child: Container(
-                                width: RS.w10 * 8,
-                                height: RS.w10 * 10,
-                                margin: EdgeInsets.symmetric(horizontal: RS.w5),
+                                width: 10 * 8,
+                                height: 10 * 10,
+                                margin: EdgeInsets.symmetric(horizontal: 5),
                                 decoration: BoxDecoration(
                                     border: onboardingController
                                             .selectedWeekDays
@@ -96,7 +95,7 @@ class Onboarding6 extends StatelessWidget {
                                             width: 2)
                                         : Border.all(color: Colors.grey),
                                     borderRadius:
-                                        BorderRadius.circular(RS.w10 * 1.5)),
+                                        BorderRadius.circular(10 * 1.5)),
                                 child: Center(
                                   child: Text(WeekDayType.values[index].label),
                                 ),

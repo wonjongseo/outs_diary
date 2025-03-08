@@ -20,10 +20,10 @@ class Onboarding5 extends StatelessWidget {
             AppString.doYouDrinkPill.tr,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: RS.w10 * 1.8,
+              fontSize: 10 * 1.8,
             ),
           ),
-          SizedBox(height: RS.h10 * 5),
+          SizedBox(height: 10 * 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -33,7 +33,7 @@ class Onboarding5 extends StatelessWidget {
                   width: size.width / 3 - 30,
                   height: size.width / 3 - 30,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(RS.w10 * 1.5),
+                    borderRadius: BorderRadius.circular(10 * 1.5),
                     border: onboardingController.isDrinkingPill != null &&
                             onboardingController.isDrinkingPill == true
                         ? Border.all(color: AppColors.primaryColor, width: 2)
@@ -55,7 +55,7 @@ class Onboarding5 extends StatelessWidget {
                   width: size.width / 3 - 30,
                   height: size.width / 3 - 30,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(RS.w10 * 1.5),
+                    borderRadius: BorderRadius.circular(10 * 1.5),
                     border: onboardingController.isDrinkingPill != null &&
                             onboardingController.isDrinkingPill == false
                         ? Border.all(color: AppColors.primaryColor, width: 2)

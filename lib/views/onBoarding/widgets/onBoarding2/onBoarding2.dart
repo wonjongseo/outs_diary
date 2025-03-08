@@ -21,13 +21,13 @@ class OnBoarding2 extends StatelessWidget {
           style: TextStyle(
             height: 1.8,
             fontWeight: FontWeight.bold,
-            fontSize: RS.width18,
+            fontSize: 18,
           ),
           TextSpan(
             text: AppString.selectBackgroundMsg.tr,
           ),
         ),
-        SizedBox(height: RS.h10 * 1.5),
+        SizedBox(height: 10 * 1.5),
         GetBuilder<OnboardingController>(builder: (backgroundController) {
           return Stack(
             children: [
@@ -45,9 +45,9 @@ class OnBoarding2 extends StatelessWidget {
                               backgroundController.backgroundIndex == index,
                         ),
                         Container(
-                          margin: EdgeInsets.all(RS.w10 * 1.5),
-                          width: RS.w10 * 3,
-                          height: RS.w10 * 3,
+                          margin: EdgeInsets.all(10 * 1.5),
+                          width: 10 * 3,
+                          height: 10 * 3,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: backgroundController.backgroundIndex == index
@@ -57,7 +57,7 @@ class OnBoarding2 extends StatelessWidget {
                           child: backgroundController.backgroundIndex == index
                               ? Icon(
                                   Icons.check,
-                                  size: RS.w10 * 2,
+                                  size: 10 * 2,
                                   color: Colors.white,
                                 )
                               : null,
@@ -74,7 +74,7 @@ class OnBoarding2 extends StatelessWidget {
                                       .backgroundLists[index].description,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: RS.w10 * 2.2,
+                                    fontSize: 10 * 2.2,
                                     color: Get.isDarkMode
                                         ? Colors.black
                                         : Colors.white,
@@ -85,7 +85,7 @@ class OnBoarding2 extends StatelessWidget {
                                 AppConstant.backgroundLists[index].description,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: RS.w10 * 2.2,
+                                  fontSize: 10 * 2.2,
                                 ),
                               )
                             ],

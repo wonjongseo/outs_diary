@@ -42,23 +42,23 @@ class SelectedDiary extends StatelessWidget {
           children: [
             _FealIconAndDay(userController, diaryController),
             const Divider(),
-            SizedBox(height: RS.h10),
+            SizedBox(height: 10),
             if (diaryModel.donePillDayModels!.isNotEmpty) ...[
               _donePill(diaryModel, diaryController),
-              SizedBox(height: RS.h10 * 1.5),
+              SizedBox(height: 10 * 1.5),
             ],
             if (diaryModel.health != null &&
                 diaryModel.health!.argIsNotZero) ...[
               _healthFiguare(diaryModel),
-              SizedBox(height: RS.h10 * 1.5),
+              SizedBox(height: 10 * 1.5),
             ],
             if (diaryModel.poopConditions != null &&
                 diaryModel.poopConditions!.isNotEmpty) ...[
               _poopCondition(diaryModel, diaryController),
-              SizedBox(height: RS.h10 * 1.5),
+              SizedBox(height: 10 * 1.5),
             ],
             ColTextAndWidget(
-              vertical: RS.h5,
+              vertical: 5,
               label: '${AppString.health.tr} ${AppString.memo.tr}',
               widget: CustomTextFormField(
                 readOnly: true,
@@ -67,11 +67,11 @@ class SelectedDiary extends StatelessWidget {
                 maxLines: (diaryModel.whatTodo ?? '').split('\n').length,
               ),
             ),
-            SizedBox(height: RS.h10),
+            SizedBox(height: 10),
             if (diaryModel.imagePath != null &&
                 diaryModel.imagePath!.isNotEmpty) ...[
               ColTextAndWidget(
-                vertical: RS.h5,
+                vertical: 5,
                 label: AppString.photo.tr,
                 widget: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -85,11 +85,11 @@ class SelectedDiary extends StatelessWidget {
                           onTap: () =>
                               Get.to(() => FullmageScreen(fileImage: imageUrl)),
                           child: Container(
-                            width: RS.w10 * 12,
-                            height: RS.w10 * 14,
-                            margin: EdgeInsets.only(right: RS.w10),
+                            width: 10 * 12,
+                            height: 10 * 14,
+                            margin: EdgeInsets.only(right: 10),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(RS.w10 * 2),
+                              borderRadius: BorderRadius.circular(10 * 2),
                               border: Border.all(color: Colors.grey),
                               image: DecorationImage(
                                 image: FileImage(File(imageUrl)),
@@ -103,7 +103,7 @@ class SelectedDiary extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: RS.h10 * 1.5),
+              SizedBox(height: 10 * 1.5),
             ]
           ],
         );
@@ -113,7 +113,7 @@ class SelectedDiary extends StatelessWidget {
 
   ColTextAndWidget _healthFiguare(DiaryModel diaryModel) {
     return ColTextAndWidget(
-      vertical: RS.h5,
+      vertical: 5,
       label: AppString.averageHealthValue.tr,
       labelWidget: diaryModel.painfulIndex == null
           ? null
@@ -125,7 +125,7 @@ class SelectedDiary extends StatelessWidget {
   ColTextAndWidget _poopCondition(
       DiaryModel diaryModel, DiaryController diaryController) {
     return ColTextAndWidget(
-      vertical: RS.h5,
+      vertical: 5,
       label: AppString.poop.tr,
       widget: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,19 +135,19 @@ class SelectedDiary extends StatelessWidget {
             (index) => SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Container(
-                  padding: EdgeInsets.all(RS.w10),
-                  margin: EdgeInsets.only(bottom: RS.w10),
+                  padding: EdgeInsets.all(10),
+                  margin: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(10)),
                   child: Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(RS.w10 * .6),
-                        constraints: BoxConstraints(minWidth: RS.w10 * 7.5),
+                        padding: EdgeInsets.all(10 * .6),
+                        constraints: BoxConstraints(minWidth: 10 * 7.5),
                         decoration: BoxDecoration(
                           color: AppColors.primaryColor,
-                          borderRadius: BorderRadius.circular(RS.w10 * .3),
+                          borderRadius: BorderRadius.circular(10 * .3),
                         ),
                         child: Center(
                           child: Text(
@@ -161,7 +161,7 @@ class SelectedDiary extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: RS.w10),
+                      SizedBox(width: 10),
                       Text(
                         diaryController.selectedDiary!.poopConditions![index]
                             .poopConditionType.label,
@@ -176,7 +176,7 @@ class SelectedDiary extends StatelessWidget {
   ColTextAndWidget _donePill(
       DiaryModel diaryModel, DiaryController diaryController) {
     return ColTextAndWidget(
-      vertical: RS.h5,
+      vertical: 5,
       label: AppString.doDrinkPill.tr,
       widget: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -208,9 +208,9 @@ class SelectedDiary extends StatelessWidget {
           children: [
             Image.asset(
               userController.feals[diaryModel.fealIndex],
-              width: RS.w10 * 6,
+              width: 10 * 6,
             ),
-            SizedBox(width: RS.w10),
+            SizedBox(width: 10),
             Text(
               DateFormat.MMMEd(Get.locale.toString())
                   .format(diaryModel.dateTime),
@@ -228,14 +228,14 @@ class SelectedDiary extends StatelessWidget {
               ),
               icon: FaIcon(
                 FontAwesomeIcons.pen,
-                size: RS.width20,
+                size: 20,
               ),
             ),
             IconButton(
               onPressed: () => diaryController.delete(),
               icon: FaIcon(
                 FontAwesomeIcons.trashCan,
-                size: RS.width20,
+                size: 20,
               ),
             ),
           ],

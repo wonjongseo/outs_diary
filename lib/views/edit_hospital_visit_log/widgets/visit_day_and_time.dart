@@ -26,7 +26,7 @@ class VisitDayAndTime extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             _DayAndTimeSelector(cn, context),
-            SizedBox(height: RS.h10 * 3),
+            SizedBox(height: 10 * 3),
             GestureDetector(
               onTap: isEdit ? cn.onTapEnrollAlarm : null,
               child: Row(
@@ -42,14 +42,14 @@ class VisitDayAndTime extends StatelessWidget {
                           )
                         : const TextStyle(),
                   ),
-                  SizedBox(width: RS.w10),
+                  SizedBox(width: 10),
                   CircleAvatar(
                     backgroundColor:
                         cn.isEnrollAlarm ? AppColors.primaryColor : Colors.grey,
-                    radius: RS.w10 * 1.2,
+                    radius: 10 * 1.2,
                     child: Icon(
                       Icons.done,
-                      size: RS.w10 * 1.5,
+                      size: 10 * 1.5,
                       color: cn.isEnrollAlarm ? Colors.white : null,
                     ),
                   )
@@ -57,11 +57,11 @@ class VisitDayAndTime extends StatelessWidget {
               ),
             ),
             if (cn.isEnrollAlarm) ...[
-              SizedBox(height: RS.h10 * 2),
+              SizedBox(height: 10 * 2),
               Column(
                 children: [
                   FadeInRight(child: Text(AppString.plzSelectAlarmTime.tr)),
-                  SizedBox(height: RS.h10 * 2),
+                  SizedBox(height: 10 * 2),
                   FadeInRight(
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -111,7 +111,7 @@ class VisitDayAndTime extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: RS.w10 * 2),
+        SizedBox(width: 10 * 2),
         Expanded(
           child: CustomTextFormField(
             readOnly: true,
@@ -142,9 +142,9 @@ class SelectBeforeAlarmTime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: RS.w10 * 4,
+      height: 10 * 4,
       width: width,
-      margin: EdgeInsets.symmetric(horizontal: RS.w5),
+      margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
         border: isActive ? null : Border.all(color: Colors.grey),
         color: isActive ? AppColors.primaryColor : null,
@@ -154,7 +154,7 @@ class SelectBeforeAlarmTime extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-              fontSize: RS.w10 * 1.2,
+              fontSize: 10 * 1.2,
               color: Get.isDarkMode
                   ? textWhiteOrBlack
                   : isActive

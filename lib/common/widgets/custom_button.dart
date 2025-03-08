@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
-import 'package:ours_log/common/utilities/responsive.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key, required this.label, required this.onTap});
@@ -13,7 +12,7 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: RS.w10),
+        margin: EdgeInsets.symmetric(horizontal: 10),
         height: 60,
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
@@ -24,7 +23,7 @@ class CustomButton extends StatelessWidget {
             label,
             style: TextStyle(
               fontWeight: FontWeight.w700,
-              fontSize: RS.width20,
+              fontSize: 20,
               color: AppColors.white,
             ),
           ),
