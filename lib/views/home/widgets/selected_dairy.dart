@@ -42,20 +42,20 @@ class SelectedDiary extends StatelessWidget {
           children: [
             _FealIconAndDay(userController, diaryController),
             const Divider(),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             if (diaryModel.donePillDayModels!.isNotEmpty) ...[
               _donePill(diaryModel, diaryController),
-              SizedBox(height: 10 * 1.5),
+              const SizedBox(height: 15),
             ],
             if (diaryModel.health != null &&
                 diaryModel.health!.argIsNotZero) ...[
               _healthFiguare(diaryModel),
-              SizedBox(height: 10 * 1.5),
+              const SizedBox(height: 15),
             ],
             if (diaryModel.poopConditions != null &&
                 diaryModel.poopConditions!.isNotEmpty) ...[
               _poopCondition(diaryModel, diaryController),
-              SizedBox(height: 10 * 1.5),
+              const SizedBox(height: 15),
             ],
             ColTextAndWidget(
               vertical: 5,
@@ -67,7 +67,7 @@ class SelectedDiary extends StatelessWidget {
                 maxLines: (diaryModel.whatTodo ?? '').split('\n').length,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             if (diaryModel.imagePath != null &&
                 diaryModel.imagePath!.isNotEmpty) ...[
               ColTextAndWidget(
@@ -186,10 +186,8 @@ class SelectedDiary extends StatelessWidget {
           children: List.generate(
             diaryModel.donePillDayModels!.length,
             (index) => DoneCircleIcon(
-              backgroundColor: diaryController
-                      .selectedDiary!.donePillDayModels![index].isDone
-                  ? AppColors.primaryColor
-                  : Colors.grey,
+              isDone: diaryController
+                  .selectedDiary!.donePillDayModels![index].isDone,
               label: diaryModel.donePillDayModels![index].dayPeriod.label,
             ),
           ),

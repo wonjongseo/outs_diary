@@ -26,10 +26,7 @@ class DayDonePillRow extends StatelessWidget {
                   onTap: () =>
                       editDiaryController.onToggleDonePillDayModel(index),
                   child: DoneCircleIcon(
-                    backgroundColor:
-                        editDiaryController.donePillDayModels[index].isDone
-                            ? AppColors.primaryColor
-                            : Colors.grey,
+                    isDone: editDiaryController.donePillDayModels[index].isDone,
                     label: editDiaryController
                         .donePillDayModels[index].dayPeriod.label,
                   ),

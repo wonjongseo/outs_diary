@@ -27,6 +27,8 @@ class CustomFealLineGraph extends StatelessWidget {
           lineTouchData: LineTouchData(
               touchTooltipData: LineTouchTooltipData(
             getTooltipColor: (touchedSpot) => Colors.grey,
+            fitInsideHorizontally: true,
+            fitInsideVertically: true,
             getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
               return touchedBarSpots.map((barSpot) {
                 final flSpot = barSpot;

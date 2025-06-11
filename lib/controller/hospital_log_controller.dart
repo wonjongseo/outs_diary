@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_constant.dart';
+import 'package:ours_log/common/utilities/app_function.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/models/diary_model.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
@@ -37,8 +38,10 @@ class HospitalLogController extends GetxController {
     super.onInit();
   }
 
+  bool isSelected = false;
   void onChageCalendar(DateTime cfocusedDay) {
     focusedDay = cfocusedDay;
+    isSelected = false;
     update();
   }
 
@@ -113,6 +116,9 @@ class HospitalLogController extends GetxController {
     if (selectedEvents.value.isEmpty) {
       Get.to(() => EditHospitalVisitLogScreen(selectedDate: cSelectedDay));
     }
+    isSelected = true;
     update();
+
+    AppFunction.scrollGoToBottom(scrollController, position: 150);
   }
 }

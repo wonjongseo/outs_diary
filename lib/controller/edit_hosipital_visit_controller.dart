@@ -12,6 +12,7 @@ import 'package:ours_log/common/utilities/app_snackbar.dart';
 import 'package:ours_log/common/utilities/string/app_string.dart';
 import 'package:ours_log/common/utilities/app_validator.dart';
 import 'package:ours_log/controller/hospital_log_controller.dart';
+import 'package:ours_log/controller/image_controller.dart';
 import 'package:ours_log/controller/user_controller.dart';
 import 'package:ours_log/datas/check_before_alarm.dart';
 import 'package:ours_log/models/hospital_log_model.dart';
@@ -228,6 +229,22 @@ class EditHosipitalVisitController extends GetxController {
     update();
   }
 
+  void selectedPhotos({required bool isTakeAPhoto}) async {
+    File? file = isTakeAPhoto
+        ? await ImageController.pickImageFromCamera()
+        : await ImageController.getImageFromLibery();
+    if (file == null) return;
+
+    if (!uploadFiles.contains(file)) {
+      uploadFiles.add(file);
+    }
+    update();
+    if (uploadFiles.length != 1) {
+      carouselSliderController.animateToPage(uploadFiles.length - 1);
+    }
+    Get.back();
+  }
+
   void addPhotos() async {
     Get.back();
     final ImagePicker picker = ImagePicker();
@@ -378,6 +395,9 @@ class EditHosipitalVisitController extends GetxController {
         message: hospitalLogModel == null
             ? AppString.savedVisitLog.tr
             : AppString.editedVisitLog.tr);
+
+    AppFunction.scrollGoToBottom(hospitalLogController.scrollController,
+        position: 300);
   }
 
   List<NotificationModel> notifications = [];

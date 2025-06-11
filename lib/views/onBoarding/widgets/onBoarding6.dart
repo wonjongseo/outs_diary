@@ -14,10 +14,8 @@ class Onboarding6 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 10 * 1.8,
-    );
+    //하루에 몇번 드시고 계신가요
+    var textStyle = const TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
     return GetBuilder<OnboardingController>(builder: (onboardingController) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -27,9 +25,9 @@ class Onboarding6 extends StatelessWidget {
               child: Column(
                 children: [
                   Text(AppString.whatTimeDoYouDrinkPill.tr, style: textStyle),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children:
@@ -40,9 +38,9 @@ class Onboarding6 extends StatelessWidget {
                             DayPeriodType.values[index],
                           ),
                           child: Container(
-                            width: 10 * 10,
-                            height: 10 * 10,
-                            margin: EdgeInsets.symmetric(horizontal: 5),
+                            width: 100,
+                            height: 100,
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
                             decoration: BoxDecoration(
                                 border: onboardingController.pillTimeDayPeriod
                                         .contains(DayPeriodType.values[index])
@@ -61,47 +59,65 @@ class Onboarding6 extends StatelessWidget {
                 ],
               ),
             ),
+          // 어떤 요일에 복용하고 계신가요
           if (onboardingController.isShownDays)
             FadeInRight(
               child: Column(
                 children: [
                   Text(AppString.whatWeekDayYouDrink.tr, style: textStyle),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: List.generate(
-                          WeekDayType.values.length,
-                          (index) {
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      alignment: WrapAlignment.center,
+                      children: List.generate(
+                        WeekDayType.values.length + 1,
+                        (index) {
+                          if (index == 0) {
                             return GestureDetector(
                               onTap: () =>
-                                  onboardingController.onSelectWeekdays(
-                                WeekDayType.values[index],
-                              ),
+                                  onboardingController.onClickEveryDay(),
                               child: Container(
-                                width: 10 * 8,
-                                height: 10 * 10,
-                                margin: EdgeInsets.symmetric(horizontal: 5),
+                                width: 80,
+                                height: 60,
                                 decoration: BoxDecoration(
-                                    border: onboardingController
-                                            .selectedWeekDays
-                                            .contains(WeekDayType.values[index])
-                                        ? Border.all(
-                                            color: AppColors.primaryColor,
-                                            width: 2)
-                                        : Border.all(color: Colors.grey),
-                                    borderRadius:
-                                        BorderRadius.circular(10 * 1.5)),
-                                child: Center(
-                                  child: Text(WeekDayType.values[index].label),
+                                  borderRadius: BorderRadius.circular(15),
+                                  border:
+                                      onboardingController.isEveryDaySelected()
+                                          ? Border.all(
+                                              color: AppColors.primaryColor,
+                                              width: 2)
+                                          : Border.all(color: Colors.grey),
                                 ),
+                                child:
+                                    Center(child: Text(AppString.everyDay.tr)),
                               ),
                             );
-                          },
-                        ),
+                          }
+                          return GestureDetector(
+                            onTap: () => onboardingController.onSelectWeekdays(
+                                WeekDayType.values[index - 1]),
+                            child: Container(
+                              width: 80,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                  border: onboardingController.selectedWeekDays
+                                          .contains(
+                                              WeekDayType.values[index - 1])
+                                      ? Border.all(
+                                          color: AppColors.primaryColor,
+                                          width: 2)
+                                      : Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Center(
+                                child:
+                                    Text(WeekDayType.values[index - 1].label),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   )

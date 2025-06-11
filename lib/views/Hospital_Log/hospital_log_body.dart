@@ -26,7 +26,7 @@ class HospitalLogBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10 * 1.5),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
                   Text(
@@ -34,58 +34,58 @@ class HospitalLogBody extends StatelessWidget {
                         .format(hospitalLogController.focusedDay),
                     style: boldStyle,
                   ),
-                  SizedBox(height: 10 * 1.2),
+                  const SizedBox(height: 12),
                   _tableCalendar(hospitalLogController),
                 ],
               ),
             ),
-            ValueListenableBuilder<List<HospitalLogModel>>(
-              valueListenable: hospitalLogController.selectedEvents,
-              builder: (context, value, _) {
-                return Column(
-                  children: List.generate(value.length, (index) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        if (index == 0)
+            if (hospitalLogController.isSelected)
+              ValueListenableBuilder<List<HospitalLogModel>>(
+                valueListenable: hospitalLogController.selectedEvents,
+                builder: (context, value, _) {
+                  return Column(
+                    children: List.generate(value.length, (index) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          if (index == 0)
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(() => EditHospitalVisitLogScreen(
+                                    selectedDate:
+                                        hospitalLogController.selectedDay!));
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                margin: const EdgeInsets.only(
+                                  right: 20,
+                                  bottom: 10,
+                                ),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.primaryColor,
+                                ),
+                                child:
+                                    const Icon(Icons.add, color: Colors.white),
+                              ),
+                            ),
                           GestureDetector(
-                            onTap: () {
-                              Get.to(() => EditHospitalVisitLogScreen(
-                                  selectedDate:
-                                      hospitalLogController.selectedDay!));
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 10,
+                            onTap: () => Get.to(
+                              () => EditHospitalVisitLogScreen(
+                                selectedDate: value[index].dateTime,
+                                hospitalLogModel: value[index],
                               ),
-                              margin: EdgeInsets.only(
-                                right: 10 * 2,
-                                bottom: 10,
-                              ),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.primaryColor,
-                              ),
-                              child: Icon(Icons.add, color: Colors.white),
                             ),
+                            child: SelectedVisitHospital(
+                                hospitalLog: value[index]),
                           ),
-                        GestureDetector(
-                          onTap: () => Get.to(
-                            () => EditHospitalVisitLogScreen(
-                              selectedDate: value[index].dateTime,
-                              hospitalLogModel: value[index],
-                            ),
-                          ),
-                          child:
-                              SelectedVisitHospital(hospitalLog: value[index]),
-                        ),
-                      ],
-                    );
-                  }),
-                );
-              },
-            ),
+                        ],
+                      );
+                    }),
+                  );
+                },
+              ),
           ],
         ),
       );
@@ -142,7 +142,7 @@ class HospitalLogBody extends StatelessWidget {
       selectedDayPredicate: (day) =>
           isSameDay(hospitalLogController.selectedDay, day),
       eventLoader: hospitalLogController.getEventsForDay,
-      rowHeight: 10 * 9.4,
+      rowHeight: 10 * 10.4,
       onDaySelected: hospitalLogController.onDaySelected,
     );
   }

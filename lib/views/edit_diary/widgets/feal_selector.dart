@@ -12,7 +12,7 @@ class FealSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<EditDiaryController>(builder: (addDiaryController) {
       return Container(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Get.isDarkMode ? AppColors.black : AppColors.white,
           borderRadius: BorderRadius.circular(10),
@@ -20,7 +20,7 @@ class FealSelector extends StatelessWidget {
         child: Column(
           children: [
             Text(AppString.howFealToday.tr),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
@@ -46,6 +46,17 @@ class FealSelector extends StatelessWidget {
                     ),
                   );
                 },
+              ),
+            ),
+            const SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("← ${AppString.veryGood.tr}"),
+                  Text("${AppString.veryBad.tr}→"),
+                ],
               ),
             )
           ],

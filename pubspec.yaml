@@ -46,6 +46,7 @@ dependencies:
   google_mobile_ads: ^4.0.0
   flutter_localizations:
     sdk: flutter
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:
@@ -113,26 +114,7 @@ flutter:
           weight: 800
         - asset: assets/fonts/M_PLUS_Rounded_1c/MPLUSRounded1c-Black.ttf
           weight: 900
-    # - family: ZenMaruGothic
-    #   fonts:
-    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Light.ttf
-    #       weight: 100
-    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Light.ttf
-    #       weight: 200
-    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Regular.ttf
-    #       weight: 300
-    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Regular.ttf
-    #       weight: 400
-    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Medium.ttf
-    #       weight: 500
-    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Medium.ttf
-    #       weight: 600
-    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Bold.ttf
-    #       weight: 700
-    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Bold.ttf
-    #       weight: 800
-    #     - asset: assets/fonts/Zen_Maru_Gothic/ZenMaruGothic-Black.ttf
-    #       weight: 900
+
     - family: CookieRunFont
       fonts:
         - asset: assets/fonts/CookieRunFont_TTF/CookieRun-Regular.ttf

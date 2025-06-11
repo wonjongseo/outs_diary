@@ -32,7 +32,7 @@ class DiaryBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10 * 1.5),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
                   Text(
@@ -40,14 +40,14 @@ class DiaryBody extends StatelessWidget {
                         .format(controller.focusedDay),
                     style: boldStyle,
                   ),
-                  SizedBox(height: 10 * 1.2),
+                  const SizedBox(height: 12),
                   _tableCalendar(controller),
                 ],
               ),
             ),
             if (diaryController.selectedDiary != null)
               SelectedDiary(), // Dont' Const
-            SizedBox(height: 10 * 2)
+            const SizedBox(height: 20)
           ],
         ),
       );
@@ -62,7 +62,7 @@ class DiaryBody extends StatelessWidget {
         weekendStyle: weekdayStyle,
       ),
       locale: Get.locale.toString(),
-      daysOfWeekHeight: 10 * 3,
+      daysOfWeekHeight: 30,
       headerVisible: false,
       onPageChanged: diaryController.onPageChanged,
       calendarStyle: CalendarStyle(
@@ -113,11 +113,11 @@ class DiaryBody extends StatelessWidget {
                 ? Colors.grey.withValues(alpha: .15)
                 : Colors.grey.withValues(alpha: .4),
           ),
-          margin: EdgeInsets.only(bottom: 5),
+          margin: const EdgeInsets.only(bottom: 5),
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 10 * .6),
-          margin: EdgeInsets.only(bottom: 10 * .4),
+          padding: const EdgeInsets.symmetric(horizontal: 6),
+          margin: const EdgeInsets.only(bottom: 4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
             color: isToday ? AppColors.primaryColor : null,
@@ -146,7 +146,6 @@ class DiaryBody extends StatelessWidget {
 
   Widget? singleMarkerBuilder(context, day, event) {
     UserController backgroundController = Get.find<UserController>();
-    bool isToday = AppFunction.isSameDay(diaryController.now, day);
 
     if (diaryController.kEvents[day] != null) {
       DiaryModel diaryModel = diaryController.kEvents[day]![0];
@@ -154,6 +153,7 @@ class DiaryBody extends StatelessWidget {
       return Column(
         children: [
           CircleAvatar(
+            radius: 23, // TODO FIX HARD CODING
             backgroundColor: diaryController.selectedDay == day
                 ? AppColors.primaryColor
                 : Get.isDarkMode
@@ -165,7 +165,6 @@ class DiaryBody extends StatelessWidget {
                       backgroundController.userModel?.fealIconIndex ?? 0]
                   .iconPath[diaryModel.fealIndex],
             ),
-            radius: 10 * 2.5,
           ),
         ],
       );

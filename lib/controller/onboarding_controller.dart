@@ -54,6 +54,24 @@ class OnboardingController extends GetxController {
   bool isShownDays = false;
   List<DayPeriodType> pillTimeDayPeriod = []; // 0:아침, 1:점심, 2: 저녁
   List<WeekDayType> selectedWeekDays = []; // 0:월, 1: 화
+  bool isEveryDay = false;
+
+  bool isEveryDaySelected() {
+    return selectedWeekDays.length == 7 && isEveryDay;
+  }
+
+  void onClickEveryDay() {
+    if (isEveryDay) {
+      isEveryDay = false;
+      selectedWeekDays.clear();
+    } else {
+      isEveryDay = true;
+      for (WeekDayType weekDayType in WeekDayType.values) {
+        selectedWeekDays.add(weekDayType);
+      }
+    }
+    update();
+  }
 
   void onSelectMorningLunchEvening(DayPeriodType dayPeriodType) {
     bool isSelected = pillTimeDayPeriod.contains(dayPeriodType);
@@ -75,6 +93,7 @@ class OnboardingController extends GetxController {
       selectedWeekDays.add(weekday);
     }
 
+    isEveryDay = selectedWeekDays.length == 7;
     update();
   }
 

@@ -55,31 +55,29 @@ class EditDiaryScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 controller: editDiaryController.scrollController,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 20,
-                  ),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: GetBuilder<UserController>(builder: (userController) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         const FealSelector(),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         if (editDiaryController.donePillDayModels.isNotEmpty)
                           const DayDonePillRow(),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         _painLevel(userController, editDiaryController),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         _weight(editDiaryController),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         _temperature(userController, editDiaryController),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         _pulse(userController, editDiaryController),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         _bloodPressure(userController, editDiaryController),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         _poopCondition(userController),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         _memoAndPhotos(editDiaryController, context),
                       ],
                     );
@@ -102,7 +100,7 @@ class EditDiaryScreen extends StatelessWidget {
             label: AppString.saveText.tr,
             onTap: editDiaryController.onTapSaveBtn,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           const GlobalBannerAdmob(),
         ],
       ),
@@ -123,9 +121,9 @@ class EditDiaryScreen extends StatelessWidget {
               maxLines: 7,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10 * 2),
-            child: const Divider(),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Divider(),
           ),
           ImageOfToday(
             carouselSliderController:

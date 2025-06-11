@@ -40,11 +40,8 @@ class _FealGraphState extends State<FealGraph> {
   }
 
   void onToggleGraph() {
-    if (pageIndex == 0) {
-      pageIndex = 1;
-    } else {
-      pageIndex = 0;
-    }
+    pageIndex = pageIndex == 0 ? 1 : 0;
+
     pageController.animateToPage(
       pageIndex,
       duration: const Duration(milliseconds: 300),
@@ -69,7 +66,7 @@ class _FealGraphState extends State<FealGraph> {
           GestureDetector(
             onTap: onToggleGraph,
             child: Padding(
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -82,7 +79,7 @@ class _FealGraphState extends State<FealGraph> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Expanded(
             child: PageView.builder(
               physics: const NeverScrollableScrollPhysics(),

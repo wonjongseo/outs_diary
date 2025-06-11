@@ -14,12 +14,10 @@ class CircleAverHealthWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 10),
+      padding: const EdgeInsets.only(right: 10),
       child: Container(
-        constraints: BoxConstraints(
-          minWidth: 10 * 10,
-        ),
-        padding: EdgeInsets.all(10 * .8),
+        constraints: const BoxConstraints(minWidth: 100),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: Colors.grey, width: 1)),
@@ -29,9 +27,9 @@ class CircleAverHealthWidget extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 10 * 1.4),
+              style: const TextStyle(fontSize: 14),
             ),
-            SizedBox(width: 10 * .8),
+            const SizedBox(width: 8),
             Text(
               averValue,
               style: TextStyle(fontSize: 10 * 1.4),

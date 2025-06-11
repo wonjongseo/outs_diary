@@ -18,6 +18,7 @@ class DisplayArticle {
   });
 }
 
+// ignore: must_be_immutable
 class OnBoardingScreen extends StatelessWidget {
   OnBoardingScreen({super.key});
 
@@ -30,7 +31,7 @@ class OnBoardingScreen extends StatelessWidget {
         body: SafeArea(
           child: Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: 10,
                 horizontal: 10,
               ),

@@ -12,18 +12,19 @@ class Onboarding5 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 약을 복용중이신가요?
     Size size = MediaQuery.of(context).size;
     return GetBuilder<OnboardingController>(builder: (onboardingController) {
       return Column(
         children: [
           Text(
             AppString.doYouDrinkPill.tr,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 10 * 1.8,
+              fontSize: 18,
             ),
           ),
-          SizedBox(height: 10 * 5),
+          const SizedBox(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -33,7 +34,7 @@ class Onboarding5 extends StatelessWidget {
                   width: size.width / 3 - 30,
                   height: size.width / 3 - 30,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10 * 1.5),
+                    borderRadius: BorderRadius.circular(15),
                     border: onboardingController.isDrinkingPill != null &&
                             onboardingController.isDrinkingPill == true
                         ? Border.all(color: AppColors.primaryColor, width: 2)
@@ -55,7 +56,7 @@ class Onboarding5 extends StatelessWidget {
                   width: size.width / 3 - 30,
                   height: size.width / 3 - 30,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10 * 1.5),
+                    borderRadius: BorderRadius.circular(15),
                     border: onboardingController.isDrinkingPill != null &&
                             onboardingController.isDrinkingPill == false
                         ? Border.all(color: AppColors.primaryColor, width: 2)

@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
@@ -20,7 +21,7 @@ class PoopDayPeriod extends StatelessWidget {
     return GetBuilder<EditDiaryController>(
       builder: (editDiaryController) {
         return Container(
-          padding: EdgeInsets.symmetric(horizontal: 10 * 1.6).copyWith(
+          padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
             top: 14,
             bottom: 10,
           ),
@@ -34,17 +35,16 @@ class PoopDayPeriod extends StatelessWidget {
                 DayPeriodType.values.length,
                 (index) {
                   return Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5),
+                    padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Row(
                       children: [
                         Container(
-                          constraints: BoxConstraints(minWidth: 10 * 7.5),
+                          constraints: const BoxConstraints(minWidth: 75),
                           child: Text(DayPeriodType.values[index].label),
                         ),
-                        SizedBox(width: 10 * 2),
+                        const SizedBox(width: 20),
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: 10),
                             decoration: BoxDecoration(
                               border:
                                   Border.all(color: Colors.grey, width: 1.0),
@@ -55,43 +55,8 @@ class PoopDayPeriod extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-                                  child: DropdownButton<PoopConditionType?>(
-                                    isExpanded: true,
-                                    value: editDiaryController
-                                        .getDayPeriodPoopCondition(index),
-                                    padding: EdgeInsets.only(right: 10),
-                                    iconSize: 10 * 2.5,
-                                    icon: const Icon(Icons.keyboard_arrow_down),
-                                    underline: const SizedBox(),
-                                    items: List.generate(
-                                        PoopConditionType.values.length,
-                                        (index) {
-                                      PoopConditionType poopCondition =
-                                          PoopConditionType.values[index];
-                                      return DropdownMenuItem(
-                                        value: poopCondition,
-                                        child: Text(
-                                          poopCondition.label,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                                    onChanged: (v) => editDiaryController
-                                        .setDayPeriodPoopCondition(index, v),
-                                  ),
+                                  child: _dropdown(editDiaryController, index),
                                 ),
-                                if (editDiaryController
-                                        .getDayPeriodPoopCondition(index) !=
-                                    null)
-                                  IconButton(
-                                      onPressed: () {
-                                        editDiaryController
-                                            .setDayPeriodPoopCondition(
-                                                index, null);
-                                      },
-                                      icon: const Icon(Icons.remove))
                               ],
                             ),
                           ),
@@ -101,9 +66,9 @@ class PoopDayPeriod extends StatelessWidget {
                   );
                 },
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
-                child: const Divider(),
+                child: Divider(),
               ),
               CustomExpansionCard(
                 initiallyExpanded: userController.userModel!.userUtilModel
@@ -118,6 +83,30 @@ class PoopDayPeriod extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  DropdownButton2<PoopConditionType?> _dropdown(
+      EditDiaryController editDiaryController, int index) {
+    return DropdownButton2<PoopConditionType?>(
+      isExpanded: true,
+      value: editDiaryController.getDayPeriodPoopCondition(index),
+      underline: const SizedBox(),
+      items: [
+        ...List.generate(PoopConditionType.values.length, (index) {
+          PoopConditionType poopCondition = PoopConditionType.values[index];
+          return DropdownMenuItem(
+            value: poopCondition,
+            child: Text(
+              poopCondition.label,
+              style: const TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          );
+        }),
+      ],
+      onChanged: (v) => editDiaryController.setDayPeriodPoopCondition(index, v),
     );
   }
 }

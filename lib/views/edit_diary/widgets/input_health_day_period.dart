@@ -31,7 +31,7 @@ class InputHealthDayPeriod extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<UserController>(builder: (userController) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 10 * 1.6).copyWith(
+        padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
           top: 14,
           bottom: 10,
         ),
@@ -43,14 +43,14 @@ class InputHealthDayPeriod extends StatelessWidget {
           children: [
             ...List.generate(DayPeriodType.values.length, (index) {
               return Padding(
-                padding: EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: Row(
                   children: [
                     Container(
-                      constraints: BoxConstraints(minWidth: 10 * 5.8),
+                      constraints: const BoxConstraints(minWidth: 58),
                       child: Text(DayPeriodType.values[index].label),
                     ),
-                    SizedBox(width: 10 * 2),
+                    // const SizedBox(width: 10),
                     Expanded(
                       child: CustomTextFormField(
                         hintStyle:
@@ -72,7 +72,7 @@ class InputHealthDayPeriod extends StatelessWidget {
                       ),
                     ),
                     if (controllers2 != null) ...[
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: CustomTextFormField(
                           hintStyle:

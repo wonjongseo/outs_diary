@@ -43,7 +43,7 @@ class CustomTextFormField extends StatelessWidget {
               onFieldSubmitted: onFieldSubmitted,
               onTap: onTap,
               readOnly: readOnly ?? false,
-              style: TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 12),
               maxLines: maxLines ?? 1,
               controller: controller,
               decoration: InputDecoration(

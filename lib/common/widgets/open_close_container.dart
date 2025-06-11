@@ -36,61 +36,64 @@ class _ExpansionIconCardState extends State<ExpansionIconCard> {
   @override
   Widget build(BuildContext context) {
     return CustomExpansionCard(
-      onExpansionChanged: widget.onExpansionChanged,
-      initiallyExpanded: widget.initiallyExpanded,
-      title: widget.label,
-      child: Wrap(
-        children: List.generate(
-          widget.icons.length,
-          (index) => Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: GestureDetector(
-              onTap: () {
-                if (widget.isOnlyOne) {
-                  selectedIndex = index;
-                  widget.selectedIconIndexs.assignAll([index]);
-                } else {
-                  if (widget.selectedIconIndexs.contains(index)) {
-                    widget.selectedIconIndexs.remove(index);
-                  } else {
-                    widget.selectedIconIndexs.add(index);
-                  }
-                }
+        onExpansionChanged: widget.onExpansionChanged,
+        initiallyExpanded: widget.initiallyExpanded,
+        title: widget.label,
+        child: SizedBox(
+          height: 150,
+          width: double.infinity,
+          child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 5,
+            ),
+            itemCount: widget.icons.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: GestureDetector(
+                  onTap: () {
+                    if (widget.isOnlyOne) {
+                      selectedIndex = index;
+                      widget.selectedIconIndexs.assignAll([index]);
+                    } else {
+                      if (widget.selectedIconIndexs.contains(index)) {
+                        widget.selectedIconIndexs.remove(index);
+                      } else {
+                        widget.selectedIconIndexs.add(index);
+                      }
+                    }
 
-                setState(() {});
-              },
-              child: SizedBox(
-                width: widget.width ?? 10 * 6.5,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      widget.icons[index].iconData,
-                      size: 10 * 4,
-                      color: widget.selectedIconIndexs.contains(index) ||
-                              selectedIndex == index
-                          ? AppColors.primaryColor
-                          : null,
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      widget.icons[index].title,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      style: TextStyle(
+                    setState(() {});
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        widget.icons[index].iconData,
+                        size: 10 * 4,
                         color: widget.selectedIconIndexs.contains(index) ||
                                 selectedIndex == index
                             ? AppColors.primaryColor
                             : null,
                       ),
-                    )
-                  ],
+                      Text(
+                        widget.icons[index].title,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: widget.selectedIconIndexs.contains(index) ||
+                                  selectedIndex == index
+                              ? AppColors.primaryColor
+                              : null,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

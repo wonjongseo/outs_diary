@@ -193,15 +193,14 @@ class _GraphBodyState extends State<GraphBody> {
                 child: Column(
                   children: [
                     _fealGraph(userController),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     // _painLevel(userController),
-                    // SizedBox(height: 10),
                     _weight(userController),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     _temperature(userController),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     _pulse(userController),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     _bloodPressure(userController),
                   ],
                 ),
@@ -221,9 +220,9 @@ class _GraphBodyState extends State<GraphBody> {
           userController.toggleExpanded(IsExpandtionType.bloodPressureGraph),
       title: AppString.bloodPressure.tr,
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 10,
-          horizontal: 10 * 2,
+          horizontal: 20,
         ),
         child: maxBloodPressureGraphData == null
             ? Container()
@@ -244,9 +243,9 @@ class _GraphBodyState extends State<GraphBody> {
           userController.toggleExpanded(IsExpandtionType.pulseGraph),
       title: AppString.pulse.tr,
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 10,
-          horizontal: 10 * 2,
+          horizontal: 20,
         ),
         child: pulseGraphData == null
             ? Container()
@@ -266,9 +265,9 @@ class _GraphBodyState extends State<GraphBody> {
           userController.toggleExpanded(IsExpandtionType.temperatureGraph),
       title: AppString.temperature.tr,
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 10,
-          horizontal: 10 * 2,
+          horizontal: 20,
         ),
         child: temperatureGraphData == null
             ? Container()
@@ -288,9 +287,9 @@ class _GraphBodyState extends State<GraphBody> {
       onExpansionChanged: (bool v) =>
           userController.toggleExpanded(IsExpandtionType.weightGraph),
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 10,
-          horizontal: 10 * 2,
+          horizontal: 20,
         ),
         child: weightGraphData == null
             ? Container()
@@ -332,7 +331,7 @@ class _GraphBodyState extends State<GraphBody> {
           userController.toggleExpanded(IsExpandtionType.fealGraph),
       title: AppString.fealText.tr,
       child: Padding(
-        padding: EdgeInsets.only(right: 10 * 2),
+        padding: const EdgeInsets.only(right: 20),
         child: fealGraphData == null
             ? Container()
             : FealGraph(

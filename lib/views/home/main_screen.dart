@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/admob/global_banner_admob.dart';
@@ -54,22 +55,24 @@ class _MainScreenState extends State<MainScreen> {
       body: SafeArea(
         child: BackgroundWidget(
           child: Padding(
-            padding: EdgeInsets.only(
-              top: 10 * 3,
-              right: 10 * 1.2,
-              left: 10 * 1.2,
+            padding: const EdgeInsets.only(
+              top: 30,
+              right: 12,
+              left: 12,
             ),
             child: bodys[bodyIndex],
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton.small(onPressed: () async {
-      //   NotificationService notification = NotificationService();
-      //   notification.cancelAllNotifications();
-      //   UserModelRepository().deleteAll();
-      //   // DiaryRepository().deleteAll();
-      //   // HospitalLogRepository().deleteAll();
-      // }),
+      floatingActionButton: kDebugMode
+          ? FloatingActionButton.small(onPressed: () async {
+              NotificationService notification = NotificationService();
+              notification.cancelAllNotifications();
+              UserModelRepository().deleteAll();
+              DiaryRepository().deleteAll();
+              HospitalLogRepository().deleteAll();
+            })
+          : null,
     );
   }
 

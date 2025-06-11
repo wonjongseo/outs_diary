@@ -87,6 +87,7 @@ class AppTranslations extends Translations {
           AppString.doYouAlarmWhenDrinkPill:
               AppString.doYouAlarmWhenDrinkPillJp,
           AppString.whatWeekDayYouDrink: AppString.whatWeekDayYouDrinkJp,
+          AppString.everyDay: AppString.everyDayJp,
           AppString.monday: AppString.mondayJp,
           AppString.tuesday: AppString.tuesdayJp,
           AppString.wednesday: AppString.wednesdayJp,
@@ -279,6 +280,7 @@ class AppTranslations extends Translations {
           AppString.doYouAlarmWhenDrinkPill:
               AppString.doYouAlarmWhenDrinkPillKr,
           AppString.whatWeekDayYouDrink: AppString.whatWeekDayYouDrinkKr,
+          AppString.everyDay: AppString.everyDayKr,
           AppString.monday: AppString.mondayKr,
           AppString.tuesday: AppString.tuesdayKr,
           AppString.wednesday: AppString.wednesdayKr,
@@ -471,6 +473,7 @@ class AppTranslations extends Translations {
           AppString.doYouAlarmWhenDrinkPill:
               AppString.doYouAlarmWhenDrinkPillEn,
           AppString.whatWeekDayYouDrink: AppString.whatWeekDayYouDrinkEn,
+          AppString.everyDay: AppString.everyDayEn,
           AppString.monday: AppString.mondayEn,
           AppString.tuesday: AppString.tuesdayEn,
           AppString.wednesday: AppString.wednesdayEn,
@@ -996,6 +999,11 @@ class AppString {
   static String noBackgroundJp = '背景なし';
   static String noBackgroundEn = "No background";
 
+  static String everyDay = "everyDayTr";
+  static String everyDayKr = "매일";
+  static String everyDayJp = '毎日';
+  static String everyDayEn = "ErrDay";
+
   static String monday = "mondayTr";
   static String mondayKr = "월";
   static String mondayJp = '月';
@@ -1402,13 +1410,16 @@ Would you like to copy the email [visionwill3322@gmail.com]?
   static String weightTextEn = "Weight";
 
   static String maxBloodPressure = 'maxBloodPressureTr';
-  static String maxBloodPressureKr = '최고 혈압';
-  static String maxBloodPressureJp = '最高血圧';
+  static String maxBloodPressureKr = '최고';
+  static String maxBloodPressureJp = '最高';
   static String maxBloodPressureEn = "systolic blood pressure";
+  // static String maxBloodPressureKr = '최고 혈압';
+  // static String maxBloodPressureJp = '最高血圧';
+  // static String maxBloodPressureEn = "systolic blood pressure";
 
   static String minBloodPressure = 'minBloodPressureTr';
-  static String minBloodPressureKr = '최저 혈압';
-  static String minBloodPressureJp = '最低血圧';
+  static String minBloodPressureKr = '최저';
+  static String minBloodPressureJp = '最低';
   static String minBloodPressureEn = "diastolic blood pressure";
 
   static String poopCondition1 = 'poopCondition1Tr';

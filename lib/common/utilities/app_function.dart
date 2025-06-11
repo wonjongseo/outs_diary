@@ -156,9 +156,10 @@ class AppFunction {
     );
   }
 
-  static void scrollGoToBottom(ScrollController scrollController) {
+  static void scrollGoToBottom(ScrollController scrollController,
+      {double position = 200}) {
     scrollController.animateTo(
-      200,
+      position,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
@@ -178,6 +179,7 @@ class AppFunction {
       minuteLabelText: AppString.minute.tr,
       context: context,
       initialEntryMode: TimePickerEntryMode.input,
+      // initialTime: initialTime ?? TimeOfDay(hour: 0, minute: 0)
       initialTime: initialTime ?? TimeOfDay.now(),
     );
   }

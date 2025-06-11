@@ -27,7 +27,7 @@ class ImageOfToday extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColTextAndWidget(
       label: '$label  ${uploadFiles.isEmpty ? '' : '+${uploadFiles.length}'}',
-      labelWidget: uploadFiles.length == 3
+      labelWidget: uploadFiles.length == 10
           ? null
           : GestureDetector(
               onTap: selectedPhotos,
@@ -47,10 +47,10 @@ class ImageOfToday extends StatelessWidget {
             alignment: AlignmentDirectional.center,
             children: [
               Container(
-                height: 10 * 25,
-                width: 10 * 25,
+                height: 250,
+                width: 250,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10 * 4),
+                  borderRadius: BorderRadius.circular(40),
                   border: Border.all(
                     color: Colors.grey,
                   ),
@@ -79,7 +79,7 @@ class ImageOfToday extends StatelessWidget {
         ),
       ),
       options: CarouselOptions(
-        height: 10 * 25,
+        height: 250,
         aspectRatio: 1,
         viewportFraction: 1,
         enableInfiniteScroll: false,
@@ -93,18 +93,18 @@ class ImageOfToday extends StatelessWidget {
       child: Align(
         alignment: Alignment.center,
         child: Container(
-          height: 10 * 25,
-          width: 10 * 25,
+          height: 250,
+          width: 250,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10 * 4),
+            borderRadius: BorderRadius.circular(40),
             border: Border.all(color: Colors.grey),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.camera_alt_outlined,
-                size: 10 * 5,
+                size: 50,
                 color: Colors.grey,
               ),
               Text(AppString.addPhoto.tr)

@@ -96,19 +96,17 @@ class CustomLineGraph extends StatelessWidget {
               ),
             ),
           ),
-          lineTouchData: const LineTouchData(enabled: false),
+          lineTouchData: const LineTouchData(
+            enabled: true,
+            touchTooltipData: LineTouchTooltipData(
+              fitInsideHorizontally: true,
+              fitInsideVertically: true,
+            ),
+          ),
           minX: 0,
           maxX: (countOfDay - 1).toDouble(),
           maxY: maxY,
           minY: minY,
-          // minY: graphData2 == null
-          //     ? graphData.minY
-          //     : graphData.minY ?? 0 + graphData2!.minY!,
-          // // maxY: graphData.maxY,
-
-          // maxY: graphData2 == null
-          //     ? graphData.maxY
-          //     : graphData.maxY ?? 0 + graphData2!.maxY!,
         ),
       ),
     );

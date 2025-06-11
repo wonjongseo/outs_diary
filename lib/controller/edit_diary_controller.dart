@@ -42,11 +42,11 @@ class EditDiaryController extends GetxController {
   void setDayPeriodPoopCondition(int index, PoopConditionType? poopCondition) {
     switch (index) {
       case 0:
-        moringPoop = poopCondition;
+        moringPoop = moringPoop == poopCondition ? null : poopCondition;
       case 1:
-        lunchPoop = poopCondition;
+        lunchPoop = lunchPoop == poopCondition ? null : poopCondition;
       case 2:
-        eveningPoop = poopCondition;
+        eveningPoop = eveningPoop == poopCondition ? null : poopCondition;
     }
     update();
   }
@@ -79,8 +79,6 @@ class EditDiaryController extends GetxController {
     }
 
     if (diaryModel != null) {
-      print('diaryModel : ${diaryModel}'); // ?
-
       loadDiaryModel();
       loadHealthModel();
       update();

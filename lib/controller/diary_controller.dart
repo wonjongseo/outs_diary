@@ -45,7 +45,6 @@ class DiaryController extends GetxController {
 
     if (kEvents[cSelectedDay] != null) {
       selectedDiary = kEvents[cSelectedDay]![0];
-      print('selectedDiary : ${selectedDiary}');
 
       AppFunction.scrollGoToBottom(scrollController);
       update();
