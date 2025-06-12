@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ours_log/common/theme/theme.dart';
 import 'package:ours_log/common/utilities/app_color.dart';
+import 'package:ours_log/common/utilities/app_function.dart';
 
 import 'package:ours_log/common/widgets/custom_text_form_field.dart';
 import 'package:ours_log/controller/user_controller.dart';
@@ -50,7 +51,7 @@ class InputHealthDayPeriod extends StatelessWidget {
                       constraints: const BoxConstraints(minWidth: 58),
                       child: Text(DayPeriodType.values[index].label),
                     ),
-                    // const SizedBox(width: 10),
+                    if (isEn) const SizedBox(width: 15),
                     Expanded(
                       child: CustomTextFormField(
                         hintStyle:

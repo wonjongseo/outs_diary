@@ -54,8 +54,14 @@ class FealSelector extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("← ${AppString.veryGood.tr}"),
-                  Text("${AppString.veryBad.tr}→"),
+                  Text(
+                    "← ${AppString.veryGood.tr}",
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  Text(
+                    "${AppString.veryBad.tr}→",
+                    style: const TextStyle(fontSize: 12),
+                  ),
                 ],
               ),
             )

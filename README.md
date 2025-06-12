@@ -249,3 +249,47 @@ First Release Of My Medical Logs
 私のカルテの1番目のリリーズ
 </ja-JP>
 </details>
+
+<details><summary>1.0.1+1</summary>
+
+<ko-KR>
+[추가]
+1. 약 복용 일 - "매일" 버튼 추가
+2. 기분 아이콘 - "아주 좋음←→아주 나쁨" 의 문구 표시
+
+[변경/수정]
+
+1. 건강 기록 달력과 진료 기록 달력 높이 동일하게 수정
+2. 진료 기록에 사진 저장 안되는 버그 수정
+3. 건강 그래프 - 그래프 클릭 시 수치 보이게 변경
+4. 그 외 버그 수정
+5. UI/UX 변경
+
+</ko-KR>
+<en-US>
+[Add]
+1. Date of taking medicine - Add "every day" button
+2. Emotional icon - Added characters "Very good ←→ Very bad"
+
+[Changes and modifications]
+
+1. Same height correction of health record and medical record calendar
+2. Fixing a bug where photos are not stored in medical records
+3. Change the number to be visible when clicking the health graph
+4. Other errors fixes
+5. UI/UX Changes
+   </en-US>
+   <ja-JP>
+   [追加]
+6. 薬の服用日ー”毎日”ボタン追加
+7. 感情アイコンー”とても良い ←→ とても悪い”　の文字追加
+
+[変更・修正]
+
+1. 健康記録と診療記録カレンダーの高さを同一に修正
+2. 診療記録に写真が保存されない不具合修正
+3. 健康グラフーグラフクリック時、数値が見えるように変更
+4. その他不具合修正
+5. UI/UX 変更
+</ja-JP>
+</details>

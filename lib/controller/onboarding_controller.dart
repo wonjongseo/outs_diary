@@ -57,7 +57,8 @@ class OnboardingController extends GetxController {
   bool isEveryDay = false;
 
   bool isEveryDaySelected() {
-    return selectedWeekDays.length == 7 && isEveryDay;
+    return isEveryDay;
+    // return selectedWeekDays.length == 7 && isEveryDay;
   }
 
   void onClickEveryDay() {
@@ -67,9 +68,12 @@ class OnboardingController extends GetxController {
     } else {
       isEveryDay = true;
       for (WeekDayType weekDayType in WeekDayType.values) {
-        selectedWeekDays.add(weekDayType);
+        if (!selectedWeekDays.contains(weekDayType)) {
+          selectedWeekDays.add(weekDayType);
+        }
       }
     }
+    print('selectedWeekDays.length : ${selectedWeekDays.length}');
     update();
   }
 
@@ -94,6 +98,8 @@ class OnboardingController extends GetxController {
     }
 
     isEveryDay = selectedWeekDays.length == 7;
+    print('selectedWeekDays.length : ${selectedWeekDays.length}');
+
     update();
   }
 
