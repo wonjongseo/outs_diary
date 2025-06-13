@@ -24,7 +24,8 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.wonjongseo.my_medical_logs"
-    compileSdkVersion 34
+    // compileSdkVersion 34
+    compileSdkVersion 35
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -43,7 +44,8 @@ android {
     defaultConfig {
         applicationId "com.wonjongseo.my_medical_logs"
         minSdkVersion 21
-        targetSdkVersion 34
+        // targetSdkVersion 34
+        targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

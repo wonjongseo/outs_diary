@@ -1,0 +1,2 @@
+/Users/jongseowon/Desktop/MY/project/ours_log/android/app/.cxx/Debug/25c6s503/x86_64/CMakeFiles/edit_cache.dir
+/Users/jongseowon/Desktop/MY/project/ours_log/android/app/.cxx/Debug/25c6s503/x86_64/CMakeFiles/rebuild_cache.dir

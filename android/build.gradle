@@ -6,6 +6,7 @@ buildscript {
     }
 
     dependencies {
+        classpath "com.android.tools.build:gradle:8.1.0"       // Flutter 3.29.2 기준
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -26,5 +27,5 @@ subprojects {
 }
 
 tasks.register("clean", Delete) {
-    delete rootProject.buildDir
+    delete rootProject.layout.buildDirectory
 }

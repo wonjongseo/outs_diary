@@ -1,0 +1,2 @@
+/Users/jongseowon/Desktop/MY/project/ours_log/android/app/.cxx/RelWithDebInfo/1b5m3uxn/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/jongseowon/Desktop/MY/project/ours_log/android/app/.cxx/RelWithDebInfo/1b5m3uxn/arm64-v8a/CMakeFiles/rebuild_cache.dir

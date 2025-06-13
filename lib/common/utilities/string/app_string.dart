@@ -1164,7 +1164,7 @@ class AppString {
   static String errorCreateEmail2Kr =
       '핸드폰에 이메일 등록이 되어 있지 않으면 $appNameKr에서 이메일을 작성 할 수 없습니다.\n별도의 이메일 앱에서 문의 해주시면 감사하겠습니다.\n\n이메일 [visionwill3322@gmail.com]을 복사하시겠습니까?';
   static String errorCreateEmail2Jp =
-      "携帯にメールが登録されていなければ、 $appNameJpからメールを作成することができません。\n別途のメールアプリからお問い合わせして頂ければ幸いと存じております。\n\nメール　[visionwill3322@gmail.com]をコピーしますか。";
+      "誠に恐れ入りますが、お使いのスマートフォンにメールアドレスが登録されていないため、、 「$appNameJp」からメールを作成できません。\n大変お手数ですが、別のメールアプリより下記アドレスへお問い合わせいただけますと幸いです。\n\nメール　「visionwill3322@gmail.com」をコピーしますか。";
   static String errorCreateEmail2En = """
 If your email is not registered on your phone, you will not be able to send an email from $appNameEn.
 We kindly ask that you contact us using another email app.
